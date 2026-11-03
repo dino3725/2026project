@@ -23,7 +23,7 @@ ROS 2 Humble 기반의 TurtleBot3 + OpenMANIPULATOR-X 서비스 로봇 프로젝
 ## 구성
 
 ```text
-eated_ws/
+2026project/
 ├── src/
 │   ├── control_pkg/       # 전체 작업 상태 머신과 Pick/Place 제어
 │   ├── eated_interfaces/  # RobotCommand 메시지와 FindObject 액션
@@ -62,7 +62,7 @@ eated_ws/
 
 ```bash
 cd /home/fcsl
-git clone https://github.com/kr28284-max/Eated_ws-2026.git eated_ws
+git clone https://github.com/dino3725/2026project.git
 cd /home/fcsl/2026project
 
 sudo apt install python3-colcon-common-extensions python3-rosdep2 python3-pip python3.10-venv python3-cffi \
