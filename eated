@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-readonly WORKSPACE="/home/fcsl/eated_ws"
+readonly WORKSPACE="/home/fcsl/2026project"
 readonly TERMINATOR_CONFIG="$WORKSPACE/eated_terminator.conf"
 
 if ! command -v terminator >/dev/null 2>&1; then

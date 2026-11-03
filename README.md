@@ -58,12 +58,12 @@ eated_ws/
 
 ## 내려받기 및 빌드
 
-이 프로젝트의 실행 파일에는 현재 로봇 PC의 경로가 반영되어 있으므로 `/home/fcsl/eated_ws`에 클론하는 것을 기준으로 합니다.
+이 프로젝트의 실행 파일에는 현재 로봇 PC의 경로가 반영되어 있으므로 `/home/fcsl/2026project`에 클론하는 것을 기준으로 합니다.
 
 ```bash
 cd /home/fcsl
 git clone https://github.com/kr28284-max/Eated_ws-2026.git eated_ws
-cd /home/fcsl/eated_ws
+cd /home/fcsl/2026project
 
 sudo apt install python3-colcon-common-extensions python3-rosdep2 python3-pip python3.10-venv python3-cffi \
   ros-humble-turtlebot3-manipulation-bringup ros-humble-turtlebot3-manipulation-moveit-config \
@@ -93,9 +93,9 @@ python3 -m venv --system-site-packages .venv
 
 ```bash
 sudo apt install terminator
-chmod +x /home/fcsl/eated_ws/eated /home/fcsl/eated_ws/eated_pane.sh /home/fcsl/eated_ws/eated_hardware.sh
+chmod +x /home/fcsl/2026project/eated /home/fcsl/2026project/eated_pane.sh /home/fcsl/2026project/eated_hardware.sh
 mkdir -p /home/fcsl/.local/bin
-ln -sf /home/fcsl/eated_ws/eated /home/fcsl/.local/bin/eated
+ln -sf /home/fcsl/2026project/eated /home/fcsl/.local/bin/eated
 ```
 
 `~/.local/bin`이 PATH에 없다면 다음 줄을 `~/.bashrc`에 추가합니다.
@@ -152,7 +152,7 @@ Control Node가 `IDLE`인 상태에서 실행합니다.
 
 ```bash
 source /opt/ros/humble/setup.bash
-source /home/fcsl/eated_ws/install/setup.bash
+source /home/fcsl/2026project/install/setup.bash
 
 ros2 topic pub --once /voice/robot_command \
   eated_interfaces/msg/RobotCommand \
@@ -208,7 +208,7 @@ Vision CV 창에 표시되고, 그리퍼를 열 때까지 남은 시간도 표�
 Jetson의 작업 공간 가상환경에 MediaPipe가 없다면 다음 명령으로 설치합니다.
 
 ```bash
-cd /home/fcsl/eated_ws
+cd /home/fcsl/2026project
 .venv/bin/python -m pip install --no-deps \
   mediapipe==0.10.18 absl-py==2.3.1 flatbuffers==25.2.10 protobuf==4.25.8
 ```

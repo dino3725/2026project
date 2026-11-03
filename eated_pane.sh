@@ -6,7 +6,7 @@
 # prompt so the operator can start panes in a safe order.
 
 readonly PANE_NUMBER="${1:-}"
-readonly WORKSPACE="/home/fcsl/eated_ws"
+readonly WORKSPACE="/home/fcsl/2026project"
 
 if [[ ! "$PANE_NUMBER" =~ ^[1-9]$ ]]; then
     echo "Usage: $0 <pane-number 1-9>" >&2
@@ -42,7 +42,7 @@ case "$PANE_NUMBER" in
     4)
         title="4. VISION"
         hint="3번 RealSense 영상이 나온 다음 실행하세요."
-        command="ros2 launch vision_pkg vision2.launch.py model_path:=/home/fcsl/eated_ws/best.pt"
+        command="ros2 launch vision_pkg vision2.launch.py model_path:=/home/fcsl/2026project/best.pt"
         ;;
     5)
         title="5. JOY DRIVER"

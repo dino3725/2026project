@@ -7,7 +7,7 @@ eated
 ```
 
 It opens an independent Terminator window with nine panes. Each pane sources
-ROS 2 Humble and `/home/fcsl/eated_ws/install/setup.bash`, then waits with its
+ROS 2 Humble and `/home/fcsl/2026project/install/setup.bash`, then waits with its
 command prefilled. Commands are not started until Enter is pressed.
 
 Start panes in numerical order. In particular, wait for hardware controllers

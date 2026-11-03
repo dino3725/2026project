@@ -3,7 +3,7 @@
 set -eo pipefail
 
 source /opt/ros/humble/setup.bash
-source /home/fcsl/eated_ws/install/setup.bash
+source /home/fcsl/2026project/install/setup.bash
 set -u
 export LDS_MODEL=LDS-02
 
