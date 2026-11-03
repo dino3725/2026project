@@ -23,3 +23,7 @@ __pycache__/
 *.bag
 *.db3
 
+
+# Voice recordings
+recordings/
+*.wav
