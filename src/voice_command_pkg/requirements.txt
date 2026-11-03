@@ -1,0 +1,2 @@
+faster-whisper==1.2.1
+webrtcvad-wheels==2.0.14

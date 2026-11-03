@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Recorded audio and local model artifacts
+recordings/
+*.wav
+*.mp3
+*.flac
+models/
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# ROS2 colcon build artifacts
+build/
+install/
+log/
