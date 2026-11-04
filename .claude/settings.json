@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(ros2 launch:*)",
+      "Bash(ros2 run:*)",
+      "Bash(ros2 topic pub:*)",
+      "Bash(ros2 action send_goal:*)",
+      "Bash(ros2 service call:*)"
+    ]
+  }
+}
