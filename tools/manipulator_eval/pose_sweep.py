@@ -261,7 +261,12 @@ def main() -> None:
     executor, thread = spin_in_background(node)
     try:
         try:
-            time.sleep(1.5)
+            deadline = time.monotonic() + 15.0
+            while time.monotonic() < deadline and (
+                    node.frame()[1] is None
+                    or node.control_state == ''
+                    or node.measured_deg() is None):
+                time.sleep(0.2)
             print(f'control_node 상태: {node.control_state or "(없음)"} | '
                   f'그리퍼 명령 없음 | 저장={args.out}')
             if node.frame()[1] is None:
