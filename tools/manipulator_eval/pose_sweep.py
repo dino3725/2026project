@@ -29,10 +29,12 @@ the robot body; <= 10 deg/s).
 
 import argparse
 import datetime
+import os
 import threading
 import time
 from collections import Counter
 
+import cv2
 from cv_bridge import CvBridge
 import rclpy
 from rclpy.qos import qos_profile_sensor_data
@@ -45,7 +47,13 @@ from baseline_math import (
     project_to_image,
     sweep_candidates,
 )
-from live_detect import DEFAULT_MODEL, detect, NORMAL_THRESHOLD
+from live_detect import (
+    annotate,
+    DEFAULT_MODEL,
+    DEFAULT_SAVE_DIR,
+    detect,
+    NORMAL_THRESHOLD,
+)
 from pose_jog import MAX_STEP_SPEED_DEG_S, path_problems, PoseJog
 from ros_common import (
     append_csv_row,
@@ -99,7 +107,7 @@ class SweepNode(PoseJog):
 
 
 def collect(node: SweepNode, model, device, target: str, dwell: float,
-            min_conf: float) -> dict:
+            min_conf: float, save_path: str = '') -> dict:
     """Run YOLO on fresh frames for ``dwell`` seconds and summarize."""
     frames = 0
     hits = 0
@@ -129,6 +137,13 @@ def collect(node: SweepNode, model, device, target: str, dwell: float,
             if name != target:
                 others[name] += 1
                 other_conf[name] += conf
+    if save_path and last_id >= 0:
+        _, frame = node.frame()
+        if frame is not None:
+            image = annotate(frame, detect(model, frame, min_conf, device),
+                             node.joints(), 0.0)
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            cv2.imwrite(save_path, image)
     summary = {'frames': frames}
     if frames:
         summary['target_rate'] = hits / frames
@@ -233,6 +248,9 @@ def main() -> None:
     parser.add_argument('--poses', default='',
                         help='explicit candidates "j2,j3,j4;j2,j3,j4;..." '
                              '(joint1 = 0); replaces the generated grid')
+    parser.add_argument('--save-frames', action='store_true',
+                        help='save one annotated image per pose under '
+                             'results/live_snapshots/')
     parser.add_argument('--dry-run', action='store_true',
                         help='print the candidate poses and exit')
     parser.add_argument('--out', default=None,
@@ -276,6 +294,7 @@ def main() -> None:
     device = 0 if torch.cuda.is_available() else 'cpu'
     model = YOLO(args.model)
 
+    run_stamp = datetime.datetime.now().strftime('%H%M%S')
     rclpy.init()
     node = SweepNode(params, args.topic)
     executor, thread = spin_in_background(node)
@@ -320,8 +339,14 @@ def main() -> None:
                     print(f'[{index + 1}/{len(poses)}] 정지: {message}')
                     break
                 time.sleep(args.settle)
+                save_path = ''
+                if args.save_frames:
+                    save_path = os.path.join(
+                        DEFAULT_SAVE_DIR,
+                        f'{run_stamp}_{args.object}_y{args.object_y:+.2f}_'
+                        f'{index:02d}.png')
                 summary = collect(node, model, device, args.object,
-                                  args.dwell, args.min_conf)
+                                  args.dwell, args.min_conf, save_path)
                 write_row(args, index, pose, 'ok', summary, pixel=pixel)
                 print(f'[{index + 1}/{len(poses)}] {pose} '
                       f'rate {summary.get("target_rate", 0):.2f} '
