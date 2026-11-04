@@ -27,3 +27,6 @@ __pycache__/
 # Voice recordings
 recordings/
 *.wav
+
+# Per-file evaluation results may contain transcripts of bystanders; keep local only.
+tools/voice_eval/results/*_files.csv
