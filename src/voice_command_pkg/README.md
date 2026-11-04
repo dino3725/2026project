@@ -65,235 +65,99 @@ Jetson Control Node가 수행합니다.
 여러 지원 물체를 동시에 요청하면 한 물체를 임의로 선택하지 않고 `unknown`으로
 처리합니다. 음악 재생을 멈추라는 명령은 플랫폼 정지가 아니므로 `stop`이 아닙니다.
 
-## 주요 파일
+## 패키지 구조
 
-| 파일 | 역할 |
+```text
+src/voice_command_pkg/
+  voice_command_pkg/
+    voice_command_node.py   ROS2 노드: 파이프라인을 작업 스레드에서 돌리고 결과를 발행
+    pipeline.py             VAD → WAV → Whisper → LLM 한 발화 처리 (ROS 의존 없음)
+    audio_capture.py        PulseAudio 녹음, WebRTC VAD 상태 머신, VadConfig
+    command_classifier.py   Ollama 분류기, 출력 스키마·허용 조합 검증
+    prompts/system_prompt.txt  분류기 시스템 프롬프트 (바꾸면 회귀 테스트 필수)
+    command_protocol.py     발행 허용 규칙 (fetch 4종, stop만 통과)
+    parameters.py           ROS 파라미터 이름·기본값 → PipelineConfig
+  config/voice_command.yaml 실험값 (코드 수정 없이 변경)
+  launch/voice_command.launch.py
+  test/                     pytest + ament lint
+tools/voice_eval/           분류기 회귀·평가 스크립트, 평가셋, 결과 기록
+voice_env.sh                노트북 실행 환경 (ROS + .venv)
+```
+
+## 준비 (노트북)
+
+```bash
+cd ~/2026project
+python3 -m venv .venv                       # 처음 한 번
+.venv/bin/pip install -r src/voice_command_pkg/requirements.txt
+ollama list                                  # qwen3:4b-instruct 확인
+
+source /opt/ros/humble/setup.bash
+colcon build --symlink-install --packages-up-to voice_command_pkg
+```
+
+ROS 실행 파일은 `/usr/bin/python3`로 실행됩니다. Jetson의 `eated_pane.sh`처럼
+`voice_env.sh`가 `.venv`의 site-packages를 `PYTHONPATH`에 추가합니다.
+`pip install rclpy`는 하지 않습니다.
+
+## 실행
+
+```bash
+source ~/2026project/voice_env.sh
+ros2 launch voice_command_pkg voice_command.launch.py
+```
+
+`[LISTENING] 말씀해주세요.`가 보이면 말합니다. 종료는 `Ctrl+C`입니다.
+
+- 발행 없이 확인만:
+  `ros2 run voice_command_pkg voice_command_node --ros-args -p publish_commands:=false`
+- 다른 실험값: YAML을 복사해 고친 뒤 `config_file:=/path/to/my.yaml`
+- VAD만 확인: `ros2 run voice_command_pkg vad_monitor` (발화 시작·끝만 표시)
+- 발화 WAV는 `~/2026project/recordings/`에 저장됩니다. 커밋하지 않습니다.
+
+**주의:** Jetson이 켜져 있고 `ROS_DOMAIN_ID`가 같으면 `fetch`/`stop`이 실제
+로봇에 전달됩니다. 로봇 없이 시험할 때는 `publish_commands:=false`를 쓰세요.
+
+## 테스트
+
+```bash
+# ROS 없이 순수 로직 (노드 테스트는 자동으로 건너뜀)
+.venv/bin/python -m pytest src/voice_command_pkg/test -q
+
+# lint 포함 전체
+source /opt/ros/humble/setup.bash && source install/setup.bash
+colcon test --packages-select voice_command_pkg && colcon test-result --verbose
+```
+
+이 노트북에서는 `~/.local`의 anyio pytest 플러그인이 시스템 pytest와 맞지 않아
+`colcon test` 앞에 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`이 필요합니다.
+
+분류기 회귀 테스트 (Ollama 사용, ROS 발행 없음):
+
+```bash
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/test_llm_pick_objects.py
+```
+
+`test_command_classifier.py`는 프롬프트 SHA256을 고정해 둡니다. 프롬프트를
+바꾸면 이 테스트가 실패합니다. 회귀 테스트를 다시 돌려 결과를
+`tools/voice_eval/results/`에 기록한 뒤 고정값을 갱신하세요.
+
+## ROS2 메시지
+
+- Topic: `/voice/robot_command`, Type: `eated_interfaces/msg/RobotCommand`, QoS depth 10
+- Fields: `header`(stamp = 발행 시각), `action`, `target_class`, `transcript`
+- 통과 조건: `fetch` + `coke|vaseline|tissue|airpod`, 또는 `stop` + 빈 문자열.
+  `unknown`과 그 밖의 조합은 발행하지 않습니다.
+
+## 파라미터 (기본값 = 2026-11-04 기준선)
+
+전체 목록과 설명은 `config/voice_command.yaml`에 있습니다.
+
+| 그룹 | 주요 값 |
 | --- | --- |
-| `voice_command_test.py` | VAD → STT → LLM → optional ROS2 통합 실행 |
-| `vad_test.py` | PulseAudio/WebRTC VAD 단독 테스트 |
-| `llm_test.py` | Ollama 명령 분류, JSON schema 및 Python 검증 |
-| `robot_command_publisher.py` | 검증된 fetch/stop 명령의 ROS2 publisher |
-| `src/eated_interfaces` | Jetson과 공유하는 ROS2 custom interface 패키지 |
-| `test_llm_pick_objects.py` | STT 없는 현재 명령 분류 회귀 테스트 |
-| `test_robot_command_publisher.py` | local ROS2 publisher/subscriber 안전 테스트 |
-| `text_command_ros_test.py` | 텍스트 → LLM → ROS2 통합 테스트 |
-| `test_llm_classifier.py` | 이전 classifier core 회귀 테스트 |
-| `dev_cases_v1.json` | 이전 classifier 개발용 데이터 |
-| `final_heldout_v2.json` | classifier v2의 완료된 평가 데이터 |
-
-`dev_cases_v1.json`과 `final_heldout_v2.json`은 과거 평가 기록입니다. 현재 물체
-구성의 검증에는 `test_llm_pick_objects.py`를 사용합니다.
-
-## 확인된 환경
-
-- Ubuntu 22.04
-- Python 3.10.12
-- Intel Core i7-10510U, 4코어/8스레드
-- RAM 15 GiB
-- NVIDIA GPU 없음
-- ROS2 Humble
-- faster-whisper 1.2.1
-- Whisper model: `small`
-- Ollama 0.33.3
-- LLM model: `qwen3:4b-instruct`
-- WebRTC VAD: `webrtcvad-wheels==2.0.14`
-
-## 준비
-
-Python 가상환경은 프로젝트의 기존 `.venv`를 사용합니다.
-
-```bash
-cd /home/sh/llm_robot_test
-.venv/bin/python --version
-.venv/bin/pip install -r requirements.txt
-```
-
-Ollama 서비스와 모델을 확인합니다.
-
-```bash
-ollama --version
-ollama list
-curl http://127.0.0.1:11434/api/tags
-```
-
-필요한 모델 이름은 `qwen3:4b-instruct`입니다.
-
-ROS2 명령을 실행할 터미널에서는 환경을 먼저 불러옵니다.
-
-```bash
-source /opt/ros/humble/setup.bash
-```
-
-ROS2 setup을 source하면 기존 `.venv/bin/python`에서도 `rclpy`와 `std_msgs`를
-불러올 수 있습니다. `pip install rclpy`는 사용하지 않습니다.
-
-## 빠른 테스트
-
-### 단일 텍스트 분류
-
-```bash
-cd /home/sh/llm_robot_test
-.venv/bin/python llm_test.py "로봇 멈춰"
-```
-
-기대 결과:
-
-```json
-{"action":"stop","object":""}
-```
-
-다른 예시:
-
-```bash
-.venv/bin/python llm_test.py "목마른데 콜라 가져다줘"
-.venv/bin/python llm_test.py "입술이 터서 바를 게 필요해"
-.venv/bin/python llm_test.py "커피를 쏟아서 닦을 게 필요해"
-.venv/bin/python llm_test.py "에어팟 가져다줘"
-.venv/bin/python llm_test.py "오늘 날씨 어때"
-```
-
-### 전체 텍스트 LLM 테스트
-
-마이크와 STT를 사용하지 않고 48문장을 실행합니다.
-
-```bash
-.venv/bin/python test_llm_pick_objects.py
-```
-
-현재 확인된 결과:
-
-```text
-class.coke=8/8
-class.vaseline=8/8
-class.tissue=8/8
-class.airpod=8/8
-class.stop=8/8
-class.unknown=8/8
-overall=48/48
-```
-
-### ROS2 publisher 단독 테스트
-
-```bash
-source /opt/ros/humble/setup.bash
-.venv/bin/python test_robot_command_publisher.py
-```
-
-이 테스트는 fetch 4종과 stop을 local subscriber로 수신하고, unknown 및 잘못된
-action/object 조합이 차단되는지 확인합니다.
-
-### 텍스트 → LLM → ROS2 테스트
-
-```bash
-source /opt/ros/humble/setup.bash
-.venv/bin/python text_command_ros_test.py
-```
-
-기대 결과:
-
-```text
-[SUBSCRIBER]
-received=5 expected=5
-RESULT: PASS
-```
-
-## 실제 음성 실행
-
-ROS publish 없이 기존 로컬 음성 파이프라인만 실행:
-
-```bash
-cd /home/sh/llm_robot_test
-.venv/bin/python voice_command_test.py
-```
-
-ROS publish 활성화:
-
-```bash
-cd /home/sh/llm_robot_test
-source /opt/ros/humble/setup.bash
-colcon build --packages-select eated_interfaces
-source install/setup.bash
-.venv/bin/python voice_command_test.py --ros
-```
-
-다음 안내가 표시되면 명령을 말합니다.
-
-```text
-[LISTENING]
-말씀해주세요.
-```
-
-프로그램은 명령 처리가 끝나면 자동으로 다시 `[LISTENING]` 상태로 돌아갑니다.
-종료하려면 `Ctrl+C`를 누릅니다.
-
-다른 터미널에서 ROS 메시지를 확인할 수 있습니다.
-
-```bash
-source /opt/ros/humble/setup.bash
-source /home/sh/llm_robot_test/install/setup.bash
-ros2 topic echo /voice/robot_command eated_interfaces/msg/RobotCommand
-```
-
-## ROS2 메시지 설계
-
-- Topic: `/voice/robot_command`
-- Type: `eated_interfaces/msg/RobotCommand`
-- Fields: `header`, `action`, `target_class`, `transcript`
-- QoS depth: 10
-
-publisher는 다음 조건만 통과시킵니다.
-
-- `action == "fetch"`이며 object가 `coke`, `vaseline`, `tissue`, `airpod` 중 하나
-- 또는 `action == "stop"`이며 object가 빈 문자열
-
-그 밖의 action/object 조합과 추가 필드가 있는 dict는 발행하지 않습니다.
-
-LLM의 기존 `object` 값은 publish 직전에 `target_class`로 매핑하며, Whisper가
-생성한 한국어 문장은 `transcript`에 보존합니다. `header.stamp`는 publisher의
-ROS clock으로 채웁니다.
-
-ROS 계층만 단독으로 검사하려면 다음을 실행합니다.
-
-```bash
-cd /home/sh/llm_robot_test
-source /opt/ros/humble/setup.bash
-source install/setup.bash
-python3 test_robot_command_publisher.py
-```
-
-CLI로 custom message를 직접 보낼 수도 있습니다.
-
-```bash
-ros2 topic pub --once /voice/robot_command \
-  eated_interfaces/msg/RobotCommand \
-  "{action: fetch, target_class: coke, transcript: '목마른데 마실 거 가져다줘'}"
-```
-
-## VAD 및 STT 설정
-
-- PulseAudio default source (`pactl get-default-source`)
-- PCM: 16 kHz, mono, signed 16-bit
-- WebRTC VAD mode: 3
-- Frame: 30 ms (`480 samples`, `960 bytes`)
-- Stream warm-up: 1.2초
-- Start window: 300 ms 중 speech 80% 이상
-- Start RMS gate: 200
-- Pre-roll: 450 ms
-- End silence: 900 ms
-- Maximum utterance: 15초
-- Whisper: `small`, CPU, `int8`, `language="ko"`
-
-WebRTC VAD는 화자 식별 기능이 없습니다. 주변 사람의 목소리도 음성으로 감지할 수
-있으므로 다중 사용자 환경에서는 wake word나 화자 인식이 추가로 필요합니다.
-
-## LLM 설정
-
-- Model: `qwen3:4b-instruct`
-- `think: false`
-- `temperature: 0`
-- `keep_alive: 10m`
-- JSON schema structured output
-- Python-side action/object allowlist 검증
+| `vad.*` | mode 3, start window 300 ms 중 80%, RMS gate 200, pre-roll 450 ms, 종료 무음 900 ms, 최대 15 s, 스트림 시작 후 1.2 s 버림 |
+| `whisper.*` | `small`, CPU, `int8`, `ko` |
+| `llm.*` | `qwen3:4b-instruct`, timeout 120 s, `keep_alive` 10m (`think: false`, `temperature: 0`은 코드 고정) |
 
 ## YOLO 기반 객체 인식
 

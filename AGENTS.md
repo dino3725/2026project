@@ -18,7 +18,7 @@ ROS2로 TurtleBot3 + OpenMANIPULATOR-X(Jetson Orin)에 전달하면 로봇이 YO
 | Jetson Orin (JetPack 6.2.3, CUDA 12.6, ROS2 Humble) | 하드웨어, MoveIt, 비전, 제어 상태 머신, 주행 | `voice_command_pkg`를 제외한 전부 |
 
 - 노트북 빌드: `colcon build --symlink-install --packages-up-to voice_command_pkg`
-  (음성 코드를 ROS2 패키지로 만들기 전까지는 `--packages-select eated_interfaces`)
+  (실행 환경은 `source ~/2026project/voice_env.sh`. `.venv` site-packages를 `PYTHONPATH`에 추가합니다)
 - Jetson 빌드: `colcon build --symlink-install --packages-skip voice_command_pkg`
 - Python 3.10 기준입니다. 3.11+ 전용 문법을 쓰지 마세요. `audioop`은 3.10에서 사용 가능합니다.
 - 워크스페이스 경로: Jetson `/home/fcsl/2026project`, 노트북 `~/2026project` (GitHub 레포 이름도 `2026project`).
