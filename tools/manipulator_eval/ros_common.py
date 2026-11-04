@@ -53,6 +53,12 @@ def append_csv_row(path: str, fieldnames: Sequence[str], row: Dict) -> None:
     """Append one row, writing the header when the file is new."""
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     new_file = not os.path.exists(path) or os.path.getsize(path) == 0
+    if not new_file:
+        with open(path, newline='', encoding='utf-8') as handle:
+            header = next(csv.reader(handle), [])
+        if header != list(fieldnames):
+            raise ValueError(
+                f'{path} has different columns; use another --out file')
     with open(path, 'a', newline='', encoding='utf-8') as handle:
         writer = csv.DictWriter(handle, fieldnames=list(fieldnames))
         if new_file:

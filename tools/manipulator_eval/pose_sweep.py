@@ -41,6 +41,7 @@ from sensor_msgs.msg import Image
 from arm_probe import ask, load_control_params
 from baseline_math import (
     forward_kinematics,
+    jog_target_problems,
     project_to_image,
     sweep_candidates,
 )
@@ -62,7 +63,7 @@ JOINT2 = (-45.0, -35.0, -25.0, -15.0)
 JOINT3 = (-50.0, -41.0, -30.0, -20.0)
 JOINT4 = (95.0, 105.0, 115.0)
 FIELDS = (
-    ['timestamp', 'object', 'index', 'result']
+    ['timestamp', 'object', 'object_x', 'object_y', 'index', 'result']
     + [f'{j}_deg' for j in ARM_JOINTS]
     + ['cam_pitch_deg', 'pred_row', 'pred_col', 'pred_dist_m', 'frames',
        'target_rate', 'target_conf_mean', 'target_conf_max',
@@ -150,6 +151,7 @@ def write_row(args, index, pose, result, summary=None, message='',
     row = {
         'timestamp': datetime.datetime.now().isoformat(timespec='seconds'),
         'object': args.object, 'index': index, 'result': result,
+        'object_x': fmt(args.object_x, 3), 'object_y': fmt(args.object_y, 3),
         'cam_pitch_deg': fmt(forward_kinematics(pose).camera_pitch_deg, 1),
         'message': message, 'frames': summary.get('frames', ''),
         'other_class': summary.get('other_class', ''),
@@ -228,17 +230,33 @@ def main() -> None:
                         default='ask',
                         help='after the sweep or Ctrl+C (never after Y or '
                              'voice stop)')
+    parser.add_argument('--poses', default='',
+                        help='explicit candidates "j2,j3,j4;j2,j3,j4;..." '
+                             '(joint1 = 0); replaces the generated grid')
     parser.add_argument('--dry-run', action='store_true',
                         help='print the candidate poses and exit')
-    parser.add_argument('--out', default=default_csv_path('pose_sweep'))
+    parser.add_argument('--out', default=None,
+                        help='default: results/raw/pose_verify_<date>.csv '
+                             'with --poses, else pose_sweep_<date>.csv')
     args = parser.parse_args()
 
+    if args.out is None:
+        args.out = default_csv_path('pose_verify' if args.poses else 'pose_sweep')
     params = load_control_params(args.control_config)
     recognition = [float(v) for v in params['recognition_pose_deg']]
     target_point = (args.object_x, args.object_y,
                     args.surface_z + args.object_height_mm / 2000.0)
-    poses = sweep_candidates(target_point, JOINT2, JOINT3, JOINT4,
-                             args.surface_z, first=recognition)
+    if args.poses:
+        try:
+            poses = [tuple([0.0] + [float(v) for v in item.split(',')])
+                     for item in args.poses.split(';') if item.strip()]
+        except ValueError:
+            parser.error('--poses must look like "-45,-30,115;-35,-41,115"')
+        if any(len(pose) != 4 for pose in poses):
+            parser.error('each --poses item needs joint2,joint3,joint4')
+    else:
+        poses = sweep_candidates(target_point, JOINT2, JOINT3, JOINT4,
+                                 args.surface_z, first=recognition)
     print(BANNER)
     print(f'후보 자세 {len(poses)}개, 물체={args.object} at '
           f'({target_point[0]:.3f}, {target_point[1]:.3f}, '
@@ -246,9 +264,11 @@ def main() -> None:
     if args.dry_run:
         for index, pose in enumerate(poses):
             column, row, dist = project_to_image(pose, target_point)
+            problems = jog_target_problems(pose, args.surface_z)
             print(f'  {index:2d} {pose} row {row:4.0f} col {column:4.0f} '
                   f'dist {dist:.2f} pitch '
-                  f'{forward_kinematics(pose).camera_pitch_deg:.0f}')
+                  f'{forward_kinematics(pose).camera_pitch_deg:.0f}'
+                  + (f'  REFUSED: {problems[0]}' if problems else ''))
         return
 
     import torch  # noqa: E402
