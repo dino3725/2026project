@@ -9,6 +9,8 @@ from baseline_math import (
     checked_min_clearance_m,
     forward_kinematics,
     jog_target_problems,
+    project_to_image,
+    sweep_candidates,
     lift_target,
     grid_mm_to_base,
     gripper_width_from_joint,
@@ -200,3 +202,26 @@ def test_jog_target_problems():
     low = (0.0, 30.0, -10.0, 60.0)
     assert len(jog_target_problems(low, surface_z_m=0.07)) >= \
         len(jog_target_problems(low))
+
+
+def test_project_to_image_recognition_pose():
+    pixel = project_to_image((0.0, -30.0, -41.0, 115.0), (0.24, 0.0, 0.105))
+    assert pixel is not None
+    column, row, depth = pixel
+    assert 600 < column < 760 and 420 < row < 540 and 0.3 < depth < 0.45
+    # Behind the camera.
+    assert project_to_image((0.0, -30.0, -41.0, 115.0), (-0.5, 0, 0.4)) \
+        is None
+
+
+def test_sweep_candidates_are_safe_and_start_at_current_pose():
+    current = (0.0, -30.0, -41.0, 115.0)
+    poses = sweep_candidates((0.24, 0.0, 0.105), (-45, -35, -25, -15),
+                             (-50, -41, -30, -20), (95, 105, 115), 0.07,
+                             first=current)
+    assert poses[0] == current
+    assert len(poses) > 5
+    for pose in poses[1:]:
+        assert jog_target_problems(pose, 0.07) == []
+        _, row, _ = project_to_image(pose, (0.24, 0.0, 0.105))
+        assert 120 <= row <= 600

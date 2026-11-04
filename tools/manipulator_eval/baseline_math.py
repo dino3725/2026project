@@ -361,6 +361,23 @@ def forward_kinematics(joints_deg: Sequence[float]) -> ArmPoints:
     pose = _compose(pose, _rot_y(q[3]), (0.124, 0.0, 0.0))    # joint4
     ee = _compose(pose, _IDENTITY, (0.126, 0.0, 0.0))
     camera = _compose(ee, _IDENTITY, CAMERA_MOUNT_XYZ_M)
+    return _arm_points(ee, camera)
+
+
+def _camera_pose(joints_deg: Sequence[float]):
+    """Return (R, p) of d435i_link in base_link (x forward, z up)."""
+    q = [math.radians(float(v)) for v in joints_deg]
+    pose = (_IDENTITY, (0.0, 0.0, 0.0))
+    pose = _compose(pose, _IDENTITY, (-0.092, 0.0, 0.091))
+    pose = _compose(pose, _rot_z(q[0]), (0.012, 0.0, 0.017))
+    pose = _compose(pose, _rot_y(q[1]), (0.0, 0.0, 0.0595))
+    pose = _compose(pose, _rot_y(q[2]), (0.024, 0.0, 0.128))
+    pose = _compose(pose, _rot_y(q[3]), (0.124, 0.0, 0.0))
+    pose = _compose(pose, _IDENTITY, (0.126, 0.0, 0.0))
+    return _compose(pose, _IDENTITY, CAMERA_MOUNT_XYZ_M)
+
+
+def _arm_points(ee, camera) -> 'ArmPoints':
     forward_z = camera[0][2][0]
     pitch = math.degrees(math.asin(max(-1.0, min(1.0, -forward_z))))
     return ArmPoints(ee[1], camera[1], pitch)
@@ -397,3 +414,69 @@ def jog_target_problems(
             problems.append(
                 f'{name} over the robot body too low (x {x:.3f}, z {z:.3f})')
     return problems
+
+
+# D435i colour intrinsics at 1280x720 (camera_info, 2026-11-04).
+CAMERA_INTRINSICS = (911.7, 911.5, 632.2, 373.0, 1280, 720)
+
+
+def project_to_image(
+    joints_deg: Sequence[float],
+    point: Sequence[float],
+    intrinsics: Sequence[float] = CAMERA_INTRINSICS,
+) -> Optional[Tuple[float, float, float]]:
+    """
+    Return (column, row, depth_m) of a base_link point, or None if behind.
+
+    Uses the URDF chain and the nominal camera mount; the real image can be
+    offset by mount errors (about 100 rows were seen on 2026-11-04).
+    """
+    fx, fy, cx, cy = (float(v) for v in intrinsics[:4])
+    rotation, origin = _camera_pose(joints_deg)
+    d = [float(point[i]) - origin[i] for i in range(3)]
+    # Point in d435i_link: x forward, y left, z up (R transposed).
+    local = [sum(rotation[k][i] * d[k] for k in range(3)) for i in range(3)]
+    if local[0] <= 0.0:
+        return None
+    return (cx - fx * local[1] / local[0], cy - fy * local[2] / local[0],
+            local[0])
+
+
+def sweep_candidates(
+    target: Sequence[float],
+    joint2_deg: Sequence[float],
+    joint3_deg: Sequence[float],
+    joint4_deg: Sequence[float],
+    surface_z_m: float,
+    first: Optional[Sequence[float]] = None,
+    row_band: Tuple[float, float] = (120.0, 600.0),
+) -> List[Tuple[float, float, float, float]]:
+    """
+    Return safe joint poses that put ``target`` inside the image row band.
+
+    joint1 stays 0. Poses failing jog_target_problems are dropped. The list
+    is ordered in a serpentine so consecutive poses differ by one step, and
+    ``first`` (the current recognition pose) is placed at the front.
+    """
+    poses = []
+    for i, j2 in enumerate(joint2_deg):
+        j3_values = list(joint3_deg) if i % 2 == 0 else list(joint3_deg)[::-1]
+        for k, j3 in enumerate(j3_values):
+            j4_values = list(joint4_deg) if k % 2 == 0 else \
+                list(joint4_deg)[::-1]
+            for j4 in j4_values:
+                pose = (0.0, float(j2), float(j3), float(j4))
+                if jog_target_problems(pose, surface_z_m):
+                    continue
+                pixel = project_to_image(pose, target)
+                if pixel is None:
+                    continue
+                column, row, _ = pixel
+                if not (row_band[0] <= row <= row_band[1]
+                        and 100.0 <= column <= 1180.0):
+                    continue
+                poses.append(pose)
+    if first is not None:
+        head = tuple(float(v) for v in first)
+        poses = [head] + [p for p in poses if p != head]
+    return poses
