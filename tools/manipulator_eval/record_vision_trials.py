@@ -128,8 +128,12 @@ def ask_mark(marks: dict, previous: str):
             print(f'  알 수 없는 입력입니다. 표식: {", ".join(marks)}')
 
 
-def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> None:
-    """Wait for one recognition and append the result row."""
+def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> bool:
+    """
+    Wait for one recognition and append the result row.
+
+    Return False when nothing arrived before the timeout.
+    """
     label, x_mm, y_mm = mark
     truth = grid_mm_to_base(
         x_mm, y_mm, args.object_height_mm / 2.0, args.surface_z)
@@ -155,7 +159,7 @@ def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> None:
             timeout=max(1.0, deadline - time.monotonic()))
     except queue.Empty:
         print('  시간 초과: 인식 결과를 받지 못했습니다. 기록하지 않습니다.')
-        return
+        return False
 
     row = {
         'trial': trial_id,
@@ -202,7 +206,8 @@ def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> None:
     else:
         row['note'] = input('  메모 (없으면 Enter): ').strip()
     append_csv_row(args.out, FIELDS, row)
-    print(f'  저장: trial {trial_id} -> {args.out}')
+    print(f'  저장: trial {trial_id} -> {args.out}', flush=True)
+    return True
 
 
 def main() -> None:
@@ -222,13 +227,25 @@ def main() -> None:
                              'every trial of this run')
     parser.add_argument('--repeats', type=int, default=1,
                         help='non-interactive: recognitions to record')
+    parser.add_argument('--sequence', default='',
+                        help='non-interactive: comma-separated mark ids, one '
+                             'per recognition, e.g. V1,V1,V2,V2')
     parser.add_argument('--note', default='',
                         help='non-interactive: note stored on every row')
     args = parser.parse_args()
 
     marks = load_marks(args.marks)
     fixed_mark = None
-    if args.mark:
+    plan = []
+    if args.sequence:
+        if args.mark:
+            parser.error('use --mark or --sequence, not both')
+        for mark_id in (v.strip() for v in args.sequence.split(',')):
+            if mark_id not in marks:
+                parser.error(f'unknown mark {mark_id!r} in --sequence')
+            plan.append((mark_id,) + marks[mark_id])
+        args.mark = 'sequence'
+    elif args.mark:
         if args.mark in marks:
             fixed_mark = (args.mark,) + marks[args.mark]
         else:
@@ -248,10 +265,17 @@ def main() -> None:
               f'표면 z={args.surface_z:.3f} m, 저장={args.out}')
         print(f'control_node 상태: {node.control_state or "(아직 없음)"}')
         if fixed_mark is not None:
-            for index in range(args.repeats):
-                print(f'\n[{index + 1}/{args.repeats}] 표식 {fixed_mark[0]}',
-                      flush=True)
-                run_trial(node, args, fixed_mark, next_trial_id(args.out))
+            plan = [fixed_mark] * args.repeats
+        for index, mark in enumerate(plan):
+            following = (f' (다음: {plan[index + 1][0]})'
+                         if index + 1 < len(plan) else ' (마지막)')
+            print(f'\n[{index + 1}/{len(plan)}] 표식 {mark[0]}{following}',
+                  flush=True)
+            if not run_trial(node, args, mark, next_trial_id(args.out)):
+                print(f'중단: {index}개 기록 후 시간 초과. 남은 순서: '
+                      + ','.join(m[0] for m in plan[index:]), flush=True)
+                break
+        if plan:
             return
         previous = ''
         while rclpy.ok():
