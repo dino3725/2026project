@@ -11,7 +11,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from llm_test import classify_command
+from voice_command_pkg.command_classifier import classify_command
 
 
 DATA_PATH = Path(__file__).with_name("dev_cases_v1.json")

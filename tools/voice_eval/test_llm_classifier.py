@@ -10,7 +10,7 @@ import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 
-from llm_test import classify_command
+from voice_command_pkg.command_classifier import classify_command
 
 
 @dataclass(frozen=True)

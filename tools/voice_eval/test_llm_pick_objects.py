@@ -8,7 +8,7 @@ import statistics
 import time
 from collections import Counter, defaultdict
 
-from llm_test import classify_command
+from voice_command_pkg.command_classifier import classify_command
 
 
 CASES = {

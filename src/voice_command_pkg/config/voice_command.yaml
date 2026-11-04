@@ -1,0 +1,31 @@
+# Voice command node parameters (laptop).
+# Defaults reproduce the 2026-11-04 baseline. Change values here for
+# experiments instead of editing code; record results in tools/voice_eval/results/.
+voice_command_node:
+  ros__parameters:
+    # false = run the full pipeline but never publish (dry run).
+    publish_commands: true
+    # WAV of each utterance is kept for evaluation data. Never commit it.
+    recordings_dir: "~/2026project/recordings"
+
+    whisper:
+      model: "small"
+      device: "cpu"
+      compute_type: "int8"
+      language: "ko"
+
+    vad:
+      mode: 3                      # WebRTC aggressiveness 0-3
+      start_min_rms: 200           # noise gate while waiting for speech
+      stream_warmup_ms: 1200       # discarded after opening the mic stream
+      start_window_ms: 300
+      start_speech_ratio: 0.8      # speech frames needed in the start window
+      end_silence_ms: 900          # 5.1 ②: try 500-600 and measure
+      pre_roll_ms: 450
+      max_utterance_seconds: 15.0
+
+    llm:
+      ollama_url: "http://127.0.0.1:11434"
+      model: "qwen3:4b-instruct"
+      timeout_seconds: 120.0       # 5.3 ③: target about 10 s
+      keep_alive: "10m"            # 5.3 ②: target -1 (always loaded)

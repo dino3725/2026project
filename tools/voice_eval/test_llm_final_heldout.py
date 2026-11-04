@@ -12,12 +12,14 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from llm_test import classify_command
+from voice_command_pkg.command_classifier import classify_command
 
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "final_heldout_v2.json"
-CLASSIFIER_PATH = ROOT / "llm_test.py"
+CLASSIFIER_PATH = (
+    ROOT.parents[1] / "src" / "voice_command_pkg" / "voice_command_pkg" / "command_classifier.py"
+)
 CLASSES = ("coke", "tissue", "snack", "unknown")
 EXPECTED_COUNTS = {
     "base": {label: 30 for label in CLASSES},
