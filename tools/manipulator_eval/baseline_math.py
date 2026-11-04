@@ -303,3 +303,97 @@ def parse_moveit_log(text: str) -> Optional[Tuple[str, Point]]:
     if match is None:
         return None
     return match.group(1), tuple(float(match.group(i)) for i in range(2, 5))
+
+
+# --- Forward kinematics (URDF: turtlebot3_manipulation_description) -------
+
+# URDF joint limits in degrees (joint1..joint4).
+JOINT_LIMITS_DEG = (
+    (-162.0, 162.0),
+    (-102.6, 90.0),
+    (-54.0, 79.2),
+    (-102.6, 117.0),
+)
+# Camera mount (vision2.launch.py defaults): end_effector_link -> d435i_link.
+CAMERA_MOUNT_XYZ_M = (-0.065, 0.0195, 0.052)
+
+
+def _rot_z(angle: float):
+    c, s = math.cos(angle), math.sin(angle)
+    return ((c, -s, 0.0), (s, c, 0.0), (0.0, 0.0, 1.0))
+
+
+def _rot_y(angle: float):
+    c, s = math.cos(angle), math.sin(angle)
+    return ((c, 0.0, s), (0.0, 1.0, 0.0), (-s, 0.0, c))
+
+
+_IDENTITY = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0))
+
+
+def _compose(pose, rotation, offset):
+    """Return pose * (rotation, offset) for (R, p) tuples."""
+    r, p = pose
+    new_p = tuple(p[i] + sum(r[i][k] * offset[k] for k in range(3))
+                  for i in range(3))
+    new_r = tuple(tuple(sum(r[i][k] * rotation[k][j] for k in range(3))
+                        for j in range(3)) for i in range(3))
+    return new_r, new_p
+
+
+@dataclass(frozen=True)
+class ArmPoints:
+    """Hand and camera positions in base_link for one joint configuration."""
+
+    ee: Point
+    camera: Point
+    camera_pitch_deg: float  # downward tilt of the camera view axis
+
+
+def forward_kinematics(joints_deg: Sequence[float]) -> ArmPoints:
+    """Return end_effector_link and d435i_link positions (URDF geometry)."""
+    q = [math.radians(float(v)) for v in joints_deg]
+    pose = (_IDENTITY, (0.0, 0.0, 0.0))
+    pose = _compose(pose, _IDENTITY, (-0.092, 0.0, 0.091))   # link1
+    pose = _compose(pose, _rot_z(q[0]), (0.012, 0.0, 0.017))  # joint1
+    pose = _compose(pose, _rot_y(q[1]), (0.0, 0.0, 0.0595))   # joint2
+    pose = _compose(pose, _rot_y(q[2]), (0.024, 0.0, 0.128))  # joint3
+    pose = _compose(pose, _rot_y(q[3]), (0.124, 0.0, 0.0))    # joint4
+    ee = _compose(pose, _IDENTITY, (0.126, 0.0, 0.0))
+    camera = _compose(ee, _IDENTITY, CAMERA_MOUNT_XYZ_M)
+    forward_z = camera[0][2][0]
+    pitch = math.degrees(math.asin(max(-1.0, min(1.0, -forward_z))))
+    return ArmPoints(ee[1], camera[1], pitch)
+
+
+def jog_target_problems(
+    joints_deg: Sequence[float],
+    surface_z_m: float = DEFAULT_SURFACE_Z_M,
+    min_clearance_m: float = MIN_CLEARANCE_FLOOR_MM / 1000.0,
+    margin_deg: float = 1.5,
+) -> List[str]:
+    """
+    Return reasons a jog target is refused (empty if allowed).
+
+    Checks URDF limits with a margin, the hand and camera height above the
+    surface, and keeps both above the robot body when they are over it.
+    """
+    problems = []
+    for index, (value, (low, high)) in enumerate(
+            zip(joints_deg, JOINT_LIMITS_DEG), start=1):
+        if not low + margin_deg <= value <= high - margin_deg:
+            problems.append(
+                f'joint{index} {value:.1f}° outside '
+                f'[{low + margin_deg:.1f}, {high - margin_deg:.1f}]')
+    if problems:
+        return problems
+    points = forward_kinematics(joints_deg)
+    for name, (x, _, z) in (('hand', points.ee), ('camera', points.camera)):
+        if z - surface_z_m < min_clearance_m:
+            problems.append(
+                f'{name} {m_to_mm(z - surface_z_m):.0f} mm above surface '
+                f'< {m_to_mm(min_clearance_m):.0f} mm')
+        if x < 0.10 and z < 0.20:
+            problems.append(
+                f'{name} over the robot body too low (x {x:.3f}, z {z:.3f})')
+    return problems

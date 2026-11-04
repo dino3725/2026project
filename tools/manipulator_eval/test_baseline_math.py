@@ -7,6 +7,8 @@ import pytest
 from baseline_math import (
     axis_stats,
     checked_min_clearance_m,
+    forward_kinematics,
+    jog_target_problems,
     lift_target,
     grid_mm_to_base,
     gripper_width_from_joint,
@@ -175,3 +177,26 @@ def test_parse_moveit_log():
     assert label == 'PICK'
     assert point == pytest.approx((0.271, 0.010, 0.045))
     assert parse_moveit_log('MoveIt PICK failed: error=-1') is None
+
+
+def test_forward_kinematics_matches_known_poses():
+    recognition = forward_kinematics((0.0, -30.0, -41.0, 115.0))
+    assert recognition.ee == pytest.approx((0.008, 0.0, 0.320), abs=0.002)
+    assert recognition.camera == pytest.approx((-0.003, 0.0195, 0.403),
+                                               abs=0.002)
+    assert recognition.camera_pitch_deg == pytest.approx(44.0, abs=0.5)
+    home = forward_kinematics((0.0, -101.0, 53.0, 70.0))
+    assert home.ee == pytest.approx((-0.010, 0.0, 0.212), abs=0.002)
+
+
+def test_jog_target_problems():
+    assert jog_target_problems((0.0, -30.0, -41.0, 115.0)) == []
+    assert any('joint4' in p
+               for p in jog_target_problems((0.0, -30.0, -41.0, 125.0)))
+    # Reaching far down: hand below the 50 mm clearance.
+    assert any('hand' in p
+               for p in jog_target_problems((0.0, 60.0, 20.0, 30.0)))
+    # Raised surface (8 cm box) makes the same pose stricter.
+    low = (0.0, 30.0, -10.0, 60.0)
+    assert len(jog_target_problems(low, surface_z_m=0.07)) >= \
+        len(jog_target_problems(low))
