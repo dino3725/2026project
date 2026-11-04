@@ -53,6 +53,9 @@ from ros_common import (
 
 OBJECTS = ('airpod', 'coke', 'tissue', 'vaseline')
 HERE = os.path.dirname(os.path.abspath(__file__))
+# rcl_interfaces/Log level constants are bytes in rclpy (b'('); the
+# message field is an int. Compare against the integer value.
+LOG_ERROR = Log.ERROR[0] if isinstance(Log.ERROR, bytes) else int(Log.ERROR)
 
 FIELDS = (
     ['trial', 'timestamp', 'object', 'object_height_mm', 'mark',
@@ -99,7 +102,7 @@ class VisionRecorder(MeasurementNode):
         point = parse_vision_log(msg.msg)
         if point is not None:
             self.results.put(('ok', point, msg.msg))
-        elif msg.level >= Log.ERROR and 'recognition/pick failed' in msg.msg:
+        elif msg.level >= LOG_ERROR and 'recognition/pick failed' in msg.msg:
             self.results.put(('fail', None, msg.msg))
 
     def reset_trial(self) -> None:
