@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Classify Korean service-robot commands with a local Ollama model."""
+"""
+Classify Korean service-robot fetch requests with a local Ollama model.
+
+The LLM only decides fetch (four objects) or unknown. Stop is never decided
+here; transcript_rules.is_stop_command runs first and handles it.
+"""
 
 from __future__ import annotations
 
@@ -23,7 +28,7 @@ SYSTEM_PROMPT = PROMPT_PATH.read_text(encoding='utf-8').rstrip('\n')
 OUTPUT_SCHEMA: dict[str, Any] = {
     'type': 'object',
     'properties': {
-        'action': {'type': 'string', 'enum': ['fetch', 'stop', 'unknown']},
+        'action': {'type': 'string', 'enum': ['fetch', 'unknown']},
         'object': {
             'type': 'string',
             'enum': ['coke', 'vaseline', 'tissue', 'airpod', ''],
@@ -58,12 +63,6 @@ OUTPUT_SCHEMA: dict[str, Any] = {
         },
         {
             'properties': {
-                'action': {'const': 'stop'},
-                'object': {'const': ''},
-            }
-        },
-        {
-            'properties': {
                 'action': {'const': 'unknown'},
                 'object': {'const': ''},
             }
@@ -76,7 +75,6 @@ ALLOWED_RESULTS = frozenset({
     ('fetch', 'vaseline'),
     ('fetch', 'tissue'),
     ('fetch', 'airpod'),
-    ('stop', ''),
     ('unknown', ''),
 })
 
@@ -170,7 +168,7 @@ def classify_command(
     text: str,
     config: ClassifierConfig | None = None,
 ) -> dict[str, str]:
-    """Classify one utterance into fetch/stop/unknown."""
+    """Classify one utterance into fetch or unknown (never stop)."""
     result, _ = classify_command_with_metrics(text, config)
     return result
 

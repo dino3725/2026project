@@ -17,7 +17,9 @@ WebRTC VAD (speech start/end)
         ↓
 faster-whisper small / CPU / int8 / Korean
         ↓
-Ollama qwen3:4b-instruct
+전사문 정규화 + 정지 키워드 판정 ── 걸리면 → stop (LLM 호출 안 함)
+        ↓ 아니면
+Ollama qwen3:4b-instruct (fetch 4종 또는 unknown만 판단)
         ↓
 structured JSON validation
         ↓
@@ -59,11 +61,24 @@ Jetson Control Node가 수행합니다.
 | 입술·손·피부의 건조함, 보습 필요 | `vaseline` |
 | 휴지 요청, 액체·소스·얼룩을 닦아야 함 | `tissue` |
 | 에어팟·무선 이어폰·청취 도구 필요 | `airpod` |
-| 로봇·플랫폼의 이동 또는 주행 정지 | `stop` |
 | 미지원 물체, 다중 물체, 모호한 참조, 기타 제어 | `unknown` |
 
 여러 지원 물체를 동시에 요청하면 한 물체를 임의로 선택하지 않고 `unknown`으로
-처리합니다. 음악 재생을 멈추라는 명령은 플랫폼 정지가 아니므로 `stop`이 아닙니다.
+처리합니다.
+
+## 정지 판정 (LLM 미사용)
+
+`stop`은 LLM이 판단하지 않습니다. `transcript_rules.py`가 전사문을 정규화한 뒤
+(공백·문장부호 제거, 소문자, "멈쳐/멈처 → 멈춰", "스탑 → 스톱" 같은 오인식 보정)
+아래 키워드가 **문장 어디에든** 있으면 바로 `stop`을 발행합니다.
+
+`멈춰` `멈추` `멈춤` `정지` `스톱` `stop` `중단` `움직이지마` `그만움직` `그대로서`
+
+- 정지를 놓치면 위험하고, 잘못 멈추면 불편한 정도입니다. 그래서 "음악 정지",
+  "멈추지 말고 …"처럼 다른 뜻으로 쓴 경우에도 `stop`으로 처리합니다.
+- LLM 출력 스키마에는 `stop`이 없습니다. Ollama가 꺼져 있어도 stop은 동작합니다.
+- 키워드를 바꾸면 `test/test_transcript_rules.py`(정지 문장 전부 감지, 일반 문장 오정지 0)를
+  통과해야 합니다.
 
 ## 패키지 구조
 
@@ -122,7 +137,7 @@ ros2 launch voice_command_pkg voice_command.launch.py
 
 ```bash
 # ROS 없이 순수 로직 (노드 테스트는 자동으로 건너뜀)
-.venv/bin/python -m pytest src/voice_command_pkg/test -q
+cd src/voice_command_pkg && ../../.venv/bin/python -m pytest test -q
 
 # lint 포함 전체
 source /opt/ros/humble/setup.bash && source install/setup.bash

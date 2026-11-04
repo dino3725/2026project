@@ -10,7 +10,7 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/test_llm_pick
 
 | 파일 | 상태 |
 | --- | --- |
-| `test_llm_pick_objects.py` | **현재 회귀 테스트** (물체 4종 + stop + unknown) |
+| `test_llm_pick_objects.py` | **현재 회귀 테스트** (물체 4종 + stop + unknown). 노드와 같은 경로: 정지 규칙 → LLM |
 | `test_llm_classifier.py`, `test_llm_dev.py`, `dev_cases_v1.json` | 이전 분류기(물체 구성이 다름) 개발 기록 |
 | `test_llm_final_heldout.py`, `final_heldout_v2.json` | 분류기 v2 held-out, **이미 1회 실행 완료**. 다시 돌리지 않습니다 |
 | `results/` | 평가 결과 기록 |
@@ -26,3 +26,4 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/test_llm_pick
 | 날짜 | 내용 | 결과 |
 | --- | --- | --- |
 | 2026-11-04 | ROS2 패키지화 후 확인 (프롬프트 SHA256 `f3c8d6bf…36be73`, 변경 없음) | `test_llm_pick_objects.py` 64/64 |
+| 2026-11-04 | 정지를 규칙으로 판정, LLM에서 stop 제거 (프롬프트 SHA256 `b184e9bc…3ff8df6`) | 64/64, stop 17/17 규칙 판정 → `results/stop_rules_20261104.md` |

@@ -12,10 +12,11 @@ from voice_command_pkg.command_classifier import (
 from voice_command_pkg.command_protocol import VALID_OBJECTS
 
 
-# SHA256 of the prompt used for test_llm_pick_objects.py 48/48 (2026-11-04).
-# If you change the prompt on purpose, rerun tools/voice_eval regression tests,
-# record the result in tools/voice_eval/results/, then update this value.
-FROZEN_PROMPT_SHA256 = 'f3c8d6bf9009362ab39907146600a8c733ee4b36936074fe192a141be136be73'
+# SHA256 of the prompt last checked with tools/voice_eval/test_llm_pick_objects.py
+# (2026-11-04, stop removed from the LLM; see results/stop_rules_20261104.md).
+# If you change the prompt on purpose, rerun the regression test, record the
+# result in tools/voice_eval/results/, then update this value.
+FROZEN_PROMPT_SHA256 = 'b184e9bc9b5c26ef822a79d2d18025aaecbde07f014325f2515817b653ff8df6'
 
 
 def test_prompt_is_unchanged_since_last_regression_run():
@@ -28,9 +29,17 @@ def test_schema_objects_match_protocol_allowlist():
     assert objects == VALID_OBJECTS
 
 
+def test_llm_cannot_output_stop():
+    assert OUTPUT_SCHEMA['properties']['action']['enum'] == ['fetch', 'unknown']
+    assert all(
+        option['properties']['action']['const'] != 'stop' for option in OUTPUT_SCHEMA['oneOf']
+    )
+    with pytest.raises(ValueError):
+        validate_result({'action': 'stop', 'object': ''})
+
+
 @pytest.mark.parametrize('value', [
     {'action': 'fetch', 'object': 'coke'},
-    {'action': 'stop', 'object': ''},
     {'action': 'unknown', 'object': ''},
 ])
 def test_validate_result_accepts_allowed_pairs(value):

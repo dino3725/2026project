@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Text-only LLM tests for fetch objects, stop, and unknown."""
+"""Text-only regression for fetch objects, stop, and unknown.
+
+Uses the same path as the voice node: stop keyword rule first, LLM otherwise.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +11,8 @@ import statistics
 import time
 from collections import Counter, defaultdict
 
-from voice_command_pkg.command_classifier import classify_command
+from voice_command_pkg.command_classifier import ClassifierConfig
+from voice_command_pkg.pipeline import interpret_text
 
 
 CASES = {
@@ -105,13 +109,16 @@ def main() -> int:
     confusion: dict[str, Counter[str]] = defaultdict(Counter)
     timings: list[float] = []
     failures = 0
+    decided: Counter[str] = Counter()
+    config = ClassifierConfig()
 
     for expected_class, texts in CASES.items():
         for text in texts:
             started = time.perf_counter()
             error = None
+            decided_by = ""
             try:
-                actual = classify_command(text)
+                actual, _, decided_by = interpret_text(text, config)
             except Exception as exc:
                 actual = None
                 error = f"{type(exc).__name__}: {exc}"
@@ -130,6 +137,7 @@ def main() -> int:
             confusion[expected_class][actual_class] += 1
             failures += int(not passed)
             timings.append(elapsed)
+            decided[f"{expected_class}<-{decided_by.split(':')[0] or 'error'}"] += 1
             print(
                 json.dumps(
                     {
@@ -137,6 +145,7 @@ def main() -> int:
                         "expected": expected,
                         "actual": actual,
                         "pass": passed,
+                        "decided_by": decided_by,
                         "elapsed_seconds": round(elapsed, 3),
                         "error": error,
                     },
@@ -155,6 +164,7 @@ def main() -> int:
     print(f"warm_min_seconds={min(timings[1:]):.3f}")
     print(f"warm_max_seconds={max(timings[1:]):.3f}")
     print("confusion=" + json.dumps(confusion, ensure_ascii=False))
+    print("decided_by=" + json.dumps(dict(sorted(decided.items())), ensure_ascii=False))
     return 1 if failures else 0
 
 
