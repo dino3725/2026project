@@ -30,6 +30,7 @@ from voice_command_pkg.audio_capture import (
     VadStateMachine,
 )
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
+from voice_command_pkg.transcript_rules import find_stop_keyword, stop_command
 
 
 # (command, transcript) -> published?
@@ -317,6 +318,23 @@ def classify_text(text: str, config: ClassifierConfig) -> tuple[dict[str, str], 
     return command, time.perf_counter() - started
 
 
+def interpret_text(
+    text: str,
+    config: ClassifierConfig,
+) -> tuple[dict[str, str], float, str]:
+    """
+    Decide the command for a transcript: stop rule first, LLM only otherwise.
+
+    Returns (command, llm_seconds, decided_by) where decided_by is
+    'rule:<keyword>' or 'llm'. Stop never waits for or depends on the LLM.
+    """
+    keyword = find_stop_keyword(text)
+    if keyword is not None:
+        return stop_command(), 0.0, f'rule:{keyword}'
+    command, llm_seconds = classify_text(text, config)
+    return command, llm_seconds, 'llm'
+
+
 class VoiceCommandPipeline:
     """Reuse one Whisper model while processing repeated VAD utterances."""
 
@@ -355,9 +373,12 @@ class VoiceCommandPipeline:
         )
         self.log(f'[STT] {text}')
 
-        command, llm_seconds = classify_text(text, self.config.classifier)
+        command, llm_seconds, decided_by = interpret_text(text, self.config.classifier)
         command_done = time.perf_counter()
-        self.log('[COMMAND] ' + json.dumps(command, ensure_ascii=False, separators=(',', ':')))
+        self.log(
+            '[COMMAND] ' + json.dumps(command, ensure_ascii=False, separators=(',', ':'))
+            + f' by={decided_by}'
+        )
 
         published = False
         if self.publish is not None:
@@ -377,6 +398,7 @@ class VoiceCommandPipeline:
             'capture': capture,
             'transcript': text,
             'command': command,
+            'decided_by': decided_by,
             'published': published,
             'stt_seconds': stt_seconds,
             'llm_seconds': llm_seconds,
