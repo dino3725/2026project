@@ -34,7 +34,7 @@ class VadConfig:
     start_min_rms: int = 200
     stream_warmup_ms: int = 1_200
     start_window_ms: int = 300
-    start_speech_ratio: float = 0.8
+    start_speech_ratio: float = 0.6
     end_silence_ms: int = 900
     pre_roll_ms: int = 450
     max_utterance_seconds: float = 15.0

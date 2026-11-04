@@ -19,7 +19,7 @@ voice_command_node:
       start_min_rms: 200           # noise gate while waiting for speech
       stream_warmup_ms: 1200       # discarded after opening the mic stream
       start_window_ms: 300
-      start_speech_ratio: 0.8      # speech frames needed in the start window
+      start_speech_ratio: 0.6      # 6 of 10 frames; 0.8 missed short "스톱" (stop_speech_20261104_2010)
       end_silence_ms: 900          # 5.1 ②: try 500-600 and measure
       pre_roll_ms: 450
       max_utterance_seconds: 15.0
