@@ -180,8 +180,10 @@ def return_home(node: SweepNode, args, params) -> None:
     if node.control_state != 'IDLE':
         print('\ncontrol_node가 IDLE이 아닙니다. X로 HOME 복귀하세요.')
         return
-    if ask('\n복귀: Enter=인식 자세 거쳐 HOME (Y 준비), n=그대로: ') in \
-            ('n', 'q'):
+    if args.return_home == 'no' or (
+            args.return_home == 'ask'
+            and ask('\n복귀: Enter=인식 자세 거쳐 HOME (Y 준비), n=그대로: ')
+            in ('n', 'q')):
         print('팔을 그대로 둡니다. 나중에 Y -> X로 HOME 복귀하세요.')
         return
     node.abort_event.clear()
@@ -218,6 +220,14 @@ def main() -> None:
     parser.add_argument('--model', default=DEFAULT_MODEL)
     parser.add_argument('--topic', default='/realsense/d435i/color/image_raw')
     parser.add_argument('--control-config', default=None)
+    parser.add_argument('--yes', action='store_true',
+                        help='skip the start prompt (the person at the '
+                             'robot has already confirmed: object placed, '
+                             'hand on Y)')
+    parser.add_argument('--return-home', choices=('ask', 'yes', 'no'),
+                        default='ask',
+                        help='after the sweep or Ctrl+C (never after Y or '
+                             'voice stop)')
     parser.add_argument('--dry-run', action='store_true',
                         help='print the candidate poses and exit')
     parser.add_argument('--out', default=default_csv_path('pose_sweep'))
@@ -257,8 +267,12 @@ def main() -> None:
             if node.frame()[1] is None:
                 print('카메라 영상이 없습니다. REALSENSE 패널을 확인하세요.')
                 return
-            if ask(f'{args.object}를 박스 위 정해진 자리에 놓고 Y를 준비한 뒤 '
-                   'Enter (q=취소): ') in ('q', 'n'):
+            if not args.yes and ask(
+                    f'{args.object}를 박스 위 정해진 자리에 놓고 Y를 준비한 '
+                    '뒤 Enter (q=취소): ') in ('q', 'n'):
+                return
+            if node.control_state != 'IDLE':
+                print('control_node가 IDLE이 아니라 시작하지 않습니다.')
                 return
             for index, pose in enumerate(poses):
                 if node.abort_event.is_set():
@@ -291,7 +305,7 @@ def main() -> None:
         except KeyboardInterrupt:
             node.abort('Ctrl+C')
             time.sleep(0.3)
-            print('\nCtrl+C: 현재 동작을 취소했습니다.')
+            print('\nCtrl+C: 현재 동작을 취소했습니다.', flush=True)
         try:
             return_home(node, args, params)
         except KeyboardInterrupt:

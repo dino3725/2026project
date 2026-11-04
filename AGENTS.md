@@ -45,6 +45,7 @@ docs/PROJECT_CONTEXT.md  배경, 분석, 계획
 이 코드는 실제 로봇 팔과 바퀴를 움직입니다.
 
 1. **실제 로봇을 움직이는 명령은 실행하지 않습니다.** `ros2 launch`, `ros2 topic pub /voice/robot_command`, `/cmd_vel` 발행 등이 해당됩니다. 실물 시험은 사람이 합니다. 시험 절차를 제안하는 것은 괜찮습니다.
+   - **예외 (2026-11-04 사용자 승인):** `tools/manipulator_eval/`의 측정 도구(`pose_sweep.py`, `pose_jog.py`, `arm_probe.py`)는 에이전트가 실행할 수 있습니다. 단, 실행할 때마다 사용자가 **"로봇 옆에 있고 Y 버튼을 들고 있다"고 확인**해야 합니다. 노드 실행(`ros2 launch`), 명령 발행, 바퀴 주행, 그리퍼 명령은 이 예외에 포함되지 않습니다.
 2. **비상정지 경로를 약화하지 않습니다.** Y 버튼과 음성 `stop`은 모든 액션 목표를 취소해야 합니다(`ControlNode._handle_emergency_stop`, `_cancel_active_goals`). 새 액션 목표(예: Nav2 `NavigateToPose`)는 반드시 `_send_goal`을 거쳐 `_active_goals`에 등록되게 하세요.
 3. **stop 처리는 결정적이어야 합니다.** 정지 키워드는 LLM보다 먼저 규칙으로 판정합니다. LLM 결과에만 의존하는 stop 경로를 만들지 마세요.
 4. **작업 취소 구조를 유지합니다.** `control_node`의 작업 스레드는 `operation_id`로 무효화됩니다. 긴 대기나 루프에는 `_ensure_active` / `_sleep_cancelable` / `_wait_future`를 사용하세요.
