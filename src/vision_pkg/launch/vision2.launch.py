@@ -15,9 +15,15 @@ def generate_launch_description():
     )
 
     model_path = LaunchConfiguration('model_path')
+    config_file = LaunchConfiguration('config_file')
     publish_mount_tf = LaunchConfiguration('publish_camera_mount_tf')
 
     declared_arguments = [
+        DeclareLaunchArgument(
+            'config_file',
+            default_value=config_path,
+            description='Vision parameter YAML file (default: vision2.yaml)',
+        ),
         DeclareLaunchArgument(
             'model_path',
             default_value='',
@@ -49,7 +55,7 @@ def generate_launch_description():
         executable='vision_node2',
         name='vision_node2',
         output='screen',
-        parameters=[config_path, {'model_path': model_path}],
+        parameters=[config_file, {'model_path': model_path}],
     )
 
     hand_gesture_node = Node(
@@ -57,7 +63,7 @@ def generate_launch_description():
         executable='hand_gesture_node',
         name='hand_gesture_node',
         output='screen',
-        parameters=[config_path],
+        parameters=[config_file],
     )
 
     camera_mount_tf = Node(
