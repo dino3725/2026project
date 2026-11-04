@@ -9,7 +9,10 @@ control_node:
 
     home_on_startup: true
     home_pose_deg: [0.0, -101.0, 53.0, 70.0]
-    recognition_pose_deg: [0.0, -30.0, -41.0, 115.0]
+    # 2026-11-04 pose sweep (objects on an 8 cm box, 24 cm ahead, y 0/±6 cm):
+    # vaseline was misread as airpod at the old [0, -30, -41, 115].
+    # See tools/manipulator_eval/results/2026-11-04_recognition_pose.md.
+    recognition_pose_deg: [0.0, -45.0, -33.0, 115.0]
     cargo_pose_deg: [-73.0, -30.0, 38.0, -10.0]
     joint_motion_duration_sec: 4.0
     recognition_settle_sec: 0.5

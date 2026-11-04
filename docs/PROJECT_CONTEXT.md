@@ -225,6 +225,12 @@ IDLE → MOVE_TO_RECOGNITION → VISION_SEARCH → PICKING → MOVE_TO_CARGO
 | 6 | 12 | 실패 시 1회 재시도 | 파지 실패 시 재인식 후 한 번 더 시도합니다. |
 | 조건부 | 2, 3, 5 | 카메라 장착 보정·팔 정확도·깊이 안정화 | 5의 보정값으로도 빗나감이 해결되지 않을 때만 합니다. 측정 도구는 `tools/manipulator_eval/`에 있습니다(격자, 비전 기록, 팔 측정). |
 
+- **진행 (11/4):** 1번 시연 조건 중 인식 자세를 확정했습니다.
+  - 조건: 물체를 8 cm 박스 위에 둠
+  - 변경: `recognition_pose_deg` [0, −30, −41, 115] → [0, −45, −33, 115]
+  - 효과: vaseline 0% → 100%. 12개 조건 중 11개에서 100%이고, 남은 1개는 tissue 오른쪽입니다.
+  - 근거: `tools/manipulator_eval/results/2026-11-04_recognition_pose.md`
+  - 남은 일: 새 자세로 실제 fetch 인식 확인, 그다음 2번 Pick 기준선
 - 도달 판정, 보정 방향, 정렬량 계산은 ROS에 의존하지 않는 순수 함수로 분리해 pytest로 테스트합니다.
 - 인식 자세 값을 바꾸면 `control.yaml`에서만 바꾸고, 바꾸기 전후 값을 기록합니다(관절 자세는 사용자 승인 후 변경).
 
