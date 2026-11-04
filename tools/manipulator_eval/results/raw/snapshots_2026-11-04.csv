@@ -1,0 +1,2 @@
+timestamp,label,control_state,joint1_deg,joint2_deg,joint3_deg,joint4_deg,gripper_q_m,ee_x,ee_y,ee_z,cam_x,cam_y,cam_z,note
+2026-11-04T21:28:43,gripper_closed,,-0.09,-101.25,53.53,70.14,-0.0100,-0.0103,-0.0001,0.2098,,,,
