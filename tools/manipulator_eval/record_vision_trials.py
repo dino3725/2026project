@@ -137,7 +137,8 @@ def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> None:
     if node.control_state != 'IDLE':
         print(f'  주의: control_node 상태가 {node.control_state or "없음"}'
               '입니다. IDLE에서 시작하세요.')
-    print('  조이스틱 A 버튼(또는 fetch 명령)으로 인식을 시작하세요...')
+    print('  조이스틱 A 버튼(또는 fetch 명령)으로 인식을 시작하세요...',
+          flush=True)
 
     deadline = time.monotonic() + args.timeout
     camera = None
@@ -196,7 +197,10 @@ def run_trial(node: VisionRecorder, args, mark, trial_id: int) -> None:
     if node.pick_seen.is_set():
         print('  !!! PICKING 상태를 봤습니다. pick_enabled=false 설정으로 '
               'control_node를 다시 실행하세요. Y 버튼을 준비하세요.')
-    row['note'] = input('  메모 (없으면 Enter): ').strip()
+    if args.mark:
+        row['note'] = args.note
+    else:
+        row['note'] = input('  메모 (없으면 Enter): ').strip()
     append_csv_row(args.out, FIELDS, row)
     print(f'  저장: trial {trial_id} -> {args.out}')
 
@@ -213,9 +217,28 @@ def main() -> None:
                         help='surface height in base_link (floor = -0.010)')
     parser.add_argument('--timeout', type=float, default=120.0)
     parser.add_argument('--out', default=default_csv_path('vision'))
+    parser.add_argument('--mark', default='',
+                        help='non-interactive: mark id (or "x_mm,y_mm") for '
+                             'every trial of this run')
+    parser.add_argument('--repeats', type=int, default=1,
+                        help='non-interactive: recognitions to record')
+    parser.add_argument('--note', default='',
+                        help='non-interactive: note stored on every row')
     args = parser.parse_args()
 
     marks = load_marks(args.marks)
+    fixed_mark = None
+    if args.mark:
+        if args.mark in marks:
+            fixed_mark = (args.mark,) + marks[args.mark]
+        else:
+            try:
+                x_mm, y_mm = (float(v) for v in args.mark.split(','))
+            except ValueError:
+                parser.error(f'unknown mark {args.mark!r}')
+            fixed_mark = (f'{x_mm:g},{y_mm:g}', x_mm, y_mm)
+        if args.repeats < 1:
+            parser.error('--repeats must be >= 1')
     rclpy.init()
     node = VisionRecorder()
     executor, thread = spin_in_background(node)
@@ -224,6 +247,12 @@ def main() -> None:
         print(f'물체={args.object}, 높이={args.object_height_mm:.0f} mm, '
               f'표면 z={args.surface_z:.3f} m, 저장={args.out}')
         print(f'control_node 상태: {node.control_state or "(아직 없음)"}')
+        if fixed_mark is not None:
+            for index in range(args.repeats):
+                print(f'\n[{index + 1}/{args.repeats}] 표식 {fixed_mark[0]}',
+                      flush=True)
+                run_trial(node, args, fixed_mark, next_trial_id(args.out))
+            return
         previous = ''
         while rclpy.ok():
             mark = ask_mark(marks, previous)
