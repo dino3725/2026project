@@ -6,6 +6,8 @@ import pytest
 
 from baseline_math import (
     axis_stats,
+    checked_min_clearance_m,
+    lift_target,
     grid_mm_to_base,
     gripper_width_from_joint,
     GripperMargin,
@@ -128,7 +130,33 @@ def test_probe_target_refusals(point, keyword):
 def test_probe_limits_follow_surface():
     raised = ProbeLimits(surface_z_m=0.020)
     assert probe_target_problems((0.20, 0.0, 0.040), raised)
-    assert probe_target_problems((0.20, 0.0, 0.060), raised) == []
+    assert probe_target_problems((0.20, 0.0, 0.060), raised)
+    assert probe_target_problems((0.20, 0.0, 0.070), raised) == []
+
+
+def test_min_clearance_floor_cannot_be_lowered():
+    assert checked_min_clearance_m(50.0) == pytest.approx(0.050)
+    assert checked_min_clearance_m(80.0) == pytest.approx(0.080)
+    for value in (49.0, 0.0, -10.0, math.nan):
+        with pytest.raises(ValueError):
+            checked_min_clearance_m(value)
+
+
+def test_default_limits_refuse_points_below_5cm():
+    assert probe_target_problems((0.20, 0.0, 0.035))  # 45 mm above floor
+    assert probe_target_problems((0.20, 0.0, 0.040)) == []  # 50 mm
+
+
+def test_lift_target():
+    assert lift_target((0.2, 0.0, 0.05), 0.05, 0.35) == pytest.approx(
+        (0.2, 0.0, 0.10))
+    assert lift_target((0.2, 0.0, 0.33), 0.05, 0.35) == pytest.approx(
+        (0.2, 0.0, 0.35))
+    # Already above the cap: never move down.
+    assert lift_target((0.2, 0.0, 0.36), 0.05, 0.35) == pytest.approx(
+        (0.2, 0.0, 0.36))
+    with pytest.raises(ValueError):
+        lift_target((0.2, 0.0, 0.05), 0.0, 0.35)
 
 
 def test_reach_from_shoulder():

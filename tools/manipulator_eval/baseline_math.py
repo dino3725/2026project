@@ -209,6 +209,32 @@ def gripper_width_from_joint(
     return closed_width_mm + ratio * (open_width_mm - closed_width_mm)
 
 
+# Arm-probe targets must keep end_effector_link at least this far above the
+# table surface. The command line may raise it but never lower it.
+MIN_CLEARANCE_FLOOR_MM = 50.0
+
+
+def checked_min_clearance_m(requested_mm: float) -> float:
+    """Return the clearance in meters, refusing values below the floor."""
+    if not math.isfinite(requested_mm) or \
+            requested_mm < MIN_CLEARANCE_FLOOR_MM:
+        raise ValueError(
+            f'min clearance must be >= {MIN_CLEARANCE_FLOOR_MM:.0f} mm')
+    return mm_to_m(requested_mm)
+
+
+def lift_target(
+    current: Sequence[float],
+    lift_m: float,
+    max_z_m: float,
+) -> Point:
+    """Return the point straight above ``current``, capped at ``max_z_m``."""
+    if lift_m <= 0.0:
+        raise ValueError('lift must be positive')
+    x, y, z = (float(v) for v in current)
+    return (x, y, min(z + lift_m, max(z, max_z_m)))
+
+
 @dataclass(frozen=True)
 class ProbeLimits:
     """
@@ -219,7 +245,7 @@ class ProbeLimits:
     """
 
     surface_z_m: float = DEFAULT_SURFACE_Z_M
-    min_clearance_m: float = 0.030
+    min_clearance_m: float = MIN_CLEARANCE_FLOOR_MM / 1000.0
     min_x_m: float = 0.100
     max_abs_y_m: float = 0.200
     max_z_m: float = 0.350
