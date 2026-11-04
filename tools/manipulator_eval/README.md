@@ -1,5 +1,11 @@
 # 매니퓰레이터 오차 기준선 측정 (5.5 ①)
 
+> **2026-11-04 계획 재정리:** 매니퓰레이터 작업은 "결과에서 거꾸로" 진행합니다(`docs/PROJECT_CONTEXT.md` 5.5).
+> - 먼저 시연 조건을 확정하고, 그 조건에서 Pick 성공률과 실패 원인을 잽니다.
+> - 이 폴더의 측정 B(비전)·C(팔)는 빗나감의 원인을 가를 때 쓰는 보조 도구입니다.
+> - 11/4 바닥 조건 결과는 `results/raw/vision_2026-11-04.csv`에 있습니다.
+> - 물체를 박스 위에 놓을 때는 기록 스크립트에 `--surface-z <박스 윗면 z>`를 줍니다.
+
 > **시작 전 필수: 노트북 음성 노드는 끄거나 `publish_commands:=false`로 실행합니다.**
 > ```bash
 > ros2 run voice_command_pkg voice_command_node --ros-args -p publish_commands:=false
