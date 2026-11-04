@@ -36,6 +36,7 @@ src/joystick_pkg/        [Jetson] F710 수동 주행
 src/eated_navigation/    [Jetson, 신규] 지도, Nav2 파라미터, twist_mux, 베이스 정렬
 src/voice_command_pkg/   [노트북, 신규] 기존 음성 스크립트를 ROS2 패키지로
 tools/voice_eval/        분류기 평가셋과 결과 기록
+tools/manipulator_eval/  [Jetson] 매니퓰레이터 오차 측정 스크립트·절차서·결과
 docs/PROJECT_CONTEXT.md  배경, 분석, 계획
 ```
 
