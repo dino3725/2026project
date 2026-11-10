@@ -43,6 +43,14 @@ def test_override_reaches_nested_config():
     assert config.classifier.timeout_seconds == 10.0
 
 
+def test_capture_parameters_reach_pipeline():
+    config = build_pipeline_config({
+        'capture.queue_capacity': 3, 'capture.max_fetch_age_seconds': 8.0,
+    })
+    assert config.queue_capacity == 3
+    assert config.max_fetch_age_seconds == 8.0
+
+
 def test_unknown_parameter_is_rejected():
     with pytest.raises(ValueError):
         build_pipeline_config({'vad.end_silence': 600})

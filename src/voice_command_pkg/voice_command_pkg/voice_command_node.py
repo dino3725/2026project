@@ -12,7 +12,7 @@ from rclpy.node import Node
 
 from voice_command_pkg.command_protocol import command_payload, TOPIC_NAME
 from voice_command_pkg.parameters import build_pipeline_config, DEFAULT_PARAMETERS
-from voice_command_pkg.pipeline import PipelineError, VoiceCommandPipeline
+from voice_command_pkg.pipeline import PipelineError, PipelineStopped, VoiceCommandPipeline
 
 
 class VoiceCommandNode(Node):
@@ -28,6 +28,8 @@ class VoiceCommandNode(Node):
         self.pipeline_config = build_pipeline_config(values)
         self.publisher = self.create_publisher(RobotCommand, TOPIC_NAME, 10)
         self.stop_event = threading.Event()
+        self.publish_lock = threading.RLock()
+        self._closing = False
         self.failed = False
         self.worker = threading.Thread(target=self._run_pipeline, daemon=True)
         if not self.publish_enabled:
@@ -55,30 +57,46 @@ class VoiceCommandNode(Node):
         message.action = action
         message.target_class = target_class
         message.transcript = transcript
-        self.publisher.publish(message)
-        return True
+        with self.publish_lock:
+            if self.stop_event.is_set():
+                return False
+            self.publisher.publish(message)
+            return True
+
+    def _log_pipeline(self, text: str) -> None:
+        with self.publish_lock:
+            if not self._closing:
+                self.get_logger().info(text)
+
+    def _report_failure(self, text: str) -> None:
+        with self.publish_lock:
+            if not self._closing:
+                self.failed = True
+                self.get_logger().error(text)
 
     def _run_pipeline(self) -> None:
         try:
             pipeline = VoiceCommandPipeline(
                 self.pipeline_config,
                 publish=self.publish_command,
-                log=self.get_logger().info,
+                log=self._log_pipeline,
                 stop_event=self.stop_event,
             )
             pipeline.run_forever()
+        except PipelineStopped:
+            pass
         except PipelineError as exc:
-            self.failed = True
-            self.get_logger().error(exc.describe())
+            self._report_failure(exc.describe())
         except Exception as exc:  # noqa: B902 - report any worker crash
-            self.failed = True
-            self.get_logger().error(f'음성 파이프라인 오류: {type(exc).__name__}: {exc}')
+            self._report_failure(f'음성 파이프라인 오류: {type(exc).__name__}: {exc}')
 
     def stop(self) -> None:
-        self.stop_event.set()
+        with self.publish_lock:
+            self._closing = True
+            self.stop_event.set()
         if self.worker.is_alive():
-            # The capture loop checks stop_event every 30 ms frame; STT/LLM
-            # calls in flight may take longer, so do not wait forever.
+            # Capture polls at most every 100 ms, even on a stalled pipe.
+            # In-flight STT/LLM can finish later but cannot publish or log.
             self.worker.join(timeout=3.0)
 
 

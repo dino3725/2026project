@@ -7,9 +7,10 @@ A. First-command delay: unload the Ollama model, then time the first
 B. Per-utterance STT + LLM time on existing recorded WAV files, plus the
    transcript/command of each file for later manual labelling.
 C. Re-listen gap: time to reopen the microphone and discard the warm-up
-   audio, which the current code repeats after every command.
+   audio, as the original pipeline did after every command.
 
-Nothing is published to ROS. Uses the same defaults as config/voice_command.yaml.
+Nothing is published to ROS. Reproduces the original 120 s / 10m LLM settings;
+use measure_llm_readiness.py to measure the current asynchronous warmup path.
 
     PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/measure_baseline.py
 """
@@ -241,7 +242,7 @@ def main() -> int:
     parser.add_argument('--skip-mic', action='store_true', help='Skip part C')
     args = parser.parse_args()
 
-    config = build_pipeline_config({})
+    config = build_pipeline_config({'llm.timeout_seconds': 120.0, 'llm.keep_alive': '10m'})
     files: list[Path] = []
     for entry in args.recordings:
         entry = entry.expanduser()

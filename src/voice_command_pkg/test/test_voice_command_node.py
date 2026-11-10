@@ -1,6 +1,7 @@
 """Unit tests for VoiceCommandNode.publish_command without a running ROS graph."""
 
 from types import SimpleNamespace
+import threading
 
 import pytest
 
@@ -22,6 +23,8 @@ def make_node(publish_enabled=True):
     logs = []
     node = SimpleNamespace(
         publish_enabled=publish_enabled,
+        publish_lock=threading.RLock(),
+        stop_event=threading.Event(),
         publisher=SimpleNamespace(publish=published.append),
         get_clock=lambda: SimpleNamespace(now=FakeStamp),
         get_logger=lambda: SimpleNamespace(info=logs.append),
@@ -64,4 +67,24 @@ def test_invalid_command_is_not_published():
 def test_dry_run_never_publishes():
     node, published, _ = make_node(publish_enabled=False)
     assert publish(node, {'action': 'stop', 'object': ''}) is False
+    assert published == []
+
+
+@pytest.mark.parametrize('action, target', [('fetch', 'coke'), ('stop', '')])
+def test_shutdown_never_publishes(action, target):
+    node, published, _ = make_node()
+    node.stop_event.set()
+    assert publish(node, {'action': action, 'object': target}) is False
+    assert published == []
+
+
+def test_shutdown_during_message_preparation_blocks_publish():
+    node, published, _ = make_node()
+
+    def get_clock():
+        node.stop_event.set()
+        return SimpleNamespace(now=FakeStamp)
+
+    node.get_clock = get_clock
+    assert publish(node, {'action': 'fetch', 'object': 'coke'}) is False
     assert published == []

@@ -1,12 +1,18 @@
 # Voice command node parameters (laptop).
-# Defaults reproduce the 2026-11-04 baseline. Change values here for
+# Recognition defaults retain the 2026-11-04 baseline; capture is continuous.
+# Change values here for
 # experiments instead of editing code; record results in tools/voice_eval/results/.
 voice_command_node:
   ros__parameters:
     # false = run the full pipeline but never publish (dry run).
     publish_commands: true
-    # WAV of each utterance is kept for evaluation data. Never commit it.
+    # Save processed utterances only when collecting evaluation/debug data.
+    save_recordings: false
     recordings_dir: "~/2026project/recordings"
+
+    capture:
+      queue_capacity: 2            # completed utterances, excluding current processing
+      max_fetch_age_seconds: 10.0   # VAD end -> publication; stop is exempt
 
     whisper:
       model: "small"
@@ -17,7 +23,7 @@ voice_command_node:
     vad:
       mode: 3                      # WebRTC aggressiveness 0-3
       start_min_rms: 200           # noise gate while waiting for speech
-      stream_warmup_ms: 1200       # discarded after opening the mic stream
+      stream_warmup_ms: 1200       # discarded once when the mic stream first opens
       start_window_ms: 300
       start_speech_ratio: 0.6      # 6 of 10 frames; 0.8 missed short "스톱" (stop_speech_20261104_2010)
       end_silence_ms: 900          # 5.1 ②: try 500-600 and measure
@@ -27,5 +33,12 @@ voice_command_node:
     llm:
       ollama_url: "http://127.0.0.1:11434"
       model: "qwen3:4b-instruct"
-      timeout_seconds: 120.0       # 5.3 ③: target about 10 s
-      keep_alive: "10m"            # 5.3 ②: target -1 (always loaded)
+      timeout_seconds: 10.0        # also bounded by remaining fetch age
+      keep_alive: -1              # integer: keep model resident after requests
+      warmup_timeout_seconds: 120.0
+      retry_seconds: 5.0          # retry only after the previous HTTP call finishes
+
+    messages:
+      llm_preparing: "명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요."
+      llm_ready: "명령 처리 준비가 완료됐어요. 말씀해 주세요."
+      llm_failure: "명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요."

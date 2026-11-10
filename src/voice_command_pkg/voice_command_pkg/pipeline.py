@@ -1,4 +1,4 @@
-"""VAD -> STT -> LLM pipeline for one-utterance-at-a-time voice commands."""
+"""Continuous VAD capture with bounded, sequential STT/LLM command processing."""
 
 from __future__ import annotations
 
@@ -10,17 +10,18 @@ import math
 from pathlib import Path
 import threading
 import time
-from typing import Any, Callable
+from typing import Any, Callable, Iterator
 import urllib.request
 import wave
 
 from voice_command_pkg.audio_capture import (
+    AudioCaptureError,
     CHANNELS,
     FRAME_BYTES,
     FRAME_MS,
     get_default_source,
     qualify_speech_for_state,
-    read_frame,
+    read_frame_interruptible,
     SAMPLE_RATE,
     SAMPLE_WIDTH,
     start_capture,
@@ -29,8 +30,11 @@ from voice_command_pkg.audio_capture import (
     VadState,
     VadStateMachine,
 )
+from voice_command_pkg.audio_samples import pcm_to_float32
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
+from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
 from voice_command_pkg.transcript_rules import find_stop_keyword, stop_command
+from voice_command_pkg.utterance_buffer import Utterance, UtteranceBuffer
 
 
 # (command, transcript) -> published?
@@ -38,7 +42,7 @@ PublishFn = Callable[[dict[str, str], str], bool]
 LogFn = Callable[[str], None]
 
 # Failures in these stages mean the microphone itself is unusable.
-FATAL_STAGES = frozenset({'녹음 준비', '녹음', '녹음 저장', 'VAD'})
+FATAL_STAGES = frozenset({'녹음 준비', '녹음', 'VAD'})
 
 
 @dataclass(frozen=True)
@@ -50,8 +54,28 @@ class PipelineConfig:
     whisper_compute_type: str = 'int8'
     language: str = 'ko'
     recordings_dir: Path = Path('recordings')
+    save_recordings: bool = False
     vad: VadConfig = field(default_factory=VadConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
+    queue_capacity: int = 2
+    max_fetch_age_seconds: float = 10.0
+    llm_warmup_timeout_seconds: float = 120.0
+    llm_retry_seconds: float = 5.0
+    llm_preparing_message: str = '명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요.'
+    llm_ready_message: str = '명령 처리 준비가 완료됐어요. 말씀해 주세요.'
+    llm_failure_message: str = '명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요.'
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.save_recordings, bool):
+            raise ValueError('save_recordings must be a boolean')
+        if self.queue_capacity < 1:
+            raise ValueError('queue_capacity must be positive')
+        if not math.isfinite(self.max_fetch_age_seconds) or self.max_fetch_age_seconds <= 0:
+            raise ValueError('max_fetch_age_seconds must be finite and positive')
+        for name in ('llm_warmup_timeout_seconds', 'llm_retry_seconds'):
+            value = getattr(self, name)
+            if not math.isfinite(value) or value <= 0:
+                raise ValueError(f'{name} must be finite and positive')
 
 
 class PipelineError(RuntimeError):
@@ -112,12 +136,12 @@ def ensure_ollama_ready(config: ClassifierConfig) -> None:
         )
 
 
-def capture_utterance(
+def capture_utterances(
     config: VadConfig,
     log: LogFn,
     stop_event: threading.Event,
-) -> tuple[bytes, dict[str, Any]]:
-    """Capture one VAD-delimited utterance from a fresh PulseAudio stream."""
+) -> Iterator[tuple[bytes, dict[str, Any]]]:
+    """Yield utterances from one stream; warm up only once per session."""
     import webrtcvad
 
     try:
@@ -136,7 +160,7 @@ def capture_utterance(
         for frame_index in range(config.stream_warmup_frames):
             if stop_event.is_set():
                 raise PipelineStopped()
-            if read_frame(process.stdout) is None:
+            if read_frame_interruptible(process.stdout, stop_event) is None:
                 raise PipelineError(
                     '녹음 준비',
                     'PulseAudio stream 안정화 중 PCM 입력이 종료됐습니다.',
@@ -149,13 +173,14 @@ def capture_utterance(
         utterance_frames: list[bytes] = []
         listening_started = time.perf_counter()
         voice_started_wall: float | None = None
+        utterance_start_wall = 0.0
         voice_start_audio = 0.0
 
         log('[LISTENING] 말씀해주세요.')
         while True:
             if stop_event.is_set():
                 raise PipelineStopped()
-            frame = read_frame(process.stdout)
+            frame = read_frame_interruptible(process.stdout, stop_event)
             if frame is None:
                 raise PipelineError(
                     '녹음',
@@ -188,6 +213,9 @@ def capture_utterance(
                     utterance_frames = list(pre_roll)
                     pre_roll.clear()
                     voice_started_wall = time.perf_counter()
+                    utterance_start_wall = (
+                        voice_started_wall - len(utterance_frames) * FRAME_MS / 1_000.0
+                    )
                     voice_start_audio = float(details['audio_time'])
                     log(
                         f'[VOICE START] audio={voice_start_audio:.3f}s '
@@ -221,10 +249,12 @@ def capture_utterance(
             if end_details is not None:
                 voice_end_wall = time.perf_counter()
                 assert voice_started_wall is not None
-                return b''.join(utterance_frames), {
+                yield b''.join(utterance_frames), {
                     'source': source,
                     'listening_seconds': voice_started_wall - listening_started,
                     'voice_start_audio': voice_start_audio,
+                    'voice_start_wall': voice_started_wall,
+                    'utterance_start_wall': utterance_start_wall,
                     'voice_end_audio': end_details['audio_time'],
                     'vad_end_silence_seconds': end_details['silence_seconds'],
                     'utterance_seconds': len(utterance_frames) * FRAME_MS / 1_000.0,
@@ -232,8 +262,29 @@ def capture_utterance(
                     'voice_end_wall': voice_end_wall,
                     'max_duration_reached': end_details['max_duration_reached'],
                 }
+                utterance_frames.clear()
+                pre_roll.clear()
+                listening_started = time.perf_counter()
+                log('[LISTENING] 말씀해주세요.')
+    except InterruptedError as exc:
+        raise PipelineStopped() from exc
+    except (AudioCaptureError, OSError) as exc:
+        raise PipelineError('녹음', str(exc)) from exc
     finally:
         stop_capture(process)
+
+
+def capture_utterance(
+    config: VadConfig,
+    log: LogFn,
+    stop_event: threading.Event,
+) -> tuple[bytes, dict[str, Any]]:
+    """Capture a single trial for evaluation tools, closing its stream."""
+    stream = capture_utterances(config, log, stop_event)
+    try:
+        return next(stream)
+    finally:
+        stream.close()
 
 
 def next_recording_path(output_dir: Path, command_index: int) -> Path:
@@ -288,10 +339,12 @@ def audio_levels(audio_data: bytes) -> dict[str, float | bool]:
     }
 
 
-def transcribe_audio(model: Any, audio_path: Path, language: str) -> tuple[str, float]:
+def transcribe_audio(model: Any, audio: Path | bytes, language: str) -> tuple[str, float]:
+    """Transcribe raw capture PCM, or a file path for existing evaluation tools."""
     started = time.perf_counter()
     try:
-        segment_iter, _ = model.transcribe(str(audio_path), language=language)
+        source = pcm_to_float32(audio) if isinstance(audio, bytes) else str(audio)
+        segment_iter, _ = model.transcribe(source, language=language)
         text = ''.join(segment.text for segment in segment_iter).strip()
     except Exception as exc:
         raise PipelineError(
@@ -336,7 +389,7 @@ def interpret_text(
 
 
 class VoiceCommandPipeline:
-    """Reuse one Whisper model while processing repeated VAD utterances."""
+    """Record continuously while one consumer reuses the Whisper model."""
 
     def __init__(
         self,
@@ -349,31 +402,116 @@ class VoiceCommandPipeline:
         self.publish = publish
         self.log = log
         self.stop_event = stop_event or threading.Event()
-        self.recordings_dir = Path(config.recordings_dir).expanduser().resolve()
-        self.recordings_dir.mkdir(parents=True, exist_ok=True)
+        self._publish_lock = threading.RLock()
+        self._fetch_not_before = float('-inf')
+        self._capture_error: Exception | None = None
+        self.buffer = UtteranceBuffer(config.queue_capacity)
+        self.capture_worker: threading.Thread | None = None
+        self._ensure_running()
+        # Saving is optional: do not touch the filesystem during initialization.
+        self.recordings_dir = Path(config.recordings_dir).expanduser()
         self.whisper_model, self.model_load_seconds = load_whisper_model(config)
-        ensure_ollama_ready(config.classifier)
+        self._ensure_running()
         self.log(
-            f'[READY] whisper={config.whisper_model} '
-            f'load={self.model_load_seconds:.3f}s ollama={config.classifier.model}'
+            f'[STT READY] whisper={config.whisper_model} '
+            f'load={self.model_load_seconds:.3f}s'
         )
+        self.llm = LlmRuntime(config, log, self.stop_event)
 
     def run_once(self, command_index: int) -> dict[str, Any]:
         audio_data, capture = capture_utterance(self.config.vad, self.log, self.stop_event)
-        audio_path = next_recording_path(self.recordings_dir, command_index)
-        save_wav(audio_path, audio_data)
+        return self.process_utterance(Utterance(command_index, audio_data, capture))
+
+    def _ensure_running(self) -> None:
+        if self.stop_event.is_set():
+            raise PipelineStopped()
+
+    def request_stop(self) -> None:
+        """Stop capture/processing and serialize shutdown with publication."""
+        with self._publish_lock:
+            self.stop_event.set()
+        self.buffer.close()
+        self.llm.close()
+
+    def _fetch_drop_reason(self, capture: dict[str, Any]) -> str:
+        start = float(capture.get('utterance_start_wall', capture['voice_start_wall']))
+        if start <= self._fetch_not_before:
+            return 'before_stop'
+        age = time.perf_counter() - float(capture['voice_end_wall'])
+        if age > self.config.max_fetch_age_seconds:
+            return 'expired'
+        return ''
+
+    def process_utterance(self, utterance: Utterance) -> dict[str, Any]:
+        """Process one buffered utterance; only fresh, active commands may publish."""
+        self._ensure_running()
+        audio_data, capture = utterance.audio, utterance.capture
+        queue_wait_seconds = time.perf_counter() - float(capture['voice_end_wall'])
         levels = audio_levels(audio_data)
+        audio_path = None
+        recording_error = ''
+        if self.config.save_recordings:
+            try:
+                candidate = next_recording_path(self.recordings_dir, utterance.sequence)
+                save_wav(candidate, audio_data)
+                audio_path = candidate
+            except (PipelineError, OSError, ValueError) as exc:
+                recording_error = exc.describe() if isinstance(exc, PipelineError) else str(exc)
+                self.log(f'[RECORDING ERROR] sequence={utterance.sequence} {recording_error}')
+        recording = str(audio_path) if audio_path is not None else (
+            'failed' if recording_error else 'disabled'
+        )
         self.log(
-            f"[AUDIO] {audio_path.name} {levels['duration_seconds']:.3f}s "
+            f'[AUDIO] sequence={utterance.sequence} recording={recording} '
+            f"{levels['duration_seconds']:.3f}s "
             f"rms={levels['rms_dbfs']:.2f}dBFS peak={levels['peak_dbfs']:.2f}dBFS"
         )
 
+        self._ensure_running()
         text, stt_seconds = transcribe_audio(
-            self.whisper_model, audio_path, self.config.language
+            self.whisper_model, audio_data, self.config.language
         )
+        self._ensure_running()
         self.log(f'[STT] {text}')
 
-        command, llm_seconds, decided_by = interpret_text(text, self.config.classifier)
+        keyword = find_stop_keyword(text)
+        dropped_reason = ''
+        llm_metrics = {}
+        if keyword is not None:
+            command, llm_seconds, decided_by = stop_command(), 0.0, f'rule:{keyword}'
+            # Invalidate fetch utterances that began before stop was recognized,
+            # including an utterance still being recorded. Keep checking their
+            # transcripts for stop; age/invalidation never filters known stop.
+            self._fetch_not_before = time.perf_counter()
+        else:
+            utterance_start = float(capture.get(
+                'utterance_start_wall', capture['voice_start_wall']
+            ))
+            dropped_reason = (
+                self._fetch_drop_reason(capture) or self.llm.drop_reason(utterance_start)
+            )
+            command, llm_seconds, decided_by = (
+                {'action': 'unknown', 'object': ''}, 0.0, 'discard'
+            )
+            if not dropped_reason:
+                started = time.perf_counter()
+                try:
+                    command, llm_metrics = self.llm.classify(
+                        text, utterance_start,
+                        float(capture['voice_end_wall']) + self.config.max_fetch_age_seconds,
+                    )
+                    decided_by = 'llm'
+                except LlmUnavailable as exc:
+                    dropped_reason = exc.reason
+                except LlmStopped as exc:
+                    raise PipelineStopped() from exc
+                llm_seconds = time.perf_counter() - started
+            if dropped_reason.startswith('llm_'):
+                message = self.config.llm_failure_message if dropped_reason in (
+                    'llm_timeout', 'llm_error'
+                ) else self.config.llm_preparing_message
+                self.log('[GUIDANCE] ' + message)
+        self._ensure_running()
         command_done = time.perf_counter()
         self.log(
             '[COMMAND] ' + json.dumps(command, ensure_ascii=False, separators=(',', ':'))
@@ -381,19 +519,35 @@ class VoiceCommandPipeline:
         )
 
         published = False
-        if self.publish is not None:
-            published = self.publish(command, text)
-            self.log('[ROS] ' + ('published' if published else 'skipped'))
+        with self._publish_lock:
+            self._ensure_running()
+            if command['action'] == 'fetch':
+                dropped_reason = self._fetch_drop_reason(capture)
+            if self.publish is not None and not dropped_reason:
+                published = self.publish(command, text)
+        if dropped_reason:
+            self.log(f'[DROPPED] sequence={utterance.sequence} reason={dropped_reason}')
+        self.log('[ROS] ' + ('published' if published else 'skipped'))
+        if llm_metrics:
+            self.log('[LLM TIME] ' + ' '.join(
+                f'{key}={value:.3f}s' for key, value in llm_metrics.items()
+            ))
 
         voice_end_to_command = command_done - float(capture['voice_end_wall'])
         self.log(
             f"[TIME] utterance={capture['utterance_seconds']:.3f}s "
             f"end_silence={capture['vad_end_silence_seconds']:.3f}s "
             f'stt={stt_seconds:.3f}s llm={llm_seconds:.3f}s '
+            f'queue_wait={queue_wait_seconds:.3f}s '
             f'voice_end_to_command={voice_end_to_command:.3f}s'
         )
         return {
-            'audio_path': str(audio_path),
+            'sequence': utterance.sequence,
+            'queue_wait_seconds': queue_wait_seconds,
+            'dropped_reason': dropped_reason,
+            'audio_path': str(audio_path) if audio_path is not None else None,
+            'recording_saved': audio_path is not None,
+            'recording_error': recording_error,
             'audio_levels': levels,
             'capture': capture,
             'transcript': text,
@@ -402,20 +556,49 @@ class VoiceCommandPipeline:
             'published': published,
             'stt_seconds': stt_seconds,
             'llm_seconds': llm_seconds,
+            'llm_metrics': llm_metrics,
             'voice_end_to_command_seconds': voice_end_to_command,
         }
 
+    def _capture_loop(self) -> None:
+        try:
+            for sequence, (audio, capture) in enumerate(
+                capture_utterances(self.config.vad, self.log, self.stop_event), start=1
+            ):
+                if self.stop_event.is_set():
+                    break
+                dropped = self.buffer.put(Utterance(sequence, audio, capture))
+                if dropped is not None:
+                    self.log(f'[DROPPED] sequence={dropped.sequence} reason=queue_full')
+        except PipelineStopped:
+            pass
+        except Exception as exc:
+            self._capture_error = exc
+        finally:
+            self.request_stop()
+
     def run_forever(self) -> None:
-        """Process utterances until stop_event is set or the microphone fails."""
-        command_index = 1
-        while not self.stop_event.is_set():
-            try:
-                self.run_once(command_index)
-            except PipelineStopped:
-                return
-            except PipelineError as exc:
-                if exc.stage in FATAL_STAGES:
-                    raise
-                self.log('[ERROR] ' + exc.describe())
-                continue
-            command_index += 1
+        """Run the capture producer and sequential consumer until shutdown."""
+        self._ensure_running()
+        self.capture_worker = threading.Thread(
+            target=self._capture_loop, name='voice_capture', daemon=True
+        )
+        self.capture_worker.start()
+        try:
+            while not self.stop_event.is_set():
+                utterance = self.buffer.get()
+                if utterance is None:
+                    continue
+                try:
+                    self.process_utterance(utterance)
+                except PipelineStopped:
+                    break
+                except PipelineError as exc:
+                    if exc.stage in FATAL_STAGES:
+                        raise
+                    self.log('[ERROR] ' + exc.describe())
+        finally:
+            self.request_stop()
+            self.capture_worker.join()
+        if self._capture_error is not None:
+            raise self._capture_error

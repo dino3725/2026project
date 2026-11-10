@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 import json
+import math
 from pathlib import Path
 import time
 from typing import Any
@@ -81,12 +82,16 @@ ALLOWED_RESULTS = frozenset({
 
 @dataclass(frozen=True)
 class ClassifierConfig:
-    """Ollama connection settings; defaults match the frozen v2 behaviour."""
+    """Ollama transport settings; prompt and inference options remain frozen."""
 
     ollama_url: str = DEFAULT_OLLAMA_URL
     model: str = DEFAULT_MODEL
-    timeout_seconds: float = 120.0
-    keep_alive: str = '10m'
+    timeout_seconds: float = 10.0
+    keep_alive: int | str = -1
+
+    def __post_init__(self) -> None:
+        if not math.isfinite(self.timeout_seconds) or self.timeout_seconds <= 0:
+            raise ValueError('timeout_seconds must be finite and positive')
 
     @property
     def chat_url(self) -> str:

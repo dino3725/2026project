@@ -10,11 +10,14 @@ from voice_command_pkg.command_classifier import ClassifierConfig
 from voice_command_pkg.pipeline import PipelineConfig
 
 
-# Defaults reproduce the 2026-11-04 baseline behaviour. config/voice_command.yaml
-# must list the same keys; test_parameters.py checks both.
+# Recognition defaults stay at baseline; capture now runs continuously.
+# config/voice_command.yaml must list the same keys; tests check both.
 DEFAULT_PARAMETERS: dict[str, Any] = {
     'publish_commands': True,
     'recordings_dir': '~/2026project/recordings',
+    'save_recordings': False,
+    'capture.queue_capacity': 2,
+    'capture.max_fetch_age_seconds': 10.0,
     'whisper.model': 'small',
     'whisper.device': 'cpu',
     'whisper.compute_type': 'int8',
@@ -29,8 +32,13 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'vad.max_utterance_seconds': 15.0,
     'llm.ollama_url': 'http://127.0.0.1:11434',
     'llm.model': 'qwen3:4b-instruct',
-    'llm.timeout_seconds': 120.0,
-    'llm.keep_alive': '10m',
+    'llm.timeout_seconds': 10.0,
+    'llm.keep_alive': -1,
+    'llm.warmup_timeout_seconds': 120.0,
+    'llm.retry_seconds': 5.0,
+    'messages.llm_preparing': '명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요.',
+    'messages.llm_ready': '명령 처리 준비가 완료됐어요. 말씀해 주세요.',
+    'messages.llm_failure': '명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요.',
 }
 
 
@@ -46,6 +54,14 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
         whisper_compute_type=str(merged['whisper.compute_type']),
         language=str(merged['whisper.language']),
         recordings_dir=Path(str(merged['recordings_dir'])).expanduser(),
+        save_recordings=merged['save_recordings'],
+        queue_capacity=int(merged['capture.queue_capacity']),
+        max_fetch_age_seconds=float(merged['capture.max_fetch_age_seconds']),
+        llm_warmup_timeout_seconds=float(merged['llm.warmup_timeout_seconds']),
+        llm_retry_seconds=float(merged['llm.retry_seconds']),
+        llm_preparing_message=str(merged['messages.llm_preparing']),
+        llm_ready_message=str(merged['messages.llm_ready']),
+        llm_failure_message=str(merged['messages.llm_failure']),
         vad=VadConfig(
             vad_mode=int(merged['vad.mode']),
             start_min_rms=int(merged['vad.start_min_rms']),
@@ -60,6 +76,6 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
             ollama_url=str(merged['llm.ollama_url']),
             model=str(merged['llm.model']),
             timeout_seconds=float(merged['llm.timeout_seconds']),
-            keep_alive=str(merged['llm.keep_alive']),
+            keep_alive=merged['llm.keep_alive'],
         ),
     )

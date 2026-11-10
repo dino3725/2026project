@@ -7,8 +7,12 @@ import audioop
 from collections import deque
 from dataclasses import dataclass
 from enum import auto, Enum
+import os
+import select
 import subprocess
 import sys
+import threading
+import time
 from typing import BinaryIO
 
 
@@ -183,12 +187,15 @@ def get_default_source() -> str:
             capture_output=True,
             text=True,
             check=True,
+            timeout=2,
         )
     except FileNotFoundError as exc:
         raise AudioCaptureError('pactl 실행 파일을 찾을 수 없습니다.') from exc
     except subprocess.CalledProcessError as exc:
         detail = exc.stderr.strip() or f'exit={exc.returncode}'
         raise AudioCaptureError(f'기본 마이크 source 조회 실패: {detail}') from exc
+    except subprocess.TimeoutExpired as exc:
+        raise AudioCaptureError('기본 마이크 source 조회 시간이 초과되었습니다.') from exc
 
     source = completed.stdout.strip()
     if not source:
@@ -231,6 +238,34 @@ def read_frame(stream: BinaryIO) -> bytes | None:
     return b''.join(chunks)
 
 
+def read_frame_interruptible(
+    stream: BinaryIO,
+    stop_event: threading.Event,
+    timeout_seconds: float = 2.0,
+) -> bytes | None:
+    """Read a pipe frame with bounded waits, even if the producer stalls."""
+    chunks: list[bytes] = []
+    remaining = FRAME_BYTES
+    deadline = time.monotonic() + timeout_seconds
+    while remaining:
+        if stop_event.is_set():
+            raise InterruptedError('audio capture stopped')
+        wait = deadline - time.monotonic()
+        if wait <= 0:
+            raise AudioCaptureError(
+                f'마이크 PCM 입력이 {timeout_seconds:g}초 동안 도착하지 않았습니다.'
+            )
+        ready, _, _ = select.select([stream], [], [], min(wait, 0.1))
+        if not ready:
+            continue
+        chunk = os.read(stream.fileno(), remaining)
+        if not chunk:
+            return None
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    return b''.join(chunks)
+
+
 def stop_capture(process: subprocess.Popen[bytes]) -> str:
     """Stop parec and return its diagnostic output without leaving a zombie."""
     if process.poll() is None:
@@ -241,9 +276,13 @@ def stop_capture(process: subprocess.Popen[bytes]) -> str:
         process.kill()
         process.wait(timeout=2)
 
-    if process.stderr is None:
-        return ''
-    return process.stderr.read().decode('utf-8', errors='replace').strip()
+    detail = ''
+    if process.stderr is not None:
+        detail = process.stderr.read().decode('utf-8', errors='replace').strip()
+        process.stderr.close()
+    if process.stdout is not None:
+        process.stdout.close()
+    return detail
 
 
 def run_vad_monitor(config: VadConfig) -> None:
