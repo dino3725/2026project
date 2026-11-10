@@ -43,6 +43,10 @@ class OperationCancelled(RuntimeError):
     """Raised inside a worker after an emergency stop invalidates it."""
 
 
+class ActionOutcomeUnknown(RuntimeError):
+    """An action may still be executing; automatic HOME must not follow."""
+
+
 class ControlNode(Node):
     """Run the top-level fetch state machine and enforce control ownership."""
 
@@ -626,6 +630,7 @@ class ControlNode(Node):
             self._fail_operation(
                 operation_id,
                 f'recognition/pick failed: {exc}',
+                auto_home=not isinstance(exc, ActionOutcomeUnknown),
             )
 
     def _release_sequence(self, operation_id: int) -> None:
@@ -638,7 +643,11 @@ class ControlNode(Node):
         except OperationCancelled:
             return
         except Exception as exc:
-            self._fail_operation(operation_id, f'release failed: {exc}')
+            self._fail_operation(
+                operation_id,
+                f'release failed: {exc}',
+                auto_home=not isinstance(exc, ActionOutcomeUnknown),
+            )
 
     def _home_recovery_sequence(self, operation_id: int) -> None:
         try:
@@ -1034,40 +1043,46 @@ class ControlNode(Node):
         operation_id: int,
         label: str,
     ):
+        self._ensure_active(operation_id)
         future = client.send_goal_async(goal)
-        future.add_done_callback(
-            lambda completed: self._cancel_goal_if_stale(
-                completed,
+        try:
+            goal_handle = self._wait_future(
+                future,
                 operation_id,
+                f'{label} goal response',
+                self.server_timeout,
             )
-        )
-        goal_handle = self._wait_future(
-            future,
-            operation_id,
-            f'{label} goal response',
-            self.server_timeout,
-        )
+        except OperationCancelled:
+            future.add_done_callback(self._cancel_abandoned_goal)
+            raise
+        except Exception as exc:
+            # Also runs if the response arrived just before registration.
+            future.add_done_callback(self._cancel_abandoned_goal)
+            raise ActionOutcomeUnknown(
+                f'{label} acceptance is unknown: {exc}'
+            ) from exc
         if goal_handle is None or not goal_handle.accepted:
             raise RuntimeError(f'{label} goal was rejected')
-        with self._goal_lock:
-            self._active_goals.append(goal_handle)
-        self._ensure_active(operation_id)
+        try:
+            # A stop must either see the registered goal or prevent adoption.
+            with self._lock:
+                self._ensure_active(operation_id)
+                with self._goal_lock:
+                    self._active_goals.append(goal_handle)
+        except OperationCancelled:
+            self._cancel_abandoned_goal(future)
+            raise
         return goal_handle
 
-    def _cancel_goal_if_stale(self, future, operation_id: int) -> None:
-        """Cancel a goal accepted after its operation was emergency-stopped."""
+    def _cancel_abandoned_goal(self, future) -> None:
+        """Cancel accepted goals whose response wait failed or was stopped."""
         try:
             goal_handle = future.result()
-            with self._lock:
-                stale = (
-                    operation_id != self._operation_id
-                    or self._stop_event.is_set()
-                )
-            if stale and goal_handle is not None and goal_handle.accepted:
+            if goal_handle is not None and goal_handle.accepted:
                 goal_handle.cancel_goal_async()
         except Exception as exc:
             self.get_logger().warn(
-                f'Could not cancel a stale action goal: {exc}'
+                f'Could not cancel an abandoned action goal: {exc}'
             )
 
     def _wait_result(
@@ -1078,16 +1093,23 @@ class ControlNode(Node):
         timeout: Optional[float] = None,
     ):
         try:
-            return self._wait_future(
+            response = self._wait_future(
                 goal_handle.get_result_async(),
                 operation_id,
                 f'{label} result',
                 self.result_timeout if timeout is None else timeout,
             )
-        finally:
-            with self._goal_lock:
-                if goal_handle in self._active_goals:
-                    self._active_goals.remove(goal_handle)
+        except OperationCancelled:
+            raise
+        except Exception as exc:
+            # Keep the goal visible to failure cleanup until a result arrives.
+            raise ActionOutcomeUnknown(
+                f'{label} completion is unknown: {exc}'
+            ) from exc
+        with self._goal_lock:
+            if goal_handle in self._active_goals:
+                self._active_goals.remove(goal_handle)
+        return response
 
     def _wait_future(
         self,
@@ -1274,6 +1296,8 @@ class ControlNode(Node):
             return
         except Exception as exc:
             try:
+                self._ensure_active(operation_id)
+                self._cancel_active_goals()
                 self._set_state(TaskState.ERROR, operation_id)
             except OperationCancelled:
                 return

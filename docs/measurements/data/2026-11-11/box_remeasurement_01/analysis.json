@@ -1,0 +1,661 @@
+{
+  "method": "Common-normal least-squares fit to tabletop and lid; frame-time TF; no change to robot.",
+  "assumptions": [
+    "Selected tabletop and lid regions approximate parallel planes.",
+    "Visible tabletop shares the robot wheel support plane as reported by user."
+  ],
+  "limitations": [
+    "Manual ROI choice, surface shape and depth bias remain.",
+    "Small repeated-frame spread does not imply absolute accuracy.",
+    "One pair of planes does not determine full camera extrinsics."
+  ],
+  "regions_xyxy": {
+    "table": [
+      90,
+      410,
+      260,
+      650
+    ],
+    "lid_left": [
+      450,
+      360,
+      600,
+      580
+    ],
+    "lid_right": [
+      820,
+      350,
+      940,
+      560
+    ]
+  },
+  "sample_stride_pixels": 4,
+  "capture_sha256": "46818ee31b3900adc7ab419f3a3e87c9827e787119202245a901631763f7602f",
+  "summary": {
+    "frames": 10,
+    "separation_mean_mm": 76.31379331775159,
+    "separation_min_max_mm": [
+      75.1824521201142,
+      78.10530198982069
+    ],
+    "separation_sample_std_mm": 0.8667031648021662,
+    "difference_from_user_80mm": -3.686206682248411,
+    "max_rgb_depth_delta_ms": 0.0,
+    "table_ground_z_original_mm_median_over_frames": 3.412697334999706,
+    "lid_ground_z_original_mm_median_over_frames": 77.9251104984736,
+    "table_ground_z_plus25_mm_median_over_frames": 28.412697334999706,
+    "lid_ground_z_plus25_mm_median_over_frames": 102.9251104984736
+  },
+  "frames": [
+    {
+      "index": 1,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.65579627862266,
+          "base_z_p05_p95_mm": [
+            -10.944978914134811,
+            -4.54751525434394
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.4550608725985,
+          "base_z_p05_p95_mm": [
+            64.82583496313053,
+            70.8234895500123
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.63728607531914,
+          "base_z_p05_p95_mm": [
+            65.07953300462286,
+            70.13604867146243
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.03792567688622736,
+          0.0022941831596060003,
+          -19.39869029403968,
+          76.71972487095051
+        ],
+        "normal_separation_mm": 76.66440768255484,
+        "residual_rms_mm": 1.0835573217812844
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.0359843001582304,
+            0.01549917707915302,
+            -22.575425877489636
+          ],
+          "residual_rms_mm": 0.9862697720967433
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.0351396149169823,
+            0.0010795799379188509,
+            58.09437812747716
+          ],
+          "residual_rms_mm": 1.0957353562856416
+        }
+      },
+      "table_ground_z_original_mm": 2.3442037213773403,
+      "lid_ground_z_original_mm": 77.52661270219727,
+      "table_ground_z_plus25_mm": 27.34420372137734,
+      "lid_ground_z_plus25_mm": 102.52661270219727
+    },
+    {
+      "index": 2,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.515292987900068,
+          "base_z_p05_p95_mm": [
+            -11.569392188548525,
+            -3.534456280830537
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.67074334316962,
+          "base_z_p05_p95_mm": [
+            65.33765728777159,
+            71.4079034566365
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 0.9987421383647799,
+          "base_z_median_mm": 67.80447465363986,
+          "base_z_p05_p95_mm": [
+            65.03478113941875,
+            70.1567007534896
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04255131656120253,
+          0.0033923772121725038,
+          -20.827957540798188,
+          77.0103636288061
+        ],
+        "normal_separation_mm": 76.94029819681887,
+        "residual_rms_mm": 1.2039341066682645
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04846573463359726,
+            0.005529896104347412,
+            -23.143670036733745
+          ],
+          "residual_rms_mm": 1.1792813773042738
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.03571461380963666,
+            0.0024831292226279444,
+            58.05303818664638
+          ],
+          "residual_rms_mm": 1.168109730057192
+        }
+      },
+      "table_ground_z_original_mm": 2.484707012099932,
+      "lid_ground_z_original_mm": 77.73608969248588,
+      "table_ground_z_plus25_mm": 27.484707012099932,
+      "lid_ground_z_plus25_mm": 102.73608969248588
+    },
+    {
+      "index": 3,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.141355117260048,
+          "base_z_p05_p95_mm": [
+            -12.579833667321534,
+            -2.530769525699891
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.1538103662813,
+          "base_z_p05_p95_mm": [
+            65.1376686075067,
+            71.82267676725544
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.73612419910458,
+          "base_z_p05_p95_mm": [
+            64.77233804425528,
+            71.0462232072588
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.051838143600539045,
+          0.007161943805061216,
+          -24.327859124415323,
+          78.2121740332421
+        ],
+        "normal_separation_mm": 78.10530198982069,
+        "residual_rms_mm": 1.326678762969631
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05154863426942396,
+            0.022189924002948197,
+            -28.50055477196102
+          ],
+          "residual_rms_mm": 1.566817198010472
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04677504394343762,
+            0.0055724391324272204,
+            55.28162482946985
+          ],
+          "residual_rms_mm": 1.0417590367892313
+        }
+      },
+      "table_ground_z_original_mm": 2.858644882739952,
+      "lid_ground_z_original_mm": 77.99268855868698,
+      "table_ground_z_plus25_mm": 27.858644882739952,
+      "lid_ground_z_plus25_mm": 102.99268855868698
+    },
+    {
+      "index": 4,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.496727826757649,
+          "base_z_p05_p95_mm": [
+            -10.58580030358558,
+            -2.013666349272583
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.78470619074142,
+          "base_z_p05_p95_mm": [
+            64.64677916612547,
+            70.83880460197119
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 0.9993710691823899,
+          "base_z_median_mm": 67.4328645927842,
+          "base_z_p05_p95_mm": [
+            64.51942459141338,
+            70.80845892939449
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04945064261194827,
+          0.0040441510152607885,
+          -21.7432981188152,
+          75.9683633634659
+        ],
+        "normal_separation_mm": 75.87502918443207,
+        "residual_rms_mm": 1.1414037949810987
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05202856160603703,
+            0.011749382061326336,
+            -24.66226342651726
+          ],
+          "residual_rms_mm": 1.1978449043670552
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04407585039143838,
+            0.0029352385547127824,
+            55.70070957256264
+          ],
+          "residual_rms_mm": 1.0500164367007754
+        }
+      },
+      "table_ground_z_original_mm": 3.503272173242351,
+      "lid_ground_z_original_mm": 77.63621756456695,
+      "table_ground_z_plus25_mm": 28.50327217324235,
+      "lid_ground_z_plus25_mm": 102.63621756456695
+    },
+    {
+      "index": 5,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.795215687827437,
+          "base_z_p05_p95_mm": [
+            -10.444624588214458,
+            -3.0145321880656684
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.5766272585112,
+          "base_z_p05_p95_mm": [
+            64.37729672221712,
+            71.20626855873505
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.31083526098615,
+          "base_z_p05_p95_mm": [
+            64.87920366120616,
+            71.12883985343213
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04561232838749154,
+          -0.0006365864291165702,
+          -19.78154063787334,
+          75.26063466567965
+        ],
+        "normal_separation_mm": 75.1824521201142,
+        "residual_rms_mm": 1.2235373192247752
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.049254762761791145,
+            -0.006935545549224487,
+            -19.05153932226809
+          ],
+          "residual_rms_mm": 1.2342909404214157
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04415491395956761,
+            -0.0003517818598730571,
+            55.87135354252409
+          ],
+          "residual_rms_mm": 1.2047957517438224
+        }
+      },
+      "table_ground_z_original_mm": 3.2047843121725634,
+      "lid_ground_z_original_mm": 77.85682757813922,
+      "table_ground_z_plus25_mm": 28.204784312172563,
+      "lid_ground_z_plus25_mm": 102.85682757813922
+    },
+    {
+      "index": 6,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.077864703269142,
+          "base_z_p05_p95_mm": [
+            -10.344896333878031,
+            -2.885158687733448
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 0.9995215311004785,
+          "base_z_median_mm": 68.16234823755946,
+          "base_z_p05_p95_mm": [
+            64.6265255922467,
+            72.16522066999637
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.431680422266,
+          "base_z_p05_p95_mm": [
+            65.14909759856852,
+            70.91702659761181
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04400770004364007,
+          0.0036079715014824265,
+          -20.068660082646687,
+          76.08913838384728
+        ],
+        "normal_separation_mm": 76.01507136139912,
+        "residual_rms_mm": 1.2917554629200287
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04536418166139121,
+            -0.0034892946682648363,
+            -18.450421191739068
+          ],
+          "residual_rms_mm": 1.2870153590635751
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.045242929236442755,
+            0.0042409060170358615,
+            55.675468714039994
+          ],
+          "residual_rms_mm": 1.282877784405918
+        }
+      },
+      "table_ground_z_original_mm": 3.9221352967308576,
+      "lid_ground_z_original_mm": 77.89602963169125,
+      "table_ground_z_plus25_mm": 28.922135296730858,
+      "lid_ground_z_plus25_mm": 102.89602963169125
+    },
+    {
+      "index": 7,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.580676703175982,
+          "base_z_p05_p95_mm": [
+            -10.381945828658539,
+            -2.580096293134058
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 0.9995215311004785,
+          "base_z_median_mm": 68.06781589717559,
+          "base_z_p05_p95_mm": [
+            64.58226544265855,
+            71.98964940971548
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.18853771385383,
+          "base_z_p05_p95_mm": [
+            65.49355030036904,
+            71.80390669907801
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04804178788124232,
+          0.0017540308354688228,
+          -20.99582192959362,
+          76.2028004352444
+        ],
+        "normal_separation_mm": 76.11489700519274,
+        "residual_rms_mm": 1.1168325247265918
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.045555689607431914,
+            0.006081940473257469,
+            -21.50159930435682
+          ],
+          "residual_rms_mm": 1.0800927053933924
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04905773483542904,
+            0.0015626346350918752,
+            54.93362153576134
+          ],
+          "residual_rms_mm": 1.1363281408766983
+        }
+      },
+      "table_ground_z_original_mm": 3.419323296824018,
+      "lid_ground_z_original_mm": 78.12014018472024,
+      "table_ground_z_plus25_mm": 28.419323296824018,
+      "lid_ground_z_plus25_mm": 103.12014018472024
+    },
+    {
+      "index": 8,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.5939286268246065,
+          "base_z_p05_p95_mm": [
+            -10.24132546975801,
+            -3.199053296849138
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.58929236090432,
+          "base_z_p05_p95_mm": [
+            65.441698907107,
+            71.07815262721046
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 0.9993710691823899,
+          "base_z_median_mm": 68.20912383554617,
+          "base_z_p05_p95_mm": [
+            64.70235019915799,
+            71.21358362022592
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.041743603358852556,
+          0.005140475830047092,
+          -20.274282822068624,
+          77.06012172913708
+        ],
+        "normal_separation_mm": 76.99205415867198,
+        "residual_rms_mm": 1.1864379172466049
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04062378468108022,
+            0.01425899267115193,
+            -22.529364272368163
+          ],
+          "residual_rms_mm": 1.162127529379519
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.039586973575599274,
+            0.004274518339451916,
+            57.38425824343157
+          ],
+          "residual_rms_mm": 1.179255700747506
+        }
+      },
+      "table_ground_z_original_mm": 3.4060713731753935,
+      "lid_ground_z_original_mm": 78.46972568172833,
+      "table_ground_z_plus25_mm": 28.406071373175394,
+      "lid_ground_z_plus25_mm": 103.46972568172833
+    },
+    {
+      "index": 9,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.195420737358859,
+          "base_z_p05_p95_mm": [
+            -10.01718052448437,
+            -1.9466005514552065
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.6375449996138,
+          "base_z_p05_p95_mm": [
+            64.50961170638276,
+            71.52676278733053
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 68.21835241045244,
+          "base_z_p05_p95_mm": [
+            65.75892022599456,
+            71.61244679520782
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04595871336572112,
+          0.0017418826406562782,
+          -19.9103597051298,
+          75.81219889210993
+        ],
+        "normal_separation_mm": 75.73214546612938,
+        "residual_rms_mm": 1.1529240793771776
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.050021626425691176,
+            -0.002616591181255873,
+            -19.853814626287182
+          ],
+          "residual_rms_mm": 1.1087335469884232
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04335396232225079,
+            0.0017622103501162556,
+            56.609725406666406
+          ],
+          "residual_rms_mm": 1.1711059546318439
+        }
+      },
+      "table_ground_z_original_mm": 3.804579262641141,
+      "lid_ground_z_original_mm": 78.46111006799521,
+      "table_ground_z_plus25_mm": 28.80457926264114,
+      "lid_ground_z_plus25_mm": 103.46111006799521
+    },
+    {
+      "index": 10,
+      "regions": {
+        "table": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.286273354669646,
+          "base_z_p05_p95_mm": [
+            -9.822037768685323,
+            -2.4114222421297287
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 67.96449070642151,
+          "base_z_p05_p95_mm": [
+            65.47153855479148,
+            71.1927901209866
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 0.9993710691823899,
+          "base_z_median_mm": 67.9373495850624,
+          "base_z_p05_p95_mm": [
+            65.14115776024639,
+            71.13266838320018
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04041644783169107,
+          0.0020796563343598307,
+          -18.547657232575045,
+          75.5780915277207
+        ],
+        "normal_separation_mm": 75.51627601238198,
+        "residual_rms_mm": 1.2604315863244777
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04191896123328336,
+            -0.0006154967589321464,
+            -18.218865917882606
+          ],
+          "residual_rms_mm": 1.5215393267111963
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.039852323817513975,
+            0.0022047651725127793,
+            57.18211871587975
+          ],
+          "residual_rms_mm": 1.0366027301508767
+        }
+      },
+      "table_ground_z_original_mm": 3.713726645330354,
+      "lid_ground_z_original_mm": 77.95419136525595,
+      "table_ground_z_plus25_mm": 28.713726645330354,
+      "lid_ground_z_plus25_mm": 102.95419136525595
+    }
+  ]
+}

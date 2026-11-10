@@ -1,0 +1,262 @@
+{
+  "method": "Hand-selected five visible lid pixels per saved depth image; 7x7 valid-depth median; pinhole deprojection; saved pre-trial TF.",
+  "limitations": [
+    "Snapshot depth/RGB/debug stamps differ; robot and box were held static.",
+    "Saved camera TF is latest at session initialization, not at each image stamp.",
+    "Patch selection is manual; lid curvature, depth noise and user height uncertainty remain.",
+    "No plane fit or full extrinsic calibration; these differences are diagnostic, not correction parameters."
+  ],
+  "inputs_sha256": {
+    "session.json": "673fc172cc458bc59f0b572e6824a1d08694ddf80658c8223f41320c39947540",
+    "001_depth.png": "a630d0d4a87c4940ce3e52189158225ce8c9b423d459b71b43240766dc82eea5",
+    "002_depth.png": "c949de15d2556e412f2108b9df7e45673e551b652d4594f98b35c1be32560ffc",
+    "003_depth.png": "333495f53b1af09fd04f8431888a7541aed9ca84296787c7607c17cc2852cc4b"
+  },
+  "box_top_above_support_plane_mm": 80,
+  "assumed_base_link_above_support_plane_mm": 10,
+  "user_camera_lens_height_mm_approximate": 426,
+  "live_model_optical_frame_height_above_support_plane_mm": 409.8258591350471,
+  "model_with_inferred_25mm_shift_height_mm": 434.8258591350471,
+  "rows": [
+    {
+      "trial": 1,
+      "pixel_uv": [
+        500,
+        550
+      ],
+      "depth_mm": 395.0,
+      "base_xyz_mm": [
+        223.69087148507637,
+        92.33673387631464,
+        65.40525939806024
+      ],
+      "z_plus25_mm": 90.40525939806024,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.405259398060238
+    },
+    {
+      "trial": 1,
+      "pixel_uv": [
+        650,
+        600
+      ],
+      "depth_mm": 377.0,
+      "base_xyz_mm": [
+        198.63478127592964,
+        27.76713227251659,
+        65.82496443393104
+      ],
+      "z_plus25_mm": 90.82496443393104,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.824964433931044
+    },
+    {
+      "trial": 1,
+      "pixel_uv": [
+        900,
+        550
+      ],
+      "depth_mm": 395.0,
+      "base_xyz_mm": [
+        223.2079458141315,
+        -80.9610755548601,
+        64.65075896533051
+      ],
+      "z_plus25_mm": 89.65075896533051,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 19.65075896533051
+    },
+    {
+      "trial": 1,
+      "pixel_uv": [
+        500,
+        400
+      ],
+      "depth_mm": 451.0,
+      "base_xyz_mm": [
+        308.126391873457,
+        100.20263376089144,
+        70.21045295002942
+      ],
+      "z_plus25_mm": 95.21045295002942,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 25.21045295002942
+    },
+    {
+      "trial": 1,
+      "pixel_uv": [
+        900,
+        400
+      ],
+      "depth_mm": 453.0,
+      "base_xyz_mm": [
+        308.9383624836623,
+        -98.2488028515825,
+        67.88345599365037
+      ],
+      "z_plus25_mm": 92.88345599365037,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 22.883455993650372
+    },
+    {
+      "trial": 2,
+      "pixel_uv": [
+        500,
+        550
+      ],
+      "depth_mm": 392.0,
+      "base_xyz_mm": [
+        221.99299351745017,
+        91.89529381242126,
+        67.94516268720186
+      ],
+      "z_plus25_mm": 92.94516268720186,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 22.945162687201858
+    },
+    {
+      "trial": 2,
+      "pixel_uv": [
+        650,
+        600
+      ],
+      "depth_mm": 376.0,
+      "base_xyz_mm": [
+        198.10826180061142,
+        27.784232166038695,
+        66.7109084517059
+      ],
+      "z_plus25_mm": 91.7109084517059,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 21.710908451705905
+    },
+    {
+      "trial": 2,
+      "pixel_uv": [
+        900,
+        550
+      ],
+      "depth_mm": 394.0,
+      "base_xyz_mm": [
+        222.64320908822472,
+        -80.66949361135326,
+        65.4993035227222
+      ],
+      "z_plus25_mm": 90.4993035227222,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.4993035227222
+    },
+    {
+      "trial": 2,
+      "pixel_uv": [
+        500,
+        400
+      ],
+      "depth_mm": 452.0,
+      "base_xyz_mm": [
+        308.809295316456,
+        100.34895048291037,
+        69.47959839086087
+      ],
+      "z_plus25_mm": 94.47959839086087,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 24.479598390860872
+    },
+    {
+      "trial": 2,
+      "pixel_uv": [
+        900,
+        400
+      ],
+      "depth_mm": 454.0,
+      "base_xyz_mm": [
+        309.6200433300259,
+        -98.5412147610349,
+        67.15069130680406
+      ],
+      "z_plus25_mm": 92.15069130680406,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 22.150691306804063
+    },
+    {
+      "trial": 3,
+      "pixel_uv": [
+        500,
+        550
+      ],
+      "depth_mm": 395.0,
+      "base_xyz_mm": [
+        223.69087148507637,
+        92.33673387631464,
+        65.40525939806024
+      ],
+      "z_plus25_mm": 90.40525939806024,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.405259398060238
+    },
+    {
+      "trial": 3,
+      "pixel_uv": [
+        650,
+        600
+      ],
+      "depth_mm": 377.0,
+      "base_xyz_mm": [
+        198.63478127592964,
+        27.76713227251659,
+        65.82496443393104
+      ],
+      "z_plus25_mm": 90.82496443393104,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.824964433931044
+    },
+    {
+      "trial": 3,
+      "pixel_uv": [
+        900,
+        550
+      ],
+      "depth_mm": 394.0,
+      "base_xyz_mm": [
+        222.64320908822472,
+        -80.66949361135326,
+        65.4993035227222
+      ],
+      "z_plus25_mm": 90.4993035227222,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 20.4993035227222
+    },
+    {
+      "trial": 3,
+      "pixel_uv": [
+        500,
+        400
+      ],
+      "depth_mm": 450.0,
+      "base_xyz_mm": [
+        307.44348843045816,
+        100.05631703887252,
+        70.94130750919797
+      ],
+      "z_plus25_mm": 95.94130750919797,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 25.94130750919797
+    },
+    {
+      "trial": 3,
+      "pixel_uv": [
+        900,
+        400
+      ],
+      "depth_mm": 453.0,
+      "base_xyz_mm": [
+        308.9383624836623,
+        -98.2488028515825,
+        67.88345599365037
+      ],
+      "z_plus25_mm": 92.88345599365037,
+      "expected_base_z_mm": 70,
+      "z_plus25_minus_expected_mm": 22.883455993650372
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+{
+  "source_directory": "log/vision_baseline_20261111",
+  "local_archive": "log/backups/measurements_2026-11-11.tar.gz",
+  "archive_sha256": "b799c74b3704328c8b4378f08342c7b34ffe99e67bc04a3d2d899c5fbcd455f0",
+  "files": [
+    {
+      "path": "before_motion.png",
+      "bytes": 1166473,
+      "sha256": "35dbf3a87ce332ab028f78b1843ed1d21dd9a873d6a04fb590b14d4dbc80e715",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/001_depth.png",
+      "bytes": 183442,
+      "sha256": "f035fbcc5b94f85b3ee1202e9358eede1060cdc4b4b73409ddeb4d52e908996e",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/001_rgb.png",
+      "bytes": 1176825,
+      "sha256": "5fcbacb550cddc4f8f64c6667f0b02144b3e18523248ee78af4162bb0bafd6c2",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/002_depth.png",
+      "bytes": 184599,
+      "sha256": "93fbda3bc5a92f6d755f560c4590692049f78b5bac87670aba13bd9b7f264460",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/002_rgb.png",
+      "bytes": 1227219,
+      "sha256": "7fcf5bd7e44183ff7d9f3a6c59f998068cdf91a3b892e8bfb6096e47bbb92feb",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/003_depth.png",
+      "bytes": 185663,
+      "sha256": "3f85aec5f6b2770a5edf00d5dfe9ef65291f98347ce8ab6630c323bd1f8065d6",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/003_rgb.png",
+      "bytes": 1231262,
+      "sha256": "68bcdb2f2faea0b7dfde0e13d69e118bc030fd59593cbc50be046efacafabdf8",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/004_depth.png",
+      "bytes": 185268,
+      "sha256": "60b67bf64752f4d9d0ed24cce72c0c17d31a117e8572c07d9686bd9b956bd580",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/004_rgb.png",
+      "bytes": 1228506,
+      "sha256": "e8340f909ba220a6a52f721bd0db01a6c5817f0ca8b27f907d41e25717cd5ed7",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/005_depth.png",
+      "bytes": 187179,
+      "sha256": "630dd7d44f8038be13e9039dd8005e8abf0db0e282b54523931a6d8c426c8a0a",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/005_rgb.png",
+      "bytes": 1234001,
+      "sha256": "9ab419d51ddbe338732c8d81c6ac0de13f61678c775e7121621f1f8c5bef4ca2",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/006_depth.png",
+      "bytes": 189099,
+      "sha256": "328e1f3e94be1db56a054e0e4a3430d945185c8979bd721405e67790e904dcfe",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/006_rgb.png",
+      "bytes": 1233108,
+      "sha256": "977f20e5073d542fd3c8355c11d53caa60d9c3eb42755a629f718f221e65a9a8",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/007_depth.png",
+      "bytes": 186559,
+      "sha256": "c98bc5e871a93d14a50e8823f9fba437d1dfa86e8f96ddf121ad501e06309e50",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/007_rgb.png",
+      "bytes": 1233827,
+      "sha256": "15bd1bf154d60f8f390cd11c082de5f18ddc3525a6c4ac5876e6908849466559",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/008_depth.png",
+      "bytes": 185283,
+      "sha256": "b7f4e8aa674a0aa24947266e6fb7e7e1e08e9a2219c556a4e1dd6b131377e872",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/008_rgb.png",
+      "bytes": 1232751,
+      "sha256": "57a7f435a4d3dc8914ce34769f4fc57837176dcb769ab212e0944053d90ca9d9",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/009_depth.png",
+      "bytes": 184714,
+      "sha256": "7e4e424803bc45aea20d252042f7a0b97c0322451f998aec161222375e7c5df4",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/009_rgb.png",
+      "bytes": 1234475,
+      "sha256": "093942c67f7ed349d5c90d12f9fb64f2b4f24942b50ac67cad56ef98075ae876",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/010_depth.png",
+      "bytes": 187331,
+      "sha256": "eb4e5a4ef016d41fe4c7a535d9a30ae1cd2301b6f780e3344db085c994004b95",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/010_rgb.png",
+      "bytes": 1233521,
+      "sha256": "9a00ead354b4f83038f463c03f2a1ff47b91c6e61689fff7a7da3ead5762e90c",
+      "included_in_git_data": false
+    },
+    {
+      "path": "box_remeasurement_01/analysis.json",
+      "bytes": 18754,
+      "sha256": "7ace923df893014a1c1ce48330bc1df7f2ed5ffdf3207d83a5642b1eb5464389",
+      "included_in_git_data": true,
+      "git_copy_sha256": "7ace923df893014a1c1ce48330bc1df7f2ed5ffdf3207d83a5642b1eb5464389"
+    },
+    {
+      "path": "box_remeasurement_01/analyze.py",
+      "bytes": 5589,
+      "sha256": "3d6a18582073c0aeb7447e272cd7bf5b9a2d53a85d93239bc8d9bd8edc6bde70",
+      "included_in_git_data": true,
+      "git_copy_sha256": "3d6a18582073c0aeb7447e272cd7bf5b9a2d53a85d93239bc8d9bd8edc6bde70"
+    },
+    {
+      "path": "box_remeasurement_01/capture.json",
+      "bytes": 22102,
+      "sha256": "46818ee31b3900adc7ab419f3a3e87c9827e787119202245a901631763f7602f",
+      "included_in_git_data": true,
+      "git_copy_sha256": "46818ee31b3900adc7ab419f3a3e87c9827e787119202245a901631763f7602f"
+    },
+    {
+      "path": "coke_center_pilot_01/001_debug.png",
+      "bytes": 1146938,
+      "sha256": "c35512fc8dfc5c78a986de74e2857d8f364fd9d1137f13110e9060ad7e27c8e6",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/001_depth.png",
+      "bytes": 156533,
+      "sha256": "a630d0d4a87c4940ce3e52189158225ce8c9b423d459b71b43240766dc82eea5",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/001_rgb.png",
+      "bytes": 1133348,
+      "sha256": "75a8f7f5f6aa03f178b57afb02ef323588446a1b57dfe2ffdb8bf051d89699b9",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/002_debug.png",
+      "bytes": 1146509,
+      "sha256": "f08b7728f95b53998036fa303989d65a1494d59d69c66e0abb459a1035afc2e7",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/002_depth.png",
+      "bytes": 153441,
+      "sha256": "c949de15d2556e412f2108b9df7e45673e551b652d4594f98b35c1be32560ffc",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/002_rgb.png",
+      "bytes": 1132353,
+      "sha256": "59f2ed0e8519da8cb7ec0e5f8f1b48562c8e35c172fa2616a0a44b0403156bcd",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/003_debug.png",
+      "bytes": 1147750,
+      "sha256": "67b1544293808ef050e11dfcd79af7927b2060a7e70764946d89be5321af64b7",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/003_depth.png",
+      "bytes": 157370,
+      "sha256": "333495f53b1af09fd04f8431888a7541aed9ca84296787c7607c17cc2852cc4b",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/003_rgb.png",
+      "bytes": 1132640,
+      "sha256": "4e64fd44dc675f967005a574bc7a8b1d484fa1c2361cadd584c871e933d42bcf",
+      "included_in_git_data": false
+    },
+    {
+      "path": "coke_center_pilot_01/box_plane_diagnostic.json",
+      "bytes": 6455,
+      "sha256": "2c93465e85bdf602c415f48f8fc9b05a44e8bfb18d9d139efa748ccf64f7b190",
+      "included_in_git_data": true,
+      "git_copy_sha256": "2c93465e85bdf602c415f48f8fc9b05a44e8bfb18d9d139efa748ccf64f7b190"
+    },
+    {
+      "path": "coke_center_pilot_01/check_box_plane.py",
+      "bytes": 2944,
+      "sha256": "f332ca0e060be30c809e88be62d1236661eb25960d2e7edc082c1e39149e12d9",
+      "included_in_git_data": true,
+      "git_copy_sha256": "f332ca0e060be30c809e88be62d1236661eb25960d2e7edc082c1e39149e12d9"
+    },
+    {
+      "path": "coke_center_pilot_01/session.json",
+      "bytes": 16399,
+      "sha256": "673fc172cc458bc59f0b572e6824a1d08694ddf80658c8223f41320c39947540",
+      "included_in_git_data": true,
+      "git_copy_sha256": "673fc172cc458bc59f0b572e6824a1d08694ddf80658c8223f41320c39947540"
+    },
+    {
+      "path": "coke_center_pilot_01/trials.csv",
+      "bytes": 553,
+      "sha256": "422ce642df48815165a0f9ad651b8901447c3812d59bc393c13c2d50c7d6864c",
+      "included_in_git_data": true,
+      "git_copy_sha256": "8c35be6f9c558efe3843cda1a26e5dd71333f6e265431a525cbe684044f01900",
+      "git_copy_note": "CSV CRLF normalized to LF; values unchanged; original preserved in local archive."
+    },
+    {
+      "path": "geometry_resume_01/001_depth.png",
+      "bytes": 162544,
+      "sha256": "92bfcf29585f40b3bb88eba8ae8e301f8059f08513abb042b9c5266463fa784c",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/001_rgb.png",
+      "bytes": 1216493,
+      "sha256": "e2cbcc91ea882c5ba5d71f06452ae7f5ab033d107dc59a8e01c2e588fc8ca6eb",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/002_depth.png",
+      "bytes": 165010,
+      "sha256": "fb0d5b490efb35152e47cce7398f8bbcbe94cdbc6a0692a245b0cb68adb8fe10",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/002_rgb.png",
+      "bytes": 1215353,
+      "sha256": "b879fa20aee5b34fcaf73e360f7bc9d98158620c14332714ac7cbee221fe22c9",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/003_depth.png",
+      "bytes": 163499,
+      "sha256": "f460162cfd19838618f28c91724fa6902d171f4e4d8b9eaaf7fb82948c595532",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/003_rgb.png",
+      "bytes": 1216404,
+      "sha256": "ea3607308b692b2274844e16c326d2513104914362299b17a61160bc42c3a28d",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/004_depth.png",
+      "bytes": 163783,
+      "sha256": "4a3625cc2693e046518bd5b5adc2c86aa03640bc177b65ea4083dc07d5eed8ef",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/004_rgb.png",
+      "bytes": 1217273,
+      "sha256": "13ae5f66edcf2039648729e31b068b0e0d7f72fa4ae39199d07183d67cb4506f",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/005_depth.png",
+      "bytes": 161890,
+      "sha256": "fdcb1316f85151e77a9bd064bd6af6fe041324ad04f580bb8232ba8e476b91b9",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/005_rgb.png",
+      "bytes": 1217233,
+      "sha256": "8aa75d1b9c6f0dc8276373575cb16f0c5df9cab1c3529e335a69f069d90707df",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/006_depth.png",
+      "bytes": 165552,
+      "sha256": "4454804dde95b9c7621103cf7bd8c9add390011eb834e55f4df97f232b7615ce",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/006_rgb.png",
+      "bytes": 1213847,
+      "sha256": "bd435295da996d69bdb37f1d57364b05c0ad0dc2c0320f3ee563a27d78ed4125",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/007_depth.png",
+      "bytes": 164514,
+      "sha256": "6c4af890bae264710585c70c52c93587e2b91a71d3091af204b68dbe65a48fe4",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/007_rgb.png",
+      "bytes": 1216068,
+      "sha256": "8ed2abd418307c566e3bef5a7ae777867e8839ffae6a4156b5a75a804b43df35",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/008_depth.png",
+      "bytes": 162111,
+      "sha256": "4a79f9a4d0e0b1bbaaa2e2f27c05cdc251b705df03a3c25878638a9a9d36b592",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/008_rgb.png",
+      "bytes": 1216226,
+      "sha256": "0ad62b450e9ad698feb3fe186dfaf737535808a9596cdfcc03a4c5d78939bc5f",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/009_depth.png",
+      "bytes": 163580,
+      "sha256": "50c2210534c7c2f61655ecfcf5f432fcf882e98ea1ad6f217aa339cc56d6f5d9",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/009_rgb.png",
+      "bytes": 1214592,
+      "sha256": "e275e4a3d29b34c8d7148b7dacb844e42dea38d5fbd607f3d6d8f63d0b32cc82",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/010_depth.png",
+      "bytes": 162481,
+      "sha256": "3af11ee14728788d50bbd3f1c9c0d7f7f41224baf30f60398b9aa445c5b69336",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/010_rgb.png",
+      "bytes": 1216941,
+      "sha256": "4703d2a24a8d738658afac34b0606b17f58edab73291d75e03840d8515f0ae7d",
+      "included_in_git_data": false
+    },
+    {
+      "path": "geometry_resume_01/analysis.json",
+      "bytes": 23762,
+      "sha256": "a3b3d6676e4c9a08ae9807cc16c590050783ff0a69999121e4c93a961c417c2a",
+      "included_in_git_data": true,
+      "git_copy_sha256": "a3b3d6676e4c9a08ae9807cc16c590050783ff0a69999121e4c93a961c417c2a"
+    },
+    {
+      "path": "geometry_resume_01/analyze.py",
+      "bytes": 5719,
+      "sha256": "6a09ab57a4ba1df29d434ac77b8b1e514008749060905e8c62b9b10aaa58c024",
+      "included_in_git_data": true,
+      "git_copy_sha256": "6a09ab57a4ba1df29d434ac77b8b1e514008749060905e8c62b9b10aaa58c024"
+    },
+    {
+      "path": "geometry_resume_01/capture.json",
+      "bytes": 22433,
+      "sha256": "6ed095c3641fb2ac41c704a296eb51fcf0fdad66a661981ac792b7bbe0ef3f29",
+      "included_in_git_data": true,
+      "git_copy_sha256": "6ed095c3641fb2ac41c704a296eb51fcf0fdad66a661981ac792b7bbe0ef3f29"
+    },
+    {
+      "path": "geometry_resume_01/plane_geometry.json",
+      "bytes": 13835,
+      "sha256": "eef5c173dfd426554a2e9d1813f88b959ae7e37a25ba681b064f6ec2ba0f2feb",
+      "included_in_git_data": true,
+      "git_copy_sha256": "eef5c173dfd426554a2e9d1813f88b959ae7e37a25ba681b064f6ec2ba0f2feb"
+    },
+    {
+      "path": "geometry_resume_01/plane_geometry.py",
+      "bytes": 3693,
+      "sha256": "e8b7980f5b729054d3ad8759d2cf9db4648f6b08a2778bc7b5ec4db93d5a51ab",
+      "included_in_git_data": true,
+      "git_copy_sha256": "e8b7980f5b729054d3ad8759d2cf9db4648f6b08a2778bc7b5ec4db93d5a51ab"
+    },
+    {
+      "path": "recognition_pose.png",
+      "bytes": 1135291,
+      "sha256": "a8cc9414e79cb19736c99547ed53902d633c49fba5816735d9bb5c7ba13cd7c4",
+      "included_in_git_data": false
+    },
+    {
+      "path": "recognition_pose_joints.json",
+      "bytes": 79,
+      "sha256": "e45cc982215341cd714af5b1db1a1b6889894ee025df7b145f3111434fc3b2ff",
+      "included_in_git_data": true,
+      "git_copy_sha256": "e45cc982215341cd714af5b1db1a1b6889894ee025df7b145f3111434fc3b2ff"
+    }
+  ]
+}

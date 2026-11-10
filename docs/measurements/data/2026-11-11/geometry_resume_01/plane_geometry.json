@@ -1,0 +1,455 @@
+{
+  "applied_to_robot": false,
+  "interpretation": "Plane-relative height diagnostic; not a complete camera extrinsic solution.",
+  "limitations": [
+    "One fixed pose cannot separate arm kinematic errors from mount errors.",
+    "Plane alone leaves in-plane translation and rotation unobserved.",
+    "Camera-to-plane distance is independent of the chosen rigid base transform.",
+    "Height and tilt use manually selected approximately planar tabletop regions."
+  ],
+  "held_out_regions_xyxy": {
+    "table_left": [
+      140,
+      500,
+      260,
+      540
+    ],
+    "table_right": [
+      1140,
+      550,
+      1220,
+      595
+    ],
+    "lid_front": [
+      460,
+      585,
+      900,
+      615
+    ]
+  },
+  "summary": {
+    "table_tilt_from_live_base_degrees": {
+      "mean": 2.8595162539336685,
+      "min": 2.4739440920336913,
+      "max": 3.0826442872890802
+    },
+    "camera_to_table_normal_distance_mm": {
+      "mean": 420.29707913379787,
+      "min": 418.88026464034795,
+      "max": 421.315186616113
+    },
+    "camera_model_support_height_plus25_mm": {
+      "mean": 434.94168063635186,
+      "min": 434.86147841017527,
+      "max": 435.01456488632857
+    },
+    "table_fit_rms_mm": {
+      "mean": 1.3421245197252873,
+      "min": 1.069644578578426,
+      "max": 1.688765550714832
+    },
+    "table_left": {
+      "median_height_mean_mm": 0.1710406400714028,
+      "median_height_range_mm": [
+        -0.41636471420561527,
+        1.1382401438901137
+      ]
+    },
+    "table_right": {
+      "median_height_mean_mm": -0.08945318640093855,
+      "median_height_range_mm": [
+        -0.5086934088554624,
+        0.3884019260062619
+      ]
+    },
+    "lid_front": {
+      "median_height_mean_mm": 78.75620245337613,
+      "median_height_range_mm": [
+        78.22321285315573,
+        79.39769647201818
+      ]
+    }
+  },
+  "frames": [
+    {
+      "index": 1,
+      "table_normal_in_live_base": [
+        -0.05156399452783804,
+        -0.009043560607807134,
+        0.9986287440685182
+      ],
+      "table_tilt_from_live_base_degrees": 3.0008654938052115,
+      "camera_to_table_normal_distance_mm": 420.9429798568888,
+      "camera_model_support_height_plus25_mm": 434.879164938611,
+      "table_fit_rms_mm": 1.3153461541415277,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.2547161564244256,
+          "table_relative_height_p05_p95_mm": [
+            -1.395502854033706,
+            1.9325061114532462
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.3868865249260516,
+          "table_relative_height_p05_p95_mm": [
+            -1.3227498311135213,
+            2.05166951070416
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.81324209597192,
+          "table_relative_height_p05_p95_mm": [
+            77.60282780859957,
+            80.27659583570073
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "table_normal_in_live_base": [
+        -0.041751095508053455,
+        -0.010957551653683747,
+        0.9990679546885859
+      ],
+      "table_tilt_from_live_base_degrees": 2.4739440920336913,
+      "camera_to_table_normal_distance_mm": 419.0713381260884,
+      "camera_model_support_height_plus25_mm": 434.86147841017527,
+      "table_fit_rms_mm": 1.346062452754336,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.16755445874261277,
+          "table_relative_height_p05_p95_mm": [
+            -2.1720663785051118,
+            1.808412211895603
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.07498598792711064,
+          "table_relative_height_p05_p95_mm": [
+            -1.6461189403601193,
+            2.2064771771722245
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.61640899746808,
+          "table_relative_height_p05_p95_mm": [
+            76.81968328051221,
+            79.93491176760186
+          ]
+        }
+      }
+    },
+    {
+      "index": 3,
+      "table_normal_in_live_base": [
+        -0.05015561536104638,
+        -0.009675471442381437,
+        0.9986945476471384
+      ],
+      "table_tilt_from_live_base_degrees": 2.9279617579383572,
+      "camera_to_table_normal_distance_mm": 420.86858883437645,
+      "camera_model_support_height_plus25_mm": 434.92195692621266,
+      "table_fit_rms_mm": 1.2020544442172578,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.34407456093752664,
+          "table_relative_height_p05_p95_mm": [
+            -1.1562722833277983,
+            1.7817370815473499
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.493395852342271,
+          "table_relative_height_p05_p95_mm": [
+            -1.5790814055327969,
+            1.3255580695309876
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.85535690051057,
+          "table_relative_height_p05_p95_mm": [
+            77.10783229400137,
+            80.0983666139165
+          ]
+        }
+      }
+    },
+    {
+      "index": 4,
+      "table_normal_in_live_base": [
+        -0.05276666764292648,
+        -0.01037176308727906,
+        0.9985530057619988
+      ],
+      "table_tilt_from_live_base_degrees": 3.0826442872890802,
+      "camera_to_table_normal_distance_mm": 421.315186616113,
+      "camera_model_support_height_plus25_mm": 434.93281316884656,
+      "table_fit_rms_mm": 1.069644578578426,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.11268210714405313,
+          "table_relative_height_p05_p95_mm": [
+            -1.8230637268842587,
+            1.9748423166355564
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.02710271111999063,
+          "table_relative_height_p05_p95_mm": [
+            -1.4937895949821178,
+            1.4806328259426016
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 79.08181389503257,
+          "table_relative_height_p05_p95_mm": [
+            78.08239366496399,
+            80.83502482460148
+          ]
+        }
+      }
+    },
+    {
+      "index": 5,
+      "table_normal_in_live_base": [
+        -0.051974305709016504,
+        -0.009126416373309288,
+        0.9986067194197356
+      ],
+      "table_tilt_from_live_base_degrees": 3.0248744916626853,
+      "camera_to_table_normal_distance_mm": 420.6421289271624,
+      "camera_model_support_height_plus25_mm": 434.9549878605384,
+      "table_fit_rms_mm": 1.2418383571476563,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.2829779933245522,
+          "table_relative_height_p05_p95_mm": [
+            -1.7669969374121686,
+            1.15283169807415
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.3370760713797747,
+          "table_relative_height_p05_p95_mm": [
+            -2.0369482509763386,
+            0.7337854808217641
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.44563919867964,
+          "table_relative_height_p05_p95_mm": [
+            77.15150538155166,
+            79.57854783671287
+          ]
+        }
+      }
+    },
+    {
+      "index": 6,
+      "table_normal_in_live_base": [
+        -0.04880216309859771,
+        -0.010668820717801364,
+        0.9987514831735615
+      ],
+      "table_tilt_from_live_base_degrees": 2.863386847754851,
+      "camera_to_table_normal_distance_mm": 420.31604820760657,
+      "camera_model_support_height_plus25_mm": 434.9377816702524,
+      "table_fit_rms_mm": 1.688765550714832,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.21366609309268192,
+          "table_relative_height_p05_p95_mm": [
+            -1.6694041390437007,
+            1.9542598239440985
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.3884019260062619,
+          "table_relative_height_p05_p95_mm": [
+            -0.9160805439097762,
+            2.286067363716923
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.93446665839474,
+          "table_relative_height_p05_p95_mm": [
+            77.8433640521952,
+            80.30258820164246
+          ]
+        }
+      }
+    },
+    {
+      "index": 7,
+      "table_normal_in_live_base": [
+        -0.047639824718830076,
+        -0.009355572213383033,
+        0.9988207648869337
+      ],
+      "table_tilt_from_live_base_degrees": 2.7827905416235574,
+      "camera_to_table_normal_distance_mm": 420.00321894218905,
+      "camera_model_support_height_plus25_mm": 434.90691299809,
+      "table_fit_rms_mm": 1.2727036550930921,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 1.1382401438901137,
+          "table_relative_height_p05_p95_mm": [
+            -0.05779782252253117,
+            2.0779597337861553
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.2720092069115818,
+          "table_relative_height_p05_p95_mm": [
+            -1.5515735563434916,
+            0.8530837325005154
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.53190196623137,
+          "table_relative_height_p05_p95_mm": [
+            77.41579873550086,
+            79.55867445456171
+          ]
+        }
+      }
+    },
+    {
+      "index": 8,
+      "table_normal_in_live_base": [
+        -0.0502545951158168,
+        -0.009760897301884269,
+        0.9986887405761653
+      ],
+      "table_tilt_from_live_base_degrees": 2.934468209313754,
+      "camera_to_table_normal_distance_mm": 420.3438728666524,
+      "camera_model_support_height_plus25_mm": 435.01456488632857,
+      "table_fit_rms_mm": 1.494255988391503,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.1514677724376181,
+          "table_relative_height_p05_p95_mm": [
+            -1.7726441183011292,
+            1.471532172146179
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.3743356037973058,
+          "table_relative_height_p05_p95_mm": [
+            -2.3771254763728535,
+            1.3803713356675489
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.66228549629865,
+          "table_relative_height_p05_p95_mm": [
+            77.21973924618784,
+            79.69962985606429
+          ]
+        }
+      }
+    },
+    {
+      "index": 9,
+      "table_normal_in_live_base": [
+        -0.044301879417479643,
+        -0.009130220075335036,
+        0.9989764674713087
+      ],
+      "table_tilt_from_live_base_degrees": 2.5925402328315412,
+      "camera_to_table_normal_distance_mm": 418.88026464034795,
+      "camera_model_support_height_plus25_mm": 434.99258061813634,
+      "table_fit_rms_mm": 1.4785463930740992,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.41636471420561527,
+          "table_relative_height_p05_p95_mm": [
+            -2.002754486258833,
+            0.8411905027397475
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": -0.5086934088554624,
+          "table_relative_height_p05_p95_mm": [
+            -2.1385033415840957,
+            1.102820486323353
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 78.22321285315573,
+          "table_relative_height_p05_p95_mm": [
+            77.05792487467005,
+            79.2542705037562
+          ]
+        }
+      }
+    },
+    {
+      "index": 10,
+      "table_normal_in_live_base": [
+        -0.04921508649301527,
+        -0.012576749506224696,
+        0.9987090169981158
+      ],
+      "table_tilt_from_live_base_degrees": 2.9116865850839524,
+      "camera_to_table_normal_distance_mm": 420.587164320554,
+      "camera_model_support_height_plus25_mm": 435.01456488632846,
+      "table_fit_rms_mm": 1.3120276231401422,
+      "held_out": {
+        "table_left": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.027347815575163636,
+          "table_relative_height_p05_p95_mm": [
+            -1.6981339650156941,
+            1.5860252465760893
+          ]
+        },
+        "table_right": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 0.21360112929759545,
+          "table_relative_height_p05_p95_mm": [
+            -1.1360277572231305,
+            2.6569018995706184
+          ]
+        },
+        "lid_front": {
+          "valid_fraction": 1.0,
+          "table_relative_height_median_mm": 79.39769647201818,
+          "table_relative_height_p05_p95_mm": [
+            77.65592375094838,
+            81.0519539178354
+          ]
+        }
+      }
+    }
+  ]
+}

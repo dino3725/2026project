@@ -1,0 +1,571 @@
+{
+  "created": "2026-11-11T01:02:47.384683+09:00",
+  "target": "coke",
+  "requested_trials": 3,
+  "reference_footprint_center_mm": {
+    "x": 290.0,
+    "y": 0.0
+  },
+  "reference_note": "Vision surface points are not object footprint centers.",
+  "geometry": {
+    "record_date": "2026-11-11",
+    "source": "user_measurements_and_official_photo_comparison",
+    "units": "mm",
+    "applied_to_robot_configuration": false,
+    "chassis": {
+      "floor_1_to_2_spacing_increase": 10,
+      "floor_2_to_3_spacing_increase": 15,
+      "other_geometry": {
+        "status": "user_assumes_same_as_official",
+        "independently_verified": false
+      },
+      "conditional_floor_height_increases": {
+        "conditions": "first_floor_position_and_plate_thickness_unchanged",
+        "floor_2": 10,
+        "floor_3": 25
+      }
+    },
+    "mounting": {
+      "arm": {
+        "mounting_position_matches_official_photo": true,
+        "evidence": "user_visual_comparison",
+        "mounting_floor": 3,
+        "measured_height_above_ground": null,
+        "derived_geometry": {
+          "status": "calculated_from_reported_floor_spacing_not_directly_measured",
+          "conditions": "same_mounting_hardware_and_other_dimensions_as_official",
+          "base_fixed_xyz_relative_to_base_link": [
+            -92,
+            0,
+            116
+          ],
+          "link1_height_above_ground": 126,
+          "joint1_height_above_ground": 143,
+          "shoulder_joint2_height_above_ground": 202.5
+        }
+      },
+      "lidar": {
+        "position_relative_to_official_photo": "farther_forward",
+        "evidence": "user_visual_comparison_and_approximate_measurement",
+        "mounting_floor": 3,
+        "forward_shift_from_model": 29,
+        "measured_x_from_drive_wheel_axle_line": 5,
+        "measurement_quality": "approximate",
+        "measurement_uncertainty_mm": null,
+        "measurement_note": "바퀴 축 선과 거의 동일 선상이며 약 5mm 앞쪽으로 보임. 사용자가 정확한 측정은 어렵다고 명시함.",
+        "derived_shift_note": "근사 실측 +5mm에서 모델 -24mm를 뺀 값. 29mm 역시 근사값임.",
+        "measured_height_above_ground": null,
+        "derived_geometry": {
+          "status": "calculated_from_reported_floor_spacing_not_directly_measured",
+          "conditions": "same_mounting_hardware_and_other_dimensions_as_official",
+          "scan_joint_xyz_relative_to_base_link": [
+            5,
+            0,
+            147
+          ],
+          "height_above_ground": 157,
+          "x_is_approximate": true
+        },
+        "measurement_convention": "front_positive_rear_negative",
+        "model_reference": {
+          "parent_frame": "base_link",
+          "child_frame": "base_scan",
+          "x": -24,
+          "y": 0,
+          "z": 122,
+          "height_above_ground": 132
+        }
+      }
+    },
+    "support_box": {
+      "width_left_right": 350,
+      "length_front_back": 260,
+      "height": 80,
+      "top_flat": true,
+      "same_box_for_practice_and_demo": true,
+      "support_plane_shared_with_robot_wheels": true,
+      "support_plane_note": "사용자가 로봇 바퀴와 상자 밑면이 같은 평면에 있음을 확인. 지면 기준은 이 공통 지지면을 뜻함."
+    },
+    "pilot_setup": {
+      "object": "coke",
+      "footprint_center_x_from_wheel_axle_line": 290,
+      "footprint_center_y_from_robot_centerline": 0,
+      "position_quality": "approximate_user_measurement",
+      "box_height": 80,
+      "object_height": 134,
+      "reference_note": "물체 밑면 중심의 배치 좌표이며 비전 표면 좌표와 같은 점은 아님."
+    },
+    "objects": {
+      "coke": {
+        "width": 53,
+        "depth_measured": null,
+        "depth_estimate_if_circular": 53,
+        "height": 134,
+        "placement": "upright_front_facing"
+      },
+      "vaseline": {
+        "width": 67,
+        "depth_measured": 44,
+        "height": 70,
+        "placement": "upright_front_facing"
+      },
+      "tissue": {
+        "description": "nearly_used_up_toilet_paper_roll",
+        "width": 49,
+        "depth_measured": null,
+        "depth_estimate_if_circular": 49,
+        "height": 96,
+        "placement": "upright_front_facing"
+      },
+      "airpod": {
+        "width": 59,
+        "depth_measured": 45,
+        "height": 22,
+        "placement": "lying_down_front_facing"
+      }
+    },
+    "pending": [
+      "derived_mounting_transforms_not_yet_applied_or_verified_with_live_tf",
+      "camera_mount_transform_calibration_is_separate_from_chassis_dimensions"
+    ]
+  },
+  "git_head": "13d3d7d1a5b35570a89257114182d6ea0232ca66",
+  "git_status": " D AGENTS.md\n M src/control_pkg/control_pkg/control_node.py\n?? docs/CONVERSATION_ANALYSIS_2026-11-10.md\n?? docs/WORKSPACE_ANALYSIS_2026-11-10.md\n?? docs/measurements/\n?? src/control_pkg/test/test_action_lifecycle.py\n?? tools/vision_eval/\n",
+  "files_sha256": {
+    "src/control_pkg/config/control.yaml": "a96a9de969ebf99c17a4ba176d3b2fe5571a4493b83b04a8daff1b387de33ecc",
+    "src/vision_pkg/config/vision2.yaml": "ddc598c7b40d8308ed8bd87c4748d3dba47dc70d640008c09eeea33e367faf30",
+    "src/vision_pkg/launch/vision2.launch.py": "0779b389a5bc5482ba5207fb42ba37049a1f3fcecd5232c680b9e09fa7947146",
+    "src/vision_pkg/vision_pkg/vision_node.py": "311b6d50981fb60de46b2159c70d8f1eed97c58e7aca33469f1bfd0bde06c0f6",
+    "src/vision_pkg/vision_pkg/vision_node2.py": "ce969df0940c97959b92d5bc6ec95120de876887bdb6872e6e77cf747a7ca5ad",
+    "tools/vision_eval/measurement_control.py": "7c3d58c49ec2dc221181374c5b4fc23c193c57b2a3905940ab0cad5b5b9df8a6",
+    "tools/vision_eval/record_vision.py": "b75282682344d358bb86209ea8ce74d367bb377942df92c6a20a3a4ca9a17aff",
+    "best.pt": "d0892d275d9795595d0808136c692dbec5652b08e6e451589ebf01971b68ab08"
+  },
+  "trials": [
+    {
+      "trial": 1,
+      "joints": {
+        "wheel_right_joint": 3.4821363885004053,
+        "joint2": -0.521553467881118,
+        "wheel_left_joint": 4.683243345414862,
+        "joint1": 0.0,
+        "joint4": 2.00951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.6933593161243098
+      },
+      "feedback": [
+        {
+          "detected": true,
+          "stable_time": 0.0,
+          "confidence": 0.8975538015365601
+        },
+        {
+          "detected": true,
+          "stable_time": 0.11022984981536865,
+          "confidence": 0.8912762999534607
+        },
+        {
+          "detected": false,
+          "stable_time": 0.11022984981536865,
+          "confidence": 0.0
+        },
+        {
+          "detected": true,
+          "stable_time": 0.36886003613471985,
+          "confidence": 0.8952197432518005
+        },
+        {
+          "detected": true,
+          "stable_time": 0.4605134427547455,
+          "confidence": 0.8987911343574524
+        },
+        {
+          "detected": true,
+          "stable_time": 0.8389614820480347,
+          "confidence": 0.9014887809753418
+        },
+        {
+          "detected": true,
+          "stable_time": 0.9612093567848206,
+          "confidence": 0.8954294919967651
+        },
+        {
+          "detected": true,
+          "stable_time": 1.1052316427230835,
+          "confidence": 0.8993201851844788
+        },
+        {
+          "detected": true,
+          "stable_time": 1.2695478200912476,
+          "confidence": 0.8977614045143127
+        },
+        {
+          "detected": true,
+          "stable_time": 1.4856481552124023,
+          "confidence": 0.898438036441803
+        },
+        {
+          "detected": true,
+          "stable_time": 1.703709602355957,
+          "confidence": 0.9011449813842773
+        },
+        {
+          "detected": true,
+          "stable_time": 1.8295780420303345,
+          "confidence": 0.8992144465446472
+        },
+        {
+          "detected": true,
+          "stable_time": 1.9217675924301147,
+          "confidence": 0.898078978061676
+        },
+        {
+          "detected": false,
+          "stable_time": 1.9217675924301147,
+          "confidence": 0.0
+        },
+        {
+          "detected": true,
+          "stable_time": 2.4010438919067383,
+          "confidence": 0.8997247219085693
+        }
+      ],
+      "images": {
+        "rgb": {
+          "file": "001_rgb.png",
+          "stamp": [
+            1794326582,
+            120349121
+          ],
+          "encoding": "rgb8"
+        },
+        "depth": {
+          "file": "001_depth.png",
+          "stamp": [
+            1794326582,
+            120349121
+          ],
+          "encoding": "16UC1"
+        },
+        "debug": {
+          "file": "001_debug.png",
+          "stamp": [
+            1794326582,
+            20276611
+          ],
+          "encoding": "bgr8"
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "joints": {
+        "wheel_right_joint": 3.4821363885004053,
+        "joint2": -0.521553467881118,
+        "wheel_left_joint": 4.683243345414862,
+        "joint1": 0.0,
+        "joint4": 2.00951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.6933593161243098
+      },
+      "feedback": [
+        {
+          "detected": true,
+          "stable_time": 0.0,
+          "confidence": 0.8987473845481873
+        },
+        {
+          "detected": true,
+          "stable_time": 0.16703705489635468,
+          "confidence": 0.9018585085868835
+        },
+        {
+          "detected": true,
+          "stable_time": 0.29673463106155396,
+          "confidence": 0.9037083983421326
+        },
+        {
+          "detected": true,
+          "stable_time": 0.3970438539981842,
+          "confidence": 0.9018430113792419
+        },
+        {
+          "detected": false,
+          "stable_time": 0.3970438539981842,
+          "confidence": 0.0
+        },
+        {
+          "detected": true,
+          "stable_time": 0.6363189816474915,
+          "confidence": 0.9028043746948242
+        },
+        {
+          "detected": true,
+          "stable_time": 0.7913820743560791,
+          "confidence": 0.8993474245071411
+        },
+        {
+          "detected": true,
+          "stable_time": 1.0013818740844727,
+          "confidence": 0.9021979570388794
+        },
+        {
+          "detected": true,
+          "stable_time": 1.173434853553772,
+          "confidence": 0.9029164910316467
+        },
+        {
+          "detected": true,
+          "stable_time": 1.437227725982666,
+          "confidence": 0.903457760810852
+        },
+        {
+          "detected": true,
+          "stable_time": 1.5953609943389893,
+          "confidence": 0.9019737243652344
+        },
+        {
+          "detected": true,
+          "stable_time": 1.7475637197494507,
+          "confidence": 0.9008647203445435
+        },
+        {
+          "detected": true,
+          "stable_time": 1.8454874753952026,
+          "confidence": 0.9006980657577515
+        },
+        {
+          "detected": false,
+          "stable_time": 1.8454874753952026,
+          "confidence": 0.0
+        },
+        {
+          "detected": true,
+          "stable_time": 2.379350423812866,
+          "confidence": 0.9029906392097473
+        }
+      ],
+      "images": {
+        "rgb": {
+          "file": "002_rgb.png",
+          "stamp": [
+            1794326584,
+            922371338
+          ],
+          "encoding": "rgb8"
+        },
+        "depth": {
+          "file": "002_depth.png",
+          "stamp": [
+            1794326584,
+            955728760
+          ],
+          "encoding": "16UC1"
+        },
+        "debug": {
+          "file": "002_debug.png",
+          "stamp": [
+            1794326584,
+            855656006
+          ],
+          "encoding": "bgr8"
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "joints": {
+        "wheel_right_joint": 3.4821363885004053,
+        "joint2": -0.521553467881118,
+        "wheel_left_joint": 4.683243345414862,
+        "joint1": 0.0,
+        "joint4": 2.00951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.6933593161243098
+      },
+      "feedback": [
+        {
+          "detected": true,
+          "stable_time": 0.0,
+          "confidence": 0.9068659543991089
+        },
+        {
+          "detected": true,
+          "stable_time": 0.13747012615203857,
+          "confidence": 0.9024470448493958
+        },
+        {
+          "detected": true,
+          "stable_time": 0.23239725828170776,
+          "confidence": 0.8996634483337402
+        },
+        {
+          "detected": true,
+          "stable_time": 0.3960855007171631,
+          "confidence": 0.9032775163650513
+        },
+        {
+          "detected": true,
+          "stable_time": 0.5133255124092102,
+          "confidence": 0.9005118012428284
+        },
+        {
+          "detected": true,
+          "stable_time": 0.6263693571090698,
+          "confidence": 0.90493243932724
+        },
+        {
+          "detected": true,
+          "stable_time": 0.6999980807304382,
+          "confidence": 0.902256190776825
+        },
+        {
+          "detected": true,
+          "stable_time": 0.9049477577209473,
+          "confidence": 0.9049955010414124
+        },
+        {
+          "detected": true,
+          "stable_time": 1.2180339097976685,
+          "confidence": 0.901073157787323
+        },
+        {
+          "detected": true,
+          "stable_time": 1.4673988819122314,
+          "confidence": 0.9036375880241394
+        },
+        {
+          "detected": true,
+          "stable_time": 1.5853707790374756,
+          "confidence": 0.8988150954246521
+        },
+        {
+          "detected": false,
+          "stable_time": 1.5853707790374756,
+          "confidence": 0.0
+        },
+        {
+          "detected": false,
+          "stable_time": 1.5853707790374756,
+          "confidence": 0.0
+        },
+        {
+          "detected": true,
+          "stable_time": 1.5853707790374756,
+          "confidence": 0.9020248055458069
+        },
+        {
+          "detected": true,
+          "stable_time": 1.7517178058624268,
+          "confidence": 0.9026833772659302
+        },
+        {
+          "detected": true,
+          "stable_time": 1.9676942825317383,
+          "confidence": 0.903061032295227
+        },
+        {
+          "detected": true,
+          "stable_time": 2.258625030517578,
+          "confidence": 0.9045993089675903
+        }
+      ],
+      "images": {
+        "rgb": {
+          "file": "003_rgb.png",
+          "stamp": [
+            1794326589,
+            292198730
+          ],
+          "encoding": "rgb8"
+        },
+        "depth": {
+          "file": "003_depth.png",
+          "stamp": [
+            1794326589,
+            358913086
+          ],
+          "encoding": "16UC1"
+        },
+        "debug": {
+          "file": "003_debug.png",
+          "stamp": [
+            1794326589,
+            225484619
+          ],
+          "encoding": "bgr8"
+        }
+      }
+    }
+  ],
+  "live_base_to_link1_z_mm": 91.0,
+  "inferred_mount_height_adjustment_mm": 25.0,
+  "camera_info": {
+    "frame_id": "d435i_color_optical_frame",
+    "width": 1280,
+    "height": 720,
+    "k": [
+      911.713134765625,
+      0.0,
+      632.2310791015625,
+      0.0,
+      911.4946899414062,
+      372.9808654785156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "d": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "distortion_model": "plumb_bob"
+  },
+  "camera_tf_latest": {
+    "translation": [
+      0.00013693908095820106,
+      0.03421379213035106,
+      0.3998258591350471
+    ],
+    "quaternion": [
+      -0.6524570518922825,
+      0.6554503984550603,
+      -0.267914346254098,
+      0.27001198801603826
+    ]
+  },
+  "summary": {
+    "trials": 3,
+    "successes": 3,
+    "x_mm": {
+      "mean": 256.318523281693,
+      "sample_std": 0.015866409685911267,
+      "min": 256.3078448098822,
+      "max": 256.3367551758255
+    },
+    "y_mm": {
+      "mean": 6.098095717603764,
+      "sample_std": 0.15959218943985456,
+      "min": 5.916599210369515,
+      "max": 6.216483260765533
+    },
+    "z_raw_mm": {
+      "mean": 167.56001817416052,
+      "sample_std": 0.040107696312581514,
+      "min": 167.5289690087672,
+      "max": 167.60530160931802
+    },
+    "z_adjusted_mm": {
+      "mean": 192.56001817416052,
+      "sample_std": 0.040107696312581514,
+      "min": 192.5289690087672,
+      "max": 192.60530160931802
+    }
+  }
+}

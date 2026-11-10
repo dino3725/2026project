@@ -1,0 +1,833 @@
+{
+  "method": "Common-normal least-squares fit to tabletop and lid; frame-time TF; no change to robot.",
+  "assumptions": [
+    "Selected tabletop and lid regions approximate parallel planes.",
+    "Visible tabletop shares the robot wheel support plane as reported by user."
+  ],
+  "limitations": [
+    "Manual ROI choice, surface shape and depth bias remain.",
+    "Small repeated-frame spread does not imply absolute accuracy.",
+    "One pair of planes does not determine full camera extrinsics."
+  ],
+  "regions_xyxy": {
+    "table_front_left": [
+      80,
+      550,
+      260,
+      680
+    ],
+    "table_middle_left": [
+      245,
+      350,
+      320,
+      500
+    ],
+    "table_front_right": [
+      1130,
+      610,
+      1230,
+      680
+    ],
+    "lid_left": [
+      450,
+      360,
+      600,
+      580
+    ],
+    "lid_right": [
+      820,
+      350,
+      940,
+      560
+    ]
+  },
+  "sample_stride_pixels": 4,
+  "capture_sha256": "6ed095c3641fb2ac41c704a296eb51fcf0fdad66a661981ac792b7bbe0ef3f29",
+  "summary": {
+    "frames": 10,
+    "separation_mean_mm": 77.61649365858258,
+    "separation_min_max_mm": [
+      77.35810361745433,
+      77.964621561937
+    ],
+    "separation_sample_std_mm": 0.2098485277038042,
+    "difference_from_user_80mm": -2.383506341417416,
+    "max_rgb_depth_delta_ms": 0.0,
+    "table_ground_z_original_mm_median_over_frames": 3.414244902875822,
+    "lid_ground_z_original_mm_median_over_frames": 80.01746770110344,
+    "table_ground_z_plus25_mm_median_over_frames": 28.414244902875822,
+    "lid_ground_z_plus25_mm_median_over_frames": 105.01746770110344
+  },
+  "frames": [
+    {
+      "index": 1,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.325641629417646,
+          "base_z_p05_p95_mm": [
+            -10.537559142791338,
+            -5.229937479316481
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9958448753462604,
+          "base_z_median_mm": -1.2919684536274758,
+          "base_z_p05_p95_mm": [
+            -4.326555577939109,
+            2.8848767738623
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.895204046767049,
+          "base_z_p05_p95_mm": [
+            -14.330281969102453,
+            -10.41319537638219
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.2330558816634,
+          "base_z_p05_p95_mm": [
+            67.16659896259746,
+            73.29620699228045
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.59400926718851,
+          "base_z_p05_p95_mm": [
+            65.88986253899346,
+            72.45562767896273
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.049977836185601414,
+          0.008582145133211039,
+          -21.43014710644058,
+          77.79378567952723
+        ],
+        "normal_separation_mm": 77.69395724317964,
+        "residual_rms_mm": 1.1957602039904696
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05163479905230939,
+            0.009055978672276865,
+            -21.95514234904092
+          ],
+          "residual_rms_mm": 1.3153461541415277
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.045062223032543175,
+            0.006081809901040458,
+            57.72945078779125
+          ],
+          "residual_rms_mm": 1.0625083505519766
+        }
+      },
+      "table_ground_z_original_mm": 2.9317562189423256,
+      "lid_ground_z_original_mm": 80.05060582560273,
+      "table_ground_z_plus25_mm": 27.931756218942326,
+      "lid_ground_z_plus25_mm": 105.05060582560273
+    },
+    {
+      "index": 2,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.24448420979445,
+          "base_z_p05_p95_mm": [
+            -9.872890685441098,
+            -4.550085866478674
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9944598337950139,
+          "base_z_median_mm": -2.2308010551857365,
+          "base_z_p05_p95_mm": [
+            -5.403915835490261,
+            0.6823875019576603
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -13.47215809462881,
+          "base_z_p05_p95_mm": [
+            -15.082096305703214,
+            -11.241120950883323
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.69081569459416,
+          "base_z_p05_p95_mm": [
+            67.11025204144899,
+            72.77265114303452
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.29933828701442,
+          "base_z_p05_p95_mm": [
+            66.34518541146893,
+            72.82459904369256
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.043867960216268376,
+          0.009350548044576912,
+          -20.24747976939456,
+          77.87480214270842
+        ],
+        "normal_separation_mm": 77.7965846849897,
+        "residual_rms_mm": 1.250148747902923
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04179004572423451,
+            0.010967774116125331,
+            -19.97777980549949
+          ],
+          "residual_rms_mm": 1.346062452754336
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04376550288307462,
+            0.0043846958703834815,
+            57.72224045383799
+          ],
+          "residual_rms_mm": 1.071532689498712
+        }
+      },
+      "table_ground_z_original_mm": 3.116932790737451,
+      "lid_ground_z_original_mm": 79.52748878672122,
+      "table_ground_z_plus25_mm": 28.11693279073745,
+      "lid_ground_z_plus25_mm": 104.52748878672122
+    },
+    {
+      "index": 3,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.280486788821804,
+          "base_z_p05_p95_mm": [
+            -10.289008328396267,
+            -5.456103487072039
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9958448753462604,
+          "base_z_median_mm": -1.0107644732141807,
+          "base_z_p05_p95_mm": [
+            -5.030610234318004,
+            1.9317412922418613
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.909717857331003,
+          "base_z_p05_p95_mm": [
+            -14.639358889390408,
+            -11.157270492449674
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.12958001751576,
+          "base_z_p05_p95_mm": [
+            67.381796338206,
+            73.429491519408
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.77006058708045,
+          "base_z_p05_p95_mm": [
+            66.6665894373859,
+            73.70913908609258
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.05085576457592357,
+          0.008590936574537744,
+          -21.80619989698642,
+          77.95565001515214
+        ],
+        "normal_separation_mm": 77.85217100054447,
+        "residual_rms_mm": 1.1565576974340284
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05022117671435161,
+            0.009688118819889666,
+            -21.83011550568607
+          ],
+          "residual_rms_mm": 1.2020544442172578
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.04908219001951582,
+            0.004854825791068329,
+            56.681518948494144
+          ],
+          "residual_rms_mm": 1.0648635523975483
+        }
+      },
+      "table_ground_z_original_mm": 2.9866122489784743,
+      "lid_ground_z_original_mm": 79.98343149915289,
+      "table_ground_z_plus25_mm": 27.986612248978474,
+      "lid_ground_z_plus25_mm": 104.98343149915289
+    },
+    {
+      "index": 4,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.127901755098833,
+          "base_z_p05_p95_mm": [
+            -9.349566783885006,
+            -4.905272294987981
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9944598337950139,
+          "base_z_median_mm": -0.6579516311018949,
+          "base_z_p05_p95_mm": [
+            -5.05799537636508,
+            2.636031394734661
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.933364068081914,
+          "base_z_p05_p95_mm": [
+            -15.167454345610361,
+            -11.853010071673157
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.15866000730009,
+          "base_z_p05_p95_mm": [
+            66.66364890409463,
+            73.97865550071424
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.65969069857508,
+          "base_z_p05_p95_mm": [
+            66.44925654943641,
+            73.22998607477274
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.05308735270651238,
+          0.009548199550323488,
+          -22.268312121953706,
+          77.79057045776679
+        ],
+        "normal_separation_mm": 77.67765348226081,
+        "residual_rms_mm": 1.1658112824963904
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05284313134950716,
+            0.010386792716491136,
+            -22.35047884995457
+          ],
+          "residual_rms_mm": 1.069644578578426
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.05117950318606401,
+            0.006580986974552339,
+            56.07931752943646
+          ],
+          "residual_rms_mm": 1.1975677820176722
+        }
+      },
+      "table_ground_z_original_mm": 3.206981370817175,
+      "lid_ground_z_original_mm": 79.83647809859855,
+      "table_ground_z_plus25_mm": 28.206981370817175,
+      "lid_ground_z_plus25_mm": 104.83647809859855
+    },
+    {
+      "index": 5,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.598943887009511,
+          "base_z_p05_p95_mm": [
+            -9.773247860992559,
+            -4.333966063289598
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9958448753462604,
+          "base_z_median_mm": -0.6132396123053923,
+          "base_z_p05_p95_mm": [
+            -4.85778732075583,
+            3.6768782522861727
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.211454647630433,
+          "base_z_p05_p95_mm": [
+            -14.000182400120565,
+            -10.430116485118148
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.40411219929496,
+          "base_z_p05_p95_mm": [
+            67.37587617070844,
+            73.48194503509283
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.5209487803707,
+          "base_z_p05_p95_mm": [
+            66.80360056521668,
+            73.97401578773191
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.05253860519501739,
+          0.008001070928607246,
+          -21.51904996393194,
+          77.5042274191348
+        ],
+        "normal_separation_mm": 77.39501025914058,
+        "residual_rms_mm": 1.1516015830994462
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05204682153472533,
+            0.009139149773208427,
+            -21.587865187098043
+          ],
+          "residual_rms_mm": 1.2418383571476563
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.05034683038511746,
+            0.004063983154198425,
+            56.63222503156722
+          ],
+          "residual_rms_mm": 1.0148611028066286
+        }
+      },
+      "table_ground_z_original_mm": 3.7386016596300067,
+      "lid_ground_z_original_mm": 79.98432957660415,
+      "table_ground_z_plus25_mm": 28.738601659630007,
+      "lid_ground_z_plus25_mm": 104.98432957660415
+    },
+    {
+      "index": 6,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.667614874473145,
+          "base_z_p05_p95_mm": [
+            -10.103734012261715,
+            -4.479381369741861
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9986149584487535,
+          "base_z_median_mm": -1.0094076440890944,
+          "base_z_p05_p95_mm": [
+            -5.74119286134254,
+            3.458314571738356
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.599925518442149,
+          "base_z_p05_p95_mm": [
+            -16.353395611527883,
+            -10.150463154506662
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.10549994179519,
+          "base_z_p05_p95_mm": [
+            67.13753626924856,
+            73.06549864743918
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 0.9993710691823899,
+          "base_z_median_mm": 70.0842775299962,
+          "base_z_p05_p95_mm": [
+            65.99652533300807,
+            73.11519003045348
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04990697985256019,
+          0.009108865709403058,
+          -21.272104608276123,
+          77.55280005699075
+        ],
+        "normal_separation_mm": 77.4531943101685,
+        "residual_rms_mm": 1.4360521453470632
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04886316958802147,
+            0.010682157571271764,
+            -21.270487661737853
+          ],
+          "residual_rms_mm": 1.688765550714832
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.047692317290455005,
+            0.0038306537054113576,
+            56.9538187488465
+          ],
+          "residual_rms_mm": 1.113128037281402
+        }
+      },
+      "table_ground_z_original_mm": 3.618999013109544,
+      "lid_ground_z_original_mm": 80.09512052802654,
+      "table_ground_z_plus25_mm": 28.618999013109544,
+      "lid_ground_z_plus25_mm": 105.09512052802654
+    },
+    {
+      "index": 7,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -7.164847540969049,
+          "base_z_p05_p95_mm": [
+            -9.39120626268907,
+            -5.229780090457939
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9958448753462604,
+          "base_z_median_mm": -1.751274759741932,
+          "base_z_p05_p95_mm": [
+            -5.0009934905607505,
+            2.532148944808887
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.819422929848798,
+          "base_z_p05_p95_mm": [
+            -14.653190663258291,
+            -9.827404380257414
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.0432086173553,
+          "base_z_p05_p95_mm": [
+            66.10060402353383,
+            73.76752007773237
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.75218020592544,
+          "base_z_p05_p95_mm": [
+            66.96346004218238,
+            72.26237482846503
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.047198004680139696,
+          0.008421352348716882,
+          -20.61667245813116,
+          77.55030415404612
+        ],
+        "normal_separation_mm": 77.46133007646266,
+        "residual_rms_mm": 1.2702688867165106
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.047696069598856305,
+            0.009366617657815796,
+            -20.915734667108488
+          ],
+          "residual_rms_mm": 1.2727036550930921
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.043410339646123744,
+            0.00472950503965297,
+            58.01026023198324
+          ],
+          "residual_rms_mm": 1.2156580882997403
+        }
+      },
+      "table_ground_z_original_mm": 3.2094907926421,
+      "lid_ground_z_original_mm": 79.92004893909484,
+      "table_ground_z_plus25_mm": 28.2094907926421,
+      "lid_ground_z_plus25_mm": 104.92004893909484
+    },
+    {
+      "index": 8,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.757715388143538,
+          "base_z_p05_p95_mm": [
+            -9.276429454461526,
+            -4.31658559127452
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.9986149584487535,
+          "base_z_median_mm": -0.8671131816430488,
+          "base_z_p05_p95_mm": [
+            -3.9040817424349257,
+            3.631270607205522
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -12.276421359399535,
+          "base_z_p05_p95_mm": [
+            -14.58782295176411,
+            -10.267413441581601
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.00409208255391,
+          "base_z_p05_p95_mm": [
+            67.66144599250615,
+            73.61891046277626
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.39991209019593,
+          "base_z_p05_p95_mm": [
+            67.01712267359078,
+            73.62034376645767
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.05012919417132856,
+          0.008233459763324402,
+          -20.891659272350932,
+          77.61226491848105
+        ],
+        "normal_separation_mm": 77.51231034968818,
+        "residual_rms_mm": 1.3628660787264726
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.05032057844852023,
+            0.009773713175391358,
+            -21.213652184100958
+          ],
+          "residual_rms_mm": 1.494255988391503
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.045372620393351215,
+            0.002509469900053851,
+            58.08848964684671
+          ],
+          "residual_rms_mm": 1.132135268000091
+        }
+      },
+      "table_ground_z_original_mm": 3.623290508929415,
+      "lid_ground_z_original_mm": 80.11745948072334,
+      "table_ground_z_plus25_mm": 28.623290508929415,
+      "lid_ground_z_plus25_mm": 105.11745948072334
+    },
+    {
+      "index": 9,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.737433390952731,
+          "base_z_p05_p95_mm": [
+            -9.161495446891262,
+            -4.638196755955164
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.997229916897507,
+          "base_z_median_mm": -1.11653522386149,
+          "base_z_p05_p95_mm": [
+            -5.24386237341204,
+            2.791783861821076
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -11.846328121408703,
+          "base_z_p05_p95_mm": [
+            -13.60503690694427,
+            -10.612516140880468
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 0.999043062200957,
+          "base_z_median_mm": 70.21356946080053,
+          "base_z_p05_p95_mm": [
+            67.20450641343399,
+            74.21754484502108
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 69.99968095967373,
+          "base_z_p05_p95_mm": [
+            66.00506729868601,
+            73.3156745489143
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04758358060090077,
+          0.008402964290497583,
+          -20.362352302655538,
+          77.448359084943
+        ],
+        "normal_separation_mm": 77.35810361745433,
+        "residual_rms_mm": 1.318668600239384
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04434727029118133,
+            0.0091395747273669,
+            -19.62810337429862
+          ],
+          "residual_rms_mm": 1.4785463930740992
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.05253423099272366,
+            0.007219006269524542,
+            55.759565623550465
+          ],
+          "residual_rms_mm": 1.1574419666411822
+        }
+      },
+      "table_ground_z_original_mm": 3.651213600818437,
+      "lid_ground_z_original_mm": 80.14333564072322,
+      "table_ground_z_plus25_mm": 28.651213600818437,
+      "lid_ground_z_plus25_mm": 105.14333564072322
+    },
+    {
+      "index": 10,
+      "regions": {
+        "table_front_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -6.560402321607057,
+          "base_z_p05_p95_mm": [
+            -9.301079316859205,
+            -4.316326169595539
+          ]
+        },
+        "table_middle_left": {
+          "valid_fraction": 0.997229916897507,
+          "base_z_median_mm": -0.7601941041589271,
+          "base_z_p05_p95_mm": [
+            -4.351794200741,
+            2.572419013869219
+          ]
+        },
+        "table_front_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": -13.548019348724551,
+          "base_z_p05_p95_mm": [
+            -15.387634405240046,
+            -11.9566320239091
+          ]
+        },
+        "lid_left": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.35194214958534,
+          "base_z_p05_p95_mm": [
+            67.67506903582351,
+            73.45597895284963
+          ]
+        },
+        "lid_right": {
+          "valid_fraction": 1.0,
+          "base_z_median_mm": 70.11702805291151,
+          "base_z_p05_p95_mm": [
+            67.31828219004356,
+            72.84979381297143
+          ]
+        }
+      },
+      "parallel_plane_fit": {
+        "coefficients_a_b_c_d": [
+          0.04732645356368657,
+          0.010950121333813623,
+          -20.735949297761767,
+          78.0565538557522
+        ],
+        "normal_separation_mm": 77.964621561937,
+        "residual_rms_mm": 1.2902824133940847
+      },
+      "separate_plane_fits": {
+        "table": {
+          "coefficients_a_b_c": [
+            0.04927870446283167,
+            0.012593006864028769,
+            -21.54559894553645
+          ],
+          "residual_rms_mm": 1.3120276231401422
+        },
+        "lid": {
+          "coefficients_a_b_c": [
+            0.03857566054700729,
+            0.00404182284470167,
+            59.78722998630291
+          ],
+          "residual_rms_mm": 1.0635307018462534
+        }
+      },
+      "table_ground_z_original_mm": 3.853433372519703,
+      "lid_ground_z_original_mm": 80.25084880736401,
+      "table_ground_z_plus25_mm": 28.853433372519703,
+      "lid_ground_z_plus25_mm": 105.25084880736401
+    }
+  ]
+}
