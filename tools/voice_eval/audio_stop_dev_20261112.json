@@ -1,0 +1,411 @@
+{
+  "purpose": "development; reused tuning audio, not held-out",
+  "annotation_note": "Clip labels follow the user-confirmed script and session logs. Continuous speech bounds are approximate VAD/RMS islands from prior analysis, not hand-labeled phoneme ends. Match windows end <=1s after estimated speech end and before the next phrase.",
+  "samples": [
+    {
+      "id": "stt_01",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171151_001.wav",
+      "sha256": "9bb41577199d6fb1afa04c829bdfa6fa15a2dc888242754cd1619269cbc687dd",
+      "reference": "콜라 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_02",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171200_002.wav",
+      "sha256": "32800268ac09f2915b4b2db1d2b8b9d24cb05ad64a9285206678c3dcf0d8da48",
+      "reference": "콜라 좀 갖다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_03",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171208_003.wav",
+      "sha256": "ae06a6308775586fb4791583a603a05ab7d6a66ee2fd8fdf568bfd173ac2076e",
+      "reference": "목마른데 마실 거 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_04",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171215_004.wav",
+      "sha256": "55536a6c6574d4d1a40e397d0f7982e9b616ddef44d47d6903f8036b26915e37",
+      "reference": "휴지 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_05",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171222_005.wav",
+      "sha256": "377f00809d8630e14089808ee021667fd05ef533870295139fde51e619c4916c",
+      "reference": "휴지 좀 줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_06",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171231_006.wav",
+      "sha256": "29ffca69117cd5a96e8e46924fd60b68baea04af1f48407d5d190a4c51e84a23",
+      "reference": "코 닦을 휴지가 필요해",
+      "category": "negative"
+    },
+    {
+      "id": "stt_07",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171240_007.wav",
+      "sha256": "9464148aad63c491d31e13288d89540b4007fbb361c5cd8bda473aca9bc76f66",
+      "reference": "바세린 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_08",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171249_008.wav",
+      "sha256": "2d7b262bc238d9ed4ac1302ef1656baab0332ea7386fa2e96b211a9c061130b3",
+      "reference": "바세린 좀 갖다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_09",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171259_009.wav",
+      "sha256": "a911e508d7d8eb24f6873475f5251782edb8cb63cdab748a61f0d532fa5b68e2",
+      "reference": "입술이 건조한데 바세린 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_10",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171308_010.wav",
+      "sha256": "0e742d220de755d547bee2a54b564afd473a5f3a95016a88dfbdda10ccd64553",
+      "reference": "에어팟 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_11",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171315_011.wav",
+      "sha256": "90d0305651d7fbb3d0fd9ff37a9c44d87aa9f608511fb6436f44e65c96d2b338",
+      "reference": "에어팟 좀 줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_12",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171324_012.wav",
+      "sha256": "a24262f8d0b6c5f322435a4570640745d1ef7c587157303950373c76a26579af",
+      "reference": "음악 듣게 에어팟 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_13",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171333_013.wav",
+      "sha256": "edec66ee327d4fe2384563e999e04b2d454eaea73904edbe322fa1e28d507667",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_14",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171340_014.wav",
+      "sha256": "44fe13807b8b8cfaeff89f94793c9d650739a71b11baae0b979e59916525624f",
+      "reference": "정지",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_15",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171357_015.wav",
+      "sha256": "7c7cf5c1cbd771860b4c0d89a81cafa5ad62dad916b91c607b143f59c780f324",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_16",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171408_016.wav",
+      "sha256": "6cac4877839907fc6ec27cd2a5be2b1c8840423c2932eb1b77147e88fe67499e",
+      "reference": "지금 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_17",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171417_017.wav",
+      "sha256": "70a1b7eb4a7b8b3c5434f638a8e043e5b0fcb87cce3d6959901e5c92683b0b85",
+      "reference": "로봇 정지",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_18",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171424_018.wav",
+      "sha256": "cb282dcfb004f1c819a11ac0c3f43272a87c498e958c0eab50f2d37fe9950ce5",
+      "reference": "잠깐 스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_19",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171433_019.wav",
+      "sha256": "74ea17b96526ccc0f74ebc63ba3f44edd88d419ad2d552a08ae9b026959e2ce8",
+      "reference": "콜라 가져오지 말고 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_20",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171440_020.wav",
+      "sha256": "43bb1ba719a9c3f4b7222933726c6b9e8f5a21bc8aaadd80994643a1d0606b9e",
+      "reference": "휴지 가져다줘, 아니 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "stt_21",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171448_021.wav",
+      "sha256": "9e19854ef0674997f988bf01a7adf6a11f1bc4a154fc4928c444bd222eeeab19",
+      "reference": "그만 움직여",
+      "category": "fallback_stop"
+    },
+    {
+      "id": "stt_22",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171455_022.wav",
+      "sha256": "b4c19cb9f56da8b94b6dffc36e35d2043608871ff1daf6cff13499326f296eed",
+      "reference": "안녕하세요",
+      "category": "negative"
+    },
+    {
+      "id": "stt_23",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171500_023.wav",
+      "sha256": "8eff58e79155d811bb23df6fa091ad04c1ba02142822ee5c37da659e0dca27a9",
+      "reference": "고마워",
+      "category": "negative"
+    },
+    {
+      "id": "stt_24",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171506_024.wav",
+      "sha256": "f99b6a71dba2bf49ebd669451231af55260d21a59b94d3add11a370f4d4d2dd6",
+      "reference": "오늘 날씨 어때",
+      "category": "negative"
+    },
+    {
+      "id": "stt_25",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171513_025.wav",
+      "sha256": "f90cf80a40b77138e7438a4bf58b844b6df32e2d5f904fede958659a2ec3fc06",
+      "reference": "지금 몇 시야",
+      "category": "negative"
+    },
+    {
+      "id": "stt_26",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171519_026.wav",
+      "sha256": "44e677a56a5fd629679bf82d9cb71143d13ad5f952c3ce41edc9256d4ae3872c",
+      "reference": "책 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "stt_27",
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171526_027.wav",
+      "sha256": "9a0305ef260e754c6dc29a02bb38debf5b35af44f71c060ffe3805186ee36d4c",
+      "reference": "불 켜줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_check_01",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231647_001.wav",
+      "sha256": "26880b3b36cd6035373f9a7390d53718afae44909e38131d31bc2143bbfc85fc",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_02",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231653_002.wav",
+      "sha256": "2030d5b39cd10a2466d9dbb1fded11b5f7408f745eaeb2069ef04ba1150923ae",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_03",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231702_003.wav",
+      "sha256": "f6e5b0c98a08235202b9518171a9e81ded71bf5dcb487cf719adf5c9a6e49fb8",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_04",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231711_004.wav",
+      "sha256": "0342cfc11d0883a92a0279dd0112aff478209a0b078ff84edb91a099fe7b5778",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_05",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231718_005.wav",
+      "sha256": "f31e373e1d12bdd4c79e1b06de51d4c7aa66df6c3500b075e1133c38eabb3710",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_06",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231725_006.wav",
+      "sha256": "b4a605f5b39287a055bde1a4337bb9a03e6dfa428a9e016c6a473b2dc3bdaad0",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_check_07",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231733_007.wav",
+      "sha256": "9df7cff1c253caac716c12ccfe30683fa86669b9523977a27f03f7f9d7f15e4a",
+      "reference": "콜라 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_check_08",
+      "file": "../../recordings/vad_check.eaAniS/vad_command_20261111_231740_008.wav",
+      "sha256": "e701d235e0263c93439bcf9563b96a9a77c46195526ecf1e44ead0649dd2a1b5",
+      "reference": "안녕하세요",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end600_01",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003428_001.wav",
+      "sha256": "f639bc9e61b92ee212bcc17ddbb2039780d30114a2ca71e18a251e39122ab0d8",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end600_02",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003436_002.wav",
+      "sha256": "67f8653bacc5bfc5564aa51ce4d2f774f2756cac64275055cc3af163e68f9f1a",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end600_03",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003443_003.wav",
+      "sha256": "641065eae5d2aa946847e67531cbd708d8913f98a319733f1603a10ac90282d2",
+      "reference": "콜라 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end600_04",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003450_004.wav",
+      "sha256": "09baa636419be8c4ab71c59670a6c472b53e4da6032c102f54bb2cd20af3873b",
+      "reference": "목마른데 마실 거 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end600_05",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003457_005.wav",
+      "sha256": "94b2601d5659907c9ca6d22b9015f5cd39cd4ce3ef8f2edae80a8e702a99948b",
+      "reference": "입술이 건조한데 바세린 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end600_06",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003503_006.wav",
+      "sha256": "8dedb0e09fa842a5502ab1782fb33141dbd6766a8822ec3494f32a9f735f5c0c",
+      "reference": "휴지 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end600_07",
+      "file": "../../recordings/vad_end600.QGXVwA/vad_command_20261112_003505_007.wav",
+      "sha256": "429d168870b28176c9bf7c0965eb8d51728205d51aaaef6b18436a234972ca62",
+      "reference": "아니 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end750_01",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010105_001.wav",
+      "sha256": "9af3331c07dd9238e490a5db1e0d6520d9e00c2f8b08cdb8488d010c108a616a",
+      "reference": "휴지 가져다줘 아니 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end750_02",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010120_002.wav",
+      "sha256": "565dafbbb47ba77483d28e51eb2ab70f61c0945f40cbfad4d275e49d9298a564",
+      "reference": "휴지 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end750_03",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010122_003.wav",
+      "sha256": "a87bb5dcbb5e66497ce44c266310a208f521029e9786bf38f9fa3163186d909c",
+      "reference": "아니 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end750_04",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010131_004.wav",
+      "sha256": "d45371604662fe64ec63a5069096f99da703a09adec78b875dea2df1bbb0e0eb",
+      "reference": "휴지 가져다줘 아니 멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end750_05",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010140_005.wav",
+      "sha256": "281fd640ab262bf90f6f4547ad9762219e575423dc760c8d5875a39847d274f6",
+      "reference": "목마른데 마실 거 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "vad_end750_06",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010145_006.wav",
+      "sha256": "68602f3059c58a9fd5f46107e69a146d3da86d830c3177fe2fa7e9ff8d17f1b2",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "vad_end750_07",
+      "file": "../../recordings/vad_end750.QP39aD/vad_command_20261112_010151_007.wav",
+      "sha256": "a5575fc808e4521047ac4a74c56c4dfab64ff2b1b7382969a8c360b79d504a2d",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "continuous50",
+      "file": "../../recordings/stop_probe.oIcb6b/continuous.wav",
+      "sha256": "a8dac70c0b49869076d379adf525e26c7e1f011cdb6ba6101bfe4e80f52c95b1",
+      "category": "continuous_stop",
+      "events": [
+        {
+          "keyword": "스톱",
+          "start": 12.27,
+          "speech_end_estimate": 12.69,
+          "end": 13.69
+        },
+        {
+          "keyword": "스톱",
+          "start": 14.04,
+          "speech_end_estimate": 14.37,
+          "end": 15.37
+        },
+        {
+          "keyword": "스톱",
+          "start": 15.99,
+          "speech_end_estimate": 16.8,
+          "end": 17.8
+        },
+        {
+          "keyword": "스톱",
+          "start": 18.75,
+          "speech_end_estimate": 19.8,
+          "end": 20.8
+        },
+        {
+          "keyword": "스톱",
+          "start": 21.45,
+          "speech_end_estimate": 22.35,
+          "end": 23.35
+        },
+        {
+          "keyword": "스톱",
+          "start": 24.0,
+          "speech_end_estimate": 24.81,
+          "end": 25.81
+        },
+        {
+          "keyword": "멈춰",
+          "start": 26.85,
+          "speech_end_estimate": 27.69,
+          "end": 28.679
+        },
+        {
+          "keyword": "멈춰",
+          "start": 28.68,
+          "speech_end_estimate": 29.22,
+          "end": 30.22
+        },
+        {
+          "keyword": "멈춰",
+          "start": 30.72,
+          "speech_end_estimate": 31.17,
+          "end": 32.17
+        }
+      ]
+    }
+  ]
+}

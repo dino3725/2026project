@@ -31,6 +31,8 @@ from voice_command_pkg.audio_capture import (
     VadStateMachine,
 )
 from voice_command_pkg.audio_samples import pcm_to_float32
+from voice_command_pkg.audio_stop import AudioStopEvent, AudioStopWorker
+from voice_command_pkg.audio_stop_model import AudioStopConfig, KoreanStopSpotter, STOP_WORDS
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
 from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
 from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
@@ -58,6 +60,7 @@ class PipelineConfig:
     recordings_dir: Path = Path('recordings')
     save_recordings: bool = False
     vad: VadConfig = field(default_factory=VadConfig)
+    audio_stop: AudioStopConfig = field(default_factory=AudioStopConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
     queue_capacity: int = 2
     max_fetch_age_seconds: float = 10.0
@@ -142,6 +145,7 @@ def capture_utterances(
     config: VadConfig,
     log: LogFn,
     stop_event: threading.Event,
+    frame_sink: Callable[[bytes, float, float], None] | None = None,
 ) -> Iterator[tuple[bytes, dict[str, Any]]]:
     """Yield utterances from one stream; warm up only once per session."""
     import webrtcvad
@@ -189,6 +193,11 @@ def capture_utterances(
                     'PulseAudio PCM stream이 예기치 않게 종료됐습니다.',
                     f'parec exit={process.poll()}',
                 )
+
+            if frame_sink is not None:
+                # Share all post-warmup PCM before the VAD/RMS gate, including
+                # short words that never become a Whisper utterance.
+                frame_sink(frame, detector.audio_time + FRAME_MS / 1000, time.perf_counter())
 
             if detector.state is VadState.LISTENING:
                 pre_roll.append(frame)
@@ -258,6 +267,9 @@ def capture_utterances(
                     'voice_start_wall': voice_started_wall,
                     'utterance_start_wall': utterance_start_wall,
                     'voice_end_audio': end_details['audio_time'],
+                    'utterance_start_audio': (
+                        end_details['audio_time'] - len(utterance_frames) * FRAME_MS / 1000
+                    ),
                     'vad_end_silence_seconds': end_details['silence_seconds'],
                     'utterance_seconds': len(utterance_frames) * FRAME_MS / 1_000.0,
                     'capture_wall_seconds': voice_end_wall - voice_started_wall,
@@ -411,6 +423,10 @@ class VoiceCommandPipeline:
         self.stop_event = stop_event or threading.Event()
         self._publish_lock = threading.RLock()
         self._fetch_not_before = float('-inf')
+        self._fetch_audio_not_before = float('-inf')
+        self.audio_stop_worker: AudioStopWorker | None = None
+        self._audio_stop_successes: deque[float] = deque(maxlen=64)
+        self._last_published_action = ''
         self._capture_error: Exception | None = None
         self.buffer = UtteranceBuffer(config.queue_capacity)
         self.capture_worker: threading.Thread | None = None
@@ -429,6 +445,8 @@ class VoiceCommandPipeline:
         self.llm = LlmRuntime(config, log, self.stop_event)
 
     def run_once(self, command_index: int) -> dict[str, Any]:
+        if self.config.audio_stop.mode != 'off':
+            raise ValueError('audio stop requires run_forever (one continuous microphone stream)')
         audio_data, capture = capture_utterance(self.config.vad, self.log, self.stop_event)
         return self.process_utterance(Utterance(command_index, audio_data, capture))
 
@@ -442,10 +460,70 @@ class VoiceCommandPipeline:
             self.stop_event.set()
         self.buffer.close()
         self.llm.close()
+        if self.audio_stop_worker is not None:
+            self.audio_stop_worker.close()
+
+    def _start_audio_stop(self) -> None:
+        if self.config.audio_stop.mode == 'off':
+            return
+        try:
+            backend = KoreanStopSpotter(self.config.audio_stop)
+            self._ensure_running()
+            self.audio_stop_worker = AudioStopWorker(
+                self.config.audio_stop, backend, self._on_audio_stop, self.log
+            )
+            self.log(f'[AUDIO STOP READY] mode={self.config.audio_stop.mode} experimental=true')
+        except PipelineStopped:
+            raise
+        except Exception as exc:
+            self.log(f'[AUDIO STOP ERROR] disabled; transcript fallback retained: {exc}')
+
+    def _on_audio_stop(self, event: AudioStopEvent) -> None:
+        # This runs independently of the sequential Whisper/LLM consumer.
+        # Serialize invalidation, final fetch checks and publication together.
+        with self._publish_lock:
+            if self.stop_event.is_set() or self.config.audio_stop.mode == 'off':
+                return
+            lag = time.perf_counter() - event.received_at
+            if event.keyword not in STOP_WORDS or not 0 <= lag <= (
+                self.config.audio_stop.max_lag_seconds
+            ):
+                return
+            mode = self.config.audio_stop.mode
+            published = False
+            if mode == 'active':
+                self._fetch_not_before = time.perf_counter()
+                self._fetch_audio_not_before = max(self._fetch_audio_not_before, event.audio_end)
+                if self.publish is not None:
+                    published = self.publish(stop_command(), event.keyword, {
+                        'source': 'audio_stop', 'audio_end': event.audio_end,
+                        'frame_received_wall': event.received_at,
+                    })
+                if published:
+                    self._audio_stop_successes.append(event.audio_end)
+                    self._last_published_action = 'stop'
+            self.log(
+                f'[AUDIO STOP] keyword={event.keyword} mode={mode} '
+                f'audio={event.audio_end:.3f}s frame_to_decision={lag:.3f}s '
+                f'published={published}'
+            )
+
+    def _audio_stop_already_published(self, capture: dict[str, Any]) -> bool:
+        # Suppress only a confirmed successful stop for this same audio window.
+        # Failed/dry-run sends still get the transcript path, as does a new stop
+        # after an intervening fetch. There is no global stop cooldown.
+        if self._last_published_action != 'stop' or 'voice_end_audio' not in capture:
+            return False
+        end = float(capture['voice_end_audio'])
+        start = end - float(capture['utterance_seconds'])
+        return any(start <= position <= end for position in self._audio_stop_successes)
 
     def _fetch_drop_reason(self, capture: dict[str, Any]) -> str:
         start = float(capture.get('utterance_start_wall', capture['voice_start_wall']))
-        if start <= self._fetch_not_before:
+        # Sample positions survive bursty PulseAudio reads better than wall
+        # timestamps. Either timeline can invalidate an old/overlapping fetch.
+        audio_start = float(capture.get('utterance_start_audio', float('inf')))
+        if start <= self._fetch_not_before or audio_start <= self._fetch_audio_not_before:
             return 'before_stop'
         age = time.perf_counter() - float(capture['voice_end_wall'])
         if age > self.config.max_fetch_age_seconds:
@@ -492,7 +570,8 @@ class VoiceCommandPipeline:
             # Invalidate fetch utterances that began before stop was recognized,
             # including an utterance still being recorded. Keep checking their
             # transcripts for stop; age/invalidation never filters known stop.
-            self._fetch_not_before = time.perf_counter()
+            with self._publish_lock:
+                self._fetch_not_before = time.perf_counter()
         else:
             utterance_start = float(capture.get(
                 'utterance_start_wall', capture['voice_start_wall']
@@ -537,8 +616,12 @@ class VoiceCommandPipeline:
                 dropped_reason = self._fetch_drop_reason(capture)
                 if not dropped_reason and self.fetch_gate is not None:
                     dropped_reason = self.fetch_gate(utterance_start)
+            elif command['action'] == 'stop' and self._audio_stop_already_published(capture):
+                dropped_reason = 'audio_stop_already_published'
             if self.publish is not None and not dropped_reason:
                 published = self.publish(command, text, capture)
+                if published:
+                    self._last_published_action = command['action']
         if dropped_reason:
             self.log(f'[DROPPED] sequence={utterance.sequence} reason={dropped_reason}')
         self.log('[ROS] ' + ('published' if published else 'skipped'))
@@ -576,8 +659,13 @@ class VoiceCommandPipeline:
 
     def _capture_loop(self) -> None:
         try:
+            arguments = (self.config.vad, self.log, self.stop_event)
+            stream = (
+                capture_utterances(*arguments, frame_sink=self.audio_stop_worker.submit)
+                if self.audio_stop_worker is not None else capture_utterances(*arguments)
+            )
             for sequence, (audio, capture) in enumerate(
-                capture_utterances(self.config.vad, self.log, self.stop_event), start=1
+                stream, start=1
             ):
                 if self.stop_event.is_set():
                     break
@@ -594,6 +682,7 @@ class VoiceCommandPipeline:
     def run_forever(self) -> None:
         """Run the capture producer and sequential consumer until shutdown."""
         self._ensure_running()
+        self._start_audio_stop()
         self.capture_worker = threading.Thread(
             target=self._capture_loop, name='voice_capture', daemon=True
         )

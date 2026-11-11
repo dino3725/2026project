@@ -69,7 +69,100 @@ VAD가 시작을 감지하지 못한 짧은 말은 `save_recordings:=true`여도
 따라서 저장된 느린 “스톱”의 전사가 개선돼도 빠른 “스톱”의 녹음 누락까지 해결된 것은 아닙니다.
 이 경우 `arecord`로 발화 사이 무음까지 연속 저장한 뒤 `inspect_vad_audio.py`로 시작 전
 프레임의 RMS·VAD·임계값 통과 여부를 확인합니다. 임계값을 낮추기 전에 누락과 잡음의
-근거를 확보하는 용도이며, 오디오 정지 전용 감지기는 아직 구현 전입니다.
+근거를 확보하는 용도입니다. 오디오 정지 전용 감지기는 아래의 실험 기능으로 구현했습니다.
+
+### 정지 전용 오디오 감지 — 실험 기능, 기본 비활성화
+
+같은 PulseAudio 스트림의 30ms PCM을 VAD 판정 전에 별도 KWS 스레드로 전달합니다.
+Whisper/LLM과 독립적으로 `멈춰`, `정지`, `스톱`을 찾고, `active`에서는 기존 발행 함수를
+통해 stop을 보냅니다. 새 마이크 스트림이나 ROS 토픽은 만들지 않습니다.
+초기 1.2초 안정화 구간은 기존처럼 버립니다. 기존 전사문 정지 규칙은 모든 모드에서 유지합니다.
+
+**현재 후보 모델은 운영 채택하지 않았습니다.** 개발 WAV 49개의 대상 정지 22개 중 17개,
+비정지 26개에서 오탐 0개였지만, 실제 파이프라인 조건의 50초 재생에서는 빠른 감지 3/9,
+Whisper와 합친 정지 8/9였습니다. 입력 시작 위치에 따른 결과 변화도 확인했습니다.
+정확도와 종단 지연 개선을 보장하지 않으며, 기본 `audio_stop.mode: "off"`를 유지합니다.
+상세 결과: `tools/voice_eval/results/2026-11-12_audio_stop.md`.
+
+| 파라미터 | 기본값 | 의미 |
+|---|---|---|
+| `audio_stop.mode` | `off` | `off`: 기존 경로만, `shadow`: 감지 로그만, `active`: 감지 시 stop 처리 |
+| `audio_stop.model_dir` | YAML의 고정 리비전 캐시 경로 | 파일 SHA256 확인 후 로드; 실행 중 자동 다운로드 없음 |
+| `audio_stop.threshold` | `0.01` | 현재 개발 비교 후보, 운영 확정값 아님 |
+| `audio_stop.score` | `1.0` | 키워드 탐색 가산점 |
+| `audio_stop.queue_frames` | `128` | 전달 버스트를 수용하는 최대 프레임 수; 추론은 녹음 스레드 밖에서 수행 |
+| `audio_stop.max_lag_seconds` | `0.5` | 프레임을 읽은 뒤 감지 결과까지의 최대 나이; 실제 마이크 지연이 아님 |
+
+대기열이 넘치면 미처리 프레임을 버리고 모델의 음향 문맥을 초기화합니다. 오래된 프레임과
+초과 추론 결과도 폐기합니다. `[AUDIO STOP RESET]`은 이런 입력 손실을 알립니다.
+모델/의존성 오류는 `[AUDIO STOP ERROR]`로 표시하고 전사문 정지는 계속합니다.
+`active` 정지는 이전/겹친 fetch를 벽시계와 오디오 위치로 무효화하므로 늦게 돌아온 LLM
+결과도 발행하지 않습니다. 동일 발화의 전사문 stop은 오디오 경로 발행이 성공했을 때만
+중복 억제합니다. 실패·dry-run에서는 전사문 경로가 다시 시도하며, 새 정지를 막는
+전역 cooldown은 없습니다. `run_once` 평가 API는 KWS를 지원하지 않고 `off`만 받습니다.
+
+노트북의 새 터미널에서 준비합니다. 이미 `voice_env.sh`를 source했다면 준비 두 줄은
+생략할 수 있습니다. 현재 개발 노트북에는 선택 의존성과 모델을 설치해 검증했습니다.
+다른 환경에서 처음 준비할 때만 설치/다운로드 명령을 실행합니다.
+
+```bash
+cd ~/2026project
+source voice_env.sh
+
+.venv/bin/python -m pip install -r src/voice_command_pkg/requirements-audio-stop.txt
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/download_audio_stop_model.py
+```
+
+저장 녹음만으로 재현합니다. 마이크·ROS·LLM 서버를 사용하지 않습니다.
+
+```bash
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/evaluate_audio_stop.py \
+  --manifest tools/voice_eval/audio_stop_dev_20261112.json \
+  --output log/audio_stop_recheck.json
+
+# 약 50초: 실제 VAD/Whisper/KWS, 한 PCM 파이프, 발행은 로컬 기록 함수로 대체.
+# WAV 끝은 의도적인 입력 종료로 처리하므로, 처리 완료용 끝 무음이 있는 파일을 사용합니다.
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/replay_audio_stop_pipeline.py \
+  --wav recordings/stop_probe.oIcb6b/continuous.wav \
+  --output log/audio_stop_pipeline_recheck.json
+```
+
+다음 실시간 확인은 **명령을 발행하지 않는 shadow 시험**입니다. Jetson을 켤 필요 없습니다.
+기존 음성 노드는 Ctrl+C로 종료한 뒤 하나만 실행합니다. `[LISTENING]` 이후 평소 속도로
+“스톱” 3회, “멈춰” 3회, “정지” 3회를 말하고, 각각 4초 간격을 둡니다. 이어서
+“콜라 가져다줘”, “휴지 가져다줘”, “안녕하세요”, 생활 소음 30초를 시험합니다.
+
+```bash
+mkdir -p recordings
+KWS_CHECK_DIR=$(mktemp -d "$PWD/recordings/audio_stop_check.XXXXXX")
+ros2 run voice_command_pkg voice_command_node --ros-args \
+  --params-file src/voice_command_pkg/config/voice_command.yaml \
+  -p publish_commands:=false \
+  -p audio_stop.mode:=shadow \
+  -p save_recordings:=true \
+  -p recordings_dir:="$KWS_CHECK_DIR" 2>&1 | tee "$KWS_CHECK_DIR/session.log"
+```
+
+Ctrl+C 후 같은 터미널에서:
+
+```bash
+grep -E '\[(AUDIO STOP[^]]*|STT|COMMAND|ROS|DROPPED|ERROR)\]' "$KWS_CHECK_DIR/session.log"
+echo "결과 위치: $KWS_CHECK_DIR"
+```
+
+- 연결 정상: `[AUDIO STOP READY] mode=shadow`, 감지 시 `[AUDIO STOP] ... published=False`.
+- 시험 정상: 실제 명령 발행 없음(`[ROS] skipped`), 기존 `[STT]`와 전사문 stop 유지.
+- 모델 채택 기준: 9회 모두 감지하고 일반 발화/생활 소음에는 오탐이 없어야 합니다.
+  현재 모델이 이 기준을 통과했다고 간주하지 않습니다. RESET/ERROR도 함께 확인합니다.
+- `frame_to_decision`은 마지막 입력 프레임 처리 지연이며 말끝→정지 시간이 아닙니다.
+- WAV는 VAD 발화만 저장합니다. 생활 소음 전체나 VAD 미검출 음성을 보존하는 기능은 아닙니다.
+
+원복은 노드를 끄고 `audio_stop.mode:=off`로 다시 실행하면 됩니다. 기본 YAML은 이미 off입니다.
+이번 단계에서 Jetson 명령이나 실물 시험은 필요하지 않습니다. 모델 검증을 통과하기 전에는
+`active`와 실제 명령 발행을 함께 켜지 않습니다.
 
 ### 로봇 상태 구독과 발행 조건
 

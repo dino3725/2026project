@@ -89,3 +89,15 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python \
 비교합니다. `--start-min-rms`, `--vad-mode`도 지원하며 실제 노드 기본값을 변경하지 않습니다.
 50초 녹음의 시작 누락과 별도 STT 오류, 실시간 dry-run 명령은
 `results/2026-11-11_stop_probe.md`에 기록했습니다. 시작 9개와 정지 9개는 서로 다른 지표입니다.
+## 오디오 정지 개발 평가 추가 (2026-11-12)
+
+`download_audio_stop_model.py`는 고정 리비전의 모델 파일만 내려받고 SHA256을 검증합니다.
+`evaluate_audio_stop.py`는 `audio_stop_dev_20261112.json`의 개발 WAV를 재생합니다.
+`replay_audio_stop_pipeline.py`는 WAV를 실시간 속도로 한 파이프에 전달하여 실제
+VAD/Whisper/KWS를 확인합니다. ROS 발행은 로컬 기록 콜백으로 대체하고 LLM 요청은 막습니다.
+이 도구의 active 모드는 실제 로봇으로 발행하지 않습니다.
+
+모델 후보는 기본 off이며, 운영 채택 전입니다. 직접 파일 재생과 초기 안정화 구간을
+버리는 운영 조건의 감지 수가 다르므로 수치를 섞지 마세요. 결과·명령·한계는
+`results/2026-11-12_audio_stop.md` 및 `src/voice_command_pkg/README.md`를 참고하세요.
+기존 held-out 평가셋을 이 개발 평가에 사용하지 않습니다.

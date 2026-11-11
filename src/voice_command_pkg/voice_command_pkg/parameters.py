@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from voice_command_pkg.audio_capture import VadConfig
+from voice_command_pkg.audio_stop_model import AudioStopConfig, DEFAULT_MODEL_DIR
 from voice_command_pkg.command_classifier import ClassifierConfig
 from voice_command_pkg.pipeline import PipelineConfig
 from voice_command_pkg.robot_feedback import DEFAULT_MESSAGES
@@ -20,6 +21,12 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'save_recordings': False,
     'capture.queue_capacity': 2,
     'capture.max_fetch_age_seconds': 10.0,
+    'audio_stop.mode': 'off',
+    'audio_stop.model_dir': DEFAULT_MODEL_DIR,
+    'audio_stop.threshold': 0.01,
+    'audio_stop.score': 1.0,
+    'audio_stop.queue_frames': 128,
+    'audio_stop.max_lag_seconds': 0.5,
     'whisper.model': 'small',
     'whisper.device': 'cpu',
     'whisper.compute_type': 'int8',
@@ -77,6 +84,10 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
         llm_preparing_message=str(merged['messages.llm_preparing']),
         llm_ready_message=str(merged['messages.llm_ready']),
         llm_failure_message=str(merged['messages.llm_failure']),
+        audio_stop=AudioStopConfig(**{
+            key.removeprefix('audio_stop.'): value
+            for key, value in merged.items() if key.startswith('audio_stop.')
+        }),
         vad=VadConfig(
             vad_mode=int(merged['vad.mode']),
             start_min_rms=int(merged['vad.start_min_rms']),
