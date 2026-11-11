@@ -12,7 +12,7 @@ from voice_command_pkg.robot_feedback import DEFAULT_MESSAGES
 from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
 
 
-# Model/VAD stay at baseline; STT decoding uses the selected development setting.
+# Model stays at baseline; STT and VAD start ratio use validated development settings.
 # config/voice_command.yaml must list the same keys; tests check both.
 DEFAULT_PARAMETERS: dict[str, Any] = {
     'publish_commands': True,
@@ -32,7 +32,7 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'vad.start_min_rms': 200,
     'vad.stream_warmup_ms': 1200,
     'vad.start_window_ms': 300,
-    'vad.start_speech_ratio': 0.6,
+    'vad.start_speech_ratio': 0.4,
     'vad.end_silence_ms': 900,
     'vad.pre_roll_ms': 450,
     'vad.max_utterance_seconds': 15.0,

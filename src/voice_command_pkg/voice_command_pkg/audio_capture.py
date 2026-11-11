@@ -28,7 +28,7 @@ FRAME_BYTES = FRAME_SAMPLES * SAMPLE_WIDTH * CHANNELS
 @dataclass(frozen=True)
 class VadConfig:
     """
-    Tunable VAD values. Defaults are the 2026-11-04 baseline.
+    Tunable VAD values with a start ratio validated on short stop utterances.
 
     Start-of-speech uses a rolling window so isolated noisy frames cannot
     trigger a new utterance. End-of-speech needs consecutive silent frames.
@@ -38,7 +38,7 @@ class VadConfig:
     start_min_rms: int = 200
     stream_warmup_ms: int = 1_200
     start_window_ms: int = 300
-    start_speech_ratio: float = 0.6
+    start_speech_ratio: float = 0.4
     end_silence_ms: int = 900
     pre_roll_ms: int = 450
     max_utterance_seconds: float = 15.0

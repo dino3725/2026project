@@ -19,11 +19,11 @@ def feed(detector, decisions):
     return events
 
 
-def test_default_config_matches_baseline_frame_counts():
+def test_default_config_matches_selected_frame_counts():
     config = VadConfig()
     assert config.stream_warmup_frames == 40
     assert config.start_window_frames == 10
-    assert config.start_required_speech_frames == 6
+    assert config.start_required_speech_frames == 4
     assert config.end_silence_frames == 30
     assert config.pre_roll_frames == 15
     assert config.max_utterance_frames == 500
@@ -36,16 +36,21 @@ def test_end_silence_rounds_up_to_whole_frames():
 
 def test_start_needs_ratio_of_speech_in_window():
     detector = VadStateMachine(VadConfig())
-    # 5 of 10 frames are speech: not enough to start.
-    assert feed(detector, [True] * 5 + [False] * 5) == []
+    # Three isolated qualified frames must not trigger a recording.
+    assert feed(detector, [True] * 3 + [False] * 7) == []
     assert detector.state is VadState.LISTENING
 
 
-def test_short_word_with_six_speech_frames_starts():
-    # A short voiceless-heavy word like "스톱" gives only ~6 VAD frames.
+def test_short_word_with_four_speech_frames_starts():
+    # The missed natural "스톱" had only four frames above the RMS gate.
     detector = VadStateMachine(VadConfig())
-    events = feed(detector, [False] * 2 + [True] * 6 + [False] * 2)
+    events = feed(detector, [False] * 3 + [True] * 4 + [False] * 3)
     assert [e[1] for e in events] == ['start']
+
+
+def test_previous_start_ratio_can_be_restored():
+    detector = VadStateMachine(VadConfig(start_speech_ratio=0.6))
+    assert feed(detector, [True] * 5 + [False] * 5) == []
 
 
 def test_start_then_end_after_configured_silence():
