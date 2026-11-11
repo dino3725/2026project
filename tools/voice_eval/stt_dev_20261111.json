@@ -1,0 +1,248 @@
+{
+  "purpose": "development",
+  "samples": [
+    {
+      "sequence": 1,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171151_001.wav",
+      "reference": "콜라 가져다줘",
+      "action": "fetch",
+      "object": "coke",
+      "sha256": "9bb41577199d6fb1afa04c829bdfa6fa15a2dc888242754cd1619269cbc687dd",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 2,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171200_002.wav",
+      "reference": "콜라 좀 갖다줘",
+      "action": "fetch",
+      "object": "coke",
+      "sha256": "32800268ac09f2915b4b2db1d2b8b9d24cb05ad64a9285206678c3dcf0d8da48",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 3,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171208_003.wav",
+      "reference": "목마른데 마실 거 가져다줘",
+      "action": "fetch",
+      "object": "coke",
+      "sha256": "ae06a6308775586fb4791583a603a05ab7d6a66ee2fd8fdf568bfd173ac2076e",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 4,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171215_004.wav",
+      "reference": "휴지 가져다줘",
+      "action": "fetch",
+      "object": "tissue",
+      "sha256": "55536a6c6574d4d1a40e397d0f7982e9b616ddef44d47d6903f8036b26915e37",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 5,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171222_005.wav",
+      "reference": "휴지 좀 줘",
+      "action": "fetch",
+      "object": "tissue",
+      "sha256": "377f00809d8630e14089808ee021667fd05ef533870295139fde51e619c4916c",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 6,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171231_006.wav",
+      "reference": "코 닦을 휴지가 필요해",
+      "action": "fetch",
+      "object": "tissue",
+      "sha256": "29ffca69117cd5a96e8e46924fd60b68baea04af1f48407d5d190a4c51e84a23",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 7,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171240_007.wav",
+      "reference": "바세린 가져다줘",
+      "action": "fetch",
+      "object": "vaseline",
+      "sha256": "9464148aad63c491d31e13288d89540b4007fbb361c5cd8bda473aca9bc76f66",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 8,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171249_008.wav",
+      "reference": "바세린 좀 갖다줘",
+      "action": "fetch",
+      "object": "vaseline",
+      "sha256": "2d7b262bc238d9ed4ac1302ef1656baab0332ea7386fa2e96b211a9c061130b3",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 9,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171259_009.wav",
+      "reference": "입술이 건조한데 바세린 가져다줘",
+      "action": "fetch",
+      "object": "vaseline",
+      "sha256": "a911e508d7d8eb24f6873475f5251782edb8cb63cdab748a61f0d532fa5b68e2",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 10,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171308_010.wav",
+      "reference": "에어팟 가져다줘",
+      "action": "fetch",
+      "object": "airpod",
+      "sha256": "0e742d220de755d547bee2a54b564afd473a5f3a95016a88dfbdda10ccd64553",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 11,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171315_011.wav",
+      "reference": "에어팟 좀 줘",
+      "action": "fetch",
+      "object": "airpod",
+      "sha256": "90d0305651d7fbb3d0fd9ff37a9c44d87aa9f608511fb6436f44e65c96d2b338",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 12,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171324_012.wav",
+      "reference": "음악 듣게 에어팟 가져다줘",
+      "action": "fetch",
+      "object": "airpod",
+      "sha256": "a24262f8d0b6c5f322435a4570640745d1ef7c587157303950373c76a26579af",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 13,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171333_013.wav",
+      "reference": "멈춰",
+      "action": "stop",
+      "object": "",
+      "sha256": "edec66ee327d4fe2384563e999e04b2d454eaea73904edbe322fa1e28d507667",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 14,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171340_014.wav",
+      "reference": "정지",
+      "action": "stop",
+      "object": "",
+      "sha256": "44fe13807b8b8cfaeff89f94793c9d650739a71b11baae0b979e59916525624f",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 15,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171357_015.wav",
+      "reference": "스톱",
+      "action": "stop",
+      "object": "",
+      "sha256": "7c7cf5c1cbd771860b4c0d89a81cafa5ad62dad916b91c607b143f59c780f324",
+      "note": "User reported spelling slowly"
+    },
+    {
+      "sequence": 16,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171408_016.wav",
+      "reference": "지금 멈춰",
+      "action": "stop",
+      "object": "",
+      "sha256": "6cac4877839907fc6ec27cd2a5be2b1c8840423c2932eb1b77147e88fe67499e",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 17,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171417_017.wav",
+      "reference": "로봇 정지",
+      "action": "stop",
+      "object": "",
+      "sha256": "70a1b7eb4a7b8b3c5434f638a8e043e5b0fcb87cce3d6959901e5c92683b0b85",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 18,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171424_018.wav",
+      "reference": "잠깐 스톱",
+      "action": "stop",
+      "object": "",
+      "sha256": "cb282dcfb004f1c819a11ac0c3f43272a87c498e958c0eab50f2d37fe9950ce5",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 19,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171433_019.wav",
+      "reference": "콜라 가져오지 말고 멈춰",
+      "action": "stop",
+      "object": "",
+      "sha256": "74ea17b96526ccc0f74ebc63ba3f44edd88d419ad2d552a08ae9b026959e2ce8",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 20,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171440_020.wav",
+      "reference": "휴지 가져다줘, 아니 멈춰",
+      "action": "stop",
+      "object": "",
+      "sha256": "43bb1ba719a9c3f4b7222933726c6b9e8f5a21bc8aaadd80994643a1d0606b9e",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 21,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171448_021.wav",
+      "reference": "그만 움직여",
+      "action": "stop",
+      "object": "",
+      "sha256": "9e19854ef0674997f988bf01a7adf6a11f1bc4a154fc4928c444bd222eeeab19",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 22,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171455_022.wav",
+      "reference": "안녕하세요",
+      "action": "unknown",
+      "object": "",
+      "sha256": "b4c19cb9f56da8b94b6dffc36e35d2043608871ff1daf6cff13499326f296eed",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 23,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171500_023.wav",
+      "reference": "고마워",
+      "action": "unknown",
+      "object": "",
+      "sha256": "8eff58e79155d811bb23df6fa091ad04c1ba02142822ee5c37da659e0dca27a9",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 24,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171506_024.wav",
+      "reference": "오늘 날씨 어때",
+      "action": "unknown",
+      "object": "",
+      "sha256": "f99b6a71dba2bf49ebd669451231af55260d21a59b94d3add11a370f4d4d2dd6",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 25,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171513_025.wav",
+      "reference": "지금 몇 시야",
+      "action": "unknown",
+      "object": "",
+      "sha256": "f90cf80a40b77138e7438a4bf58b844b6df32e2d5f904fede958659a2ec3fc06",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 26,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171519_026.wav",
+      "reference": "책 가져다줘",
+      "action": "unknown",
+      "object": "",
+      "sha256": "44e677a56a5fd629679bf82d9cb71143d13ad5f952c3ce41edc9256d4ae3872c",
+      "note": "User confirmed ordered script"
+    },
+    {
+      "sequence": 27,
+      "file": "../../recordings/stt_dev_20261111_171138/vad_command_20261111_171526_027.wav",
+      "reference": "불 켜줘",
+      "action": "unknown",
+      "object": "",
+      "sha256": "9a0305ef260e754c6dc29a02bb38debf5b35af44f71c060ffe3805186ee36d4c",
+      "note": "User confirmed ordered script"
+    }
+  ]
+}

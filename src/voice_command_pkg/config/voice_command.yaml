@@ -1,5 +1,5 @@
 # Voice command node parameters (laptop).
-# Recognition defaults retain the 2026-11-04 baseline; capture is continuous.
+# Model/VAD retain baseline; STT temperature was tuned on 2026-11-11 development audio.
 # Change values here for
 # experiments instead of editing code; record results in tools/voice_eval/results/.
 voice_command_node:
@@ -19,6 +19,10 @@ voice_command_node:
       device: "cpu"
       compute_type: "int8"
       language: "ko"
+      beam_size: 5
+      initial_prompt: ""
+      hotwords: ""
+      temperatures: [0.0]         # no stochastic fallback; keep beam 5 and empty hints
 
     vad:
       mode: 3                      # WebRTC aggressiveness 0-3

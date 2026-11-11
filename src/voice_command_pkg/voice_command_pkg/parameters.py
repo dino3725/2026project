@@ -9,9 +9,10 @@ from voice_command_pkg.audio_capture import VadConfig
 from voice_command_pkg.command_classifier import ClassifierConfig
 from voice_command_pkg.pipeline import PipelineConfig
 from voice_command_pkg.robot_feedback import DEFAULT_MESSAGES
+from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
 
 
-# Recognition defaults stay at baseline; capture now runs continuously.
+# Model/VAD stay at baseline; STT decoding uses the selected development setting.
 # config/voice_command.yaml must list the same keys; tests check both.
 DEFAULT_PARAMETERS: dict[str, Any] = {
     'publish_commands': True,
@@ -23,6 +24,10 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'whisper.device': 'cpu',
     'whisper.compute_type': 'int8',
     'whisper.language': 'ko',
+    'whisper.beam_size': 5,
+    'whisper.initial_prompt': '',
+    'whisper.hotwords': '',
+    'whisper.temperatures': list(DEFAULT_RUNTIME_STT.temperatures),
     'vad.mode': 3,
     'vad.start_min_rms': 200,
     'vad.stream_warmup_ms': 1200,
@@ -57,6 +62,12 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
         whisper_device=str(merged['whisper.device']),
         whisper_compute_type=str(merged['whisper.compute_type']),
         language=str(merged['whisper.language']),
+        stt=SttConfig(
+            beam_size=merged['whisper.beam_size'],
+            initial_prompt=merged['whisper.initial_prompt'],
+            hotwords=merged['whisper.hotwords'],
+            temperatures=merged['whisper.temperatures'],
+        ),
         recordings_dir=Path(str(merged['recordings_dir'])).expanduser(),
         save_recordings=merged['save_recordings'],
         queue_capacity=int(merged['capture.queue_capacity']),

@@ -45,7 +45,7 @@ def test_invalid_pcm_is_rejected(pcm):
 def test_transcriber_consumes_segments_and_preserves_file_input(source):
     received = []
 
-    def transcribe(audio, language):
+    def transcribe(audio, language, **kwargs):
         received.append((audio, language))
 
         def segments():
@@ -83,7 +83,7 @@ def test_empty_transcript_is_still_rejected():
 def make_pipeline(monkeypatch, recordings_dir, save_recordings=False):
     inputs, published, logs = [], [], []
 
-    def transcribe(audio, language):
+    def transcribe(audio, language, **kwargs):
         assert isinstance(audio, np.ndarray), 'pipeline must always transcribe from memory'
         inputs.append(audio.copy())
         return iter([SimpleNamespace(text='멈춰')]), None

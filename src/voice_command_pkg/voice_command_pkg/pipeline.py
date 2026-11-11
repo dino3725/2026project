@@ -33,6 +33,7 @@ from voice_command_pkg.audio_capture import (
 from voice_command_pkg.audio_samples import pcm_to_float32
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
 from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
+from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
 from voice_command_pkg.transcript_rules import find_stop_keyword, stop_command
 from voice_command_pkg.utterance_buffer import Utterance, UtteranceBuffer
 
@@ -53,6 +54,7 @@ class PipelineConfig:
     whisper_device: str = 'cpu'
     whisper_compute_type: str = 'int8'
     language: str = 'ko'
+    stt: SttConfig = DEFAULT_RUNTIME_STT
     recordings_dir: Path = Path('recordings')
     save_recordings: bool = False
     vad: VadConfig = field(default_factory=VadConfig)
@@ -339,12 +341,15 @@ def audio_levels(audio_data: bytes) -> dict[str, float | bool]:
     }
 
 
-def transcribe_audio(model: Any, audio: Path | bytes, language: str) -> tuple[str, float]:
+def transcribe_audio(
+    model: Any, audio: Path | bytes, language: str, config: SttConfig | None = None,
+) -> tuple[str, float]:
     """Transcribe raw capture PCM, or a file path for existing evaluation tools."""
     started = time.perf_counter()
     try:
         source = pcm_to_float32(audio) if isinstance(audio, bytes) else str(audio)
-        segment_iter, _ = model.transcribe(source, language=language)
+        options = config.options() if config is not None else {}
+        segment_iter, _ = model.transcribe(source, language=language, **options)
         text = ''.join(segment.text for segment in segment_iter).strip()
     except Exception as exc:
         raise PipelineError(
@@ -416,7 +421,10 @@ class VoiceCommandPipeline:
         self._ensure_running()
         self.log(
             f'[STT READY] whisper={config.whisper_model} '
-            f'load={self.model_load_seconds:.3f}s'
+            f'load={self.model_load_seconds:.3f}s beam_size={config.stt.beam_size} '
+            f'initial_prompt={bool(config.stt.initial_prompt.strip())} '
+            f'hotwords={bool(config.stt.hotwords.strip())} '
+            f'temperatures={config.stt.temperatures}'
         )
         self.llm = LlmRuntime(config, log, self.stop_event)
 
@@ -471,7 +479,7 @@ class VoiceCommandPipeline:
 
         self._ensure_running()
         text, stt_seconds = transcribe_audio(
-            self.whisper_model, audio_data, self.config.language
+            self.whisper_model, audio_data, self.config.language, self.config.stt
         )
         self._ensure_running()
         self.log(f'[STT] {text}')

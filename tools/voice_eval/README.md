@@ -27,3 +27,58 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/test_llm_pick
 | --- | --- | --- |
 | 2026-11-04 | ROS2 패키지화 후 확인 (프롬프트 SHA256 `f3c8d6bf…36be73`, 변경 없음) | `test_llm_pick_objects.py` 64/64 |
 | 2026-11-04 | 정지를 규칙으로 판정, LLM에서 stop 제거 (프롬프트 SHA256 `b184e9bc…3ff8df6`) | 64/64, stop 17/17 규칙 판정 → `results/stop_rules_20261104.md` |
+
+## 녹음 기반 STT 개발 비교
+
+`compare_stt_settings.py`는 16 kHz/mono/PCM16 WAV를 메모리로 읽고, 같은 `small` 모델에서
+beam 5/1 × initial_prompt 없음/어휘 목록의 네 설정을 비교합니다. `hotwords`는 이번
+비교에서는 비워 둡니다. 모델 워밍업은 측정에서 제외하고 설정 순서를 교대합니다.
+27개 실제 발화와 1초·3초 합성 무음은 별도 집계하며, 2회 반복을 독립 54명/54발화로
+해석하지 않습니다. 일반화 정확도를 위한 held-out이 아니라 설정 선택용 개발셋입니다.
+
+```bash
+cd ~/2026project
+STT_REPORT_DIR=$(mktemp -d "$PWD/log/stt-recheck.XXXXXX")
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/compare_stt_settings.py tools/voice_eval/stt_dev_20261111.json \
+  --rounds 2 --classify --output "$STT_REPORT_DIR/comparison.json"
+```
+
+녹음은 Git에 없으므로 해당 파일들이 있는 노트북에서 실행합니다. 다른 녹음은
+`purpose: development`, `samples: [{file, reference, action, object, sha256}]` 형식의
+새 JSON manifest로 지정합니다. `file`은 manifest 기준 상대 경로도 허용합니다.
+SHA256이 있으면 원본과 대조하고, 누락·중복·잘못된 정답은 오류로 처리합니다.
+`--classify`는 STT 측정 후 로컬 Ollama를 워밍업하고 전사문 정지 규칙 → 동결된 LLM으로
+최종 명령을 확인합니다. 같은 전사문은 결과를 재사용하므로 LLM 지연 측정에는 쓰지 않습니다.
+ROS 상태 게이트/명령 발행은 연결하지 않습니다. `--classify` 없이 STT만 비교할 수도 있습니다.
+
+- `comparison.jsonl`: 추론 직후 저장하는 전사·시간·segment temperature 등의 원시 기록.
+- `comparison.json`: 설정, 버전, 원본 해시, 집계와 선택적 최종 명령 결과.
+- `inspect_vad_audio.py`: 저장된 WAV를 현재 VAD로 재생하여 30ms 프레임별 RMS·판정·전환 저장.
+  각 WAV마다 VAD를 새로 생성하므로 실제 상시 스트림의 이전 상태와 결과가 다를 수 있습니다.
+- `results/2026-11-11_stt_settings.md`: 27개 문장 전체 비교, 선택 근거, 한계와 사용자 확인 절차.
+
+평가 도구 자체의 정답 대응·문자 오류율·집계 검증:
+
+```bash
+source voice_env.sh
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest tools/voice_eval/tests -q
+```
+
+재시도 비용을 분리하는 후속 비교는 같은 manifest에 다음 옵션을 사용합니다.
+기존 Whisper 온도 목록(0.0, 0.2, …, 1.0)을 순회하는 설정과, 0.0에서 한 번만
+디코딩하는 설정을 비교하며 LLM의 temperature는 변경하지 않습니다.
+
+```bash
+cd ~/2026project
+STT_REPORT_DIR=$(mktemp -d "$PWD/log/stt-temperature.XXXXXX")
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/compare_stt_settings.py tools/voice_eval/stt_dev_20261111.json \
+  --settings beam5_plain beam5_temperature0 --rounds 2 --classify \
+  --output "$STT_REPORT_DIR/comparison.json"
+```
+
+힌트는 무음에서도 힌트 문장을 출력하게 만들 수 있습니다. 이번 개발 비교의 전체
+어휘 힌트는 무음에서 정지 단어를 만들어 **기본값으로 채택하지 않았습니다**.
+`hotwords`도 같은 문제가 확인됐습니다. 단순히 물체 이름의 전사가 개선됐다는 이유로
+운영 힌트를 켜지 않습니다. 정확도와 무음 대조군은 항상 같이 확인합니다.
