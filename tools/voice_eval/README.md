@@ -82,3 +82,10 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python \
 어휘 힌트는 무음에서 정지 단어를 만들어 **기본값으로 채택하지 않았습니다**.
 `hotwords`도 같은 문제가 확인됐습니다. 단순히 물체 이름의 전사가 개선됐다는 이유로
 운영 힌트를 켜지 않습니다. 정확도와 무음 대조군은 항상 같이 확인합니다.
+
+## 짧은 스톱의 VAD 누락 분석
+
+연속 녹음의 시작 조건 후보는 `inspect_vad_audio.py --start-speech-ratio 0.4`로
+비교합니다. `--start-min-rms`, `--vad-mode`도 지원하며 실제 노드 기본값을 변경하지 않습니다.
+50초 녹음의 시작 누락과 별도 STT 오류, 실시간 dry-run 명령은
+`results/2026-11-11_stop_probe.md`에 기록했습니다. 시작 9개와 정지 9개는 서로 다른 지표입니다.

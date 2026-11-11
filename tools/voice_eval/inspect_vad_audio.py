@@ -49,14 +49,25 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('files', type=Path, nargs='+')
     parser.add_argument('--output', type=Path, required=True)
+    defaults = VadConfig()
+    parser.add_argument('--start-speech-ratio', type=float, default=defaults.start_speech_ratio)
+    parser.add_argument('--start-min-rms', type=int, default=defaults.start_min_rms)
+    parser.add_argument('--vad-mode', type=int, default=defaults.vad_mode)
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Choose a fresh --output path')
+    try:
+        config = VadConfig(
+            start_speech_ratio=args.start_speech_ratio,
+            start_min_rms=args.start_min_rms, vad_mode=args.vad_mode,
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
     results = []
     for path in args.files:
         pcm = read_pcm(path)
         result = {'file': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
-                  'duration_seconds': len(pcm) / 32000, **inspect(pcm, VadConfig())}
+                  'duration_seconds': len(pcm) / 32000, **inspect(pcm, config)}
         results.append(result)
         print(json.dumps({k: v for k, v in result.items() if k != 'frames'}, ensure_ascii=False))
     args.output.parent.mkdir(parents=True, exist_ok=True)
