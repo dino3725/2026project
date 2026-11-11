@@ -37,8 +37,8 @@ from voice_command_pkg.transcript_rules import find_stop_keyword, stop_command
 from voice_command_pkg.utterance_buffer import Utterance, UtteranceBuffer
 
 
-# (command, transcript) -> published?
-PublishFn = Callable[[dict[str, str], str], bool]
+# (command, transcript, capture timing) -> published?
+PublishFn = Callable[[dict[str, str], str, dict[str, Any]], bool]
 LogFn = Callable[[str], None]
 
 # Failures in these stages mean the microphone itself is unusable.
@@ -397,9 +397,11 @@ class VoiceCommandPipeline:
         publish: PublishFn | None = None,
         log: LogFn = print,
         stop_event: threading.Event | None = None,
+        fetch_gate: Callable[[float], str] | None = None,
     ) -> None:
         self.config = config
         self.publish = publish
+        self.fetch_gate = fetch_gate
         self.log = log
         self.stop_event = stop_event or threading.Event()
         self._publish_lock = threading.RLock()
@@ -488,7 +490,9 @@ class VoiceCommandPipeline:
                 'utterance_start_wall', capture['voice_start_wall']
             ))
             dropped_reason = (
-                self._fetch_drop_reason(capture) or self.llm.drop_reason(utterance_start)
+                self._fetch_drop_reason(capture)
+                or (self.fetch_gate(utterance_start) if self.fetch_gate is not None else '')
+                or self.llm.drop_reason(utterance_start)
             )
             command, llm_seconds, decided_by = (
                 {'action': 'unknown', 'object': ''}, 0.0, 'discard'
@@ -523,8 +527,10 @@ class VoiceCommandPipeline:
             self._ensure_running()
             if command['action'] == 'fetch':
                 dropped_reason = self._fetch_drop_reason(capture)
+                if not dropped_reason and self.fetch_gate is not None:
+                    dropped_reason = self.fetch_gate(utterance_start)
             if self.publish is not None and not dropped_reason:
-                published = self.publish(command, text)
+                published = self.publish(command, text, capture)
         if dropped_reason:
             self.log(f'[DROPPED] sequence={utterance.sequence} reason={dropped_reason}')
         self.log('[ROS] ' + ('published' if published else 'skipped'))

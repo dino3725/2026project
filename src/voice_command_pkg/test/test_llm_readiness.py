@@ -263,7 +263,7 @@ def test_pipeline_stop_bypasses_unavailable_ollama(monkeypatch, mode):
     monkeypatch.setattr(pipeline, 'transcribe_audio', lambda *args: ('콜라 줘', 0))
     instance = pipeline.VoiceCommandPipeline(
         pipeline.PipelineConfig(),
-        lambda command, text: published.append(command) or True, logs.append,
+        lambda command, text, capture: published.append(command) or True, logs.append,
     )
 
     def utterance():
@@ -313,7 +313,7 @@ def test_pipeline_blocks_pre_ready_and_late_fetch_but_handles_stop(monkeypatch):
     monkeypatch.setattr(pipeline, 'transcribe_audio', lambda *args: ('콜라 줘', 0))
     instance = pipeline.VoiceCommandPipeline(
         pipeline.PipelineConfig(classifier=ClassifierConfig(timeout_seconds=0.03)),
-        lambda command, text: published.append(command) or True, lambda line: None,
+        lambda command, text, capture: published.append(command) or True, lambda line: None,
     )
 
     def utterance(start=None):

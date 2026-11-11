@@ -46,7 +46,7 @@ def make_pipeline(monkeypatch, tmp_path, **overrides):
         {'action': 'fetch', 'object': 'coke'}, 0.0
     ))
 
-    def publish(command, text):
+    def publish(command, text, capture):
         published.append(command['action'])
         return True
 
@@ -370,3 +370,48 @@ def test_capture_failure_during_stt_blocks_result_and_propagates(monkeypatch, tm
 def test_invalid_buffer_config_is_rejected(overrides):
     with pytest.raises(ValueError):
         pipeline.PipelineConfig(**overrides)
+
+
+def test_robot_gate_skips_llm_for_busy_fetch_but_not_stop(monkeypatch, tmp_path):
+    instance, published, _ = make_pipeline(monkeypatch, tmp_path)
+    checks = []
+
+    def gate(start):
+        checks.append(start)
+        return 'robot_busy'
+
+    def unexpected(*args):
+        pytest.fail('busy general request and stop must not invoke LLM')
+
+    instance.fetch_gate = gate
+    monkeypatch.setattr(pipeline, 'classify_text', unexpected)
+    result = instance.process_utterance(make_utterance())
+    assert result['dropped_reason'] == 'robot_busy'
+    assert published == []
+    assert len(checks) == 1
+    monkeypatch.setattr(pipeline, 'transcribe_audio', lambda *args: ('멈춰', 0))
+    assert instance.process_utterance(make_utterance(2))['published']
+    assert published == ['stop']
+    assert len(checks) == 1
+
+
+def test_robot_state_changing_during_llm_blocks_final_publication(monkeypatch, tmp_path):
+    instance, published, _ = make_pipeline(monkeypatch, tmp_path)
+    replies = iter(['', 'robot_busy'])
+    instance.fetch_gate = lambda start: next(replies)
+    result = instance.process_utterance(make_utterance())
+    assert result['command']['action'] == 'fetch'
+    assert result['dropped_reason'] == 'robot_busy'
+    assert published == []
+
+
+def test_pre_roll_timing_reaches_robot_gate_and_publisher(monkeypatch, tmp_path):
+    instance, _, _ = make_pipeline(monkeypatch, tmp_path)
+    starts, captures = [], []
+    item = make_utterance()
+    item.capture['utterance_start_wall'] = item.capture['voice_start_wall'] - 0.45
+    instance.fetch_gate = lambda start: starts.append(start) or ''
+    instance.publish = lambda command, text, capture: captures.append(capture) or True
+    assert instance.process_utterance(item)['published']
+    assert starts == [item.capture['utterance_start_wall']] * 2
+    assert captures == [item.capture]

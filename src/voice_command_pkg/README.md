@@ -21,19 +21,62 @@ faster-whisper small / CPU / int8 / Korean
         ↓
 전사문 정규화 + 정지 키워드 판정 ── 걸리면 → stop (LLM 호출 안 함)
         ↓ 아니면
+로봇 상태·응답 대기·발화 시각 검사 (현재 IDLE 구간의 새 요청만)
+        ↓ 허용
 LLM 준비 상태·발화 시작 시각·fetch 유효시간 검사
         ↓ 통과
 Ollama qwen3:4b-instruct (fetch 4종 또는 unknown만 판단)
         ↓
 structured JSON validation
         ↓
-valid fetch 또는 stop만 eated_interfaces/RobotCommand publish
+fetch 발행 직전 상태·유효시간 재검사 → RobotCommand publish
+        ↓
+Jetson 수락·거절 및 상태 전환 → 고정 템플릿 화면 안내
 ```
 
 STT·LLM 처리 중에도 녹음 스레드는 다음 발화를 수집합니다. 마이크 안정화용
 1.2초 버리기는 최초 시작 때만 적용합니다. Whisper는 한 처리 스레드에서
 재사용하며 모델·프롬프트·VAD 임계값은 유지합니다. WAV 저장은 기본으로 끄고,
 평가·문제 분석 시에만 `save_recordings:=true`로 켭니다.
+
+### 로봇 상태 구독과 발행 조건
+
+노드는 `/control/state`(String, reliable/transient-local/depth 1)와
+`/control/command_status`(RobotCommandStatus, reliable/volatile/depth 10)를 구독합니다.
+상태를 받기 전, IDLE 이외 상태, 앞선 요청 응답 대기 중에는 일반 요청을 차단합니다.
+전사문 stop은 상태·응답 조건을 건너뛰며, dry-run과 종료 후 발행 금지는 그대로 적용합니다.
+
+- IDLE을 확인한 이후 시작한 발화만 받습니다. pre-roll을 포함해 작업 중 녹음된 요청은
+  IDLE로 복귀해도 재실행하지 않습니다. IDLE 확인 직후 약 1초 기다린 뒤 새로 말하세요.
+- 일반 요청의 LLM 처리 전과 발행 직전에 상태를 검사합니다. 노드에서도 상태 갱신과
+  발행을 같은 잠금으로 보호하고, 잠금을 기다리는 동안 지난 fetch 유효시간을 다시 확인합니다.
+- fetch를 발행하기 직전에 응답 대기를 등록합니다. 수락 응답만 받고 아직 IDLE로 보이더라도
+  두 번째 fetch는 허용하지 않습니다. 작업 상태를 거쳐 IDLE로 복귀하면 새 발화를 받습니다.
+- 명시적 거절은 그 시점 이후 새 발화부터 허용합니다(로봇도 IDLE이어야 함).
+  `robot.response_timeout_seconds` 기본 5초는 무응답 안내 기준입니다. 타임아웃으로
+  요청을 재전송하거나 발행 제한을 자동으로 풀지 않습니다. 실제 상태와 연결을 확인하고,
+  필요하면 사람이 stop/X 복구를 수행하여 ERROR·복귀·IDLE 상태 전환을 확인하세요.
+- 상태 메시지는 heartbeat가 아닙니다. 상태 메시지의 나이를 이유로 연결을 끊지 않습니다.
+  `robot.connection_poll_seconds` 기본 0.5초마다 DDS graph에서 상태 발행자를 확인합니다.
+  발행자가 없거나 여러 개이면 차단하고, 발행자 교체/복구 시 구독을 새로 만들어
+  이전 대기 메시지를 버리고 현재 제어기의 보관된 상태를 다시 받습니다.
+- graph의 장애 감지는 DDS 발견 지연의 영향을 받습니다. 제어 프로세스가 멈췄지만
+  graph에는 남아 있는 경우까지 즉시 탐지하지는 못합니다.
+- 수락 결과는 현재 로컬 요청의 action/target과 맞고, 상태 발행자와 같은 노드의 유일한
+  결과 발행자일 때 사용합니다. 현재 메시지에 request ID가 없으므로 **명령 발행 노드 하나**를
+  전제로 합니다. 다른 발행자의 동일 명령이나 같은 대상의 매우 늦은 과거 응답을
+  완벽하게 구별하는 프로토콜은 아닙니다. 무관한 응답·중복 수락·기한 초과 응답은 안내에 쓰지 않습니다.
+- `[FEEDBACK] event=robot_accepted`는 실제 수락 응답 뒤에만 출력합니다.
+  `robot_carrying`은 수락된 대상과 DRIVE_TO_PLACE 상태가 모두 확인됐을 때 표시합니다.
+  ERROR는 원인 미상의 오류/정지일 수 있어 인식 실패라고 단정하지 않습니다.
+  `robot_stop_sent`와 `robot_stop_accepted`는 전송과 수락 안내이며 물리적 정지 완료 증명은 아닙니다.
+- `[ROBOT STATE]`, `[ROBOT STATUS]`, `[ROBOT GATE]`, `[ROBOT CONNECTION]`으로 상태를 추적합니다.
+  안내는 `messages.robot_*`에서 바꿉니다. 물체 이름 자리에는 `{object}`만 지원합니다.
+
+`publish_commands:=false`에서도 상태 검사는 수행합니다. 로봇이 연결되지 않았다면
+일반 요청은 `robot_unknown`으로 폐기되는 것이 정상입니다. IDLE에서 dry-run 판정에
+성공해도 실제 요청 대기나 수락 안내를 만들지 않습니다. ROS 없는 STT/LLM 측정 도구는
+상태 검사를 연결하지 않은 독립 `VoiceCommandPipeline`을 사용합니다.
 
 ### LLM 워밍업과 장애 복구
 
@@ -65,7 +108,7 @@ STT·LLM 처리 중에도 녹음 스레드는 다음 발화를 수집합니다. 
 
 이번 변경은 시작 비용을 준비 단계로 옮깁니다. cold 워밍업 자체를 없애지는 않습니다.
 또한 일반 요청 처리 중 들어온 stop은 앞선 처리와 자신의 STT를 기다릴 수 있습니다.
-오디오 정지 감지·화자 인증·로봇 IDLE 상태 게이트는 별도 후속 단계입니다.
+오디오 정지 감지와 화자 인증은 별도 후속 단계입니다.
 
 ### 녹음 저장 선택
 
@@ -168,6 +211,7 @@ src/voice_command_pkg/
     command_classifier.py   Ollama 분류기, 출력 스키마·허용 조합 검증
     prompts/system_prompt.txt  분류기 시스템 프롬프트 (바꾸면 회귀 테스트 필수)
     command_protocol.py     발행 허용 규칙 (fetch 4종, stop만 통과)
+    robot_feedback.py       로봇 상태·응답 대기·피드백 판정 (ROS 의존 없음)
     parameters.py           ROS 파라미터 이름·기본값 → PipelineConfig
   config/voice_command.yaml 실험값 (코드 수정 없이 변경)
   launch/voice_command.launch.py
@@ -273,6 +317,23 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/measure_llm_r
 처리하기 시작한 시각부터이며 실제 발화·VAD 종료 무음·DDS·로봇 반응은 포함하지 않습니다.
 과거 `measure_baseline.py`는 비교용으로 120초/10m 설정을 명시적으로 유지합니다.
 
+실제 DDS를 사용한 상태/피드백 검증(로봇·마이크·Whisper·Ollama 불필요):
+
+```bash
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+python3 tools/voice_eval/check_robot_feedback.py \
+  --output "log/robot_feedback_check_$(date +%Y%m%d_%H%M%S).json"
+```
+
+도구는 localhost/domain 91과 매번 다른 시험용 토픽을 사용하며 모든 로봇 토픽을
+remap합니다. VoiceCommandNode는 dry-run으로 생성하고 음성 worker는 시작하지 않습니다.
+상태·결과 샘플만 보내고, 결과 검사를 위한 pending 상태는 메모리에서 설정합니다.
+fetch/stop 메시지는 시험용 토픽에도 보내지 않습니다. 정상 기준은 17개 PASS와
+JSON의 `passed: true`, `command_messages: 0`입니다.
+실제 마이크/Jetson 확인 명령과 순서는
+`tools/voice_eval/results/2026-11-11_robot_feedback.md`를 참고하세요.
+
 분류기 회귀 테스트 (Ollama 사용, ROS 발행 없음):
 
 ```bash
@@ -302,6 +363,8 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/test_llm_pick
 | `whisper.*` | `small`, CPU, `int8`, `ko` |
 | `llm.*` | `qwen3:4b-instruct`, 일반 요청 10 s, 워밍업 120 s, 재시도 간격 5 s, 정수 `keep_alive: -1` (`think: false`, `temperature: 0` 고정) |
 | `messages.llm_*` | 준비 중·준비 완료·실패 안내 템플릿 |
+| `robot.*` | 응답 안내 제한 5 s, 연결 graph 검사 간격 0.5 s |
+| `messages.robot_*` | 상태·수락·거절·정지·시험 모드 안내 템플릿 |
 
 ## YOLO 기반 객체 인식
 

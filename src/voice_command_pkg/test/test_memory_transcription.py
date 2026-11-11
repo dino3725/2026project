@@ -92,7 +92,7 @@ def make_pipeline(monkeypatch, recordings_dir, save_recordings=False):
     monkeypatch.setattr(pipeline, 'load_whisper_model', lambda config: (model, 0.0))
     monkeypatch.setattr(pipeline, 'LlmRuntime', lambda *args: SimpleNamespace(close=lambda: None))
 
-    def publish(command, text):
+    def publish(command, text, capture):
         published.append(command)
         return True
 

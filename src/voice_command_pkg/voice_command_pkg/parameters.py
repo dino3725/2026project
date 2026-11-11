@@ -8,6 +8,7 @@ from typing import Any, Mapping
 from voice_command_pkg.audio_capture import VadConfig
 from voice_command_pkg.command_classifier import ClassifierConfig
 from voice_command_pkg.pipeline import PipelineConfig
+from voice_command_pkg.robot_feedback import DEFAULT_MESSAGES
 
 
 # Recognition defaults stay at baseline; capture now runs continuously.
@@ -39,6 +40,9 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'messages.llm_preparing': '명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요.',
     'messages.llm_ready': '명령 처리 준비가 완료됐어요. 말씀해 주세요.',
     'messages.llm_failure': '명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요.',
+    'robot.response_timeout_seconds': 5.0,
+    'robot.connection_poll_seconds': 0.5,
+    **{f'messages.{key}': value for key, value in DEFAULT_MESSAGES.items()},
 }
 
 

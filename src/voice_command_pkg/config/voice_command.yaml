@@ -38,7 +38,27 @@ voice_command_node:
       warmup_timeout_seconds: 120.0
       retry_seconds: 5.0          # retry only after the previous HTTP call finishes
 
+    robot:
+      response_timeout_seconds: 5.0  # no automatic retransmission or unlock on timeout
+      connection_poll_seconds: 0.5   # DDS graph check; state is not a heartbeat
+
     messages:
       llm_preparing: "명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요."
       llm_ready: "명령 처리 준비가 완료됐어요. 말씀해 주세요."
       llm_failure: "명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요."
+      robot_unknown: "로봇 상태를 확인하고 있어요. 상태 확인 후 다시 말씀해 주세요."
+      robot_busy: "지금 작업 중이에요."
+      robot_error: "로봇 상태를 확인하고 복구해 주세요."
+      robot_pending: "앞서 보낸 명령의 처리 결과를 기다리고 있어요."
+      robot_before_idle: "작업 가능 상태가 되기 전 요청이에요. 다시 말씀해 주세요."
+      robot_response_timeout: "로봇 응답을 확인하지 못했어요. 로봇 상태를 확인해 주세요."
+      robot_invalid_timing: "요청 시간을 확인하지 못했어요. 다시 말씀해 주세요."
+      robot_expired: "요청 유효시간이 지났어요. 다시 말씀해 주세요."
+      robot_accepted: "{object} 가져올게요."
+      robot_rejected: "로봇이 요청을 거절했어요. 상태를 확인해 주세요."
+      robot_carrying: "{object}를 집었어요."
+      robot_stop_sent: "정지 명령을 보냈어요."
+      robot_stop_accepted: "로봇이 정지 요청을 수락했어요."
+      robot_send_error: "명령 전달 여부를 확인하지 못했어요. 로봇 상태를 확인해 주세요."
+      robot_unknown_command: "할 수 없는 명령이에요."
+      robot_dry_run: "시험 모드: 명령을 발행하지 않았어요."
