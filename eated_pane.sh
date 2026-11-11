@@ -32,7 +32,7 @@ case "$PANE_NUMBER" in
     2)
         title="2. MOVEIT"
         hint="1번 하드웨어 Bringup이 준비된 다음 실행하세요."
-        command="ros2 launch turtlebot3_manipulation_moveit_config move_group.launch.py use_sim:=false"
+        command="$WORKSPACE/eated_moveit.sh"
         ;;
     3)
         title="3. REALSENSE"

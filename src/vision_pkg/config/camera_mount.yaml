@@ -1,0 +1,28 @@
+calibration_id: jetson_rgbd_20261112_v1
+status: adopted_by_user_live_coordinate_smoke_test_completed
+parent_frame: end_effector_link
+child_frame: d435i_link
+xyz_m:
+- -0.03024395088466985
+- 0.024003263976252315
+- 0.044460232726937776
+rpy_rad:
+- -0.019564244682444217
+- 0.027721236295502605
+- 0.007998981005851141
+required_model_sha256: d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546
+required_base_fixed_z_m: 0.116
+source_profile: docs/measurements/data/2026-11-12/rgbd_refinement/candidate_profile.json
+source_profile_sha256: 85ffd8c86436acd576d68c83247de095f8a138eca70427290ddd8ccff6a6f6b0
+intrinsics_policy: keep_factory_aligned_depth_intrinsics
+absolute_accuracy_certified: false
+known_prior_box_height_error_mm: -13.06726996475939
+previous_xyz_m:
+- -0.065
+- 0.0195
+- 0.052
+previous_rpy_rad:
+- 0.0
+- 0.0
+- 0.0
+live_test_report: docs/measurements/accepted_calibration_test_2026-11-12.md

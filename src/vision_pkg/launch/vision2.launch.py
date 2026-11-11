@@ -7,11 +7,16 @@ from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
+from vision_pkg.camera_mount_config import load_camera_mount
+
 
 def generate_launch_description():
     """Build the VisionNode2 launch description."""
     config_path = (
         get_package_share_directory('vision_pkg') + '/config/vision2.yaml'
+    )
+    mount = load_camera_mount(
+        get_package_share_directory('vision_pkg') + '/config/camera_mount.yaml'
     )
 
     model_path = LaunchConfiguration('model_path')
@@ -28,12 +33,12 @@ def generate_launch_description():
             default_value='true',
             description='Publish end_effector_link to d435i_link static TF',
         ),
-        DeclareLaunchArgument('camera_mount_x', default_value='-0.065'),
-        DeclareLaunchArgument('camera_mount_y', default_value='0.0195'),
-        DeclareLaunchArgument('camera_mount_z', default_value='0.052'),
-        DeclareLaunchArgument('camera_mount_roll', default_value='0.0'),
-        DeclareLaunchArgument('camera_mount_pitch', default_value='0.0'),
-        DeclareLaunchArgument('camera_mount_yaw', default_value='0.0'),
+        DeclareLaunchArgument('camera_mount_x', default_value=mount['x']),
+        DeclareLaunchArgument('camera_mount_y', default_value=mount['y']),
+        DeclareLaunchArgument('camera_mount_z', default_value=mount['z']),
+        DeclareLaunchArgument('camera_mount_roll', default_value=mount['roll']),
+        DeclareLaunchArgument('camera_mount_pitch', default_value=mount['pitch']),
+        DeclareLaunchArgument('camera_mount_yaw', default_value=mount['yaw']),
         DeclareLaunchArgument(
             'camera_mount_parent_frame',
             default_value='end_effector_link',
