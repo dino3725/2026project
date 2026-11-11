@@ -1,0 +1,5 @@
+{
+  "review": "Full checker pattern visible in left/upper part of image at raised position; all 24 corners detected; no hand occlusion. Retained pending dataset validation.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

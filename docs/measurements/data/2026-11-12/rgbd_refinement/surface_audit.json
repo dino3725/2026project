@@ -1,0 +1,204 @@
+{
+  "status": "offline_cross_dataset_audit_no_refit",
+  "rows": [
+    {
+      "index": 1,
+      "fk_tf_difference_mm": 0.07145775274706909,
+      "nominal": {
+        "table_left": 30.56845560692033,
+        "table_right": 24.353377784853073,
+        "lid_front": 102.2019033696243
+      },
+      "selected_candidate": {
+        "table_left": -9.345550516412597,
+        "table_right": -10.722259112126608,
+        "lid_front": 66.80295542203521
+      }
+    },
+    {
+      "index": 2,
+      "fk_tf_difference_mm": 0.0878687347008008,
+      "nominal": {
+        "table_left": 30.23690610835252,
+        "table_right": 23.23396702871041,
+        "lid_front": 102.21059738857964
+      },
+      "selected_candidate": {
+        "table_left": -9.555856088343482,
+        "table_right": -11.814029553840044,
+        "lid_front": 66.78728740765504
+      }
+    },
+    {
+      "index": 3,
+      "fk_tf_difference_mm": 0.1288307090235426,
+      "nominal": {
+        "table_left": 30.41223117829774,
+        "table_right": 23.007801808755772,
+        "lid_front": 101.85959915063957
+      },
+      "selected_candidate": {
+        "table_left": -9.443902229650007,
+        "table_right": -12.00245846747556,
+        "lid_front": 66.5106486589834
+      }
+    },
+    {
+      "index": 4,
+      "fk_tf_difference_mm": 0.14313383680122213,
+      "nominal": {
+        "table_left": 30.574883336498818,
+        "table_right": 23.24970938884765,
+        "lid_front": 102.3563237699609
+      },
+      "selected_candidate": {
+        "table_left": -9.324174332639192,
+        "table_right": -11.64437227251334,
+        "lid_front": 66.79559953799338
+      }
+    },
+    {
+      "index": 5,
+      "fk_tf_difference_mm": 0.17282351342341376,
+      "nominal": {
+        "table_left": 30.47797328641621,
+        "table_right": 23.850411504579192,
+        "lid_front": 102.07877495438186
+      },
+      "selected_candidate": {
+        "table_left": -9.490891971778336,
+        "table_right": -11.11789110324025,
+        "lid_front": 66.67426260963343
+      }
+    },
+    {
+      "index": 6,
+      "fk_tf_difference_mm": 0.15004967141843287,
+      "nominal": {
+        "table_left": 30.893252296757314,
+        "table_right": 23.83255181079179,
+        "lid_front": 102.29589120201028
+      },
+      "selected_candidate": {
+        "table_left": -9.161788678003276,
+        "table_right": -11.24876549789359,
+        "lid_front": 66.92567752232665
+      }
+    },
+    {
+      "index": 7,
+      "fk_tf_difference_mm": 0.22059874038227134,
+      "nominal": {
+        "table_left": 32.04212393965377,
+        "table_right": 24.107127153645678,
+        "lid_front": 102.63608978237161
+      },
+      "selected_candidate": {
+        "table_left": -7.884475936571388,
+        "table_right": -10.876498141220889,
+        "lid_front": 67.21042483720265
+      }
+    },
+    {
+      "index": 8,
+      "fk_tf_difference_mm": 0.09690684761651042,
+      "nominal": {
+        "table_left": 31.10109544903804,
+        "table_right": 24.01276369536106,
+        "lid_front": 102.76781241719809
+      },
+      "selected_candidate": {
+        "table_left": -8.71044238781014,
+        "table_right": -11.011277624022327,
+        "lid_front": 67.30086441074974
+      }
+    },
+    {
+      "index": 9,
+      "fk_tf_difference_mm": 0.1009471650902764,
+      "nominal": {
+        "table_left": 29.85939007281351,
+        "table_right": 23.76391259737475,
+        "lid_front": 102.17405273863766
+      },
+      "selected_candidate": {
+        "table_left": -10.042287082403853,
+        "table_right": -11.306744411578759,
+        "lid_front": 66.8320827084726
+      }
+    },
+    {
+      "index": 10,
+      "fk_tf_difference_mm": 8.673617379884035e-15,
+      "nominal": {
+        "table_left": 31.35510198889684,
+        "table_right": 23.19906101413604,
+        "lid_front": 102.85464795781171
+      },
+      "selected_candidate": {
+        "table_left": -8.642688592775652,
+        "table_right": -11.78165334897539,
+        "lid_front": 67.48749723735408
+      }
+    }
+  ],
+  "summary": {
+    "nominal": {
+      "table_left": {
+        "mean_height_mm": 30.752141326364512,
+        "min_height_mm": 29.85939007281351,
+        "max_height_mm": 32.04212393965377
+      },
+      "table_right": {
+        "mean_height_mm": 23.661068378705544,
+        "min_height_mm": 23.007801808755772,
+        "max_height_mm": 24.353377784853073
+      },
+      "lid_front": {
+        "mean_height_mm": 102.34356927312157,
+        "min_height_mm": 101.85959915063957,
+        "max_height_mm": 102.85464795781171
+      }
+    },
+    "selected_candidate": {
+      "table_left": {
+        "mean_height_mm": -9.160205781638792,
+        "min_height_mm": -10.042287082403853,
+        "max_height_mm": -7.884475936571388
+      },
+      "table_right": {
+        "mean_height_mm": -11.352594953288676,
+        "min_height_mm": -12.00245846747556,
+        "max_height_mm": -10.722259112126608
+      },
+      "lid_front": {
+        "mean_height_mm": 66.93273003524061,
+        "min_height_mm": 66.5106486589834,
+        "max_height_mm": 67.48749723735408
+      }
+    }
+  },
+  "expected_approximate_heights_mm": {
+    "table_left": 0,
+    "table_right": 0,
+    "lid_front": 80
+  },
+  "input_sha256": {
+    "log/vision_baseline_20261111/geometry_resume_01/capture.json": "6ed095c3641fb2ac41c704a296eb51fcf0fdad66a661981ac792b7bbe0ef3f29",
+    "log/vision_baseline_20261111/geometry_resume_01/plane_geometry.json": "eef5c173dfd426554a2e9d1813f88b959ae7e37a25ba681b064f6ec2ba0f2feb",
+    "log/rgbd_refinement_20261112_02/candidate_profile.json": "85ffd8c86436acd576d68c83247de095f8a138eca70427290ddd8ccff6a6f6b0",
+    "log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "log/vision_baseline_20261111/geometry_resume_01/001_depth.png": "92bfcf29585f40b3bb88eba8ae8e301f8059f08513abb042b9c5266463fa784c",
+    "log/vision_baseline_20261111/geometry_resume_01/002_depth.png": "fb0d5b490efb35152e47cce7398f8bbcbe94cdbc6a0692a245b0cb68adb8fe10",
+    "log/vision_baseline_20261111/geometry_resume_01/003_depth.png": "f460162cfd19838618f28c91724fa6902d171f4e4d8b9eaaf7fb82948c595532",
+    "log/vision_baseline_20261111/geometry_resume_01/004_depth.png": "4a3625cc2693e046518bd5b5adc2c86aa03640bc177b65ea4083dc07d5eed8ef",
+    "log/vision_baseline_20261111/geometry_resume_01/005_depth.png": "fdcb1316f85151e77a9bd064bd6af6fe041324ad04f580bb8232ba8e476b91b9",
+    "log/vision_baseline_20261111/geometry_resume_01/006_depth.png": "4454804dde95b9c7621103cf7bd8c9add390011eb834e55f4df97f232b7615ce",
+    "log/vision_baseline_20261111/geometry_resume_01/007_depth.png": "6c4af890bae264710585c70c52c93587e2b91a71d3091af204b68dbe65a48fe4",
+    "log/vision_baseline_20261111/geometry_resume_01/008_depth.png": "4a79f9a4d0e0b1bbaaa2e2f27c05cdc251b705df03a3c25878638a9a9d36b592",
+    "log/vision_baseline_20261111/geometry_resume_01/009_depth.png": "50c2210534c7c2f61655ecfcf5f432fcf882e98ea1ad6f217aa339cc56d6f5d9",
+    "log/vision_baseline_20261111/geometry_resume_01/010_depth.png": "3af11ee14728788d50bbd3f1c9c0d7f7f41224baf30f60398b9aa445c5b69336"
+  },
+  "implementation_sha256": "4153e5fde98b2b4c37a6bad9458b607e4449dec9df38e2d7c8a7891454f44e7d",
+  "caveat": "Earlier inspected 10-frame single-pose capture, not 10 independent poses. Model height correction verified against historical TF. Mount stability between sessions is assumed. No parameters, masks, or candidate choice fitted to this audit."
+}

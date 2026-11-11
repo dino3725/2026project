@@ -1,0 +1,5 @@
+{
+  "review": "Full pattern visible; 24 corners extracted; no fingers occluding checker pattern. Retained for training. Final dataset diversity and calibration validity not yet evaluated.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

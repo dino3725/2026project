@@ -1,0 +1,20 @@
+{
+  "method": "Unchanged factory K/D PnP; diagnostic only, not calibration validation",
+  "normal": [
+    -0.09800232122466362,
+    0.10488458417942427,
+    -0.9896437586506
+  ],
+  "factory_PnP_rms_px": 0.32178942011479,
+  "corner_count": 20,
+  "corner_bounds_px": [
+    [
+      949.8279418945312,
+      159.18701171875
+    ],
+    [
+      1103.109375,
+      384.39324951171875
+    ]
+  ]
+}

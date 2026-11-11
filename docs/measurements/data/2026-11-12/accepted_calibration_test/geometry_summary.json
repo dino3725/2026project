@@ -1,0 +1,461 @@
+{
+  "status": "one_pose_live_audit",
+  "regions_xyxy": {
+    "table_far": [
+      490,
+      90,
+      630,
+      200
+    ],
+    "table_left": [
+      250,
+      470,
+      305,
+      600
+    ],
+    "lid_left": [
+      460,
+      340,
+      570,
+      440
+    ],
+    "lid_front": [
+      470,
+      600,
+      950,
+      640
+    ],
+    "lid_right": [
+      990,
+      400,
+      1040,
+      500
+    ]
+  },
+  "frames": [
+    {
+      "index": 1,
+      "valid_depth_fraction": {
+        "table_far": 0.980448533640023,
+        "table_left": 1.0,
+        "lid_left": 0.8680445151033387,
+        "lid_front": 0.609375,
+        "lid_right": 1.0
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -1.377307677128023,
+          "support_height_p05_p95_mm": [
+            -7.467617729911209,
+            6.95916854553337
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -7.993032917344472,
+          "support_height_p05_p95_mm": [
+            -12.657828684621698,
+            -3.9252709523046554
+          ]
+        },
+        "lid_left": {
+          "support_height_median_mm": 67.85925613378804,
+          "support_height_p05_p95_mm": [
+            65.7220501948508,
+            69.4771205610769
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 66.73980278285623,
+          "support_height_p05_p95_mm": [
+            59.24134555730089,
+            70.51867895088802
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 2,
+      "valid_depth_fraction": {
+        "table_far": 0.9815986198964922,
+        "table_left": 1.0,
+        "lid_left": 0.787758346581876,
+        "lid_front": 0.6745535714285714,
+        "lid_right": 0.9982698961937716
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -2.5592501148013564,
+          "support_height_p05_p95_mm": [
+            -6.445190860685389,
+            5.775463291386825
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -8.109784853880733,
+          "support_height_p05_p95_mm": [
+            -11.345190988946175,
+            -3.5877263056716626
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 67.23305409937839,
+          "support_height_p05_p95_mm": [
+            58.995118810736905,
+            70.69078649140819
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": 91.36750858096221,
+      "table_plane_rms_mm": 1.564568442889967,
+      "table_normal_tilt_in_base_deg": 3.1245930372750426
+    },
+    {
+      "index": 3,
+      "valid_depth_fraction": {
+        "table_far": 0.980448533640023,
+        "table_left": 1.0,
+        "lid_left": 0.6772655007949125,
+        "lid_front": 0.6727678571428571,
+        "lid_right": 1.0
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -2.5150272456860954,
+          "support_height_p05_p95_mm": [
+            -7.718690229767419,
+            6.891708273215945
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -8.20910460755884,
+          "support_height_p05_p95_mm": [
+            -12.003819161456107,
+            -3.1461172746874944
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 67.14414371178492,
+          "support_height_p05_p95_mm": [
+            58.809520370780206,
+            70.35783380124798
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 4,
+      "valid_depth_fraction": {
+        "table_far": 0.980448533640023,
+        "table_left": 1.0,
+        "lid_left": 0.21303656597774245,
+        "lid_front": 0.7,
+        "lid_right": 1.0
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -1.318069331629765,
+          "support_height_p05_p95_mm": [
+            -4.876365940196035,
+            7.981866561845484
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -7.688261093645963,
+          "support_height_p05_p95_mm": [
+            -10.962851131458805,
+            -2.964905991203105
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 66.91419639956612,
+          "support_height_p05_p95_mm": [
+            60.73091120710915,
+            71.2956491483897
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 5,
+      "valid_depth_fraction": {
+        "table_far": 0.9815986198964922,
+        "table_left": 1.0,
+        "lid_left": 0.03259141494435612,
+        "lid_front": 0.7267857142857143,
+        "lid_right": 0.986159169550173
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -2.3998772335027763,
+          "support_height_p05_p95_mm": [
+            -6.339061698858121,
+            8.196136119936433
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -8.081854147223574,
+          "support_height_p05_p95_mm": [
+            -13.094726168260262,
+            -2.145510487568012
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 67.31951553609537,
+          "support_height_p05_p95_mm": [
+            60.25616010462124,
+            71.76197367116332
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 6,
+      "valid_depth_fraction": {
+        "table_far": 0.9810235767682576,
+        "table_left": 1.0,
+        "lid_left": 0.0,
+        "lid_front": 0.7183035714285714,
+        "lid_right": 0.9844290657439446
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -2.5637330686777515,
+          "support_height_p05_p95_mm": [
+            -6.103425851907729,
+            6.301975064622786
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -9.179422731127632,
+          "support_height_p05_p95_mm": [
+            -12.517831954731657,
+            -3.0921887938508363
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 67.29219193325885,
+          "support_height_p05_p95_mm": [
+            60.549205254193176,
+            72.0716533636133
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": 90.86279648400169,
+      "table_plane_rms_mm": 1.461021867079901,
+      "table_normal_tilt_in_base_deg": 2.9268318032091347
+    },
+    {
+      "index": 7,
+      "valid_depth_fraction": {
+        "table_far": 0.980448533640023,
+        "table_left": 1.0,
+        "lid_left": 0.0,
+        "lid_front": 0.740625,
+        "lid_right": 0.9757785467128027
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -1.6948906488565925,
+          "support_height_p05_p95_mm": [
+            -4.638217766349504,
+            7.743222773132565
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -7.723699217580242,
+          "support_height_p05_p95_mm": [
+            -12.667762139867099,
+            -2.4182103221991404
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 68.09153447971755,
+          "support_height_p05_p95_mm": [
+            62.05405591423029,
+            72.30122278121524
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": 94.46798812717549,
+      "table_plane_rms_mm": 1.5444654293112214,
+      "table_normal_tilt_in_base_deg": 3.6751661820785233
+    },
+    {
+      "index": 8,
+      "valid_depth_fraction": {
+        "table_far": 0.9821736630247269,
+        "table_left": 1.0,
+        "lid_left": 0.04133545310015898,
+        "lid_front": 0.7370535714285714,
+        "lid_right": 0.9913494809688581
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -1.8779608297046035,
+          "support_height_p05_p95_mm": [
+            -6.518257576710229,
+            7.686125206264369
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -8.453373376534715,
+          "support_height_p05_p95_mm": [
+            -12.718536741967249,
+            -2.1089086955618876
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 68.37354727712784,
+          "support_height_p05_p95_mm": [
+            63.80559470525398,
+            72.43097658169127
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 9,
+      "valid_depth_fraction": {
+        "table_far": 0.9810235767682576,
+        "table_left": 1.0,
+        "lid_left": 0.03815580286168521,
+        "lid_front": 0.7294642857142857,
+        "lid_right": 0.9896193771626297
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -0.88320682060015,
+          "support_height_p05_p95_mm": [
+            -4.959910985968869,
+            7.663724122767507
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -7.938861981892096,
+          "support_height_p05_p95_mm": [
+            -12.384288053225411,
+            -1.9257022558744983
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 68.54495744770763,
+          "support_height_p05_p95_mm": [
+            64.03385699557134,
+            72.88601771263974
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    },
+    {
+      "index": 10,
+      "valid_depth_fraction": {
+        "table_far": 0.9810235767682576,
+        "table_left": 1.0,
+        "lid_left": 0.11446740858505565,
+        "lid_front": 0.7366071428571429,
+        "lid_right": 0.9948096885813149
+      },
+      "regions": {
+        "table_far": {
+          "support_height_median_mm": -1.2852719806162964,
+          "support_height_p05_p95_mm": [
+            -5.393048024262904,
+            7.893755225000247
+          ]
+        },
+        "table_left": {
+          "support_height_median_mm": -8.837174076697021,
+          "support_height_p05_p95_mm": [
+            -11.877427540921119,
+            -2.1277817781411805
+          ]
+        },
+        "lid_right": {
+          "support_height_median_mm": 68.4380021307314,
+          "support_height_p05_p95_mm": [
+            63.91197206974636,
+            72.8857724062406
+          ]
+        }
+      },
+      "relative_lid_height_median_mm": null,
+      "table_plane_rms_mm": null,
+      "table_normal_tilt_in_base_deg": null,
+      "table_plane_error": "Insufficient planar depth support"
+    }
+  ],
+  "summary": {
+    "table_far": {
+      "valid_frames": 10,
+      "mean": -1.8474594951203411,
+      "min": -2.5637330686777515,
+      "max": -0.88320682060015
+    },
+    "table_left": {
+      "valid_frames": 10,
+      "mean": -8.22145690034853,
+      "min": -9.179422731127632,
+      "max": -7.688261093645963
+    },
+    "lid_left": {
+      "valid_frames": 1,
+      "mean": 67.85925613378804,
+      "min": 67.85925613378804,
+      "max": 67.85925613378804
+    },
+    "lid_front": {
+      "valid_frames": 0,
+      "mean": null,
+      "min": null,
+      "max": null
+    },
+    "lid_right": {
+      "valid_frames": 10,
+      "mean": 67.60909457982243,
+      "min": 66.73980278285623,
+      "max": 68.54495744770763
+    },
+    "relative_lid_height_mm": {
+      "valid_frames": 3,
+      "mean": 92.2327643973798,
+      "min": 90.86279648400169,
+      "max": 94.46798812717549
+    }
+  },
+  "expected_approximate_heights_mm": {
+    "table": 0,
+    "lid": 80
+  },
+  "camera_calibration_refitted": false,
+  "notes": [
+    "Manually reviewed surface regions; common support plane confirmed by user.",
+    "Regions with less than 80% usable depth excluded and coverage recorded; masks not changed.",
+    "No new ruler measurement or independent coke footprint reference supplied.",
+    "Plane-relative lid height is invariant to a rigid camera transform; not proof of calibration."
+  ],
+  "analysis_source_sha256": "f60003a28b446a6f5a6b8634f830737c5ca95b6669aa1731daf7eb533365908e"
+}

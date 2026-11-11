@@ -1,0 +1,7 @@
+{
+  "review": "Full physical checker pattern visible in upper central image, all 24 extracted corners on target, no hand occlusion. Outer upper paper/box margin cropped; checker pattern intact. Candidate errors not examined during collection.",
+  "retained_for_validation": true,
+  "corner_count": 24,
+  "actual_coverage": "upper_center",
+  "calibration_complete": false
+}

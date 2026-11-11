@@ -1,0 +1,23 @@
+{
+  "docs/measurements/RESUME_AFTER_PAUSE_2026-11-11.md": "6b23cb1a04cc71d89e3cbaa4464a8cdcacde0a611bfa91189848fec43e064d1b",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/analysis.json": "22c961209e976a9c2086d2d82b04cf6132924fd2cd1dabfd41e2dfa6b36c1383",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/decision.json": "0cac595719e7cbde445eae9c37b6a5792b5f76a820e72449fd9df3555ea4e38e",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/pose_diagnostics.pdf": "a3797bf5671488e012f3fb77e0a8d033ee5b77513c8a9a279a30b50597f2e632",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/pose_diagnostics.png": "28680baa746e74f39e60c3e78ecf00142e3291b505e408e44e0b30ae97ff509d",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/pose_residuals.csv": "300898a7f811d56959f3c2b90a311ff063699c0d60d9855e56176902270952d1",
+  "docs/measurements/data/2026-11-12/pose_diagnosis/verification.json": "a1707c216911e69f23206ca5286d02900d0f55c3e05a2c96107ea060d3b42ee5",
+  "docs/measurements/handeye_intrinsics_comparison_2026-11-11.md": "78a1406c62cf7238a10f61ef5982a657a31bbdd89701de3037fd453ea66cb998",
+  "docs/measurements/measured_geometry_2026-11-11.yaml": "f7e3aed40886103dd61a5095fa56a59c147aa8130b0e12453418a8e8d28692a1",
+  "docs/measurements/pose_residual_diagnosis_2026-11-12.md": "216531252bed9e205894e8bd0ebd51d4c848224adb9fe81fbe2a87852dc8c89d",
+  "log/intrinsics_box_20261111_01/handeye_intrinsics_comparison.json": "e876b3f43f58afa0cbc8f17acd97cdc2c5ef1a46fe95b8f464ec7e89c6451552",
+  "log/intrinsics_box_20261111_01/intrinsic_candidates.json": "061d1587ffade82c09b335edb9a53b0858011228303745337a1d5c21abe00995",
+  "log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "tools/vision_eval/README.md": "556fd29a336aea432ffc4f38f91e057dc459a3515105c194a61bff7452a1260d",
+  "tools/vision_eval/calibration_plan.py": "21ee5d24b895a5fbf2b0fc592693a2b2ba92a22515373c0bfee836b6b8957aff",
+  "tools/vision_eval/diagnose_pose_residuals.py": "66c3b1a30ed5cb83660fa063d86117b2f1bab381164c66da36d33eb31a870c3f",
+  "tools/vision_eval/handeye.py": "fedc9b472e7f2caead9755240f737faa199c293012a5be4a297c85845336195e",
+  "tools/vision_eval/intrinsics_observation.py": "46ea7b35217f183c9bbf27328ffd0a402a094c44b8fc7a01e1210c70b9e63b2d",
+  "tools/vision_eval/pose_diagnostics.py": "eec04e0c4706425c06c1cd2b42ae3aaaedaae92ab8feb508c203231141b11380",
+  "tools/vision_eval/refine_handeye.py": "2ede42e956dda6d8319ba75f46478be579fc792fb9d9b8c18bd7fb6b3655cf4b",
+  "tools/vision_eval/test_pose_diagnostics.py": "c662b163ad09be389331a9e3872d5097cb798d59ab0dab96cb2413253fa1d918"
+}

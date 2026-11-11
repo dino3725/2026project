@@ -1,0 +1,129 @@
+{
+  "status": "offline_refinement_diagnostic_not_applied",
+  "applied": false,
+  "T_ee_optical": [
+    [
+      0.0020238363140189577,
+      -0.05698732762011621,
+      0.9983728504808671,
+      -0.022355307224612427
+    ],
+    [
+      -0.9999645691070685,
+      -0.00827302926727485,
+      0.0015548367302641497,
+      0.03841855452597435
+    ],
+    [
+      0.008170961821537483,
+      -0.998340623974333,
+      -0.05700205176527089,
+      0.050080436948358474
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_ee_camera": [
+    [
+      0.998126298601882,
+      -0.001179741731492398,
+      0.0611759777098302,
+      -0.022208456078581938
+    ],
+    [
+      0.00036559251079944585,
+      0.9999112473143733,
+      0.013317801482616767,
+      0.02370320477949451
+    ],
+    [
+      -0.06118625974369335,
+      -0.01327048242006736,
+      0.9980381435170281,
+      0.05004842336131077
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_base_board": [
+    [
+      -0.005200063073545782,
+      0.9998473444321466,
+      0.016680742669779463,
+      0.2554179354099639
+    ],
+    [
+      -0.9999864353338724,
+      -0.005204301585796402,
+      0.00021069707901182015,
+      0.1035424330037085
+    ],
+    [
+      0.00029747653045817323,
+      -0.016679420762974115,
+      0.9998608445332408,
+      -0.02330905292638495
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "metrics": {
+    "initial_corner_rms_px": 3.931352325152159,
+    "refined_corner_rms_px": 0.920225802835955,
+    "iterations_nfev": 5,
+    "jacobian_singular_values": [
+      49948.68144449447,
+      49184.28581359195,
+      6553.308239733481,
+      3441.5856163663134,
+      2655.4859087550026,
+      1958.553249957402,
+      1514.0039322214827,
+      944.0977984950166,
+      569.0344903652041,
+      471.4490929145386,
+      126.600626213533,
+      99.1374224475534
+    ],
+    "objective": "Unweighted squared pixel residuals, all training corners; no plane-height constraint."
+  },
+  "camera_xyz_mm": [
+    -22.20845607858194,
+    23.70320477949451,
+    50.04842336131077
+  ],
+  "camera_rpy_deg": [
+    -0.7617923575963395,
+    3.5079055655140308,
+    0.0209862288800478
+  ],
+  "board_center_above_support_mm": -14.325487527655746,
+  "training_inputs_sha256": {
+    "log/handeye_desk_fixed_20261111_01/train_00/observation.json": "6e87955b9d845af0378c089f5207f068c419e044c695feac4b8f381a7594feda",
+    "log/handeye_desk_fixed_20261111_01/train_01/observation.json": "727ccf3c1de8d2c1af83ac0dfb91b173191b882a8e217ef2aa5397dc183afb14",
+    "log/handeye_desk_fixed_20261111_01/train_02/observation.json": "8cded304ff6987a61c36bdbbaebcb7b7eb4e3c773e65a0bb1ade07d8e940c208",
+    "log/handeye_desk_fixed_20261111_01/train_03/observation.json": "a922cdc3677ec2a513f2a752e08143e9d7e809b6c36334963fb2a33d86b1009d",
+    "log/handeye_desk_fixed_20261111_01/train_04/observation.json": "0d5e23ba6faaccaedaf018d29058bc63a7edede9c4cc8ce33671e4702af851e4",
+    "log/handeye_desk_fixed_20261111_01/train_05/observation.json": "2b8d3871790a5537cc107300832e0c7f052535e62dfc5fa557d009ae3a8c1aa5",
+    "log/handeye_desk_fixed_20261111_01/train_06/observation.json": "347f2170a28fe82101cb7e1062e87fb63609b81ba7d897175f1a2e12c022dc57",
+    "log/handeye_desk_fixed_20261111_01/train_07/observation.json": "a073421b6be34b9d0917e99c6b4e48be53e74dd762a3da70873c1f415f2cbbe9",
+    "log/handeye_desk_fixed_20261111_01/train_08/observation.json": "0f946c15197ddbf692e46cb7b54a4de1fca6f9036d384f3a57af898c13d2e63c",
+    "log/handeye_desk_fixed_20261111_01/train_09/observation.json": "4de2fdbb2517bc6f6b847c4fe3efa4c5da2fae34ed521d912ea5ea936cd8005a",
+    "log/handeye_desk_fixed_20261111_01/train_10/observation.json": "69fd9437601e47c786c72ef871ef2d35c5cd5d27094ebf81f5cba63793202828",
+    "log/handeye_desk_fixed_20261111_01/train_11/observation.json": "2054250495b3d2cb08697f90f757c4efa14ca808ee8cd2c99704750ca44ee360",
+    "log/handeye_desk_fixed_20261111_01/train_12/observation.json": "4dd9322932e063af9ddfd9bea9c5f8407a35ecd5b840a0e147bf1cef50d8d000"
+  },
+  "validation_note": "Existing held-out results have been inspected; fresh views needed for final validation."
+}

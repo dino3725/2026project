@@ -1,0 +1,19 @@
+{
+  "status": "withheld_pending_absolute_geometry_check",
+  "mount_applied": false,
+  "arm_mount_height_model_applied": true,
+  "training_poses": 13,
+  "held_out_poses": 3,
+  "successful_indexed_moves": 15,
+  "all_observations_corner_count": 24,
+  "max_reprojection_rms_px": 0.470030277967453,
+  "held_out_max_consistency_mm": 2.6194367335377713,
+  "held_out_max_consistency_deg": 0.26891097581777,
+  "candidate_rgb_board_above_support_mm": 14.881602412554411,
+  "candidate_depth_board_above_support_mean_mm": 11.764320264435558,
+  "expected_paper_support_height_mm": "approximately 0, paper/tape thickness not independently measured",
+  "reason": "Relative pose consistency passes screening, but absolute support-plane height still differs by about 12-15mm. Do not compensate by blindly subtracting this height.",
+  "pending_user_measurement": "Current wrist joint rotation-axis center vertical height above wheel support plane",
+  "predicted_wrist_axis_height_cm": 44.08699486672626,
+  "robot_state": "Holding calibration pose 15; no HOME, base driving, pick or gripper motion. No further moves pending."
+}

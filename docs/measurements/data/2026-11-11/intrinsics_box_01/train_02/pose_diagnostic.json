@@ -1,0 +1,35 @@
+{
+  "method": "Unchanged factory K/D PnP; diagnostic only, not independent calibration validation",
+  "views": [
+    {
+      "name": "train_00",
+      "corners": 24,
+      "factory_PnP_rms_px": 0.2607311463935476,
+      "normal": [
+        -0.10267248366955073,
+        0.07803957293393382,
+        -0.991649225358148
+      ]
+    },
+    {
+      "name": "train_01",
+      "corners": 24,
+      "factory_PnP_rms_px": 0.15458839023440357,
+      "normal": [
+        0.034152644388524035,
+        -0.3171226767567232,
+        -0.94776938374687
+      ]
+    },
+    {
+      "name": "train_02",
+      "corners": 24,
+      "factory_PnP_rms_px": 0.3481127039014215,
+      "normal": [
+        -0.02539259386309173,
+        0.49706272271755964,
+        -0.8673429920518817
+      ]
+    }
+  ]
+}

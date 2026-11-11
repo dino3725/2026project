@@ -1,0 +1,21 @@
+{
+  "pose": 2,
+  "completed": true,
+  "before": {
+    "completed_pose": 1,
+    "preparing": false,
+    "blocked_reason": "",
+    "stopped": false
+  },
+  "acceptance": {
+    "success": true,
+    "message": "Pose 2 accepted; wait for completed status and ready"
+  },
+  "after": {
+    "completed_pose": 2,
+    "preparing": false,
+    "blocked_reason": "",
+    "stopped": false
+  },
+  "elapsed_seconds": 4.654102558000886
+}

@@ -1,0 +1,7 @@
+{
+  "review": "Full physical target visible, all 24 detected corners on target, no hand occlusion. Actual observed location is lower center rather than requested lower left. Retain actual view without relabeling its image coverage; candidate residuals not inspected during collection.",
+  "retained_for_validation": true,
+  "corner_count": 24,
+  "actual_coverage": "lower_center",
+  "calibration_complete": false
+}

@@ -1,0 +1,31 @@
+{
+  "completed": "2026-11-12T01:53:19.195651+09:00",
+  "stop_command_sent_first": true,
+  "first_stage_confirmed_exited_pids": [
+    9113,
+    8868,
+    8234
+  ],
+  "joy_parent_initial_sigint_did_not_stop_child": true,
+  "final_steps": [
+    {
+      "pid": 8299,
+      "command": "/opt/ros/humble/lib/joy/joy_node --ros-args -p device_id:=0 -p deadzone:=0.05 -p autorepeat_rate:=20.0 ",
+      "signal": "SIGINT",
+      "exited": true
+    },
+    {
+      "pid": 8283,
+      "command": "/usr/bin/python3 /opt/ros/humble/bin/ros2 run joy joy_node --ros-args -p device_id:=0 -p deadzone:=0.05 -p autorepeat_rate:=20.0 ",
+      "signal": "SIGINT",
+      "exited": true
+    },
+    {
+      "pid": 8568,
+      "command": "/usr/bin/python3 /opt/ros/humble/bin/ros2 launch /home/fcsl/2026project/log/measured_model_20261111/hardware.launch.py use_fake_hardware:=false start_rviz:=false ",
+      "signal": "SIGINT",
+      "exited": true
+    }
+  ],
+  "home_or_gripper_motion_requested": false
+}

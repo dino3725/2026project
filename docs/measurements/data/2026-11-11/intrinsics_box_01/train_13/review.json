@@ -1,0 +1,6 @@
+{
+  "review": "Full checker pattern visible at image right/upper region; outer right paper/box margin cropped. 20 of 24 corners detected; retain observed correspondences only without imputing missing points.",
+  "retained_for_training": true,
+  "corner_count": 20,
+  "calibration_complete": false
+}

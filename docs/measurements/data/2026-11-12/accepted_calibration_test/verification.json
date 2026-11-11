@@ -1,0 +1,16 @@
+{
+  "created": "2026-11-12T01:50:13.434763+09:00",
+  "package_tests_passed": 18,
+  "package_tests_skipped": 1,
+  "build": "passed",
+  "git_diff_check": "passed",
+  "shell_syntax": "passed",
+  "applied_live": true,
+  "recognition_pose_moves": 1,
+  "coke_localizations_successful": 3,
+  "rgbd_pairs": 10,
+  "pick_or_gripper_commands_sent": false,
+  "nonzero_base_velocity_sent": false,
+  "end_state": "ERROR_hold_manual_drive_disabled",
+  "absolute_accuracy_certified": false
+}

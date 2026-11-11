@@ -1,0 +1,45 @@
+{
+  "note": "Training-only diagnostic after primary frozen Park candidate; no method selection from held-out data.",
+  "results": {
+    "Tsai": {
+      "camera_xyz_mm": [
+        -46.58082033248829,
+        23.670391588051462,
+        53.57896630132207
+      ],
+      "training_max_translation_mm": 4.825762067853953
+    },
+    "Park": {
+      "camera_xyz_mm": [
+        -46.594042172697414,
+        20.76990993530612,
+        53.82223275900032
+      ],
+      "training_max_translation_mm": 4.927214648501859
+    },
+    "Horaud": {
+      "camera_xyz_mm": [
+        -46.593927011472324,
+        20.769934685349117,
+        53.82219327294381
+      ],
+      "training_max_translation_mm": 4.927225498788941
+    },
+    "Andreff": {
+      "camera_xyz_mm": [
+        43.104164616746594,
+        -14.533647371719372,
+        -163.73652889453217
+      ],
+      "training_max_translation_mm": 34.49527307560251
+    },
+    "Daniilidis": {
+      "camera_xyz_mm": [
+        -44.54158885438031,
+        27.861991736956035,
+        54.74402718686331
+      ],
+      "training_max_translation_mm": 5.3585949873372725
+    }
+  }
+}

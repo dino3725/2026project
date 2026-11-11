@@ -1,0 +1,50 @@
+{
+  "status": "live_tf_model_and_intrinsics_verified",
+  "calibration_id": "jetson_rgbd_20261112_v1",
+  "camera_xyz_m": [
+    -0.03024395088466985,
+    0.024003263976252315,
+    0.044460232726937776
+  ],
+  "camera_quaternion_xyzw": [
+    -0.009836379316377309,
+    0.013820281341542907,
+    0.00413448300238287,
+    0.9998475641395982
+  ],
+  "base_fixed_z_m": 0.116,
+  "model_readback": {
+    "robot_state_publisher": {
+      "raw_sha256": "8c298e973f3111701a27c7f2487cbe5df95197181469c155d6b02d67ee195a5d",
+      "canonical_equal": true
+    },
+    "controller_manager": {
+      "raw_sha256": "8c298e973f3111701a27c7f2487cbe5df95197181469c155d6b02d67ee195a5d",
+      "canonical_equal": true
+    }
+  },
+  "source_model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "raw_model_hash_note": "CLI xacro serialization differs; complete XML elements attributes and text are identical after ignoring comments and formatting.",
+  "camera_info": {
+    "k": [
+      911.713134765625,
+      0.0,
+      632.2310791015625,
+      0.0,
+      911.4946899414062,
+      372.9808654785156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "d": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "width": 1280,
+    "height": 720
+  }
+}

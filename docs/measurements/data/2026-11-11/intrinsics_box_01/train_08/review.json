@@ -1,0 +1,5 @@
+{
+  "review": "Full checker pattern visible in lower central image after in-plane rotation; all 24 corners detected; no hand occlusion.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

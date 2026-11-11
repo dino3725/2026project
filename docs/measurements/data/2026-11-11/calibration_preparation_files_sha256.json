@@ -1,0 +1,11 @@
+{
+  "calibration_camera_audit.json": "233c95e6b5392484d37712da393507139b23bbb2c231b304a1db3ef064381a37",
+  "measured_model_candidate_manifest.json": "ec56a617da091fad379288c8196c9dbf1a87af6eb894a1caf3815a98beb3907a",
+  "coke_position_comparison.csv": "4ed060011771bc9436b0e09802b72320863f72096bba2c0c49a185391454114a",
+  "coke_285mm_01_trials.csv": "0846fd16dc4f0294c96bbee001c67dce9be36eafcccb9eb72d76016a8b1322ec",
+  "coke_285mm_01_session.json": "70493b193f85f9413e2542c143d52e3786d2c9011cb0c91a837e4d858e06f355",
+  "coke_285mm_left50_01_trials.csv": "49888ccaa781d6d7239fda2e111af500e11aa6d3821677967e515cb45e47485a",
+  "coke_285mm_left50_01_session.json": "15199b7e40ca3faa73313af373f223addf53b878f645887b9aeb83d9361c8bd2",
+  "coke_335mm_01_trials.csv": "f62d13d2a3f53474a16e260bed97dd402b7ee4d6d8612af9e02ddee02959e7cb",
+  "coke_335mm_01_session.json": "b4ad9456cee75a0bf7eb522ebca70d3be82f6dd7d2f41cb76feed8d4d47529c7"
+}

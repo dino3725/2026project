@@ -1,0 +1,20 @@
+{
+  "status": "prepared_only_not_loaded",
+  "change": "base_link -> link1 z: 0.091 -> 0.116 m",
+  "shoulder_ground_height_m": 0.2025,
+  "measured_shoulder_ground_height_m": 0.202,
+  "limitations": [
+    "Deck meshes/collision geometry remain official; not a complete modified chassis model.",
+    "Lidar approximate x/z measurements are not applied in this arm calibration model.",
+    "Restart hardware and MoveIt together using these copies; do not mix with old launches.",
+    "Do not reuse an old +25mm postprocessing offset on data from this model."
+  ],
+  "sources_sha256": {
+    "/opt/ros/humble/share/turtlebot3_manipulation_description/urdf/turtlebot3_manipulation.urdf.xacro": "c7dc19191d4d6ac41c08aab285e9d8dd37d8d0494f800b4fda0e56fc6091d580",
+    "/opt/ros/humble/share/turtlebot3_manipulation_bringup/launch/base.launch.py": "9079904367bec7a3e94e8baaa3db740150b4fb2a2a28fb360055bb685d43e642",
+    "/opt/ros/humble/share/turtlebot3_manipulation_bringup/launch/hardware.launch.py": "7276afa72395d9ee4ae9abdd2851d77e3a897b8293595fa8ecd50395a641abe8",
+    "/opt/ros/humble/share/turtlebot3_manipulation_moveit_config/launch/move_group.launch.py": "bff0e464da127d0744f0fb96647d01bcbb54b561ae1176a279847cd7147f0d32",
+    "/opt/ros/humble/share/turtlebot3_manipulation_moveit_config/launch/moveit_rviz.launch.py": "f4278078d57fb1dfaba9198921e92797fdf3cc353e73e661f8a661b29931fb27"
+  },
+  "urdf_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546"
+}

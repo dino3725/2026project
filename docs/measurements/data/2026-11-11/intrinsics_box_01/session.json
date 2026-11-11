@@ -1,0 +1,51 @@
+{
+  "session_id": "intrinsics_box_20261111_01",
+  "phase": "offline_handeye_comparison_complete_candidate_withheld",
+  "user_confirmed_target_flat_on_box": true,
+  "robot_drivers_started": false,
+  "camera_only_running": true,
+  "camera_launch_pid": 20239,
+  "camera_node_pid": 20255,
+  "measured_pattern_size_mm": [
+    177,
+    125
+  ],
+  "calibration_settings_applied": false,
+  "raw_images_local_only": true,
+  "audit_image_not_training": true,
+  "operator_holds_target_camera_stays_fixed": true,
+  "front_audit_detected_corners": 24,
+  "collection_plan": "Central front view, different horizontal and vertical tilts, image positions and distances. Review each view before requesting the next. Freeze training inputs and candidates before collecting separate validation views.",
+  "training_view_target_count": 15,
+  "validation_view_target_count": 5,
+  "do_not_mix_audit_into_fit": true,
+  "retained_training_views": [
+    "train_00",
+    "train_01",
+    "train_02",
+    "train_03",
+    "train_04",
+    "train_05",
+    "train_06",
+    "train_07",
+    "train_08",
+    "train_09",
+    "train_10",
+    "train_11",
+    "train_12",
+    "train_13",
+    "train_14"
+  ],
+  "next_requested_view": null,
+  "candidate_sha256": "061d1587ffade82c09b335edb9a53b0858011228303745337a1d5c21abe00995",
+  "retained_validation_views": [
+    "validation_00",
+    "validation_01",
+    "validation_02",
+    "validation_03",
+    "validation_04"
+  ],
+  "additional_captures_planned": false,
+  "camera_preview_pid": 23412,
+  "handeye_comparison_report": "docs/measurements/handeye_intrinsics_comparison_2026-11-11.md"
+}

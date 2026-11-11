@@ -1,0 +1,5 @@
+{
+  "review": "Full pattern visible on image left, all 24 corners detected, no hands occluding pattern. Retained to broaden image coverage.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

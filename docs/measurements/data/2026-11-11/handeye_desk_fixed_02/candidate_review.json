@@ -1,0 +1,50 @@
+{
+  "park_status": "rejected_candidate",
+  "park_xyz_mm": [
+    -77.80831187185363,
+    17.3974620844341,
+    49.19130265297265
+  ],
+  "park_rpy_deg": [
+    -1.2007382172152543,
+    -0.39608116657361325,
+    0.5766410524221546
+  ],
+  "park_board_center_above_support_mm": 54.721730447523385,
+  "park_held_out": {
+    "translation_errors_mm": [
+      2.8448738119965147,
+      4.191484531222793,
+      5.436325145586425
+    ],
+    "rotation_errors_deg": [
+      0.6177224330588365,
+      0.8888282631288211,
+      0.455015166958132
+    ],
+    "max_translation_mm": 5.436325145586425,
+    "max_rotation_deg": 0.8888282631288211
+  },
+  "refined_board_center_above_support_mm": 13.386111822512579,
+  "refined_held_out_consistency": {
+    "translation_errors_mm": [
+      1.0690924508553938,
+      3.0207328036618875,
+      5.2833439910485
+    ],
+    "rotation_errors_deg": [
+      0.44045770460974903,
+      0.6098223645615504,
+      0.49762220083910125
+    ],
+    "max_translation_mm": 5.2833439910485,
+    "max_rotation_deg": 0.6098223645615504
+  },
+  "refined_held_out_corner_rms_px": [
+    0.7906166839298933,
+    1.9479372502090755,
+    2.592680300592625
+  ],
+  "refined_frozen_before_validation": true,
+  "note": "Both candidates withheld; no change to factory intrinsics or mount TF."
+}

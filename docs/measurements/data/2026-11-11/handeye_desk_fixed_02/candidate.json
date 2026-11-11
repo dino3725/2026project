@@ -1,0 +1,143 @@
+{
+  "status": "rejected_candidate",
+  "applied": false,
+  "session_id": "desk_fixed_20261111_02",
+  "T_ee_optical": [
+    [
+      0.01110723112088134,
+      0.011272565564821313,
+      0.9998747715004624,
+      -0.07809893288310277
+    ],
+    [
+      -0.9998114918893413,
+      -0.015799912165342232,
+      0.01128465602415526,
+      0.03211043157228555
+    ],
+    [
+      0.015925140590830136,
+      -0.9998116282797819,
+      0.011094947319983027,
+      0.049100878278805646
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_ee_camera": [
+    [
+      0.9999254625824903,
+      -0.009917051281508328,
+      -0.007121893972848162,
+      -0.07780831187185364
+    ],
+    [
+      0.010063874592837977,
+      0.9997312380949429,
+      0.02088468351061961,
+      0.0173974620844341
+    ],
+    [
+      0.006912865402988677,
+      -0.020954800667926484,
+      0.9997565246714958,
+      0.049191302652972654
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "camera_mount_xyz_m": [
+    -0.07780831187185364,
+    0.0173974620844341,
+    0.049191302652972654
+  ],
+  "camera_mount_rpy_rad": [
+    -0.020956835344933047,
+    -0.006912920461849659,
+    0.010064284966931819
+  ],
+  "training": {
+    "translation_errors_mm": [
+      7.89807373362577,
+      4.0429904829389685,
+      4.240028137654354,
+      4.115598071468903,
+      2.107099419936284,
+      3.5772363233942506,
+      4.980072460191884,
+      3.5124514388493004,
+      0.8284717879351038,
+      1.6225559816707376,
+      1.474362671936959,
+      3.762931215365992,
+      4.11947213590432
+    ],
+    "rotation_errors_deg": [
+      0.8443297318111744,
+      0.25348363323173345,
+      0.308305362429602,
+      0.7499269251483393,
+      0.6308795669237769,
+      0.8437583130519756,
+      0.601369033481985,
+      0.4684046054730667,
+      0.5094529463309226,
+      0.1572424375650969,
+      0.4972854812211021,
+      0.5068783555498186,
+      0.8239325506263165
+    ],
+    "max_translation_mm": 7.89807373362577,
+    "max_rotation_deg": 0.8443297318111744
+  },
+  "held_out": {
+    "translation_errors_mm": [
+      2.8448738119965147,
+      4.191484531222793,
+      5.436325145586425
+    ],
+    "rotation_errors_deg": [
+      0.6177224330588365,
+      0.8888282631288211,
+      0.455015166958132
+    ],
+    "max_translation_mm": 5.436325145586425,
+    "max_rotation_deg": 0.8888282631288211
+  },
+  "rotation_singular_values": [
+    2.669770029136328,
+    1.095937580118095,
+    0.1484891532723133
+  ],
+  "provisional_screening_limits": {
+    "max_translation_mm": 5,
+    "max_rotation_deg": 1
+  },
+  "limits_note": "Internal consistency screening, not proof of absolute robot or depth accuracy.",
+  "input_sha256": {
+    "log/handeye_desk_fixed_20261111_02/train_00/observation.json": "11dcbc6fdecc07d82ad9b70d45b842bbd0534a713cc1aa87d27d02ff0a0feca3",
+    "log/handeye_desk_fixed_20261111_02/train_01/observation.json": "0b6a85eae33c795b27846537a591a290b39a8d5cb4051abc4fd107840a566d00",
+    "log/handeye_desk_fixed_20261111_02/train_02/observation.json": "ef5a7173b26d7715faed5b555995eeacf29808b0358ca0cedccae9b3e5f11de3",
+    "log/handeye_desk_fixed_20261111_02/train_03/observation.json": "62a9de8f3745722b7e0d8c4c6f153b5458f13a4688a8bfd1d982b23f8b588900",
+    "log/handeye_desk_fixed_20261111_02/train_04/observation.json": "316b20775188c274a7328bd1baf57d370521e7b717c8abaf515601f1d4cf7485",
+    "log/handeye_desk_fixed_20261111_02/train_05/observation.json": "e83e10038341b55265ae1f3e67e7556680ca5b7cf70119928a603807c0def5b2",
+    "log/handeye_desk_fixed_20261111_02/train_06/observation.json": "351c09378cd645e61ba49fb4293cebf1088ae0a48442a587ae43b2f26c7d46e4",
+    "log/handeye_desk_fixed_20261111_02/train_07/observation.json": "2fa2ad351a1bfd15dcf5ee0e7b046ebbbde1d70b8f81f5eb7e2c8c3d9f8fd936",
+    "log/handeye_desk_fixed_20261111_02/train_08/observation.json": "edd22ed07ac03088ce9a38777881e6ac8a39f4c00b106e76bd21fb36116278c0",
+    "log/handeye_desk_fixed_20261111_02/train_09/observation.json": "5c8134e8801c8f8c15ddd0e363052bbbbf1d077d16c2fc5435b18cffb2f68174",
+    "log/handeye_desk_fixed_20261111_02/train_10/observation.json": "3eb3ba5af8e35081f50872ff8ad718cb11dde065a0e952018d069ea4bb0c04a1",
+    "log/handeye_desk_fixed_20261111_02/train_11/observation.json": "bb12a8eb28061992af799f95d2120abe8b23840ab9b25785c4921049c30ca34b",
+    "log/handeye_desk_fixed_20261111_02/train_12/observation.json": "33091d3fc6d63fc4d2f39637b1a95faadbf2709a5b16d59cbd0007f8b5ba7a87",
+    "log/handeye_desk_fixed_20261111_02/validation_13/observation.json": "eb5b3e32a1f7602964272f2dacad830dfbbf7a9cf4689d8eb68f5709aad86610",
+    "log/handeye_desk_fixed_20261111_02/validation_14/observation.json": "00a9264cdecb1df5b2c5728ffdac2c5a4b62ba49ecde8da4e30eac873e516379",
+    "log/handeye_desk_fixed_20261111_02/validation_15/observation.json": "0a2f6ef830b3f6aed5bf7e44c07afc55853abc2a34063a6faf3eeede013d7bf9"
+  }
+}

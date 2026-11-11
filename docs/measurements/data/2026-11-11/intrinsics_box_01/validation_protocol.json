@@ -1,0 +1,23 @@
+{
+  "created": "2026-11-11T17:11:15.979467+09:00",
+  "candidate_sha256": "061d1587ffade82c09b335edb9a53b0858011228303745337a1d5c21abe00995",
+  "training_frozen_sha256": "72094357453eac905ab24728c5c7dbd9d2feb41f52f9e9a808810e210613569a",
+  "primary_candidate": "radial2",
+  "selection_reason_training_only": "Lower training and split-corner residuals than pinhole; fewer free distortion terms than brown5. Leave-one-view-out focal variation remains unresolved; selection for comparison is not acceptance.",
+  "validation_view_count": 5,
+  "views": [
+    "central upright portrait, moderate combined tilt opposite training compound tilt",
+    "left lower image, landscape with mild tilt",
+    "right lower image, landscape with mild tilt",
+    "upper center, portrait with combined tilt",
+    "closer center, oblique in-plane rotation"
+  ],
+  "metrics": [
+    "all-corner pose-fit reprojection RMS",
+    "checker-parity split: pose estimated from one subset, score remaining subset, both directions"
+  ],
+  "no_refit_on_validation": true,
+  "no_auto_apply": true,
+  "physical_accuracy_not_established_by_pixel_residual": true,
+  "camera_and_robot_stay_fixed": true
+}

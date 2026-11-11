@@ -1,0 +1,19 @@
+{
+  "method": "Unchanged factory K/D PnP; pose diversity diagnostic only, not calibration validation",
+  "normal": [
+    0.005643713066984607,
+    -0.4092408449671524,
+    -0.9124089430257623
+  ],
+  "factory_PnP_rms_px": 0.49290552489269296,
+  "corner_bounds_px": [
+    [
+      572.664306640625,
+      124.13016510009766
+    ],
+    [
+      734.0381469726562,
+      341.12457275390625
+    ]
+  ]
+}

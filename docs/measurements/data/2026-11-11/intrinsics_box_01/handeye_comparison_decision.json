@@ -1,0 +1,12 @@
+{
+  "created": "2026-11-11T17:40:08.843315+09:00",
+  "applied": false,
+  "status": "comparison_complete_candidate_withheld",
+  "raw_observations_recomputed": 32,
+  "intrinsics_refitted": false,
+  "depth_recomputed": false,
+  "robot_commands_sent": false,
+  "conclusion": "No consistent improvement of support height, reused validation consistency or cross-session camera mount agreement.",
+  "next_recommendation": "Offline diagnosis of joint/pose-dependent residuals; no new physical capture requested.",
+  "report": "docs/measurements/handeye_intrinsics_comparison_2026-11-11.md"
+}

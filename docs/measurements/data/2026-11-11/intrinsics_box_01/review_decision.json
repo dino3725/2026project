@@ -1,0 +1,24 @@
+{
+  "created": "2026-11-11T17:31:33.348100+09:00",
+  "status": "candidate_withheld_pending_metric_and_alignment_analysis",
+  "applied": false,
+  "training_views": 15,
+  "validation_views": 5,
+  "rms_improvement_percent": 17.826336978262436,
+  "split_corner_improvement_percent": 14.471552916094488,
+  "improved_views": 4,
+  "worsened_views": 1,
+  "next_step": "Offline diagnosis of pose/joint-dependent residuals; no additional physical capture requested.",
+  "additional_capture_requested": false,
+  "camera_only_and_preview_running": true,
+  "robot_hardware_drivers_running": false,
+  "limitations": [
+    "Leave-one-view-out focal estimates vary appreciably",
+    "Printed dimensions and flatness uncertainty not quantified",
+    "Validation lower-left request actually produced lower-center view; coverage not uniform",
+    "RGB residual improvement does not establish metric depth, camera mount, or arm accuracy",
+    "Aligned depth geometry must stay consistent with any future RGB model change"
+  ],
+  "handeye_comparison_completed": true,
+  "handeye_comparison_report": "docs/measurements/handeye_intrinsics_comparison_2026-11-11.md"
+}

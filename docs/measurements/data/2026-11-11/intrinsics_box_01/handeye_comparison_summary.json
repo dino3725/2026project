@@ -1,0 +1,376 @@
+{
+  "baseline_regression_checks": [
+    {
+      "session": 1,
+      "method": "park",
+      "baseline_height_difference_mm": 4.09054238836859e-06,
+      "baseline_held_max_difference_mm": 6.743700802225305e-07
+    },
+    {
+      "session": 1,
+      "method": "reprojection",
+      "baseline_height_difference_mm": 6.530379121016949e-06,
+      "baseline_held_max_difference_mm": 5.606927002688167e-07
+    },
+    {
+      "session": 2,
+      "method": "park",
+      "baseline_height_difference_mm": 4.761537653052983e-06,
+      "baseline_held_max_difference_mm": 9.4743056155977e-07
+    },
+    {
+      "session": 2,
+      "method": "reprojection",
+      "baseline_height_difference_mm": 6.926973901144606e-06,
+      "baseline_held_max_difference_mm": 5.429173848270352e-07
+    }
+  ],
+  "session_mount_disagreement": [
+    {
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "park",
+      "translation_difference_mm": 31.357485767809592,
+      "rotation_difference_deg": 2.2104980852056286
+    },
+    {
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "translation_difference_mm": 26.76050348591922,
+      "rotation_difference_deg": 4.796806540288704
+    },
+    {
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "park",
+      "translation_difference_mm": 52.53081794030128,
+      "rotation_difference_deg": 5.1710120640531345
+    },
+    {
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "translation_difference_mm": 31.87957912003457,
+      "rotation_difference_deg": 5.093758391307507
+    },
+    {
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "park",
+      "translation_difference_mm": 31.02857297772457,
+      "rotation_difference_deg": 2.2554905973509722
+    },
+    {
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "translation_difference_mm": 26.752778217265064,
+      "rotation_difference_deg": 4.793763481655081
+    },
+    {
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "park",
+      "translation_difference_mm": 52.906116731648424,
+      "rotation_difference_deg": 5.17059504663525
+    },
+    {
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "translation_difference_mm": 31.87175870089923,
+      "rotation_difference_deg": 5.091368698523906
+    }
+  ],
+  "all_methods": [
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "park",
+      "height_mm": 12.85155811980488,
+      "held_max_mm": 2.939835482754608,
+      "held_fixed_board_pixel_rms": [
+        3.2168872224477614,
+        3.952629414198804,
+        1.6946628422043206
+      ],
+      "mount_xyz_mm": [
+        -47.361799684471414,
+        22.350369532084738,
+        59.290517823603366
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "height_mm": -16.746535036547627,
+      "held_max_mm": 2.455065091571945,
+      "held_fixed_board_pixel_rms": [
+        1.1831825924697426,
+        0.4058373678970311,
+        0.7964575369655876
+      ],
+      "mount_xyz_mm": [
+        -22.94246719384902,
+        24.186457785520247,
+        52.49386211340515
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "park",
+      "height_mm": 38.82033756148863,
+      "held_max_mm": 3.4809373699686206,
+      "held_fixed_board_pixel_rms": [
+        3.4792277241207583,
+        4.889877992524941,
+        3.104709765029831
+      ],
+      "mount_xyz_mm": [
+        -75.71523248260205,
+        16.427789949307638,
+        73.61616152249998
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "height_mm": -23.62768996110317,
+      "held_max_mm": 3.1083319700033463,
+      "held_fixed_board_pixel_rms": [
+        1.3563290365172926,
+        0.7272366995119843,
+        0.756379843664682
+      ],
+      "mount_xyz_mm": [
+        -29.125636244918205,
+        26.49159984839862,
+        63.52422845764114
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "park",
+      "height_mm": 12.428479418789921,
+      "held_max_mm": 2.889725398708624,
+      "held_fixed_board_pixel_rms": [
+        3.2284004050937862,
+        3.9483100451516138,
+        1.7078447703535005
+      ],
+      "mount_xyz_mm": [
+        -47.05348706921269,
+        22.343341089862292,
+        59.664246651602376
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "height_mm": -16.738278463439013,
+      "held_max_mm": 2.4410169281959857,
+      "held_fixed_board_pixel_rms": [
+        1.1906529217515784,
+        0.3856790237103937,
+        0.7971982799382237
+      ],
+      "mount_xyz_mm": [
+        -22.953462356559413,
+        24.213973776311853,
+        52.51826853117367
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "park",
+      "height_mm": 38.32340911467879,
+      "held_max_mm": 3.5309092646921485,
+      "held_fixed_board_pixel_rms": [
+        3.4866385920422234,
+        4.878436785897793,
+        3.0924235819226786
+      ],
+      "mount_xyz_mm": [
+        -75.34265094417067,
+        16.352436019138317,
+        73.99595930982518
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_01",
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "height_mm": -23.62393777513893,
+      "held_max_mm": 3.1895651084686003,
+      "held_fixed_board_pixel_rms": [
+        1.3536750620621982,
+        0.7233127380395036,
+        0.7543417721870228
+      ],
+      "mount_xyz_mm": [
+        -29.132321447639814,
+        26.520832113505417,
+        63.55426840154309
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "park",
+      "height_mm": 52.354389152375276,
+      "held_max_mm": 5.86283314327601,
+      "held_fixed_board_pixel_rms": [
+        6.707408947516594,
+        10.939574353742616,
+        12.336901043102543
+      ],
+      "mount_xyz_mm": [
+        -78.31192790395686,
+        18.589780281928586,
+        55.93798961829298
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "original_pixels",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "height_mm": 10.851303693916188,
+      "held_max_mm": 5.908577254746953,
+      "held_fixed_board_pixel_rms": [
+        0.7632148740531001,
+        1.9287417482292286,
+        2.61854022359643
+      ],
+      "mount_xyz_mm": [
+        -38.51958374864652,
+        25.190106498033895,
+        30.757471522508553
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "park",
+      "height_mm": -22.708739645830896,
+      "held_max_mm": 2.6089917459636704,
+      "held_fixed_board_pixel_rms": [
+        4.095774572321919,
+        1.973822532317192,
+        5.748954985738863
+      ],
+      "mount_xyz_mm": [
+        -23.357273674912236,
+        14.059720039024155,
+        77.15497882060198
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "original_pixels",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "height_mm": 2.4937850078805703,
+      "held_max_mm": 8.175929486058413,
+      "held_fixed_board_pixel_rms": [
+        1.4079786809275665,
+        2.505884155755314,
+        2.6008056438429414
+      ],
+      "mount_xyz_mm": [
+        -46.77664183254272,
+        25.745636830808888,
+        36.98759141010663
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "park",
+      "height_mm": 51.69461222478073,
+      "held_max_mm": 5.822395667576596,
+      "held_fixed_board_pixel_rms": [
+        6.66000319722863,
+        10.80002740345233,
+        12.182628145026557
+      ],
+      "mount_xyz_mm": [
+        -77.63777881581058,
+        18.51049822205664,
+        56.10296107702745
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "neutral_redetection",
+      "intrinsics": "factory",
+      "method": "reprojection",
+      "height_mm": 10.80164626313976,
+      "held_max_mm": 5.994911822620672,
+      "held_fixed_board_pixel_rms": [
+        0.778663377722361,
+        1.9284813809900956,
+        2.6137069604859504
+      ],
+      "mount_xyz_mm": [
+        -38.46721139334248,
+        25.3066233018511,
+        30.75038277760946
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "park",
+      "height_mm": -23.465556900681243,
+      "held_max_mm": 2.592291671940119,
+      "held_fixed_board_pixel_rms": [
+        4.206825935479134,
+        1.9617312437332104,
+        5.6410749484016485
+      ],
+      "mount_xyz_mm": [
+        -22.59784148122875,
+        13.874102126504164,
+        77.29749281069759
+      ]
+    },
+    {
+      "session": "desk_fixed_20261111_02",
+      "pixels": "neutral_redetection",
+      "intrinsics": "radial2",
+      "method": "reprojection",
+      "height_mm": 2.441186375504563,
+      "held_max_mm": 8.227579672349394,
+      "held_fixed_board_pixel_rms": [
+        1.4566962146382183,
+        2.5010981356570574,
+        2.5909173420129075
+      ],
+      "mount_xyz_mm": [
+        -46.72184816209482,
+        25.866582701903013,
+        36.98380528256006
+      ]
+    }
+  ]
+}

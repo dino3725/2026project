@@ -1,0 +1,83 @@
+{
+  "status": "diagnostic_only_do_not_apply",
+  "findings": [
+    {
+      "model": "factory",
+      "issue": "all_joint_bias_rank_deficit",
+      "unobservable_directions": 2
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_zero_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_zero_start",
+      "issue": "weak_scaled_parameter_combination"
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_positive_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_positive_start",
+      "issue": "weak_scaled_parameter_combination"
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_negative_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "factory",
+      "fit": "bias23_negative_start",
+      "issue": "weak_scaled_parameter_combination"
+    },
+    {
+      "model": "radial2",
+      "issue": "all_joint_bias_rank_deficit",
+      "unobservable_directions": 2
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_zero_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_zero_start",
+      "issue": "weak_scaled_parameter_combination"
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_positive_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_positive_start",
+      "issue": "weak_scaled_parameter_combination"
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_negative_start",
+      "issue": "bias_bound_hit"
+    },
+    {
+      "model": "radial2",
+      "fit": "bias23_negative_start",
+      "issue": "weak_scaled_parameter_combination"
+    }
+  ],
+  "runtime_calibration_exported": false,
+  "user_setup_required": false,
+  "additional_capture_requested": false,
+  "limits": [
+    "Reused validation views are not a new independent holdout.",
+    "Pixel agreement does not prove absolute metric accuracy.",
+    "Rank and weakness thresholds are diagnostic heuristics."
+  ]
+}

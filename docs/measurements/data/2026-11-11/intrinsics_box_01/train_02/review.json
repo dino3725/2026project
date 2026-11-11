@@ -1,0 +1,5 @@
+{
+  "review": "Full checker pattern visible, all 24 corners detected, no hands occluding pattern. Factory-intrinsics pose diagnostic confirms opposite pitch direction to train_01; not an accuracy validation.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

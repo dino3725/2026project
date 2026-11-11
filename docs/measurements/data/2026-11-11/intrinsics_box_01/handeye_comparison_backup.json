@@ -1,0 +1,10 @@
+{
+  "archive": "log/backups/handeye_intrinsics_comparison_20261111.tar.gz",
+  "sha256": "d170e15734d89959e99f0dd3bcfb63ea918892023937bd3a5400f9601f3a2dd4",
+  "verified_files": 11,
+  "original_image_archive": "log/backups/intrinsics_box_20261111_01_complete.tar.gz",
+  "original_handeye_archives": [
+    "log/backups/handeye_desk_fixed_20261111_01.tar.gz",
+    "log/backups/handeye_desk_fixed_20261111_02.tar.gz"
+  ]
+}

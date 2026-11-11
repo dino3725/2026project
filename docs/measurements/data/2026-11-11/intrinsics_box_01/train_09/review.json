@@ -1,0 +1,5 @@
+{
+  "review": "All 24 corners detected at closer distance. Entire checker pattern visible including bottom squares, while outer lower paper/box margin extends beyond image. No hand occlusion of checker pattern.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

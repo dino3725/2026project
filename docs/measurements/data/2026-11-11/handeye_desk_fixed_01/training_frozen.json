@@ -1,0 +1,109 @@
+{
+  "training_inputs_sha256": {
+    "log/handeye_desk_fixed_20261111_01/train_00/observation.json": "6e87955b9d845af0378c089f5207f068c419e044c695feac4b8f381a7594feda",
+    "log/handeye_desk_fixed_20261111_01/train_01/observation.json": "727ccf3c1de8d2c1af83ac0dfb91b173191b882a8e217ef2aa5397dc183afb14",
+    "log/handeye_desk_fixed_20261111_01/train_02/observation.json": "8cded304ff6987a61c36bdbbaebcb7b7eb4e3c773e65a0bb1ade07d8e940c208",
+    "log/handeye_desk_fixed_20261111_01/train_03/observation.json": "a922cdc3677ec2a513f2a752e08143e9d7e809b6c36334963fb2a33d86b1009d",
+    "log/handeye_desk_fixed_20261111_01/train_04/observation.json": "0d5e23ba6faaccaedaf018d29058bc63a7edede9c4cc8ce33671e4702af851e4",
+    "log/handeye_desk_fixed_20261111_01/train_05/observation.json": "2b8d3871790a5537cc107300832e0c7f052535e62dfc5fa557d009ae3a8c1aa5",
+    "log/handeye_desk_fixed_20261111_01/train_06/observation.json": "347f2170a28fe82101cb7e1062e87fb63609b81ba7d897175f1a2e12c022dc57",
+    "log/handeye_desk_fixed_20261111_01/train_07/observation.json": "a073421b6be34b9d0917e99c6b4e48be53e74dd762a3da70873c1f415f2cbbe9",
+    "log/handeye_desk_fixed_20261111_01/train_08/observation.json": "0f946c15197ddbf692e46cb7b54a4de1fca6f9036d384f3a57af898c13d2e63c",
+    "log/handeye_desk_fixed_20261111_01/train_09/observation.json": "4de2fdbb2517bc6f6b847c4fe3efa4c5da2fae34ed521d912ea5ea936cd8005a",
+    "log/handeye_desk_fixed_20261111_01/train_10/observation.json": "69fd9437601e47c786c72ef871ef2d35c5cd5d27094ebf81f5cba63793202828",
+    "log/handeye_desk_fixed_20261111_01/train_11/observation.json": "2054250495b3d2cb08697f90f757c4efa14ca808ee8cd2c99704750ca44ee360",
+    "log/handeye_desk_fixed_20261111_01/train_12/observation.json": "4dd9322932e063af9ddfd9bea9c5f8407a35ecd5b840a0e147bf1cef50d8d000"
+  },
+  "T_ee_optical": [
+    [
+      -0.0007581521693698882,
+      -0.028097955088465694,
+      0.9996048870144069,
+      -0.04670430998727347
+    ],
+    [
+      -0.9997883231205205,
+      -0.020531089988615275,
+      -0.0013354009646692733,
+      0.035484810628361514
+    ],
+    [
+      0.020560499924642966,
+      -0.9993943062134136,
+      -0.028076441688792517,
+      0.05366845729718205
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "training_fixed_board": [
+    [
+      0.0033987418448681484,
+      0.9999191537520689,
+      -0.01225293897880952,
+      0.2541346009399246
+    ],
+    [
+      -0.9999584155182653,
+      0.0035020580581394023,
+      0.008420381437776497,
+      0.09859765204770071
+    ],
+    [
+      0.008462611185217734,
+      0.012223810743950037,
+      0.9998894752235489,
+      0.0033771357623509825
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "training_consistency": {
+    "translation_errors_mm": [
+      2.7989985801111117,
+      4.070370453330515,
+      3.923482392971949,
+      1.4998664595977813,
+      2.189686750704907,
+      1.3801260781116766,
+      0.7885244812968366,
+      4.692608629841247,
+      4.927214648501859,
+      1.1706046004344401,
+      3.0463968633918914,
+      2.185597264742788,
+      1.5159190283432056
+    ],
+    "rotation_errors_deg": [
+      0.06720660981771491,
+      0.18656870976535597,
+      0.4134442130630799,
+      0.25436023522479045,
+      0.12928869512695484,
+      0.30313995687022066,
+      0.09310009873841242,
+      0.26558087056204815,
+      0.37601785447434594,
+      0.20012408253073163,
+      0.3750508587295639,
+      0.3576285556503811,
+      0.2949214113343619
+    ],
+    "max_translation_mm": 4.927214648501859,
+    "max_rotation_deg": 0.4134442130630799
+  },
+  "rotation_singular_values": [
+    1.7610824246558932,
+    1.0626715460910396,
+    0.0930447172923055
+  ],
+  "frozen_before_validation_capture": true
+}

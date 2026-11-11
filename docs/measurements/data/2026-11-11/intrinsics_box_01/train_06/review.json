@@ -1,0 +1,8 @@
+{
+  "review": "Full checker pattern inside image on right, no hand occlusion. Only 20 of 24 corners detected; retain available correspondences without imputing missing ids. Final dataset validation pending.",
+  "retained_for_training": true,
+  "calibration_complete": false,
+  "corner_count": 20,
+  "factory_PnP_rms_px": 0.2747704821165576,
+  "PnP_purpose": "Unchanged factory K/D; diagnostic only, not calibration validation"
+}

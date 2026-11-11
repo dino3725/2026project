@@ -1,0 +1,6 @@
+{
+  "review": "Full checker pattern visible with compound pitch/yaw tilt; 22 of 24 corners detected, no hand occlusion. Retain detected correspondences only; no missing point imputation. Final dataset validation pending.",
+  "corner_count": 22,
+  "retained_for_training": true,
+  "calibration_complete": false
+}

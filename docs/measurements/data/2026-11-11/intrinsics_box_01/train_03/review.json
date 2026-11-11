@@ -1,0 +1,5 @@
+{
+  "review": "Full pattern visible, all 24 corners detected, no hands covering pattern. Horizontal tilt provides a different normal direction from the pitch views. Factory PnP is diagnostic only.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

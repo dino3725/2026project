@@ -1,0 +1,8 @@
+{
+  "review": "Full pattern visible; all 24 corners detected; no hand occlusion. Tilt differs from first training view.",
+  "retained_for_training": true,
+  "approximate_normal_change_from_train_00_deg": 24.27257864302802,
+  "angle_method": "PnP with unchanged factory K/D; diagnostic only, not independent calibrated angle",
+  "factory_PnP_rms_px": 0.15458839023440357,
+  "calibration_complete": false
+}

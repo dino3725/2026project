@@ -1,0 +1,5 @@
+{
+  "review": "Full checker pattern visible, all 24 corners detected, no hands covering pattern. Factory PnP diagnostic shows opposite horizontal normal direction to train_03.",
+  "retained_for_training": true,
+  "calibration_complete": false
+}

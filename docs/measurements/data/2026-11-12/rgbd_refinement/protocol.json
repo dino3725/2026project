@@ -1,0 +1,101 @@
+{
+  "created": "2026-11-12T01:13:28.562596+09:00",
+  "candidate_specifications": [
+    {
+      "name": "factory_rgb_l2",
+      "intrinsics": "factory",
+      "loss": "linear",
+      "depth_mm": null
+    },
+    {
+      "name": "factory_rgb_robust",
+      "intrinsics": "factory",
+      "loss": "soft_l1",
+      "depth_mm": null
+    },
+    {
+      "name": "factory_rgbd_2mm",
+      "intrinsics": "factory",
+      "loss": "soft_l1",
+      "depth_mm": 2
+    },
+    {
+      "name": "factory_rgbd_5mm",
+      "intrinsics": "factory",
+      "loss": "soft_l1",
+      "depth_mm": 5
+    },
+    {
+      "name": "radial2_rgb_l2",
+      "intrinsics": "radial2",
+      "loss": "linear",
+      "depth_mm": null
+    },
+    {
+      "name": "radial2_rgb_robust",
+      "intrinsics": "radial2",
+      "loss": "soft_l1",
+      "depth_mm": null
+    }
+  ],
+  "cv_excluded_view_names": [
+    [
+      "1/train_04",
+      "1/train_07",
+      "1/train_10",
+      "2/train_00",
+      "2/train_07",
+      "2/train_12"
+    ],
+    [
+      "1/train_05",
+      "1/train_11",
+      "2/train_01",
+      "2/train_03",
+      "2/train_08"
+    ],
+    [
+      "1/train_06",
+      "1/train_12",
+      "2/train_02",
+      "2/train_04",
+      "2/train_09"
+    ],
+    [
+      "1/train_00",
+      "1/train_02",
+      "1/train_08",
+      "2/train_05",
+      "2/train_10"
+    ],
+    [
+      "1/train_01",
+      "1/train_03",
+      "1/train_09",
+      "2/train_06",
+      "2/train_11"
+    ]
+  ],
+  "grouping": "Connected poses within 3 degrees per joint, across both sessions.",
+  "ranking": "sqrt(mean((pixel_RMS^2 + (plane_RMS_mm/3)^2)/2)) on grouped CV.",
+  "ranking_scope": "Factory-compatible candidates only; radial2 RGB diagnostic.",
+  "held_out_policy": "Previously inspected six validation views reused AFTER selection; not a new independent holdout.",
+  "fixed": [
+    "arm kinematics and recorded image-time TF",
+    "joint zeros",
+    "depth scale",
+    "intrinsic candidates"
+  ],
+  "free": [
+    "shared camera mount (6)",
+    "one board pose per session (6+6)"
+  ],
+  "no_height_constraint": true,
+  "review_thresholds_not_accuracy_guarantees": {
+    "cv_max_corner_rms_mm": 5,
+    "validation_max_corner_rms_mm": 5,
+    "all_view_max_abs_depth_centroid_height_mm": 5,
+    "fold_mount_translation_mm": 5,
+    "fold_mount_rotation_deg": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "requested_by_user": "Stop this robot experiment for separate laptop/Jetson testing",
+  "signals": [
+    {
+      "pid": 17124,
+      "signal": "SIGINT",
+      "expected": "tools/vision_eval/calibration_control.py"
+    },
+    {
+      "pid": 11521,
+      "signal": "SIGINT",
+      "expected": "ros2 launch vision_pkg"
+    },
+    {
+      "pid": 11417,
+      "signal": "SIGINT",
+      "expected": "ros2 launch realsense2_camera"
+    },
+    {
+      "pid": 11381,
+      "signal": "SIGINT",
+      "expected": "ros2 run joy"
+    },
+    {
+      "pid": 11394,
+      "signal": "SIGINT",
+      "expected": "joy_node"
+    },
+    {
+      "pid": 11619,
+      "signal": "SIGINT",
+      "expected": "ros2 launch turtlebot3_manipulation_bringup"
+    }
+  ],
+  "hardware_remaining_pids": [],
+  "no_auto_home_requested": true
+}

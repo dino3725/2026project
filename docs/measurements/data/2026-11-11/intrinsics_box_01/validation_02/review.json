@@ -1,0 +1,7 @@
+{
+  "review": "Full physical checker pattern visible in lower-right image region, all 24 extracted corners on physical target, no hand occlusion. Preview monitor contains a small repeated image but extracted corner coordinates are exclusively on the physical target. Candidate errors not examined during collection.",
+  "retained_for_validation": true,
+  "corner_count": 24,
+  "actual_coverage": "lower_right",
+  "calibration_complete": false
+}

@@ -1,0 +1,6 @@
+{
+  "review": "Full physical target visible near center with compound tilt; all 24 detected corners lie on physical target, not preview monitor. No hand occlusion. Candidate errors not examined during collection.",
+  "retained_for_validation": true,
+  "corner_count": 24,
+  "calibration_complete": false
+}

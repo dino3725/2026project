@@ -1,0 +1,18 @@
+{
+  "status": "rejected_for_live_mount_application",
+  "camera_mount_tf_changed": false,
+  "camera_intrinsics_changed": false,
+  "successful_moves": 15,
+  "training_observations": 13,
+  "validation_observations": 3,
+  "wrist_check_session_01": {
+    "measured_cm": 43.9,
+    "predicted_cm": 44.08699486672626
+  },
+  "print_dimensions_mm": [
+    177,
+    125
+  ],
+  "reason": "Original and measured-print corrected methods remain inconsistent across poses/methods. Source not isolated.",
+  "next": "Independent camera intrinsic validation with rigid moving target; no more robot moves planned."
+}

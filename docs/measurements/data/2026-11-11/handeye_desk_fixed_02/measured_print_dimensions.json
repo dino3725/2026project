@@ -1,0 +1,12 @@
+{
+  "printed_pattern_width_mm": 177,
+  "printed_pattern_height_mm": 125,
+  "nominal_width_mm": 175,
+  "nominal_height_mm": 125,
+  "x_scale": 1.0114285714285713,
+  "y_scale": 1.0,
+  "source": "User ruler measurement of entire checker pattern, excluding margins",
+  "uncertainty_mm": null,
+  "rigid_support_available": "Closed original 350x260x80mm box; user confirms top remains flat when lifted",
+  "next_workflow": "Independent camera intrinsics validation; fixed robot and moving rigid target"
+}

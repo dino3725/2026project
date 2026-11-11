@@ -1,0 +1,10 @@
+{
+  "measurement": "wrist_joint_rotation_axis_height_above_wheel_support",
+  "user_value_cm": 43.9,
+  "model_prediction_cm": 44.08699486672626,
+  "measured_minus_model_mm": -1.8699486672625767,
+  "pose": "validation_15",
+  "measurement_uncertainty_mm": null,
+  "source": "user direct ruler measurement; uncertainty not supplied",
+  "interpretation": "Approximately 1.9mm discrepancy at this one axis height; does not validate full arm pose, orientation, or hand-eye mount."
+}

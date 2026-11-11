@@ -71,7 +71,7 @@ support_box:
   height: 80
   top_flat: null
   initial_top_flat_user_description: true
-  flatness_note: '종료 시 사용자가 완벽히 평평하지 않을 수 있다고 추가 설명함. 책상/상자 중 어느 표면인지 특정되지 않았으므로 평면성·평행성은 미검증으로 취급.'
+  flatness_note: '후속 설명에서 사용자의 우려는 책상 전체의 미세한 기울기였음이 확인됨. 표면 굴곡을 보고한 것은 아님. 상자 윗면은 최초 평평하다고 설명했으나 정밀 평면성은 독립 검증하지 않음.'
   same_box_for_practice_and_demo: true
   support_plane_shared_with_robot_wheels: true
   support_plane_note: '사용자가 로봇 바퀴와 상자 밑면이 같은 평면에 있음을 확인. 지면 기준은 이 공통 지지면을 뜻함.'
@@ -82,6 +82,25 @@ support_box:
     separation_range_mm: [75.1824521201142, 78.10530198982069]
     interpretation: approximate_relative_height_does_not_replace_user_measurement_or_validate_absolute_robot_coordinates
     report: docs/measurements/box_remeasurement_2026-11-11.md
+
+next_measurement_setup:
+  object: coke
+  same_box_and_object_as_pilot: true
+  footprint_center_x_from_wheel_axle_line: 285
+  footprint_center_y_from_robot_centerline: 0
+  position_quality: approximate_user_measurement
+  support_plane_shared_with_robot_wheels: true
+  support_surface: same_table
+  user_level_observation:
+    device: iPhone_level
+    displayed_degrees: 0
+    uncertainty_degrees: null
+    note: '사용자는 책상 전체가 아주 조금 기울어졌을 가능성을 언급함. 수준기 0° 표시를 정밀 교정값으로 취급하지 않음.'
+  vision_measurement_performed_for_this_setup: true
+  experiment_report: docs/measurements/experiment_285mm_2026-11-11.md
+  geometry_data_directory: log/vision_baseline_20261111/geometry_285mm_01
+  center_vision_data_directory: log/vision_baseline_20261111/coke_285mm_01
+  reference_note: '기존 290mm 배치 데이터와 구분한다. 동일한 단단한 평면에 로봇과 상자가 지지된다면 책상의 공통 기울기 자체는 로봇-표면 상대 기울기를 만들지 않음. 로봇 지지/자세 및 좌표 사슬 검증은 별도.'
 
 pilot_setup:
   object: coke
@@ -122,10 +141,83 @@ objects:
     placement: lying_down_front_facing
 
 pending:
-  - derived_mounting_transforms_not_yet_applied_shoulder_height_supports_nominal_25mm_increase
+  - arm_mount_height_applied_live_persist_with_generated_launches_on_next_restart
   - camera_mount_transform_calibration_is_separate_from_chassis_dimensions
-  - pilot_live_arm_mount_tf_still_91mm_versus_inferred_116mm
+  - lidar_approximate_mounting_transform_not_yet_applied
   - shoulder_height_supports_arm_raise_but_box_plane_discrepancy_requires_camera_geometry_validation
+
+camera_calibration_preparation:
+  report: docs/measurements/calibration_preparation_2026-11-11.md
+  model_candidate_directory: log/measured_model_20261111
+  model_candidate_applied: false
+  model_candidate_was_applied_live_during_completed_sessions: true
+  experiment_processes_stopped_at_user_request: true
+  latest_resume_note: docs/measurements/RESUME_AFTER_PAUSE_2026-11-11.md
+  model_application_method: live_rsp_and_controller_parameter_update_control_block_unchanged
+  hardware_driver_restarted: false
+  calibration_candidate_computed_from_real_board: true
+  calibration_candidate_applied: false
+  calibration_experiment_report: docs/measurements/handeye_experiment_2026-11-11.md
+  calibration_training_poses: 13
+  calibration_validation_poses: 3
+  calibration_candidate_internal_validation_passed: true
+  calibration_candidate_absolute_height_check_passed: false
+  printed_target_pdf: docs/measurements/calibration_board_25mm/EATED_ChArUco_A4_25mm.pdf
+  printer_available: true
+  rigid_flat_backing_board_available: unconfirmed
+  actual_target_support: taped_directly_to_flat_desk
+  target_fixed_confirmed_by_user: true
+  rgb_aligned_depth_metadata_audit_passed: true
+  metadata_audit_is_not_absolute_accuracy_validation: true
+  wrist_height_check_session_01_pose_15:
+    measured_mm: 439
+    model_mm: 440.8699486672626
+    uncertainty_mm: null
+    note: '1차 마지막 자세의 손목 회전축 수직 높이만 확인. 이후 자세에 재사용하지 않음.'
+  measured_print_pattern_size_mm: [177, 125]
+  rigid_closed_box_available: true
+  target_transfer_to_box_confirmed: true
+  next_dependency: choose_independent_geometry_reference_before_final_calibration
+  offline_pose_diagnosis_completed: true
+  offline_pose_diagnosis_report: docs/measurements/pose_residual_diagnosis_2026-11-12.md
+  offline_pose_diagnosis_setup_required: false
+  offline_pose_diagnosis_calibration_applied: false
+  fixed_arm_rgbd_refinement_completed: true
+  fixed_arm_rgbd_refinement_report: docs/measurements/rgbd_refinement_2026-11-12.md
+  fixed_arm_rgbd_candidate: factory_rgbd_5mm
+  fixed_arm_rgbd_candidate_applied: false
+  fixed_arm_rgbd_candidate_status: improved_consistency_absolute_height_error_remains
+  later_user_adoption:
+    calibration_id: jetson_rgbd_20261112_v1
+    applied_live: true
+    adopted_config: src/vision_pkg/config/camera_mount.yaml
+    live_test_report: docs/measurements/accepted_calibration_test_2026-11-12.md
+    coke_localizations: 3
+    coke_successes: 3
+    box_top_height_mean_mm: 67.60909457982243
+    absolute_accuracy_certified: false
+
+camera_intrinsics_box_validation:
+  report: docs/measurements/intrinsics_box_2026-11-11.md
+  raw_session: log/intrinsics_box_20261111_01
+  current_target_support: paper_on_rigid_closed_box_moved_by_user
+  training_views: 15
+  independent_validation_views: 5
+  candidate_frozen_before_validation: true
+  camera_parameters_refitted_on_validation: false
+  primary_candidate: radial2
+  factory_validation_rms_px: 0.29518680841091777
+  candidate_validation_rms_px: 0.24256581322820964
+  improved_validation_views: 4
+  worsened_validation_views: 1
+  applied: false
+  interpretation: image_residual_improved_but_metric_height_error_cause_unresolved
+  additional_captures_planned: false
+  hardware_drivers_started_for_intrinsics: false
+  camera_and_preview_running_after_validation: true
+  handeye_candidate_comparison_completed: true
+  handeye_candidate_comparison_report: docs/measurements/handeye_intrinsics_comparison_2026-11-11.md
+  handeye_comparison_interpretation: no_consistent_improvement_candidate_remains_unapplied
 
 resumed_camera_diagnostic:
   report: docs/measurements/camera_geometry_resume_2026-11-11.md
@@ -137,4 +229,5 @@ resumed_camera_diagnostic:
   applied_to_robot_configuration: false
   interpretation: single_pose_plane_diagnostic_not_a_complete_extrinsic_calibration
   later_user_caveat: surfaces_may_not_be_perfectly_flat_scope_unspecified
+  caveat_clarification: user_meant_possible_small_global_table_tilt_iphone_level_displayed_zero_not_reported_surface_warp
   calibration_use: do_not_treat_observed_plane_tilt_as_camera_error

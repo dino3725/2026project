@@ -1,0 +1,42 @@
+{
+  "status": "single_pose_print_and_placement_passed_not_calibration",
+  "source": "log/vision_baseline_20261111/board_placement_152103/preview.json",
+  "frames": 10,
+  "marker_count_each": [
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17
+  ],
+  "charuco_corner_count_each": [
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24
+  ],
+  "reprojection_rms_px": {
+    "min": 0.20925363898277283,
+    "max": 0.2383211851119995,
+    "mean": 0.2274562820792198
+  },
+  "support": "paper directly on desk",
+  "tape_fixation": "awaiting user confirmation",
+  "robot_motion_commands_sent": false,
+  "notes": [
+    "All printed pattern corners visible; lower paper margin is partially outside image.",
+    "No inference of full hand-eye or intrinsic accuracy from this single pose.",
+    "Images retained locally under log; numeric summary only in docs."
+  ]
+}

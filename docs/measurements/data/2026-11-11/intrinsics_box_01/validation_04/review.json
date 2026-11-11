@@ -1,0 +1,7 @@
+{
+  "review": "Full physical checker pattern visible near center at closer distance with in-plane rotation. All 24 extracted corners on physical target, no hand occlusion. Candidate residuals not examined during collection.",
+  "retained_for_validation": true,
+  "corner_count": 24,
+  "actual_coverage": "near_center_with_roll",
+  "calibration_complete": false
+}

@@ -1,0 +1,7 @@
+{
+  "status": "applied_and_tf_verified",
+  "hardware_reinitialized": false,
+  "note": "Hardware keeps its loaded control block, verified identical to candidate.",
+  "base_to_link1_z_m": 0.116,
+  "model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546"
+}
