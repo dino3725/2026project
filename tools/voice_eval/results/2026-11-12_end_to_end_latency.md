@@ -93,7 +93,7 @@ mkdir -p recordings/latency_trial01
 ros2 run voice_command_pkg voice_command_node --ros-args \
   --params-file src/voice_command_pkg/config/voice_command.yaml \
   -p publish_commands:=true \
-  -p audio_stop.mode:=off \
+  -p "audio_stop.mode:='off'" \
   -p save_recordings:=true \
   -p recordings_dir:="$PWD/recordings/latency_trial01" \
   2>&1 | tee recordings/latency_trial01/voice.log
@@ -211,3 +211,13 @@ action/감지 경로별 중앙값·nearest-rank p95·최대와 측정/누락 건
 | log/latency_20261112/feedback_smoke.json | `aaa07a43b5ee557da84e9997be7d804688d0b1c805f087e97eefe8d396d2a60c` |
 | log/latency_20261112/dry_run_report_verified.json | `6ebadfe6f80816fcf43abaa4ce5262bff67cbfb4d9ab34605f435aa08d353648` |
 | log/latency_20261112/synthetic_report.json | `2c3931a754893067c00514be2992d507d4a15eda6872e7d688ea41c0faacfa81` |
+
+
+## 실행 명령 보정
+
+사용자 실행에서 `-p audio_stop.mode:=off`의 off가 ROS 인자 파서에 의해 BOOL False로
+해석되어 STRING 파라미터 선언이 실패했습니다. CLI에서는 `-p "audio_stop.mode:='off'"`처럼
+ROS에 전달되는 값 자체에 따옴표를 남겨야 합니다. YAML 파일의 `mode: "off"`는 정상입니다.
+위 실행 예시와 패키지 README를 수정했습니다. 격리 도메인 91/localhost-only/고유 토픽으로
+실제 VoiceCommandNode를 생성하여 문자열 off와 publish_commands=false를 확인했습니다.
+마이크/파이프라인 스레드는 시작하지 않았고 명령 발행은 없습니다. 런타임 코드 변경은 없습니다.

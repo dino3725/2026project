@@ -200,7 +200,7 @@ echo "결과 위치: $KWS_CHECK_DIR"
 - `frame_to_decision`은 프레임 읽기 이후, `vad_end_to_decision`은 VAD 종료 이후 시간이며 말끝→정지 시간이 아닙니다. RECHECK DROP/ERROR가 없어야 합니다.
 - WAV는 VAD 발화만 저장합니다. 생활 소음 전체나 VAD 미검출 음성을 보존하는 기능은 아닙니다.
 
-원복은 노드를 끄고 `audio_stop.mode:=off`로 다시 실행하면 됩니다. 기본 YAML은 이미 off입니다.
+원복은 노드를 끄고 `-p "audio_stop.mode:='off'"`로 다시 실행하면 됩니다. 기본 YAML은 이미 off입니다.
 이번 단계에서 Jetson 명령이나 실물 시험은 필요하지 않습니다. 모델 검증을 통과하기 전에는
 `active`와 실제 명령 발행을 함께 켜지 않습니다.
 
