@@ -78,7 +78,7 @@ Whisper/LLM과 독립적으로 `멈춰`, `정지`, `스톱`을 찾고, `active`�
 통해 stop을 보냅니다. 새 마이크 스트림이나 ROS 토픽은 만들지 않습니다.
 초기 1.2초 안정화 구간은 기존처럼 버립니다. 기존 전사문 정지 규칙은 모든 모드에서 유지합니다.
 
-**현재 후보 모델은 운영 채택하지 않았습니다.** 개발 WAV 49개의 대상 정지 22개 중 17개,
+**현재 후보 모델은 운영 채택하지 않았습니다.** 초기 INT8 개발 WAV 49개의 대상 정지 22개 중 17개,
 비정지 26개에서 오탐 0개였지만, 실제 파이프라인 조건의 50초 재생에서는 빠른 감지 3/9,
 Whisper와 합친 정지 8/9였습니다. 입력 시작 위치에 따른 결과 변화도 확인했습니다.
 정확도와 종단 지연 개선을 보장하지 않으며, 기본 `audio_stop.mode: "off"`를 유지합니다.
@@ -87,13 +87,22 @@ Whisper와 합친 정지 8/9였습니다. 입력 시작 위치에 따른 결과 
 후속 실제 shadow 시험(2026-11-12)은 완료했습니다. 정지 9회에서 KWS 6/9,
 전사문 정지 8/9, 두 경로 중 하나에서 감지한 발화는 9/9였습니다. 마지막 “정지”의
 Whisper 오전사 “총지”를 KWS가 보완했습니다. 실제 발행은 0건이며 운영 채택은 계속
-보류합니다. 생활 소음 시험 완료는 사용자 보고로 기록했습니다. 다음 작업은 저장된
-새 녹음을 포함한 모델 개선이며, 아래 마이크 시험을 오늘 다시 할 필요는 없습니다.
+보류합니다. 생활 소음 시험 완료는 사용자 보고로 기록했습니다. 이 INT8 시험을
+단순 반복할 필요는 없으며, 아래의 후속 FP32 변경과 새 확인 절차를 구분합니다.
+
+후속 안정화 1차에서는 **같은 모델의 FP32 버전**을 실험 기본 정밀도로 선택했습니다.
+최근 shadow 녹음을 포함한 대상 정지 31개를 같은 방식으로 비교했을 때 INT8 23/31 →
+FP32 31/31, 앞 무음 6가지 반복에서는 165/186 → 185/186이었습니다. 비정지 29개 ×
+6회는 두 설정 모두 오탐 0회입니다. 50초 운영 조건 재생은 KWS 5/9, 기존 Whisper와
+합쳐 9/9였지만 연속 입력 위치를 바꾸면 여전히 누락이 있습니다. 기본 모드는 **off**로
+유지합니다. 새 FP32 설정의 실제 마이크 shadow 시험은 아직 필요합니다. 상세 결과는
+`tools/voice_eval/results/2026-11-12_audio_stop_stability.md`에 있습니다.
 
 | 파라미터 | 기본값 | 의미 |
 |---|---|---|
 | `audio_stop.mode` | `off` | `off`: 기존 경로만, `shadow`: 감지 로그만, `active`: 감지 시 stop 처리 |
 | `audio_stop.model_dir` | YAML의 고정 리비전 캐시 경로 | 파일 SHA256 확인 후 로드; 실행 중 자동 다운로드 없음 |
+| `audio_stop.precision` | `fp32` | `int8`로 이전 설정 재현 가능; 서로 다른 정밀도 파일을 섞거나 자동 대체하지 않음 |
 | `audio_stop.threshold` | `0.01` | 현재 개발 비교 후보, 운영 확정값 아님 |
 | `audio_stop.score` | `1.0` | 키워드 탐색 가산점 |
 | `audio_stop.queue_frames` | `128` | 전달 버스트를 수용하는 최대 프레임 수; 추론은 녹음 스레드 밖에서 수행 |
@@ -120,6 +129,11 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python \
   tools/voice_eval/download_audio_stop_model.py
 ```
 
+위 다운로드 도구의 기본 정밀도는 FP32입니다. 이전 결과 재현은 도구에
+`--precision int8`, ROS 노드에는 `-p audio_stop.precision:=int8`을 지정합니다.
+FP32 파일이 없으면 명확한 오류를 남기고 전사문 정지만 유지하며 INT8로 자동 대체하지 않습니다.
+현재 개발 노트북에는 두 버전 모두 해시를 확인해 설치했습니다.
+
 저장 녹음만으로 재현합니다. 마이크·ROS·LLM 서버를 사용하지 않습니다.
 
 ```bash
@@ -136,6 +150,15 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python \
   --output log/audio_stop_pipeline_recheck.json
 ```
 
+입력 시작 위치까지 비교하는 개발 평가(여러 번 재생한 수를 독립 녹음 수로 세지 않음):
+
+```bash
+PYTHONPATH=src/voice_command_pkg .venv/bin/python \
+  tools/voice_eval/evaluate_audio_stop_stability.py \
+  --manifest tools/voice_eval/audio_stop_stability_dev_20261112.json \
+  --output log/audio_stop_stability_recheck.json
+```
+
 다음 실시간 확인은 **명령을 발행하지 않는 shadow 시험**입니다. Jetson을 켤 필요 없습니다.
 기존 음성 노드는 Ctrl+C로 종료한 뒤 하나만 실행합니다. `[LISTENING]` 이후 평소 속도로
 “스톱” 3회, “멈춰” 3회, “정지” 3회를 말하고, 각각 4초 간격을 둡니다. 이어서
@@ -148,6 +171,7 @@ ros2 run voice_command_pkg voice_command_node --ros-args \
   --params-file src/voice_command_pkg/config/voice_command.yaml \
   -p publish_commands:=false \
   -p audio_stop.mode:=shadow \
+  -p audio_stop.precision:=fp32 \
   -p save_recordings:=true \
   -p recordings_dir:="$KWS_CHECK_DIR" 2>&1 | tee "$KWS_CHECK_DIR/session.log"
 ```
@@ -159,7 +183,7 @@ grep -E '\[(AUDIO STOP[^]]*|STT|COMMAND|ROS|DROPPED|ERROR)\]' "$KWS_CHECK_DIR/se
 echo "결과 위치: $KWS_CHECK_DIR"
 ```
 
-- 연결 정상: `[AUDIO STOP READY] mode=shadow`, 감지 시 `[AUDIO STOP] ... published=False`.
+- 연결 정상: `[AUDIO STOP READY] mode=shadow precision=fp32`, 감지 시 `published=False`.
 - 시험 정상: 실제 명령 발행 없음(`[ROS] skipped`), 기존 `[STT]`와 전사문 stop 유지.
 - 모델 채택 기준: 9회 모두 감지하고 일반 발화/생활 소음에는 오탐이 없어야 합니다.
   현재 모델이 이 기준을 통과했다고 간주하지 않습니다. RESET/ERROR도 함께 확인합니다.

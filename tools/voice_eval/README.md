@@ -101,3 +101,15 @@ VAD/Whisper/KWS를 확인합니다. ROS 발행은 로컬 기록 콜백으로 대
 버리는 운영 조건의 감지 수가 다르므로 수치를 섞지 마세요. 결과·명령·한계는
 `results/2026-11-12_audio_stop.md` 및 `src/voice_command_pkg/README.md`를 참고하세요.
 기존 held-out 평가셋을 이 개발 평가에 사용하지 않습니다.
+
+### 오디오 정지 안정화 1차
+
+`evaluate_audio_stop_stability.py`는 최근 shadow WAV까지 포함한
+`audio_stop_stability_dev_20261112.json`을 읽고 INT8/FP32 × 앞 무음 6가지를 비교합니다.
+연속 녹음은 운영과 같이 초기 1200ms를 제거하고, 검출 시각을 원본 좌표로 되돌려 채점합니다.
+단독 파일의 반복 수와 독립 녹음 수, 미검출과 추가 검출을 구분합니다. 합성 무음/잡음은
+생활 소음 시험을 대신하지 않습니다. 상세 결과는 `results/2026-11-12_audio_stop_stability.md`.
+
+`download_audio_stop_model.py`, `evaluate_audio_stop.py`, `replay_audio_stop_pipeline.py`의
+현재 기본 정밀도는 FP32이며 `--precision int8`로 이전 결과를 재현할 수 있습니다.
+실제 노드에서는 `audio_stop.precision`으로 선택합니다. 기본 감지 모드는 계속 off입니다.
