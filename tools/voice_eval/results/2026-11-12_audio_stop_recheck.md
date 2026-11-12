@@ -127,3 +127,57 @@ echo "결과 위치: $KWS_RECHECK_DIR"
 | log/audio_stop_recheck_20261112/pipeline.json | `c5fcfb8fd3aa0e34f23c6f02c40d1a79077a75050f2bb413cbe1015b1d0e57af` |
 | log/audio_stop_recheck_20261112/last_stop_pipeline.json | `db7ed0c5c8d50f2cfe45e8ee955ee53e926cdfe520cc78f07de9f0c2ab6a69ac` |
 | log/audio_stop_recheck_20261112/colcon_test.txt | `342c1f672fc7300aec68baf18da9ac302499a5439ef36b204234c97c6bc368b5` |
+
+## 후속 실제 마이크 shadow 시험 — 오디오 경로는 아직 7/9
+
+입력은 `recordings/audio_stop_recheck.lGeDuN/session.log`와 WAV 12개입니다. 안내한 스톱/멈춰/정지 각 3회와 일반 문장 3회의 순서를 전제로 집계했습니다.
+
+| 발화 순번 | 의도 | 연속 KWS | 보완 KWS | 전사문 stop |
+|---:|---|---|---|---|
+| 1 | 스톱 | X | X | O |
+| 2 | 스톱 | X | X | O |
+| 3 | 스톱 | O | O | O |
+| 4 | 멈춰 | O | O | O |
+| 5 | 멈춰 | O | O | O |
+| 6 | 멈춰 | O | O | O |
+| 7 | 정지 | O | X | O |
+| 8 | 정지 | O | O | X (종지) |
+| 9 | 정지 | X | O | O |
+
+연속 6/9, 보완 6/9, 오디오 두 경로 합집합 **7/9**, 전사문 8/9, 세 경로 합집합 **9/9**입니다.
+첫 두 스톱은 여전히 Whisper 전사문을 기다립니다. 보완 경로는 마지막 정지 1개를 연속 경로에 추가했습니다.
+이번 시험의 세 경로 9/9는 감지 관찰 결과이며 실제 발행/로봇 정지 9/9를 뜻하지 않습니다.
+shadow에서는 두 경로 이벤트를 그대로 기록하므로 총 AUDIO STOP 12줄을 성공 12회로 세지 않습니다.
+
+- KWS 이벤트 12건 모두 published=False, ROS 12건 모두 skipped. 실제 발행 0건.
+- 일반 문장 3개에서 두 오디오 경로의 정지 검출은 없습니다.
+- RECHECK DONE 12건 모두 존재하며 보완 검사 중앙값 126.5ms, 범위 50~200ms입니다.
+- RESET/RECHECK DROP/ERROR는 없습니다. 스톱 미탐은 이번 로그상 과부하 폐기나 오류가 아니라 hit=False 결과입니다.
+- LLM 준비 1.885초 후 시험했고, STT 중앙값 1.6705초(1.631~1.788초)입니다. 이전 57.5초의 cold warmup과 같은 조건이 아닙니다.
+- 로봇 상태 발행자 0개로 robot_unknown 차단이 발생했습니다. shadow에서 오디오가 감지한 8번도 전사문 “종지”의 COMMAND unknown은 그대로 기록됩니다.
+- 전체 로그 끝에는 마지막 일반 문장 처리 후 약 36.5초 뒤 `VOICE START audio=134.760s` 1건이 더 있습니다. 뒤의 VOICE END/전사/WAV가 없어 원인을 분석할 수 없습니다. 사용자는 마지막 구간에서 말하지 않고 생활 소음만 시험했다고 확인했습니다. 따라서 사용자 발화 없이 VAD 시작이 발생한 사례로 기록합니다. 이 로그에 추가 오디오 정지/명령 발행은 없지만, 종료되지 않은 발화의 후속 전사 결과는 알 수 없으므로 VAD까지 포함한 생활 소음 안정화 전체 통과로 판정하지 않습니다.
+
+### 같은 저장 파일의 재현
+
+실제 런타임 `recheck_audio`로 이번 WAV 12개를 다시 검사했습니다. 합성 끝 무음 없이 원본만 검사하면 실시간과 동일하게 정지 6/9이며 1·2·7번이 누락됐습니다. 일반 문장 3개에서는 정지 검출이 없습니다.
+
+정지 9개에 앞 무음 0/60/120/180/240/300ms를 붙여 추가 분석했습니다. 1번 스톱은 300ms에서만, 2번 스톱은 120/240ms에서만, 7번 정지는 180/240/300ms에서 감지됐습니다. 나머지 6개는 모든 위치에서 감지됐습니다. 이는 입력 시작 위치 민감성이 보완 경로에도 남았다는 근거이며, 여러 조건의 합집합을 현재 코드의 성능으로 보고하지 않습니다. 동일 음성의 변형은 서로 독립적인 새 발화가 아닙니다.
+
+이번에는 결과 문서만 갱신하고 런타임/임계값/어휘는 바꾸지 않았습니다. 기본 mode=off를 유지합니다. 다음 개발은 입력 위치가 다른 보완 검사 후보를 기존 전체 개발 자료와 이번 실패 녹음에 비교하고, 오탐과 총 처리 시간/0.5초 제한을 검증하는 것입니다. 같은 마이크 시험 반복을 다음 분석의 선행 조건으로 요구하지 않습니다.
+
+| 증거 파일 | SHA256 |
+|---|---|
+| recordings/audio_stop_recheck.lGeDuN/session.log | `21c835bdfdc734469de4dd5f5cde908ca87c489d9ed25c5150420d0448977265` |
+| log/audio_stop_recheck_live_20261112/replay.json | `9656a1f4c2e30406c58e152ec2444e190fc482af1a22317a3403815cf83dcfc1` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141847_001.wav | `d4d9ac2223db7d9e3785602a2a14434b94b1bc9036c5b544a75aebcde0b8ffe6` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141856_002.wav | `f0804e7d4526aba1b17e34b8401e77cd7afe9a04c70fe35eabd45fe031575313` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141903_003.wav | `65be4364342d942222f4f856a25ec4a0f6957eb429e95a62d8dbcca6b4970d75` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141913_004.wav | `dc4f034d91223fc398d1b978a057f62924855c41845dad69df678549a58afc27` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141918_005.wav | `52ac68193f4e60b5ebabd8f13451c7bfc986a1306fc6189a1943b0a82af4e242` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141927_006.wav | `9e497a9149808b0ef3329f2d5abbda80b0dd8bf8c17b0431e582531c0c5ce7f0` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141934_007.wav | `4a71f36b78acdf2e1a332ecfb0c679e2e5d9ee7aa3695d8ba12c78a26b657e7c` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141942_008.wav | `3b6c981034c4657374b1bc732c6e80b9846e3036316ab110804b675443b0b5f3` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141949_009.wav | `7ac728085da9b28ea48ac1e916f7aaf8f50f0d786bebc2f4de6f659495e57896` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141958_010.wav | `a47039bb31826df75e2960156852ff41cd01a27eaeea2a4a210f9902640b2daf` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_142007_011.wav | `87e081c6bc5d19f9d231a3299077f63d3f07824461b463713ea0a63ff2c619f0` |
+| recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_142016_012.wav | `893bda46062a0926473dccac6b0269ff88b970b2ed51f5b4c20b86f5e60b0483` |
