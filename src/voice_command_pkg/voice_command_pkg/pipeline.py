@@ -182,6 +182,7 @@ def capture_utterances(
         voice_started_wall: float | None = None
         utterance_start_wall = 0.0
         voice_start_audio = 0.0
+        last_speech_frame_read_wall = None
 
         log('[LISTENING] 말씀해주세요.')
         while True:
@@ -195,10 +196,11 @@ def capture_utterances(
                     f'parec exit={process.poll()}',
                 )
 
+            frame_received_wall = time.perf_counter()
             if frame_sink is not None:
                 # Share all post-warmup PCM before the VAD/RMS gate, including
                 # short words that never become a Whisper utterance.
-                frame_sink(frame, detector.audio_time + FRAME_MS / 1000, time.perf_counter())
+                frame_sink(frame, detector.audio_time + FRAME_MS / 1000, frame_received_wall)
 
             if detector.state is VadState.LISTENING:
                 pre_roll.append(frame)
@@ -216,6 +218,8 @@ def capture_utterances(
             qualified = qualify_speech_for_state(
                 detector.state, vad_speech, frame, config.start_min_rms
             )
+            if qualified:
+                last_speech_frame_read_wall = frame_received_wall
             transition = detector.process_frame(qualified)
 
             end_details: dict[str, float] | None = None
@@ -275,6 +279,7 @@ def capture_utterances(
                     'utterance_seconds': len(utterance_frames) * FRAME_MS / 1_000.0,
                     'capture_wall_seconds': voice_end_wall - voice_started_wall,
                     'voice_end_wall': voice_end_wall,
+                    'last_speech_frame_read_wall': last_speech_frame_read_wall,
                     'max_duration_reached': end_details['max_duration_reached'],
                 }
                 utterance_frames.clear()
@@ -711,6 +716,7 @@ class VoiceCommandPipeline:
             ):
                 if self.stop_event.is_set():
                     break
+                capture['sequence'] = sequence
                 utterance = Utterance(sequence, audio, capture)
                 if self.audio_stop_recheck is not None:
                     self.audio_stop_recheck.submit(utterance)

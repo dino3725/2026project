@@ -16,6 +16,7 @@ from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
 from std_msgs.msg import String
 
 from voice_command_pkg.command_protocol import command_payload, TOPIC_NAME
+from voice_command_pkg.latency_trace import log_publication
 from voice_command_pkg.parameters import build_pipeline_config, DEFAULT_PARAMETERS
 from voice_command_pkg.pipeline import PipelineError, PipelineStopped, VoiceCommandPipeline
 from voice_command_pkg.robot_feedback import (
@@ -82,7 +83,6 @@ class VoiceCommandNode(Node):
                 return False
             action, target_class = payload
             message = RobotCommand()
-            message.header.stamp = self.get_clock().now().to_msg()
             message.header.frame_id = ''
             message.action = action
             message.target_class = target_class
@@ -104,12 +104,16 @@ class VoiceCommandNode(Node):
                 if time.perf_counter() > deadline:
                     self._notice(('robot_expired', ''))
                     return False
+            message.header.stamp = self.get_clock().now().to_msg()
             if self._closing or self.stop_event.is_set():
                 return False
             if not self.publish_enabled:
                 self._notice(('robot_dry_run', ''))
+                now = time.perf_counter()
+                log_publication(self.get_logger().info, message, capture, now, now, False)
                 return False
             self.feedback.mark_sent(action, target_class, time.perf_counter())
+            started = time.perf_counter()
             try:
                 self.publisher.publish(message)
             except Exception as exc:
@@ -117,6 +121,8 @@ class VoiceCommandNode(Node):
                 self.get_logger().error(f'[ROS ERROR] {type(exc).__name__}: {exc}')
                 self._notice(('robot_send_error', ''))
                 return False
+            finished = time.perf_counter()
+            log_publication(self.get_logger().info, message, capture, started, finished, True)
             if action == 'stop':
                 self._notice(('robot_stop_sent', ''))
             return True
