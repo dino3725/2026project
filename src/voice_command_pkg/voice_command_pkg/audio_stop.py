@@ -11,11 +11,13 @@ from voice_command_pkg.audio_stop_model import AudioStopConfig, STOP_WORDS
 
 @dataclass(frozen=True)
 class AudioStopEvent:
-    """A detection's input position and local read time, not physical latency."""
+    """A detection's audio position and local frame-read/VAD-end time."""
 
     keyword: str
     audio_end: float
     received_at: float
+    source: str = 'stream'
+    window: tuple[float, float] | None = None
 
 
 class AudioStopWorker:

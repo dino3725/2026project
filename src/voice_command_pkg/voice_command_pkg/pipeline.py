@@ -33,6 +33,7 @@ from voice_command_pkg.audio_capture import (
 from voice_command_pkg.audio_samples import pcm_to_float32
 from voice_command_pkg.audio_stop import AudioStopEvent, AudioStopWorker
 from voice_command_pkg.audio_stop_model import AudioStopConfig, KoreanStopSpotter, STOP_WORDS
+from voice_command_pkg.audio_stop_recheck import AudioStopRecheckWorker
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
 from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
 from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
@@ -425,6 +426,8 @@ class VoiceCommandPipeline:
         self._fetch_not_before = float('-inf')
         self._fetch_audio_not_before = float('-inf')
         self.audio_stop_worker: AudioStopWorker | None = None
+        self.audio_stop_recheck: AudioStopRecheckWorker | None = None
+        self._completed_stop_windows: deque[tuple[float, float]] = deque(maxlen=64)
         self._audio_stop_successes: deque[float] = deque(maxlen=64)
         self._last_published_action = ''
         self._capture_error: Exception | None = None
@@ -462,6 +465,8 @@ class VoiceCommandPipeline:
         self.llm.close()
         if self.audio_stop_worker is not None:
             self.audio_stop_worker.close()
+        if self.audio_stop_recheck is not None:
+            self.audio_stop_recheck.close()
 
     def _start_audio_stop(self) -> None:
         if self.config.audio_stop.mode == 'off':
@@ -481,6 +486,19 @@ class VoiceCommandPipeline:
         except Exception as exc:
             self.log(f'[AUDIO STOP ERROR] disabled; transcript fallback retained: {exc}')
 
+        if self.config.audio_stop.utterance_recheck:
+            try:
+                backend = KoreanStopSpotter(self.config.audio_stop)
+                self._ensure_running()
+                self.audio_stop_recheck = AudioStopRecheckWorker(
+                    self.config.audio_stop, backend, self._on_audio_stop, self.log
+                )
+                self.log('[AUDIO STOP RECHECK READY] enabled=true')
+            except PipelineStopped:
+                raise
+            except Exception as exc:
+                self.log(f'[AUDIO STOP RECHECK ERROR] disabled; other stop paths retained: {exc}')
+
     def _on_audio_stop(self, event: AudioStopEvent) -> None:
         # This runs independently of the sequential Whisper/LLM consumer.
         # Serialize invalidation, final fetch checks and publication together.
@@ -493,22 +511,38 @@ class VoiceCommandPipeline:
             ):
                 return
             mode = self.config.audio_stop.mode
+            if mode == 'active' and self._last_published_action == 'stop':
+                duplicate = any(start <= event.audio_end <= end
+                                for start, end in self._completed_stop_windows)
+                if event.window is not None:
+                    start, end = event.window
+                    duplicate = duplicate or any(start <= pos <= end
+                                                 for pos in self._audio_stop_successes)
+                if duplicate:
+                    self.log(f'[AUDIO STOP DUPLICATE] source={event.source} '
+                             f'audio={event.audio_end:.3f}s')
+                    return
             published = False
             if mode == 'active':
                 self._fetch_not_before = time.perf_counter()
                 self._fetch_audio_not_before = max(self._fetch_audio_not_before, event.audio_end)
                 if self.publish is not None:
                     published = self.publish(stop_command(), event.keyword, {
-                        'source': 'audio_stop', 'audio_end': event.audio_end,
-                        'frame_received_wall': event.received_at,
+                        'source': 'audio_stop', 'detector': event.source,
+                        'audio_end': event.audio_end,
+                        ('vad_end_wall' if event.window else 'frame_received_wall'):
+                            event.received_at,
                     })
                 if published:
                     self._audio_stop_successes.append(event.audio_end)
+                    if event.window is not None:
+                        self._completed_stop_windows.append(event.window)
                     self._last_published_action = 'stop'
+            timing = 'vad_end_to_decision' if event.window else 'frame_to_decision'
             self.log(
                 f'[AUDIO STOP] keyword={event.keyword} mode={mode} '
-                f'audio={event.audio_end:.3f}s frame_to_decision={lag:.3f}s '
-                f'published={published}'
+                f'audio={event.audio_end:.3f}s {timing}={lag:.3f}s '
+                f'published={published} source={event.source}'
             )
 
     def _audio_stop_already_published(self, capture: dict[str, Any]) -> bool:
@@ -625,6 +659,11 @@ class VoiceCommandPipeline:
                 published = self.publish(command, text, capture)
                 if published:
                     self._last_published_action = command['action']
+                    if command['action'] == 'stop' and 'voice_end_audio' in capture:
+                        end = float(capture['voice_end_audio'])
+                        self._completed_stop_windows.append(
+                            (end - float(capture['utterance_seconds']), end)
+                        )
         if dropped_reason:
             self.log(f'[DROPPED] sequence={utterance.sequence} reason={dropped_reason}')
         self.log('[ROS] ' + ('published' if published else 'skipped'))
@@ -672,7 +711,10 @@ class VoiceCommandPipeline:
             ):
                 if self.stop_event.is_set():
                     break
-                dropped = self.buffer.put(Utterance(sequence, audio, capture))
+                utterance = Utterance(sequence, audio, capture)
+                if self.audio_stop_recheck is not None:
+                    self.audio_stop_recheck.submit(utterance)
+                dropped = self.buffer.put(utterance)
                 if dropped is not None:
                     self.log(f'[DROPPED] sequence={dropped.sequence} reason=queue_full')
         except PipelineStopped:

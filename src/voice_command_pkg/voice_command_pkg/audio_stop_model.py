@@ -34,12 +34,15 @@ class AudioStopConfig:
     mode: str = 'off'
     model_dir: str = DEFAULT_MODEL_DIR
     precision: str = 'fp32'
+    utterance_recheck: bool = True
     threshold: float = 0.01
     score: float = 1.0
     queue_frames: int = 128
     max_lag_seconds: float = 0.5
 
     def __post_init__(self):
+        if type(self.utterance_recheck) is not bool:
+            raise ValueError('audio_stop.utterance_recheck must be boolean')
         if self.mode not in ('off', 'shadow', 'active'):
             raise ValueError('audio_stop.mode must be off, shadow or active')
         if self.precision not in ('int8', 'fp32'):

@@ -18,6 +18,7 @@ voice_command_node:
       mode: "off"                 # off / shadow (log only) / active (experimental)
       precision: "fp32"           # development improvement; still disabled by default
       model_dir: "~/.cache/eated/ko-kws-zipformer-tiny/c2430dd975019802a68077e0fc4dd0521ae193e9"
+      utterance_recheck: true     # fresh VAD segment check; mode off still disables both
       threshold: 0.01
       score: 1.0
       queue_frames: 128           # absorb bounded PulseAudio delivery bursts

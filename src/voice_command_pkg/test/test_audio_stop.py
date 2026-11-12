@@ -23,7 +23,7 @@ PCM = bytes(FRAME_BYTES)
     {'mode': 'enabled'}, {'model_dir': ''}, {'threshold': 0}, {'threshold': 1.1},
     {'threshold': float('nan')}, {'score': float('inf')}, {'queue_frames': 0},
     {'queue_frames': True}, {'queue_frames': 1.5}, {'max_lag_seconds': -1},
-    {'precision': 'fp16'}, {'precision': ''},
+    {'precision': 'fp16'}, {'precision': ''}, {'utterance_recheck': 'true'},
 ])
 def test_invalid_config(values):
     with pytest.raises(ValueError):
