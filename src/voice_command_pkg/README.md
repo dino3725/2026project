@@ -672,3 +672,113 @@ dry-run은 별도 event이며 실제 명령 시각을 만들지 않습니다. �
 경로별 중앙값/p95/누락을 집계합니다. KWS 기본 off와 기존 안전 경로는 유지했습니다.
 양쪽 실행 순서·동기화·영상 표식·정상 판정은
 `tools/voice_eval/results/2026-11-12_end_to_end_latency.md`를 참고하세요.
+
+## 화자 인증 — 등록·보정·검증 후 활성화 (2026-11-12)
+
+등록된 사용자의 `fetch`만 허용하는 선택 기능입니다. 현재 기본값은
+`speaker.mode: "off"`입니다. 실제 본인/타인 데이터로 검증하기 전에는 켜지 않습니다.
+`stop`은 모든 모드에서 화자 결과를 기다리지 않고 기존 규칙으로 처리합니다.
+이 변경은 노트북 전용이며 Jetson 코드·공유 메시지는 변경하지 않습니다.
+
+- `off`: 기존 동작, 화자 모델 로드 없음.
+- `shadow`: 발화별 결과를 `[SPEAKER]`에 기록. 가져오기 제한은 적용하지 않습니다.
+- `enforce`: 검증된 프로필만 사용. 모델/프로필 오류·미준비·품질 미달·시간 초과·타인 판정은
+  가져오기를 차단합니다. 실패한 요청을 나중에 자동 재실행하지 않습니다.
+- STT 시작 직전에 별도 작업 스레드에 같은 PCM을 전달합니다. 화자 추론은 한 번에 한 건만
+  유지하며, STT 후 추가 대기는 `speaker.wait_seconds`(기본 1초) 및 fetch 유효시간으로 제한합니다.
+  승인된 fetch도 발행 직전에 기존 IDLE/유효시간/stop 무효화 검사를 다시 거칩니다.
+- 코사인 유사도는 확률이 아닙니다. 등록 기본 임계값 0.75는 관찰용 임시값이며 운영 기준이 아닙니다.
+- 프로필은 노드 시작 때 고정합니다. 파일을 바꿔도 실행 중 노드에 자동 반영하지 않습니다.
+  등록/검증과 런타임의 모델 SHA256·전처리 설정이 같아야 합니다.
+
+### 설치 (현재 개발 노트북은 설치 완료)
+
+```bash
+cd ~/2026project
+.venv/bin/python -m pip install torch==2.6.0+cpu --index-url https://download.pytorch.org/whl/cpu
+.venv/bin/python -m pip install -r src/voice_command_pkg/requirements-speaker.txt
+.venv/bin/python -m pip install --no-deps resemblyzer==0.1.4
+```
+
+기존 `requirements.txt`의 `webrtcvad-wheels`가 `webrtcvad` 모듈을 제공합니다.
+Resemblyzer 메타데이터가 요구하는 별도 `webrtcvad` 배포판을 중복 설치하지 않습니다.
+따라서 `pip check`는 Resemblyzer의 배포판 의존성이 없다고 표시할 수 있습니다.
+Resemblyzer 패키지에 포함된 모델 SHA256을 로드 전에 확인하며 런타임 다운로드는 없습니다.
+ECAPA 비교용 `speechbrain==1.0.3`, `torchaudio==2.6.0+cpu`는 운영에 필요하지 않습니다.
+
+### 1. 지금 할 일: 내 목소리 등록
+
+기존 음성 노드를 Ctrl+C로 종료한 뒤 **노트북에서만** 실행합니다.
+Jetson/eated/ROS2/Ollama를 켤 필요가 없으며 이 도구는 ROS 명령을 발행하지 않습니다.
+
+```bash
+cd ~/2026project
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speaker.py
+```
+
+화면의 20문장을 평소 말투와 실제 사용할 마이크 위치에서 한 문장씩 읽습니다.
+Enter를 누른 뒤 **“지금 말씀하세요”** 표시를 보고 말합니다. 각 녹음은 6초이며 자동 종료됩니다.
+내용을 잘못 읽으면 `r`로 다시 녹음할 수 있습니다. 무음·너무 짧거나 심하게 찌그러진
+음성은 자동 재녹음을 요청합니다. 그동안 주변 사람은 말하지 않아야 합니다.
+완료되면 `recordings/speaker_enrollment_*/manifest.json` 형식의 실제 경로와
+`speaker_profiles/owner.json`을 출력합니다. 프로필은 아직 `calibrated: false`입니다.
+중간 종료 시 프로필을 만들지 않으며, 기존 프로필은 덮어쓰지 않습니다.
+
+정상 확인:
+
+```bash
+cd ~/2026project
+.venv/bin/python -c "import json; p=json.load(open('speaker_profiles/owner.json')); print('등록 수:', len(p['enrollment_hashes']), '검증 완료:', p['calibrated'])"
+```
+
+정상 출력은 `등록 수: 20 검증 완료: False`입니다. 이것은 등록 완료이며 인증 검증 완료는 아닙니다.
+원본 녹음과 프로필은 Git에서 제외되며, 새 파일은 사용자만 읽고 쓰는 권한으로 생성합니다.
+
+### 2. 등록 이후: 기준값 보정과 별도 검증
+
+각 명령은 새 녹음 폴더를 출력합니다. 다음 단계는 등록 결과를 확인한 후 진행합니다.
+타인 녹음은 참여자의 동의를 받고, 각 세션에서 한 사람만 읽습니다.
+실제 사용 환경과 비슷하게 녹음하며 등록에 쓴 파일을 다시 사용하지 않습니다.
+
+```bash
+# 내 목소리 10문장 — 기준값 결정용
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speaker.py --purpose genuine-dev
+# 동의한 다른 사람 10문장 — 기준값 결정용
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speaker.py --purpose other-dev
+```
+
+아래 변수에는 위 명령이 출력한 `manifest.json`의 전체 경로를 입력합니다.
+
+```bash
+read -rp '본인 development manifest 경로: ' SPEAKER_GENUINE_DEV
+read -rp '타인 development manifest 경로: ' SPEAKER_OTHER_DEV
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/calibrate_speaker.py calibrate \
+  --profile speaker_profiles/owner.json \
+  --genuine "$SPEAKER_GENUINE_DEV" --other "$SPEAKER_OTHER_DEV" \
+  --output speaker_profiles/owner_development.json
+```
+
+개발 녹음에서 FAR(타인 수락률) 0%, FRR(본인 거부율) 10% 이하를 만족하는 임계값을
+고정합니다. 점수가 겹쳐 기준을 만족하지 못하면 활성화하지 않습니다.
+이후 별도 세션에서 `--purpose genuine-test`, `--purpose other-test`로 각각 10개 이상
+새로 녹음하고, 고정된 임계값을 아래와 같이 검증합니다.
+
+```bash
+read -rp '새 본인 test manifest 경로: ' SPEAKER_GENUINE_TEST
+read -rp '새 타인 test manifest 경로: ' SPEAKER_OTHER_TEST
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/calibrate_speaker.py validate \
+  --profile speaker_profiles/owner_development.json \
+  --genuine "$SPEAKER_GENUINE_TEST" --other "$SPEAKER_OTHER_TEST" \
+  --output speaker_profiles/owner_validated.json
+```
+
+등록/개발/검증 간 PCM SHA256 중복은 거부합니다. 검증에서 품질 실패한 본인 음성도 거부율에
+포함합니다. 같은 FAR/FRR 기준을 통과해야 `calibrated: true`가 됩니다.
+소수 녹음의 통과는 다른 모든 사람·장소에서의 성능 보장이 아니므로 실제 환경 확인이 남습니다.
+
+활성화는 이 결과를 확인한 **후** 별도로 안내합니다. `speaker.mode: enforce`와
+검증 파일의 `speaker.profile_path`를 함께 지정해야 합니다. `shadow`는 보호 기능이 아니므로
+관찰 시험에서는 기존 `publish_commands: false`를 유지합니다. ROS CLI로 off를 지정할 때는
+YAML 불리언 변환을 피하려고 `-p "speaker.mode:='off'"`처럼 따옴표를 보존합니다.
+
+시험 근거와 남은 항목은 `tools/voice_eval/results/2026-11-12_speaker_auth.md`를 참고하세요.
