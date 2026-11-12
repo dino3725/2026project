@@ -23,6 +23,7 @@ PCM = bytes(FRAME_BYTES)
     {'mode': 'enabled'}, {'model_dir': ''}, {'threshold': 0}, {'threshold': 1.1},
     {'threshold': float('nan')}, {'score': float('inf')}, {'queue_frames': 0},
     {'queue_frames': True}, {'queue_frames': 1.5}, {'max_lag_seconds': -1},
+    {'precision': 'fp16'}, {'precision': ''},
 ])
 def test_invalid_config(values):
     with pytest.raises(ValueError):
@@ -40,6 +41,41 @@ def test_model_hash_checked_before_native_load(tmp_path, monkeypatch):
         verify_model(tmp_path)
     (tmp_path / 'tokens.txt').write_bytes(b'correct')
     verify_model(tmp_path)
+
+
+@pytest.mark.parametrize('precision,suffix', [('int8', '.int8'), ('fp32', '')])
+def test_backend_uses_verified_precision_without_mixing_files(
+    monkeypatch, tmp_path, precision, suffix,
+):
+    verified, calls = [], []
+    monkeypatch.setattr(
+        audio_stop_model, 'verify_model',
+        lambda directory, selected: verified.append((directory, selected)),
+    )
+
+    def create(**kwargs):
+        calls.append(kwargs)
+        # Constructor must receive a real UTF-8 keyword file, not a directory.
+        from pathlib import Path
+        assert Path(kwargs['keywords_file']).read_text() == audio_stop_model.KEYWORD_LINES
+        return SimpleNamespace(create_stream=lambda: object())
+
+    monkeypatch.setitem(sys.modules, 'sherpa_onnx', SimpleNamespace(KeywordSpotter=create))
+    config = AudioStopConfig(model_dir=str(tmp_path), precision=precision)
+    audio_stop_model.KoreanStopSpotter(config)
+    assert verified == [(tmp_path, precision)]
+    for part in ('encoder', 'decoder', 'joiner'):
+        assert calls[0][part] == str(tmp_path / f'{part}{suffix}.onnx')
+
+
+def test_missing_fp32_never_silently_uses_int8(monkeypatch, tmp_path):
+    monkeypatch.setattr(audio_stop_model, 'MODEL_HASHES', {
+        'encoder.int8.onnx': hashlib.sha256(b'int8').hexdigest(),
+    })
+    (tmp_path / 'encoder.int8.onnx').write_bytes(b'int8')
+    verify_model(tmp_path, 'int8')
+    with pytest.raises(FileNotFoundError, match='encoder.onnx'):
+        audio_stop_model.KoreanStopSpotter(AudioStopConfig(model_dir=str(tmp_path)))
 
 
 def test_overflow_does_not_block_capture_and_resets_context():

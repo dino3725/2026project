@@ -16,6 +16,12 @@ MODEL_HASHES = {
     'joiner.int8.onnx': '3c8d9607af03973f0ecf78ab7f152d8a8b6e9764cd2014f4273e8f14fa53e196',
     'tokens.txt': '5ba64ac2c01404eb94393c844f8b009dff396dc286c79390cd9557b927f4e2ba',
 }
+FP32_MODEL_HASHES = {
+    'encoder.onnx': 'e59230ef379562ed360c8981ff2602c37ba9107cab6228ce94306cc04be3c70f',
+    'decoder.onnx': '61945f2b85eb78f5d843d6effa4b242ffde1194e272a95e0412366b1d967ec7f',
+    'joiner.onnx': '9dc94a4aaf783b37281e60f084b7111e2d65e31578906844875affa83ac17616',
+    'tokens.txt': MODEL_HASHES['tokens.txt'],
+}
 # Tokenized with the pinned model's bpe.model; no tokenizer dependency at runtime.
 KEYWORD_LINES = '▁ 멈 춰 @멈춰\n▁정 지 @정지\n▁스 톱 @스톱\n'
 STOP_WORDS = frozenset({'멈춰', '정지', '스톱'})
@@ -27,6 +33,7 @@ class AudioStopConfig:
 
     mode: str = 'off'
     model_dir: str = DEFAULT_MODEL_DIR
+    precision: str = 'fp32'
     threshold: float = 0.01
     score: float = 1.0
     queue_frames: int = 128
@@ -35,6 +42,8 @@ class AudioStopConfig:
     def __post_init__(self):
         if self.mode not in ('off', 'shadow', 'active'):
             raise ValueError('audio_stop.mode must be off, shadow or active')
+        if self.precision not in ('int8', 'fp32'):
+            raise ValueError('audio_stop.precision must be int8 or fp32')
         if not isinstance(self.model_dir, str) or not self.model_dir.strip():
             raise ValueError('audio_stop.model_dir must be a nonempty string')
         for name in ('threshold', 'score', 'max_lag_seconds'):
@@ -47,9 +56,16 @@ class AudioStopConfig:
             raise ValueError('audio_stop.queue_frames must be a positive integer')
 
 
-def verify_model(directory: Path) -> None:
+def model_hashes(precision: str) -> dict[str, str]:
+    """Return only files belonging to the explicitly selected model precision."""
+    if precision not in ('int8', 'fp32'):
+        raise ValueError('audio stop precision must be int8 or fp32')
+    return MODEL_HASHES if precision == 'int8' else FP32_MODEL_HASHES
+
+
+def verify_model(directory: Path, precision: str = 'int8') -> None:
     """Reject missing/changed model files before calling native inference code."""
-    for name, expected in MODEL_HASHES.items():
+    for name, expected in model_hashes(precision).items():
         path = directory / name
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             raise ValueError(f'audio stop model SHA256 mismatch: {path}')
@@ -60,7 +76,8 @@ class KoreanStopSpotter:
 
     def __init__(self, config: AudioStopConfig):
         directory = Path(config.model_dir).expanduser()
-        verify_model(directory)
+        verify_model(directory, config.precision)
+        suffix = '.int8' if config.precision == 'int8' else ''
         import sherpa_onnx
 
         # sherpa reads the keyword file during construction. Never download or
@@ -70,9 +87,9 @@ class KoreanStopSpotter:
             keywords.write_text(KEYWORD_LINES, encoding='utf-8')
             self.spotter = sherpa_onnx.KeywordSpotter(
                 tokens=str(directory / 'tokens.txt'),
-                encoder=str(directory / 'encoder.int8.onnx'),
-                decoder=str(directory / 'decoder.int8.onnx'),
-                joiner=str(directory / 'joiner.int8.onnx'),
+                encoder=str(directory / f'encoder{suffix}.onnx'),
+                decoder=str(directory / f'decoder{suffix}.onnx'),
+                joiner=str(directory / f'joiner{suffix}.onnx'),
                 keywords_file=str(keywords), num_threads=1, provider='cpu',
                 keywords_threshold=config.threshold, keywords_score=config.score,
                 max_active_paths=4, num_trailing_blanks=1,

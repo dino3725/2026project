@@ -472,7 +472,10 @@ class VoiceCommandPipeline:
             self.audio_stop_worker = AudioStopWorker(
                 self.config.audio_stop, backend, self._on_audio_stop, self.log
             )
-            self.log(f'[AUDIO STOP READY] mode={self.config.audio_stop.mode} experimental=true')
+            self.log(
+                f'[AUDIO STOP READY] mode={self.config.audio_stop.mode} '
+                f'precision={self.config.audio_stop.precision} experimental=true'
+            )
         except PipelineStopped:
             raise
         except Exception as exc:

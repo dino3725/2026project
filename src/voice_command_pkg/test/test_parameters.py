@@ -54,3 +54,10 @@ def test_capture_parameters_reach_pipeline():
 def test_unknown_parameter_is_rejected():
     with pytest.raises(ValueError):
         build_pipeline_config({'vad.end_silence': 600})
+
+
+def test_audio_precision_default_and_override_preserve_disabled_mode():
+    assert build_pipeline_config({}).audio_stop.precision == 'fp32'
+    config = build_pipeline_config({'audio_stop.precision': 'int8'})
+    assert config.audio_stop.precision == 'int8'
+    assert config.audio_stop.mode == 'off'

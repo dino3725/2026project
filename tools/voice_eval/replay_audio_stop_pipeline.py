@@ -22,6 +22,7 @@ def main():
                         help='Include trailing silence for STT to finish before EOF shuts down.')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--mode', choices=['off', 'shadow', 'active'], default='active')
+    parser.add_argument('--precision', choices=['int8', 'fp32'], default=AudioStopConfig().precision)
     args = parser.parse_args()
     pcm = read_pcm(args.wav)
     logs, commands, producers, producer_errors = [], [], [], []
@@ -74,7 +75,9 @@ def main():
         for key, value in replacements.items():
             setattr(pipeline, key, value)
         instance = pipeline.VoiceCommandPipeline(
-            pipeline.PipelineConfig(audio_stop=AudioStopConfig(mode=args.mode)), record_command, log
+            pipeline.PipelineConfig(audio_stop=AudioStopConfig(
+                mode=args.mode, precision=args.precision
+            )), record_command, log
         )
         try:
             instance.run_forever()
@@ -92,6 +95,7 @@ def main():
             setattr(pipeline, key, value)
     result = {
         'no_ros_no_microphone': True, 'llm_disabled': True, 'mode': args.mode,
+        'precision': args.precision,
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),
         'callback_commands': commands, 'logs': logs, 'expected_eof_error': end_error,
         'producer_errors': producer_errors,

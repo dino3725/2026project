@@ -67,9 +67,11 @@ def main():
     parser.add_argument('--threshold', type=float, default=AudioStopConfig().threshold)
     parser.add_argument('--score', type=float, default=AudioStopConfig().score)
     parser.add_argument('--model-dir', default=AudioStopConfig().model_dir)
+    parser.add_argument('--precision', choices=['int8', 'fp32'], default=AudioStopConfig().precision)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    config = AudioStopConfig(threshold=args.threshold, score=args.score, model_dir=args.model_dir)
+    config = AudioStopConfig(threshold=args.threshold, score=args.score, model_dir=args.model_dir,
+                             precision=args.precision)
     backend = KoreanStopSpotter(config)
     if args.manifest:
         manifest = json.loads(args.manifest.read_text(encoding='utf-8'))
@@ -92,6 +94,7 @@ def main():
     result = {
         'development_only': True, 'model_revision': MODEL_REVISION,
         'threshold': config.threshold, 'score': config.score,
+        'precision': config.precision,
         'manifest_sha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest()
         if args.manifest else None,
         'samples': rows, 'synthetic_silence_10s': silence,

@@ -8,17 +8,18 @@ import tempfile
 import urllib.request
 
 from voice_command_pkg.audio_stop_model import (
-    DEFAULT_MODEL_DIR, MODEL_HASHES, MODEL_REPO, MODEL_REVISION, verify_model,
+    AudioStopConfig, DEFAULT_MODEL_DIR, model_hashes, MODEL_REPO, MODEL_REVISION, verify_model,
 )
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model-dir', default=DEFAULT_MODEL_DIR)
+    parser.add_argument('--precision', choices=['int8', 'fp32'], default=AudioStopConfig().precision)
     args = parser.parse_args()
     directory = Path(args.model_dir).expanduser()
     directory.mkdir(parents=True, exist_ok=True)
-    for name, expected in MODEL_HASHES.items():
+    for name, expected in model_hashes(args.precision).items():
         destination = directory / name
         if destination.is_file() and hashlib.sha256(destination.read_bytes()).hexdigest() == expected:
             print(f'verified {name}')
@@ -38,8 +39,8 @@ def main():
             if temporary is not None:
                 temporary.unlink(missing_ok=True)
         print(f'downloaded and verified {name}')
-    verify_model(directory)
-    print(f'model ready: {directory}')
+    verify_model(directory, args.precision)
+    print(f'model ready: {directory} precision={args.precision}')
 
 
 if __name__ == '__main__':
