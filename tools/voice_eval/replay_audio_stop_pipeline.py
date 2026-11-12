@@ -22,7 +22,9 @@ def main():
                         help='Include trailing silence for STT to finish before EOF shuts down.')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--mode', choices=['off', 'shadow', 'active'], default='active')
-    parser.add_argument('--precision', choices=['int8', 'fp32'], default=AudioStopConfig().precision)
+    parser.add_argument('--precision', choices=['int8', 'fp32'],
+                        default=AudioStopConfig().precision)
+    parser.add_argument('--no-utterance-recheck', action='store_true')
     args = parser.parse_args()
     pcm = read_pcm(args.wav)
     logs, commands, producers, producer_errors = [], [], [], []
@@ -76,7 +78,8 @@ def main():
             setattr(pipeline, key, value)
         instance = pipeline.VoiceCommandPipeline(
             pipeline.PipelineConfig(audio_stop=AudioStopConfig(
-                mode=args.mode, precision=args.precision
+                mode=args.mode, precision=args.precision,
+                utterance_recheck=not args.no_utterance_recheck
             )), record_command, log
         )
         try:
@@ -96,6 +99,7 @@ def main():
     result = {
         'no_ros_no_microphone': True, 'llm_disabled': True, 'mode': args.mode,
         'precision': args.precision,
+        'utterance_recheck': not args.no_utterance_recheck,
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),
         'callback_commands': commands, 'logs': logs, 'expected_eof_error': end_error,
         'producer_errors': producer_errors,
@@ -103,7 +107,8 @@ def main():
         if instance.audio_stop_worker else None,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n',
+                           encoding='utf-8')
     print(f'local callbacks={len(commands)}; no ROS publications; results={args.output}')
 
 

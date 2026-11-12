@@ -95,7 +95,7 @@ Whisper 오전사 “총지”를 KWS가 보완했습니다. 실제 발행은 0�
 FP32 31/31, 앞 무음 6가지 반복에서는 165/186 → 185/186이었습니다. 비정지 29개 ×
 6회는 두 설정 모두 오탐 0회입니다. 50초 운영 조건 재생은 KWS 5/9, 기존 Whisper와
 합쳐 9/9였지만 연속 입력 위치를 바꾸면 여전히 누락이 있습니다. 기본 모드는 **off**로
-유지합니다. 새 FP32 설정의 실제 마이크 shadow 시험은 아직 필요합니다. 상세 결과는
+유지합니다. 이후 FP32 실제 마이크 시험은 합산 8/9로 마지막 정지를 놓쳤습니다. 상세 결과는
 `tools/voice_eval/results/2026-11-12_audio_stop_stability.md`에 있습니다.
 
 | 파라미터 | 기본값 | 의미 |
@@ -103,10 +103,11 @@ FP32 31/31, 앞 무음 6가지 반복에서는 165/186 → 185/186이었습니�
 | `audio_stop.mode` | `off` | `off`: 기존 경로만, `shadow`: 감지 로그만, `active`: 감지 시 stop 처리 |
 | `audio_stop.model_dir` | YAML의 고정 리비전 캐시 경로 | 파일 SHA256 확인 후 로드; 실행 중 자동 다운로드 없음 |
 | `audio_stop.precision` | `fp32` | `int8`로 이전 설정 재현 가능; 서로 다른 정밀도 파일을 섞거나 자동 대체하지 않음 |
+| `audio_stop.utterance_recheck` | `true` | off 이외 모드에서 완성 VAD 발화를 별도 스레드/새 감지 상태로 재검사 |
 | `audio_stop.threshold` | `0.01` | 현재 개발 비교 후보, 운영 확정값 아님 |
 | `audio_stop.score` | `1.0` | 키워드 탐색 가산점 |
 | `audio_stop.queue_frames` | `128` | 전달 버스트를 수용하는 최대 프레임 수; 추론은 녹음 스레드 밖에서 수행 |
-| `audio_stop.max_lag_seconds` | `0.5` | 프레임을 읽은 뒤 감지 결과까지의 최대 나이; 실제 마이크 지연이 아님 |
+| `audio_stop.max_lag_seconds` | `0.5` | 연속 감지는 프레임 읽기, 보완 감지는 VAD 종료 후 최대 나이; 실제 마이크 지연이 아님 |
 
 대기열이 넘치면 미처리 프레임을 버리고 모델의 음향 문맥을 초기화합니다. 오래된 프레임과
 초과 추론 결과도 폐기합니다. `[AUDIO STOP RESET]`은 이런 입력 손실을 알립니다.
@@ -159,9 +160,16 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python \
   --output log/audio_stop_stability_recheck.json
 ```
 
-다음 실시간 확인은 **명령을 발행하지 않는 shadow 시험**입니다. Jetson을 켤 필요 없습니다.
-기존 음성 노드는 Ctrl+C로 종료한 뒤 하나만 실행합니다. `[LISTENING]` 이후 평소 속도로
-“스톱” 3회, “멈춰” 3회, “정지” 3회를 말하고, 각각 4초 간격을 둡니다. 이어서
+안정화 2차는 **발화 종료 후 별도 감지기로 재검사**하는 보완 경로입니다. VAD 종료 900ms를
+기다리지만 Whisper/LLM 대기와 독립적으로 실행합니다. 대기열 1개, VAD 종료 후 0.5초 제한,
+성공한 동일 발화만 중복 억제를 적용합니다. 보완 모델 오류는 다른 정지 경로에 영향을 주지 않습니다.
+분리 정지 40/40·비정지 오탐 0/32, 50초 통합 재생은 연속 5/9 + 보완 8/9의 합집합 9/9이며
+로컬 stop 콜백 9회였습니다. 실제 ROS 발행은 없습니다. 연속 감지 자체의 민감성과 말하지 않은
+“고맙습니다” 전사는 미해결입니다. 상세 결과: `tools/voice_eval/results/2026-11-12_audio_stop_recheck.md`.
+
+다음 실시간 확인은 **새 보완 경로의 명령을 발행하지 않는 shadow 시험**입니다. Jetson을 켤 필요 없습니다.
+기존 음성 노드는 Ctrl+C로 종료한 뒤 하나만 실행합니다. 비교 조건을 맞추기 위해 `[LLM READY]` 이후 평소 속도로
+“스톱” 3회, “멈춰” 3회, “정지” 3회를 말하고, 각각 5초 간격을 둡니다. 이어서
 “콜라 가져다줘”, “휴지 가져다줘”, “안녕하세요”, 생활 소음 30초를 시험합니다.
 
 ```bash
@@ -172,6 +180,7 @@ ros2 run voice_command_pkg voice_command_node --ros-args \
   -p publish_commands:=false \
   -p audio_stop.mode:=shadow \
   -p audio_stop.precision:=fp32 \
+  -p audio_stop.utterance_recheck:=true \
   -p save_recordings:=true \
   -p recordings_dir:="$KWS_CHECK_DIR" 2>&1 | tee "$KWS_CHECK_DIR/session.log"
 ```
@@ -183,11 +192,12 @@ grep -E '\[(AUDIO STOP[^]]*|STT|COMMAND|ROS|DROPPED|ERROR)\]' "$KWS_CHECK_DIR/se
 echo "결과 위치: $KWS_CHECK_DIR"
 ```
 
-- 연결 정상: `[AUDIO STOP READY] mode=shadow precision=fp32`, 감지 시 `published=False`.
+- 연결 정상: `[AUDIO STOP READY] mode=shadow precision=fp32`와 `[AUDIO STOP RECHECK READY]`, 감지 시 `published=False`.
+- 정지마다 `source=stream` 또는 `source=utterance_recheck`가 있어야 합니다. shadow는 중복 이벤트를 모두 기록하므로 줄 수만 합산하지 않습니다.
 - 시험 정상: 실제 명령 발행 없음(`[ROS] skipped`), 기존 `[STT]`와 전사문 stop 유지.
 - 모델 채택 기준: 9회 모두 감지하고 일반 발화/생활 소음에는 오탐이 없어야 합니다.
   현재 모델이 이 기준을 통과했다고 간주하지 않습니다. RESET/ERROR도 함께 확인합니다.
-- `frame_to_decision`은 마지막 입력 프레임 처리 지연이며 말끝→정지 시간이 아닙니다.
+- `frame_to_decision`은 프레임 읽기 이후, `vad_end_to_decision`은 VAD 종료 이후 시간이며 말끝→정지 시간이 아닙니다. RECHECK DROP/ERROR가 없어야 합니다.
 - WAV는 VAD 발화만 저장합니다. 생활 소음 전체나 VAD 미검출 음성을 보존하는 기능은 아닙니다.
 
 원복은 노드를 끄고 `audio_stop.mode:=off`로 다시 실행하면 됩니다. 기본 YAML은 이미 off입니다.

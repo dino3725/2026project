@@ -1,0 +1,97 @@
+{
+  "purpose": "development only; not held-out",
+  "annotation_note": "Expected phrases follow the instructed trial order; exact reference speech is not independently transcribed. User confirmed not saying 고맙습니다 in clip 002; that clip is excluded from accuracy denominators.",
+  "samples": [
+    {
+      "id": "fp32_live_01",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135616_001.wav",
+      "sha256": "14266135c25baac68b47c5ef8c3a927002e376964da8116f41c4785a3d379b08",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_02",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135620_002.wav",
+      "sha256": "a6a87f06f02cecba09003f27142e861a3c3775195171d2e60ad2c9749dd318b3",
+      "reference": "사용자가 고맙습니다를 말하지 않음; 음향 정답 미확정",
+      "category": "unconfirmed_input"
+    },
+    {
+      "id": "fp32_live_03",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135625_003.wav",
+      "sha256": "5b0feefee14e7a6137d840dfbc07f13171d3cbe7089da1107d7792b3948d3c28",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_04",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135634_004.wav",
+      "sha256": "857f00c7df61d2db574ced6540a70f5f8d2c890f71d0c86f519d3b43b3693647",
+      "reference": "스톱",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_05",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135642_005.wav",
+      "sha256": "5099fb72c843957a7e8d2295a28f7d82a66b81c8c1fe0bfff32350e27fb359a2",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_06",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135652_006.wav",
+      "sha256": "68152648e20432f5ec0b4e21dcf6513dcdb6d6cd2306b05f8b62c3f72933e0a8",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_07",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135707_007.wav",
+      "sha256": "28fbe3a4174ea4e54a8485cf84c727908db3f9d442a71ff0287b1f061eff4f96",
+      "reference": "멈춰",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_08",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135718_008.wav",
+      "sha256": "f2f0cda14f2b4dab671f8abd20b163f77f571544677aea4f94185bab87e47253",
+      "reference": "정지",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_09",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135727_009.wav",
+      "sha256": "edac59f54fa9154164531444e6390fa5dfa0cd87fe1ec76c1e32624057c1bc83",
+      "reference": "정지",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_10",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135734_010.wav",
+      "sha256": "a301d446ee9035fc40071dd77161c7d51f7bdc9d06cbfd9f63a00eb1e7a93c2d",
+      "reference": "정지",
+      "category": "target_stop"
+    },
+    {
+      "id": "fp32_live_11",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135745_011.wav",
+      "sha256": "1eb3c9a885c942578fecac8f83badab833549926c53535a9df736daf55658f0e",
+      "reference": "콜라 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "fp32_live_12",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135752_012.wav",
+      "sha256": "6cabf30f21b564f2f7ba39971b6c1acc8683a6f96200355e12fa9cd5bcd300e3",
+      "reference": "휴지 가져다줘",
+      "category": "negative"
+    },
+    {
+      "id": "fp32_live_13",
+      "file": "../../recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135803_013.wav",
+      "sha256": "231ebd0118a8f26774a8a5196b78ebf415b07c540e40392599b6f4f6fac387b4",
+      "reference": "안녕하세요",
+      "category": "negative"
+    }
+  ]
+}
