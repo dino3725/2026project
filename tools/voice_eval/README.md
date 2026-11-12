@@ -113,3 +113,13 @@ VAD/Whisper/KWS를 확인합니다. ROS 발행은 로컬 기록 콜백으로 대
 `download_audio_stop_model.py`, `evaluate_audio_stop.py`, `replay_audio_stop_pipeline.py`의
 현재 기본 정밀도는 FP32이며 `--precision int8`로 이전 결과를 재현할 수 있습니다.
 실제 노드에서는 `audio_stop.precision`으로 선택합니다. 기본 감지 모드는 계속 off입니다.
+
+
+## 종단 지연 도구
+
+- `record_latency.py`: 노트북/Jetson 읽기 전용 command/status/state 관찰, chrony 시작/종료 근거 저장.
+- `analyze_latency.py`: 음성 노드 `[LATENCY]`와 양쪽 관찰 파일을 명령 1개 단위로 대응. 선택적으로 동일 영상의 사람 표식을 사용한 물리 정지 시간 계산.
+- `summarize_latency.py`: 경로별 중앙값/nearest-rank p95/최대/누락 수. 동일 명령 중복 집계 거부.
+- 동기화·명령 대응·새 상태 전환의 증거가 없으면 해당 값은 미측정입니다. ERROR/accepted를 물리적 정지 완료로 대신하지 않습니다.
+
+실행 명령과 실물 확인 순서는 [종단 지연 측정 보고서](results/2026-11-12_end_to_end_latency.md)를 참고하세요.

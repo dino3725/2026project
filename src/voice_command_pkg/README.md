@@ -658,3 +658,17 @@ Laptop microphone
 다음 단계에서는 실제 로봇을 저위험 상태에 두고 음성 stop이 Jetson의 action 취소,
 `cmd_vel = 0`, 매니퓰레이터 hold 및 `ERROR` 상태 전환까지 이어지는지 검증해야
 합니다. 음성 stop만을 유일한 비상정지 수단으로 사용해서는 안 됩니다.
+
+
+### 종단 지연 측정 (2026-11-12)
+
+발행 성공 시 `[LATENCY]` JSON에 command_stamp_ns, 호스트/부팅별 monotonic 기준,
+VAD 종료→publish 호출, 마지막 VAD 음성 프레임 읽기→publish 호출 시간을 기록합니다.
+dry-run은 별도 event이며 실제 명령 시각을 만들지 않습니다. 이 시간은 실제 말끝/물리 정지 지연이 아닙니다.
+`tools/voice_eval/record_latency.py`는 양쪽에서 기존 토픽만 구독하고,
+`analyze_latency.py`는 시험당 명령 1개와 시계 근거를 확인한 뒤 지표를 생성합니다.
+`ERROR`나 accepted 응답은 팔/바퀴의 정지 완료로 취급하지 않습니다. 실제 종단 정지는
+한 영상의 말끝/팔/바퀴 정지 표식을 넣어 별도로 측정합니다. `summarize_latency.py`는
+경로별 중앙값/p95/누락을 집계합니다. KWS 기본 off와 기존 안전 경로는 유지했습니다.
+양쪽 실행 순서·동기화·영상 표식·정상 판정은
+`tools/voice_eval/results/2026-11-12_end_to_end_latency.md`를 참고하세요.
