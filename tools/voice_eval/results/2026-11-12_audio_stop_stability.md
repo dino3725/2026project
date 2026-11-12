@@ -147,7 +147,7 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/replay_audio_
 
 ## 7. 사용자 실제 마이크 확인 및 남은 단계
 
-새 FP32의 마이크/생활 소음 확인은 아직 하지 않았습니다. `src/voice_command_pkg/README.md`의 shadow 명령에 `-p audio_stop.precision:=fp32`를 사용합니다. `publish_commands=false`로 실제 발행 없이 스톱/멈춰/정지 각 3회, 일반 문장 3개, 생활 소음을 확인합니다. 정상 연결 로그는 `mode=shadow precision=fp32`, 이벤트는 `published=False`입니다.
+아래 절차 안내 후 FP32 마이크 시험을 진행했으며, 누락이 남았습니다(8장). 이번 FP32 생활 소음 시험의 완료 여부는 아직 확인되지 않았습니다. `src/voice_command_pkg/README.md`의 shadow 명령에 `-p audio_stop.precision:=fp32`를 사용합니다. `publish_commands=false`로 실제 발행 없이 스톱/멈춰/정지 각 3회, 일반 문장 3개, 생활 소음을 확인합니다. 정상 연결 로그는 `mode=shadow precision=fp32`, 이벤트는 `published=False`입니다.
 기능 채택 여부는 9/9 감지와 비정지 오탐 0을 단기 확인 기준으로 보되, 새 화자/다른 환경까지 검증됐다고 해석하지 않습니다. 입력 위치에 따른 연속 음성 미탐은 계속 해결해야 합니다. 오디오 경로가 감지한 발화만 빨라지고, 놓친 발화는 여전히 Whisper를 기다립니다.
 
 ### 로봇에서 확인할 항목
@@ -174,3 +174,99 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/replay_audio_
 | log/audio_stop_stability_20261112/candidates.json | `10f301531288fda495d93e73f354a7f38f8f64702f9b063571fb12e393798d60` |
 | log/audio_stop_stability_20261112/gain_precision.json | `b90ae0377fee4f291d0f840a0bb17f0dc2757c081b03e9d84161c9e4e9e0fd38` |
 | log/audio_stop_stability_20261112/streams.json | `5f7714b9e350150b392632bec4329b01f91cef56a83708b50302a6495046f5be` |
+
+## 8. 후속 FP32 실시간 시험 — 안정화 미완료
+
+입력: `recordings/audio_stop_fp32.AYnvxO/session.log` 및 저장된 WAV 13개.
+아래 정답 대응은 안내한 스톱/멈춰/정지 각 3회, 일반 문장 3회의 순서를 따랐다는 전제입니다.
+중간에 추가된 002의 “고맙습니다.”는 실제 발화 여부가 확인되지 않았으므로 잡음이나 환각으로 단정하지 않습니다.
+
+| WAV 순번 | 예상 발화 | 실시간 KWS | 실제 전사문 | 전사문 stop | 파일 초기화 FP32 KWS |
+|---:|---|---|---|---|---|
+| 001 | 스톱 | 스톱 | 스톱 | O | 스톱 |
+| 002 | 확인 중 | 없음 | 고맙습니다. | X | 없음 |
+| 003 | 스톱 | 스톱 | 스톱 | O | 스톱 |
+| 004 | 스톱 | 스톱 | 스톱 | O | 스톱 |
+| 005 | 멈춰 | 없음 | 멈춰 | O | 멈춰 |
+| 006 | 멈춰 | 없음 | 멈춰 | O | 멈춰 |
+| 007 | 멈춰 | 멈춰 | 멈춰. | O | 멈춰 |
+| 008 | 정지 | 정지 | 종지 | X | 정지 |
+| 009 | 정지 | 정지 | 종지 | X | 정지 |
+| 010 | 정지 | 없음 | 총지 | X | 정지 |
+| 011 | 콜라 가져다줘 | 없음 | 콜라 가져다 줘 | X | 없음 |
+| 012 | 휴지 가져다줘 | 없음 | 휴지가 좋다. | X | 없음 |
+| 013 | 안녕하세요 | 없음 | 안녕하세요 | X | 없음 |
+
+- 실시간 KWS: 스톱 3/3, 멈춰 1/3, 정지 2/3 → **6/9**.
+- 전사문 규칙 stop: 스톱 3/3, 멈춰 3/3, 정지 0/3 → **6/9**.
+- 관찰된 두 경로의 합집합 **8/9**. 마지막 정지는 두 경로 모두 놓쳤습니다.
+- shadow이므로 KWS가 감지한 “정지”의 전사가 “종지”이면 `[COMMAND] unknown`이 그대로 나옵니다.
+  합집합 8/9는 실제 stop 발행 성공률이 아닙니다. KWS 6건 모두 published=False, ROS 13건 모두 skipped입니다.
+- 시작 시 state_publishers=0이며 비정지 후보는 robot_unknown으로 차단됐습니다. 이것은 정지 감지 실패 원인이 아닙니다.
+- 로그상 KWS RESET/ERROR, pipeline ERROR는 없습니다. 일반 문장 3개에서는 KWS 이벤트가 없었습니다.
+  연속 원음과 무음 구간 길이가 없으므로 이 로그로 생활 소음 오탐률을 확정하지 않습니다.
+
+### 같은 WAV의 추가 재생
+
+런타임 `KoreanStopSpotter`와 기존 `evaluate_audio_stop.replay`로 WAV 13개를 정밀도별로 재생했습니다.
+각 파일마다 감지기를 초기화했고, 끝에 합성 무음 600ms를 붙였습니다. 정지 검출은 모두 원본 WAV 안에서 발생했습니다.
+INT8은 정지 8/9(001 누락), FP32는 9/9이며 나머지 4파일은 양쪽 모두 검출이 없었습니다.
+002는 정답이 미확정이므로 비정지 정확도 계산에는 포함하지 않습니다.
+
+새 정지 9파일에 FP32 앞 무음 0/60/120/180/240/300ms를 적용하면 **53/54**입니다.
+001의 60ms 조건만 누락했고 나머지는 모두 감지했습니다. 이는 독립 발화 54개가 아닌 동일 9파일의 반복입니다.
+파일별 초기화 9/9와 실시간 6/9의 차이 및 위치 변형의 누락은 연속 입력 상태/시작 위치를 후속 조사할 근거입니다.
+원래 마이크 입력의 발화 사이 구간이 저장되지 않아 이 WAV를 단순 연결해 원본 실시간 실패를 재현했다고 주장할 수 없습니다.
+누락 원인이 모델 내부 상태 하나로 확정됐다는 뜻도 아닙니다.
+
+### LLM 준비 중의 처리 지연
+
+전체 로그의 LLM 준비는 wall_seconds=57.525s(load=6.404s, prompt_eval=49.691s)였습니다.
+준비와 겹친 첫 6발화의 STT 시간 중앙값은 **3.0205초**, 준비 후 7발화는 **1.714초**입니다.
+CPU 경합 가능성과 일치하지만, 발화와 실행 조건이 다르므로 인과관계나 FP32 자체의 비용을 단정하지 않습니다.
+정지는 준비 완료 전에도 계속 처리해야 하며 LLM 준비를 stop 허용 조건으로 추가하지 않습니다.
+`frame_to_decision` 0.047~0.170초는 로컬 프레임 읽기 이후 시간이지 실제 말끝→로봇 정지 지연이 아닙니다.
+
+### 결정과 다음 작업
+
+FP32 변경만으로 실시간 정지 안정화가 완료되지 않았습니다. 기본 off, 실험 fp32, VAD 시작 0.4/종료 900ms를 유지합니다.
+이번에는 런타임 코드/임계값/정지 어휘를 바꾸지 않았습니다. 특히 “종지/총지”를 무조건 stop 별칭으로 추가하지 않습니다.
+다음 구현 과제는 연속 KWS의 시작 위치 민감성을 완화하는 보완 감지를 기존 개발 음성에 먼저 적용하고,
+누락뿐 아니라 오탐·중복 발행·CPU 비용·기존 stop 우선순위까지 검증하는 것입니다.
+새 연속 입력이 필요해지기 전에는 같은 마이크 시험을 반복 요구하지 않습니다.
+
+현재 결과 확인(노트북, 읽기/오프라인 실행만):
+
+```bash
+cd ~/2026project
+grep -E '\[(LLM WARMUP|LLM READY|TIME|AUDIO STOP[^]]*)\]' \
+  recordings/audio_stop_fp32.AYnvxO/session.log
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/evaluate_audio_stop.py \
+  --wav recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135734_010.wav \
+  --precision fp32 --output log/audio_stop_fp32_last_stop_recheck.json
+```
+
+첫 명령은 준비 시간과 STT 시간을 보여줍니다. 두 번째는 실시간에서 누락된 마지막 정지 WAV의 파일별 재생입니다.
+예상 결과는 keyword=정지, audio_end=1.11이며 실시간 안정화 통과 판정은 아닙니다.
+이번 기록만으로 Jetson 코드 변경/빌드/실물 시험은 필요 없습니다. 실제 ROS 발행은 하지 않았습니다.
+
+### 후속 시험 증거 해시
+
+| 파일 | SHA256 |
+|---|---|
+| recordings/audio_stop_fp32.AYnvxO/session.log | `367f22d5f1f4f685d7ef8ae486ccf7aa8a9d181634bb2ac976ad94118e71e5e5` |
+| log/audio_stop_fp32_live_20261112/clip_replay.json | `4ce3b6dd543dd0946c7521b9892f90999d937c6028819bfa4e29e325c43b295f` |
+| log/audio_stop_fp32_live_20261112/phases.json | `088260390032e298e5804212095f4561a2539c57908707ff030bdf185a753ab8` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135616_001.wav | `14266135c25baac68b47c5ef8c3a927002e376964da8116f41c4785a3d379b08` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135620_002.wav | `a6a87f06f02cecba09003f27142e861a3c3775195171d2e60ad2c9749dd318b3` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135625_003.wav | `5b0feefee14e7a6137d840dfbc07f13171d3cbe7089da1107d7792b3948d3c28` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135634_004.wav | `857f00c7df61d2db574ced6540a70f5f8d2c890f71d0c86f519d3b43b3693647` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135642_005.wav | `5099fb72c843957a7e8d2295a28f7d82a66b81c8c1fe0bfff32350e27fb359a2` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135652_006.wav | `68152648e20432f5ec0b4e21dcf6513dcdb6d6cd2306b05f8b62c3f72933e0a8` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135707_007.wav | `28fbe3a4174ea4e54a8485cf84c727908db3f9d442a71ff0287b1f061eff4f96` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135718_008.wav | `f2f0cda14f2b4dab671f8abd20b163f77f571544677aea4f94185bab87e47253` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135727_009.wav | `edac59f54fa9154164531444e6390fa5dfa0cd87fe1ec76c1e32624057c1bc83` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135734_010.wav | `a301d446ee9035fc40071dd77161c7d51f7bdc9d06cbfd9f63a00eb1e7a93c2d` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135745_011.wav | `1eb3c9a885c942578fecac8f83badab833549926c53535a9df736daf55658f0e` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135752_012.wav | `6cabf30f21b564f2f7ba39971b6c1acc8683a6f96200355e12fa9cd5bcd300e3` |
+| recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135803_013.wav | `231ebd0118a8f26774a8a5196b78ebf415b07c540e40392599b6f4f6fac387b4` |
