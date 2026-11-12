@@ -10,6 +10,7 @@ from voice_command_pkg.audio_stop_model import AudioStopConfig, DEFAULT_MODEL_DI
 from voice_command_pkg.command_classifier import ClassifierConfig
 from voice_command_pkg.pipeline import PipelineConfig
 from voice_command_pkg.robot_feedback import DEFAULT_MESSAGES
+from voice_command_pkg.speaker_profile import SpeakerConfig
 from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
 
 
@@ -29,6 +30,12 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'audio_stop.score': 1.0,
     'audio_stop.queue_frames': 128,
     'audio_stop.max_lag_seconds': 0.5,
+    'speaker.mode': 'off',
+    'speaker.profile_path': '~/2026project/speaker_profiles/owner.json',
+    'speaker.wait_seconds': 1.0,
+    'speaker.min_speech_seconds': 0.6,
+    'messages.speaker_rejected': '등록된 사용자 목소리를 확인하지 못했어요. 다시 말씀해 주세요.',
+    'messages.speaker_unavailable': '화자 인증을 준비하지 못했어요. 등록 상태를 확인해 주세요.',
     'whisper.model': 'small',
     'whisper.device': 'cpu',
     'whisper.compute_type': 'int8',
@@ -90,6 +97,12 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
             key.removeprefix('audio_stop.'): value
             for key, value in merged.items() if key.startswith('audio_stop.')
         }),
+        speaker=SpeakerConfig(**{
+            key.removeprefix('speaker.'): value
+            for key, value in merged.items() if key.startswith('speaker.')
+        }),
+        speaker_rejected_message=str(merged['messages.speaker_rejected']),
+        speaker_unavailable_message=str(merged['messages.speaker_unavailable']),
         vad=VadConfig(
             vad_mode=int(merged['vad.mode']),
             start_min_rms=int(merged['vad.start_min_rms']),

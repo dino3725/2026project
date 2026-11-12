@@ -1,0 +1,6 @@
+# Optional speaker backend dependencies. Install CPU torch separately (README).
+# Install resemblyzer==0.1.4 with --no-deps afterwards: webrtcvad-wheels already
+# provides webrtcvad, and installing both distributions would overwrite it.
+librosa==0.11.0
+scipy==1.15.3
+typing-extensions>=4.10

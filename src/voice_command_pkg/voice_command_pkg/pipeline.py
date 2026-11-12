@@ -36,6 +36,8 @@ from voice_command_pkg.audio_stop_model import AudioStopConfig, KoreanStopSpotte
 from voice_command_pkg.audio_stop_recheck import AudioStopRecheckWorker
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
 from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
+from voice_command_pkg.speaker_profile import SpeakerConfig
+from voice_command_pkg.speaker_runtime import SpeakerDecision, SpeakerRuntime
 from voice_command_pkg.stt_config import DEFAULT_RUNTIME_STT, SttConfig
 from voice_command_pkg.transcript_rules import find_stop_keyword, stop_command
 from voice_command_pkg.utterance_buffer import Utterance, UtteranceBuffer
@@ -63,6 +65,9 @@ class PipelineConfig:
     vad: VadConfig = field(default_factory=VadConfig)
     audio_stop: AudioStopConfig = field(default_factory=AudioStopConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
+    speaker: SpeakerConfig = field(default_factory=SpeakerConfig)
+    speaker_rejected_message: str = '등록된 사용자 목소리를 확인하지 못했어요. 다시 말씀해 주세요.'
+    speaker_unavailable_message: str = '화자 인증을 준비하지 못했어요. 등록 상태를 확인해 주세요.'
     queue_capacity: int = 2
     max_fetch_age_seconds: float = 10.0
     llm_warmup_timeout_seconds: float = 120.0
@@ -451,6 +456,7 @@ class VoiceCommandPipeline:
             f'temperatures={config.stt.temperatures}'
         )
         self.llm = LlmRuntime(config, log, self.stop_event)
+        self.speaker = SpeakerRuntime(config.speaker, log, self.stop_event)
 
     def run_once(self, command_index: int) -> dict[str, Any]:
         if self.config.audio_stop.mode != 'off':
@@ -468,6 +474,7 @@ class VoiceCommandPipeline:
             self.stop_event.set()
         self.buffer.close()
         self.llm.close()
+        self.speaker.close()
         if self.audio_stop_worker is not None:
             self.audio_stop_worker.close()
         if self.audio_stop_recheck is not None:
@@ -598,9 +605,18 @@ class VoiceCommandPipeline:
         )
 
         self._ensure_running()
-        text, stt_seconds = transcribe_audio(
-            self.whisper_model, audio_data, self.config.language, self.config.stt
+        speaker_ticket = self.speaker.submit(audio_data)
+        speaker_decision = SpeakerDecision(
+            self.config.speaker.mode == 'off',
+            'speaker_off' if self.config.speaker.mode == 'off' else 'speaker_not_checked',
         )
+        try:
+            text, stt_seconds = transcribe_audio(
+                self.whisper_model, audio_data, self.config.language, self.config.stt
+            )
+        except Exception:
+            speaker_ticket.cancel()
+            raise
         self._ensure_running()
         self.log(f'[STT] {text}')
 
@@ -608,6 +624,8 @@ class VoiceCommandPipeline:
         dropped_reason = ''
         llm_metrics = {}
         if keyword is not None:
+            speaker_ticket.cancel()
+            speaker_decision = SpeakerDecision(True, 'stop_bypass')
             command, llm_seconds, decided_by = stop_command(), 0.0, f'rule:{keyword}'
             # Invalidate fetch utterances that began before stop was recognized,
             # including an utterance still being recorded. Keep checking their
@@ -626,6 +644,17 @@ class VoiceCommandPipeline:
             command, llm_seconds, decided_by = (
                 {'action': 'unknown', 'object': ''}, 0.0, 'discard'
             )
+            if not dropped_reason and self.config.speaker.mode != 'off':
+                speaker_decision = self.speaker.finish(
+                    speaker_ticket,
+                    float(capture['voice_end_wall']) + self.config.max_fetch_age_seconds,
+                )
+                if self.config.speaker.mode == 'enforce' and not speaker_decision.allowed:
+                    dropped_reason = speaker_decision.reason
+                    message = (self.config.speaker_rejected_message
+                               if dropped_reason == 'speaker_rejected'
+                               else self.config.speaker_unavailable_message)
+                    self.log('[GUIDANCE] ' + message)
             if not dropped_reason:
                 started = time.perf_counter()
                 try:
@@ -644,8 +673,14 @@ class VoiceCommandPipeline:
                     'llm_timeout', 'llm_error'
                 ) else self.config.llm_preparing_message
                 self.log('[GUIDANCE] ' + message)
+        speaker_ticket.cancel()
         self._ensure_running()
         command_done = time.perf_counter()
+        if self.config.speaker.mode != 'off':
+            self.log(f'[SPEAKER] sequence={utterance.sequence} mode={self.config.speaker.mode} '
+                     f'allowed={speaker_decision.allowed} reason={speaker_decision.reason} '
+                     f'score={speaker_decision.score} '
+                     f'compute={speaker_decision.compute_seconds:.3f}s')
         self.log(
             '[COMMAND] ' + json.dumps(command, ensure_ascii=False, separators=(',', ':'))
             + f' by={decided_by}'
@@ -656,6 +691,8 @@ class VoiceCommandPipeline:
             self._ensure_running()
             if command['action'] == 'fetch':
                 dropped_reason = self._fetch_drop_reason(capture)
+                if self.config.speaker.mode == 'enforce' and not speaker_decision.allowed:
+                    dropped_reason = speaker_decision.reason
                 if not dropped_reason and self.fetch_gate is not None:
                     dropped_reason = self.fetch_gate(utterance_start)
             elif command['action'] == 'stop' and self._audio_stop_already_published(capture):
@@ -698,6 +735,8 @@ class VoiceCommandPipeline:
             'command': command,
             'decided_by': decided_by,
             'published': published,
+            'speaker_reason': speaker_decision.reason,
+            'speaker_score': speaker_decision.score,
             'stt_seconds': stt_seconds,
             'llm_seconds': llm_seconds,
             'llm_metrics': llm_metrics,

@@ -24,6 +24,12 @@ voice_command_node:
       queue_frames: 128           # absorb bounded PulseAudio delivery bursts
       max_lag_seconds: 0.5        # local frame read -> decision, not microphone latency
 
+    speaker:
+      mode: "off"                 # off / shadow / enforce; enrollment required
+      profile_path: "~/2026project/speaker_profiles/owner.json"
+      wait_seconds: 1.0
+      min_speech_seconds: 0.6
+
     whisper:
       model: "small"
       device: "cpu"
@@ -57,6 +63,8 @@ voice_command_node:
       connection_poll_seconds: 0.5   # DDS graph check; state is not a heartbeat
 
     messages:
+      speaker_rejected: "등록된 사용자 목소리를 확인하지 못했어요. 다시 말씀해 주세요."
+      speaker_unavailable: "화자 인증을 준비하지 못했어요. 등록 상태를 확인해 주세요."
       llm_preparing: "명령 처리 준비 중이에요. 준비 완료 후 다시 말씀해 주세요."
       llm_ready: "명령 처리 준비가 완료됐어요. 말씀해 주세요."
       llm_failure: "명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요."

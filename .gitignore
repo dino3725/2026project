@@ -30,3 +30,7 @@ recordings/
 
 # Per-file evaluation results may contain transcripts of bystanders; keep local only.
 tools/voice_eval/results/*_files.csv
+
+# Private speaker enrollment templates (voice biometrics)
+speaker_profiles/
+*.speaker.json
