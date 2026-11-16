@@ -200,3 +200,47 @@ owner_development.json 경로를 명시하며 기본 YAML 뒤에 적용합니다
 변경 후 빌드 성공, 음성 패키지 348 passed/1 skipped, 화자 도구 단위 시험 8 passed.
 실제 준비 로그는 `[SPEAKER READY] mode=enforce calibrated=False development_override=True`였습니다.
 owner_development.json의 SHA256은 위 기록과 동일합니다. 실제 명령 발행은 하지 않았습니다.
+
+
+## 2026-11-16 정지 응답 폭주 조사 및 ROS Python 환경 수정
+
+직접 확인한 노트북 로그:
+`/home/sh/.ros/log/python3_20823_1794839939365.log`
+(SHA256 `3cef5160a8f2fc4ecfe1ac000b9826f0d94d5e45cfa3c7efbaaae52a3fd6194a`).
+
+- `[ROBOT STATUS] action=stop ... accepted=True feedback=False message='stop requested'`
+  378건을 epoch 1794839988.2437124–1794839990.2343404, 약 1.990628초 동안 수신.
+- `[COMMAND]`, `[ROS]`, `[LATENCY]`, `[AUDIO STOP]` 발행 경로 기록은 0건.
+- VAD 발화 14개는 모두 빈 STT 결과 오류. 녹음 저장은 disabled이므로 실제 음향 원인은 미확정.
+- 로봇 상태 RETURN_HOME→ERROR 이후 상태 발행자가 사라짐.
+- 별개로 `[SPEAKER ERROR] ... module 'coverage' has no attribute 'types'` 발생.
+
+사용자가 전달한 Jetson 분석에서는
+`/home/fcsl/2026project/log/eateded_20261116_233912_046373/control.log:7`에
+`startup HOME failed: HOME arrival not verified: Joint arrival error 1.668 deg`가 있었고,
+1도 이내를 0.3초 유지하는 HOME 도착 검사가 실패해 eateded가 전체 종료를 시작했다고 합니다.
+종료 중 실행기의 정지 요청이 과도하게 반복됐다는 설명은 노트북의 위 응답 수신과 일치합니다.
+Jetson 파일/현재 실행기 구현은 에이전트가 직접 읽지 못했으며 이 부분은 사용자 제공 분석입니다.
+사용자가 확인한 이후 토픽 2개가 Unknown topic인 것도 현재 실행 종료와 부합합니다.
+
+이번 음성 노드가 음성을 오인식해 정지를 반복 발행했다는 증거는 없습니다.
+상태 수신 콜백에는 명령 재발행이 없고, 동일 stop 수락 응답을 378회 넣어 명령 발행 0건,
+이후 실제 stop 요청은 정상 발행되는 회귀 시험을 추가했습니다. 정지 빈도 제한이나 숨김은
+추가하지 않았습니다. Jetson의 HOME 허용 오차/속도/정지 경로는 변경하지 않았습니다.
+
+화자 준비 실패는 직접 재현하고 수정했습니다. `.venv/bin/python` 확인만으로는 드러나지
+않았지만 `source voice_env.sh` 후 `/usr/bin/python3`는 시스템 coverage 6.2를 함께 보았습니다.
+numba 0.68.1의 coverage 지원 모듈이 import 시 coverage.types.Tracer에 접근해 실패했습니다.
+프로젝트 .venv에 coverage 7.6.1을 설치하고 requirements-speaker.txt에 고정했습니다.
+[공식 coverage 7.6.1 배포 정보](https://pypi.org/project/coverage/7.6.1/)도 확인했습니다.
+시스템 coverage 패키지는 수정하지 않았습니다.
+
+`check_speaker_environment.py`는 가상환경 Python으로 확인하는 실수를 막고 실제 ROS Python에서
+모델/프로필 초기화를 수행합니다. 노드나 마이크를 시작하지 않고 ROS 명령을 발행하지 않습니다.
+이 도구로 coverage 7.6.1 경로와 `[SPEAKER READY] mode=enforce calibrated=False
+ development_override=True`, 최종 PASS를 확인했습니다. 기준값/등록 데이터는 유지했습니다.
+
+자동 검사: 음성 패키지 349 passed/1 skipped, colcon test-result 실패/오류 0,
+새 환경 확인 도구 flake8 통과. 추가 실제 음성 평가나 로봇 재실행은 하지 않았습니다.
+Jetson 후속 작업은 HOME 관절별 목표/실제 각도 계측과 실행기 종료 시 정지 요청 반복 원인 수정이며,
+노트북의 상태 수신 로그를 줄이는 것으로 해당 문제를 해결했다고 간주하지 않습니다.

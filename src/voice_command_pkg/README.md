@@ -819,3 +819,32 @@ stop은 누구의 목소리든 기존 경로로 처리합니다. 이 명령은 �
 
 일반 기본 설정은 off/allow_development_profile=false를 유지합니다.
 위 두 번째 params 파일을 뒤에 적용하는 실행에서 사용자 선택을 반영합니다.
+
+
+### ROS 실행 환경 사전 확인 (2026-11-16 수정)
+
+등록 도구의 `.venv/bin/python`과 `ros2 run`의 `/usr/bin/python3`는 검색하는 시스템
+라이브러리 범위가 다릅니다. Ubuntu의 coverage 6.2가 보이는 ROS 환경에서 numba 0.68.1이
+`coverage.types.Tracer`를 참조해 화자 준비가 실패하는 문제를 확인했습니다.
+requirements-speaker.txt에 coverage==7.6.1을 추가해 프로젝트 .venv에서 먼저 읽도록 합니다.
+시스템 패키지는 제거하거나 수정하지 않습니다.
+
+노트북 개발 환경에는 수정 버전을 설치했습니다. 새 환경은 다음 설치 후 확인합니다.
+
+```bash
+cd ~/2026project
+.venv/bin/python -m pip install -r src/voice_command_pkg/requirements-speaker.txt
+source voice_env.sh
+/usr/bin/python3 tools/voice_eval/check_speaker_environment.py \
+  --profile speaker_profiles/owner_development.json \
+  --allow-development-profile
+```
+
+이 도구는 마이크·ROS 노드·명령 발행 없이 실제 ROS Python의 모델과 프로필 준비를 확인합니다.
+정상 기준은 `[SPEAKER READY] mode=enforce calibrated=False development_override=True`와
+`PASS: ROS Python model/profile ready`입니다. `.venv/bin/python`으로 실행하면 실제 ROS 환경
+확인을 생략하지 않도록 오류로 종료합니다.
+
+`[ROBOT STATUS] action=stop`은 Jetson에서 수신한 상태 응답입니다. 이 음성 노드가 명령을
+발행했는지는 `[COMMAND]`, `[ROS] published`, `[LATENCY]`의 published 이벤트로 구분합니다.
+다른 발행자나 Jetson 실행기의 정지 요청 응답도 음성 노드에서 표시될 수 있습니다.

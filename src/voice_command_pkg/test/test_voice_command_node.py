@@ -254,3 +254,25 @@ def test_humble_single_argument_callbacks_and_old_generation_discard():
     assert node.feedback.state == 'IDLE'
     node.state_subscription.callback(SimpleNamespace(data='PICKING'))
     assert node.feedback.state == 'PICKING'
+
+
+def test_repeated_unsolicited_stop_status_never_republishes_stop():
+    node, published, logs = make_node()
+    node._subscription_generation = 1
+    node._controller_source = ('controller-gid', 'control_node', '/')
+    node.status_subscription = SimpleNamespace(topic_name='/control/command_status')
+    node.get_publishers_info_by_topic = lambda topic: [SimpleNamespace(
+        node_name='control_node', node_namespace='/',
+        topic_type='eated_interfaces/msg/RobotCommandStatus',
+    )]
+    status = SimpleNamespace(action='stop', target_class='', accepted=True,
+                             message='stop requested')
+    for _ in range(378):
+        VoiceCommandNode._on_command_status(node, status, 1)
+    assert published == []
+    assert node.feedback.pending is None
+    assert sum('[ROBOT STATUS]' in line for line in logs) == 378
+    # Repeated incoming acknowledgements must not inhibit a subsequent real stop.
+    assert publish(node, {'action': 'stop', 'object': ''}, '멈춰')
+    assert len(published) == 1
+    assert published[0].action == 'stop'
