@@ -8,6 +8,20 @@ from pathlib import Path
 import numpy as np
 
 
+MODEL_SPECS = {
+    'resemblyzer-0.1.4': {
+        'sha256': '39373b86598fa3da9fcddee6142382efe09777e8d37dc9c0561f41f0070f134e',
+        'dimension': 256,
+        'preprocessing': 'resemblyzer-v1',
+    },
+    'speechbrain-ecapa-voxceleb-v1': {
+        'sha256': '0575cb64845e6b9a10db9bcb74d5ac32b326b8dc90352671d345e2ee3d0126a2',
+        'dimension': 192,
+        'preprocessing': 'resemblyzer-trim-pcm16-v1',
+    },
+}
+
+
 @dataclass(frozen=True)
 class SpeakerConfig:
     """Keep uncalibrated speaker verification observational by default."""
@@ -33,36 +47,44 @@ class SpeakerConfig:
             raise ValueError('speaker.min_speech_seconds must be <= 15')
 
 
-def unit_vector(vector):
+def unit_vector(vector, dimension=256):
     """Reject malformed embeddings rather than treating them as an unknown speaker score."""
     vector = np.asarray(vector, dtype=np.float64)
-    if vector.ndim != 1 or vector.size != 256 or not np.isfinite(vector).all():
-        raise ValueError('expected a finite 256-dimensional embedding')
+    if (dimension not in (192, 256) or vector.ndim != 1 or vector.size != dimension
+            or not np.isfinite(vector).all()):
+        raise ValueError(f'expected a finite {dimension}-dimensional embedding')
     length = np.linalg.norm(vector)
     if not math.isfinite(length) or length < 1e-8:
         raise ValueError('invalid speaker embedding norm')
     return vector / length
 
 
-def centroid(embeddings):
+def centroid(embeddings, dimension=256):
     """Average normalized enrollment vectors and normalize the result."""
     if not embeddings:
         raise ValueError('no enrollment embeddings')
-    return unit_vector(np.mean([unit_vector(e) for e in embeddings], axis=0))
+    return unit_vector(np.mean([unit_vector(e, dimension) for e in embeddings], axis=0), dimension)
 
 
 def similarity(vector, reference):
     """Return cosine similarity, not a probability or percent identity confidence."""
-    return float(np.clip(np.dot(unit_vector(vector), unit_vector(reference)), -1, 1))
+    dimension = len(reference)
+    return float(np.clip(np.dot(unit_vector(vector, dimension),
+                                unit_vector(reference, dimension)), -1, 1))
 
 
-def load_profile(path, model_sha256, require_development=False):
+def load_profile(path, model_sha256=None, require_development=False):
     """Validate a JSON template; profiles are immutable for the life of a node."""
     data = json.loads(Path(path).expanduser().read_text())
-    if (data.get('schema') != 1 or data.get('backend') != 'resemblyzer-0.1.4'
-            or data.get('model_sha256') != model_sha256 or data.get('sample_rate') != 16000):
+    spec = MODEL_SPECS.get(data.get('backend'))
+    if (not spec or data.get('schema') != 1 or data.get('sample_rate') != 16000
+            or data.get('model_sha256') != spec['sha256']
+            or (model_sha256 is not None and model_sha256 != spec['sha256'])):
         raise ValueError('speaker profile model or format mismatch')
-    unit_vector(data['embedding'])
+    preprocessing = data.get('preprocessing', 'resemblyzer-v1')
+    if preprocessing != spec['preprocessing']:
+        raise ValueError('speaker profile preprocessing mismatch')
+    unit_vector(data['embedding'], spec['dimension'])
     threshold = data['threshold']
     if (type(threshold) not in (int, float) or not math.isfinite(threshold)
             or not -1 <= threshold <= 1):

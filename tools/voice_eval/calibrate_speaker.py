@@ -6,7 +6,7 @@ from pathlib import Path
 
 from speaker_audio import dataset, private_json
 
-from voice_command_pkg.speaker_backend import MODEL_SHA256, SpeakerEncoder
+from voice_command_pkg.speaker_backend import SpeakerEncoder
 from voice_command_pkg.speaker_profile import choose_threshold, load_profile, similarity
 
 
@@ -65,8 +65,9 @@ def main():
     if args.output.expanduser().exists():
         parser.error('choose a fresh output file')
     try:
-        profile = load_profile(args.profile, MODEL_SHA256)
-        result = evaluate(profile, args.genuine, args.other, args.stage, SpeakerEncoder())
+        profile = load_profile(args.profile)
+        encoder = SpeakerEncoder(profile['min_speech_seconds'], profile['backend'])
+        result = evaluate(profile, args.genuine, args.other, args.stage, encoder)
         private_json(args.output, result)
     except (ValueError, KeyError, OSError) as exc:
         parser.exit(1, f'중단: {exc}\n')

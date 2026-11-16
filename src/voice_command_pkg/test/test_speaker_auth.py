@@ -259,5 +259,72 @@ def test_development_option_requires_bool_and_overlay_enforces():
     config = build_pipeline_config({'speaker.' + key: value for key, value in values.items()})
     assert config.speaker.mode == 'enforce'
     assert config.speaker.allow_development_profile
-    assert config.speaker.profile_path.endswith('/owner_development.json')
+    assert config.speaker.profile_path.endswith('/owner_ecapa_development.json')
     assert not build_pipeline_config({}).speaker.allow_development_profile
+
+
+def test_ecapa_profile_requires_correct_model_shape_and_preprocessing(tmp_path):
+    from voice_command_pkg.speaker_profile import MODEL_SPECS
+
+    data = development_profile()
+    data['backend'] = 'speechbrain-ecapa-voxceleb-v1'
+    spec = MODEL_SPECS[data['backend']]
+    data['model_sha256'] = spec['sha256']
+    data['preprocessing'] = spec['preprocessing']
+    data['embedding'] = [1.] + [0.] * 191
+    path = tmp_path / 'ecapa.json'
+    path.write_text(json.dumps(data))
+    assert load_profile(path, require_development=True)['backend'] == data['backend']
+    with pytest.raises(ValueError, match='model'):
+        load_profile(path, MODEL_SHA256)
+    data['preprocessing'] = 'resemblyzer-v1'
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match='preprocessing'):
+        load_profile(path)
+    data['preprocessing'] = spec['preprocessing']
+    data['embedding'] = [1.] * 256
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match='192-dimensional'):
+        load_profile(path)
+
+
+def test_cosine_does_not_compare_different_backend_dimensions():
+    with pytest.raises(ValueError):
+        similarity([1.] * 192, [1.] * 256)
+    assert similarity([1.] + [0.] * 191, [1.] + [0.] * 191) == 1
+
+
+def test_runtime_selects_encoder_from_validated_profile(monkeypatch, tmp_path):
+    from voice_command_pkg.speaker_profile import MODEL_SPECS
+
+    data = development_profile()
+    backend = 'speechbrain-ecapa-voxceleb-v1'
+    data.update(backend=backend, model_sha256=MODEL_SPECS[backend]['sha256'],
+                preprocessing=MODEL_SPECS[backend]['preprocessing'],
+                embedding=[1.] + [0.] * 191)
+    path = tmp_path / 'ecapa.json'
+    path.write_text(json.dumps(data))
+    selected, logs = [], []
+    ready = threading.Event()
+
+    def encoder(seconds, selected_backend):
+        selected.append((seconds, selected_backend))
+        return SimpleNamespace(encode=lambda pcm: data['embedding'])
+
+    def log(message):
+        logs.append(message)
+        ready.set()
+
+    monkeypatch.setattr(speaker_runtime, 'SpeakerEncoder', encoder)
+    runtime = SpeakerRuntime(SpeakerConfig(mode='enforce', profile_path=str(path),
+                                           allow_development_profile=True),
+                             log, threading.Event())
+    try:
+        assert ready.wait(1)
+        assert runtime.ready
+        assert runtime.submit(b'audio').result(timeout=1).allowed
+        assert selected == [(.6, backend)]
+        assert 'backend=' + backend in logs[0]
+    finally:
+        runtime.close()
+        runtime.worker.join(timeout=1)

@@ -1,0 +1,149 @@
+{
+  "purpose": "speaker development comparison; historical owner utterances, not enrollment",
+  "samples": [
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171151_001.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다줘",
+      "pcm_sha256": "47c98219462443dd4ddbabc5d8f44751f6771004dbed5a23d5d45e469f92f8e9"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171200_002.wav",
+      "speaker": "owner",
+      "reference": "콜라 좀 갖다줘",
+      "pcm_sha256": "89725b3ab8e6bcaf2854cc5629e55c5d4d8f21f71f879e733ecb5e8e17975529"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171208_003.wav",
+      "speaker": "owner",
+      "reference": "목마른데 마실 거 가져다줘",
+      "pcm_sha256": "eb7325fa2f9a5b48fc0337d943fc98eed29ee65285566e2b895cf36d3f77525b"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171215_004.wav",
+      "speaker": "owner",
+      "reference": "휴지 가져다줘",
+      "pcm_sha256": "f92237f387cd004f24367055fb1ae1c2580cc53ea828a53efc67843de8dc0e5d"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171222_005.wav",
+      "speaker": "owner",
+      "reference": "휴지 좀 줘",
+      "pcm_sha256": "3aeb068a99257f61221ae5598e35ee8128f4331e89ae0a66fc5cf0612c15dc7b"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171231_006.wav",
+      "speaker": "owner",
+      "reference": "코 닦을 휴지가 필요해",
+      "pcm_sha256": "48cecbe66ac46a83a4b09ed03e17e4a132620775cfec325fe3947aaee8a6e0b7"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171240_007.wav",
+      "speaker": "owner",
+      "reference": "바세린 가져다줘",
+      "pcm_sha256": "7ee69cf6717f2bfc87dde6624f4e6e965a10814b81a643a925fd63a309567d81"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171249_008.wav",
+      "speaker": "owner",
+      "reference": "바세린 좀 갖다줘",
+      "pcm_sha256": "bdc6ce9f33cf4650c9c7953c71723a137271a771227d6128396440ee9f6cd962"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171259_009.wav",
+      "speaker": "owner",
+      "reference": "입술이 건조한데 바세린 가져다줘",
+      "pcm_sha256": "9546775c85591b97dd1675da9184c2d9a8872b96ac964ec4584ef7d2d95d6002"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171308_010.wav",
+      "speaker": "owner",
+      "reference": "에어팟 가져다줘",
+      "pcm_sha256": "0e6fc8b096d685d3da3dd0d9389592da1b88145f017878d6d31963a2806e2331"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171315_011.wav",
+      "speaker": "owner",
+      "reference": "에어팟 좀 줘",
+      "pcm_sha256": "00e4c736bc46fb807ed1248f48ce1168a8a519157b387a9061fc2f2d5bbe1e67"
+    },
+    {
+      "file": "recordings/stt_dev_20261111_171138/vad_command_20261111_171324_012.wav",
+      "speaker": "owner",
+      "reference": "음악 듣게 에어팟 가져다줘",
+      "pcm_sha256": "fe1fd50a0425c678a7cfc178e7ec71075beee37172cc024287ae1b4d8b5380d8"
+    },
+    {
+      "file": "recordings/audio_stop_check.YgZ9jI/vad_command_20261112_014708_010.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다 줘",
+      "pcm_sha256": "fd0afe1bc41f2a748972b048f576e7a3aede8b0a6f9fd4922ca8bc2d63f6594f"
+    },
+    {
+      "file": "recordings/audio_stop_check.YgZ9jI/vad_command_20261112_014715_011.wav",
+      "speaker": "owner",
+      "reference": "휴지 가져다 줘",
+      "pcm_sha256": "5878b1ab8848e473144d48373dcca7f78ef999cc66477ecb1caa049282f0d4c0"
+    },
+    {
+      "file": "recordings/audio_stop_fp32.AYnvxO/vad_command_20261112_135745_011.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다 줘",
+      "pcm_sha256": "857633bc4d74e2a6da3444cb310f034e947bf9c2f34cade4033bccb02f9994cc"
+    },
+    {
+      "file": "recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141958_010.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다 줘",
+      "pcm_sha256": "a2cb3b3bd3399cc6f77ecda6dbfe2c48d46a90ff42a9a364f414450b4364596a"
+    },
+    {
+      "file": "recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_142007_011.wav",
+      "speaker": "owner",
+      "reference": "휴지 가져다 줘",
+      "pcm_sha256": "4a3d540a2a1f8f69cf3e0743c8bb380012b00bfb48a717f15286bdc4ec1dba39"
+    },
+    {
+      "file": "recordings/vad_check.eaAniS/vad_command_20261111_231733_007.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다 줘",
+      "pcm_sha256": "ea0de4ca3d2283f2ae88639bdb16753a332d32c6e62a6ff35f98b96d26fd27ad"
+    },
+    {
+      "file": "recordings/vad_end600.QGXVwA/vad_command_20261112_003443_003.wav",
+      "speaker": "owner",
+      "reference": "콜라 가져다 줘",
+      "pcm_sha256": "dc545d76c18eb849d955b4ee81f9e90e97bfc031270e44ad7ec9fec210e90aca"
+    },
+    {
+      "file": "recordings/vad_end600.QGXVwA/vad_command_20261112_003450_004.wav",
+      "speaker": "owner",
+      "reference": "목 마린데 마실 거 가져다 줘",
+      "pcm_sha256": "3dc84c278b2549b37c92dfd79a7f163c401b7ab5c192dc4b873d0167b0e3a397"
+    },
+    {
+      "file": "recordings/vad_end600.QGXVwA/vad_command_20261112_003457_005.wav",
+      "speaker": "owner",
+      "reference": "입술이 건조한데 바세린 가져다줘",
+      "pcm_sha256": "7bfaf310637a007152f7b11c4ae89ec22f6b5893323827ec7fa776ee6bb5ff79"
+    },
+    {
+      "file": "recordings/vad_end600.QGXVwA/vad_command_20261112_003503_006.wav",
+      "speaker": "owner",
+      "reference": "휴지 가져다 줘",
+      "pcm_sha256": "281ab5f75b4e451bd59e2d2259d7e84d244819368fe34badeddc70fe7b6a857e"
+    },
+    {
+      "file": "recordings/vad_end750.QP39aD/vad_command_20261112_010120_002.wav",
+      "speaker": "owner",
+      "reference": "휴지 가져다 줘",
+      "pcm_sha256": "50587fe75dcc7f2ea08c0149b08957f8d1fe96eaa5d779a609239af90f4b58cd"
+    },
+    {
+      "file": "recordings/vad_end750.QP39aD/vad_command_20261112_010140_005.wav",
+      "speaker": "owner",
+      "reference": "목마른데 마실 거 가져다 줘",
+      "pcm_sha256": "0118a844eaa642340d9b99d3096c5ec6c6e98c105657dafda75b2336cffa7efe"
+    }
+  ]
+}

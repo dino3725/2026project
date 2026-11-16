@@ -1,8 +1,9 @@
 # User elected to proceed with development calibration on 2026-11-16.
 # Load AFTER voice_command.yaml. Independent validation remains incomplete.
+# 2026-11-17: rebuild the existing enrollment using ECAPA + trimmed audio.
 voice_command_node:
   ros__parameters:
     speaker:
       mode: "enforce"
-      profile_path: "~/2026project/speaker_profiles/owner_development.json"
+      profile_path: "~/2026project/speaker_profiles/owner_ecapa_development.json"
       allow_development_profile: true

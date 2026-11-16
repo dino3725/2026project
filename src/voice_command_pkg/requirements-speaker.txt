@@ -7,3 +7,5 @@ typing-extensions>=4.10
 # ROS uses /usr/bin/python3 and also sees Ubuntu coverage 6.2. Numba's
 # optional coverage integration needs coverage.types.Tracer even without tracing.
 coverage==7.6.1
+# Install matching CPU torchaudio with torch before this file (see README).
+speechbrain==1.0.3

@@ -6,7 +6,7 @@ import queue
 import threading
 import time
 
-from voice_command_pkg.speaker_backend import MODEL_SHA256, SpeakerEncoder
+from voice_command_pkg.speaker_backend import SpeakerEncoder
 from voice_command_pkg.speaker_profile import load_profile, similarity
 
 
@@ -88,19 +88,20 @@ class SpeakerRuntime:
             development_override = (
                 self.config.mode == 'enforce' and self.config.allow_development_profile
             )
-            profile = load_profile(self.config.profile_path, MODEL_SHA256, development_override)
+            profile = load_profile(self.config.profile_path, None, development_override)
             if self.config.min_speech_seconds != profile['min_speech_seconds']:
                 raise ValueError('speaker runtime preprocessing differs from enrollment')
             if (self.config.mode == 'enforce' and not profile['calibrated']
                     and not development_override):
                 raise ValueError('speaker profile needs disjoint validation before enforcement')
-            encoder = SpeakerEncoder(self.config.min_speech_seconds)
+            encoder = SpeakerEncoder(self.config.min_speech_seconds, profile['backend'])
             with self.lock:
                 if self.closed.is_set() or self.stop_event.is_set():
                     return
                 self.ready = True
             self.log(f'[SPEAKER READY] mode={self.config.mode} calibrated={profile["calibrated"]} '
-                     f'development_override={development_override and not profile["calibrated"]}')
+                     f'development_override={development_override and not profile["calibrated"]} '
+                     f'backend={profile["backend"]} threshold={profile["threshold"]:.6f}')
         except Exception as exc:
             with self.lock:
                 self.error = 'speaker_unavailable'

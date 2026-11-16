@@ -1,5 +1,10 @@
 # Local Voice Robot Command
 
+현재 화자 인증 운영 설정(2026-11-17)은 `speaker_development.yaml`의
+**ECAPA + 기존 등록 음성 재계산 프로필**입니다. 실행 명령은 아래의 같은 overlay 방식을
+사용하며, 결과와 준비 방법은 문서 끝의 “ECAPA로 본인 거부 개선” 절을 참고하세요.
+
+
 Ubuntu 노트북에서 한국어 음성 명령을 완전히 로컬로 처리하고, 검증된 명령만
 ROS2 `/voice/robot_command` topic으로 발행하는 서비스 로봇 명령 파이프라인입니다.
 
@@ -701,7 +706,7 @@ dry-run은 별도 event이며 실제 명령 시각을 만들지 않습니다. �
 
 ```bash
 cd ~/2026project
-.venv/bin/python -m pip install torch==2.6.0+cpu --index-url https://download.pytorch.org/whl/cpu
+.venv/bin/python -m pip install torch==2.6.0+cpu torchaudio==2.6.0+cpu --index-url https://download.pytorch.org/whl/cpu
 .venv/bin/python -m pip install -r src/voice_command_pkg/requirements-speaker.txt
 .venv/bin/python -m pip install --no-deps resemblyzer==0.1.4
 ```
@@ -710,7 +715,8 @@ cd ~/2026project
 Resemblyzer 메타데이터가 요구하는 별도 `webrtcvad` 배포판을 중복 설치하지 않습니다.
 따라서 `pip check`는 Resemblyzer의 배포판 의존성이 없다고 표시할 수 있습니다.
 Resemblyzer 패키지에 포함된 모델 SHA256을 로드 전에 확인하며 런타임 다운로드는 없습니다.
-ECAPA 비교용 `speechbrain==1.0.3`, `torchaudio==2.6.0+cpu`는 운영에 필요하지 않습니다.
+2026-11-17 ECAPA 운영 전환으로 `speechbrain==1.0.3`과 `torchaudio==2.6.0+cpu`도 필요합니다.
+현재 노트북에는 설치 완료됐습니다. SpeechBrain은 requirements-speaker.txt에 포함했습니다.
 
 ### 1. 지금 할 일: 내 목소리 등록
 
@@ -848,3 +854,55 @@ source voice_env.sh
 `[ROBOT STATUS] action=stop`은 Jetson에서 수신한 상태 응답입니다. 이 음성 노드가 명령을
 발행했는지는 `[COMMAND]`, `[ROS] published`, `[LATENCY]`의 published 이벤트로 구분합니다.
 다른 발행자나 Jetson 실행기의 정지 요청 응답도 음성 노드에서 표시될 수 있습니다.
+
+
+### 2026-11-17 ECAPA로 본인 거부 개선
+
+기존 등록 20개 WAV를 그대로 이용해 ECAPA 192차원 특징을 추출하고 평균을 다시 만들었습니다.
+신경망 가중치는 공식 사전 학습 모델을 유지합니다. 기존 Resemblyzer 프로필은 보존합니다.
+전처리는 기존 음량 정규화/무음 정리/품질 검사 후 PCM16 양자화이며 등록과 실행이 같습니다.
+모델 종류/가중치 해시/전처리/차원을 프로필에서 확인하므로 서로 다른 모델의 기준을 섞지 않습니다.
+
+새 프로필은 `speaker_profiles/owner_ecapa_development.json`이고 기준값은
+0.44471576083795833입니다. 비교 모델이 바뀌었으므로 이전 0.764605와 숫자 크기를 직접
+비교할 수 없습니다. 새 타인 개발 최고 점수에 고정 여유 0.01을 더해 정했으며,
+`calibrated=false` 및 사용자가 선택한 development override를 유지합니다.
+
+등록에 쓰지 않은 기존 본인 34개에서 허용 19→34개, 기존 타인 10개는 허용 0→0개였습니다.
+이 자료는 모델 선택/개발에 사용했으므로 독립 검증 정확도가 아닙니다.
+실시간 실패 음성은 저장되지 않아 해당 입력의 개선은 확인할 수 없습니다.
+
+노트북 준비 확인(마이크/ROS 발행 없음):
+
+```bash
+cd ~/2026project
+source voice_env.sh
+/usr/bin/python3 tools/voice_eval/check_speaker_environment.py \
+  --profile speaker_profiles/owner_ecapa_development.json \
+  --allow-development-profile
+```
+
+정상 로그에 `backend=speechbrain-ecapa-voxceleb-v1 threshold=0.444716` 및 PASS가 나옵니다.
+이후 음성 노드를 다시 실행하면 새 프로필을 읽습니다. 이미 켜진 노드에는 자동 반영되지 않습니다.
+
+```bash
+cd ~/2026project
+source voice_env.sh
+export ROS_DOMAIN_ID=37
+export ROS_LOCALHOST_ONLY=0
+ros2 run voice_command_pkg voice_command_node --ros-args \
+  --params-file src/voice_command_pkg/config/voice_command.yaml \
+  --params-file src/voice_command_pkg/config/speaker_development.yaml \
+  -p publish_commands:=true
+```
+
+이 실행은 실제 Jetson에 명령을 발행합니다. Jetson에서는 기존 eated 실행과 도메인 37을
+유지하며, 새 파일 복사나 빌드는 필요 없습니다. 가져오기는 기존처럼 IDLE일 때만 허용합니다.
+정지는 화자 판정을 거치지 않습니다. 추가 녹음 요구 없이 기존 자료로 진행한 변경입니다.
+
+새 환경에서는 `speechbrain/spkrec-ecapa-voxceleb` 공식 모델의 revision
+`0f99f2d0ebe89ac095bcc5903c4dd8f72b367286` 내 `embedding_model.ckpt`를
+`~/.cache/eated/speaker_ecapa/0f99f2d0ebe89ac095bcc5903c4dd8f72b367286/embedding_model.ckpt`에
+배치합니다. 현재 노트북에는 준비돼 있습니다. 런타임은 다운로드하지 않으며
+SHA256 `0575cb64845e6b9a10db9bcb74d5ac32b326b8dc90352671d345e2ee3d0126a2`를 검사합니다.
+재생성 명령과 전체 근거는 `tools/voice_eval/results/2026-11-17_speaker_adaptation.md`에 있습니다.
