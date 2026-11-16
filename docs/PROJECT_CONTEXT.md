@@ -159,6 +159,12 @@ STT 병렬 인증 및 fetch 제한을 구현했습니다. stop은 인증 결과�
 다음 단계는 genuine-test/other-test 각 새 10문장으로 고정 기준 검증입니다.
 상세 근거는 2026-11-12_speaker_auth.md의 2026-11-16 후속 절에 있습니다.
 
+2026-11-16 사용자 결정 변경: 추가 화자 독립 검증을 생략하고 현재 개발 기준으로
+진행하도록 요청했습니다. speaker_development.yaml에서 enforce 및 명시적
+allow_development_profile=true로 owner_development.json을 사용합니다. calibrated=false는
+유지하며 개발 근거가 없는 프로필/모델 오류/품질 실패는 계속 차단합니다. stop 예외도 유지합니다.
+추가 녹음은 요청하지 않으며 기존 기준값을 변경하지 않습니다. 실행 명령은 음성 README 끝에 있습니다.
+
 ## 1. 과제 요구사항과 일정
 
 - 실제 하드웨어 기반 프로젝트. 발표는 개인별로, 본인이 맡은 역할을 중심으로 합니다.

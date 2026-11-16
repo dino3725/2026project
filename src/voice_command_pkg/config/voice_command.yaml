@@ -29,6 +29,7 @@ voice_command_node:
       profile_path: "~/2026project/speaker_profiles/owner.json"
       wait_seconds: 1.0
       min_speech_seconds: 0.6
+      allow_development_profile: false
 
     whisper:
       model: "small"

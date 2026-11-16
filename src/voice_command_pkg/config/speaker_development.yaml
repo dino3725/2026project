@@ -1,0 +1,8 @@
+# User elected to proceed with development calibration on 2026-11-16.
+# Load AFTER voice_command.yaml. Independent validation remains incomplete.
+voice_command_node:
+  ros__parameters:
+    speaker:
+      mode: "enforce"
+      profile_path: "~/2026project/speaker_profiles/owner_development.json"
+      allow_development_profile: true

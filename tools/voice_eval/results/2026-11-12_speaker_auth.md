@@ -176,3 +176,27 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speake
 화면 안내에 따라 각 10개를 저장하고 두 manifest 경로를 확보하면 녹음 단계 완료입니다.
 이후 고정된 `owner_development.json`으로 독립 검증하며, 본인 허용 9/10 이상·타인 허용
 0/10이 검증 기준입니다. 소수 표본 결과를 모든 사람·환경에서의 성능 보장으로 해석하지 않습니다.
+
+
+## 2026-11-16 사용자 요청에 따른 독립 검증 생략
+
+사용자가 “더 검증하지말고 이렇게 진행하자”라고 요청했습니다. 추가 genuine-test/other-test
+녹음은 요청하지 않고, 위 개발 기준값을 유지하는 운영 실행 설정을 추가했습니다.
+이전 절의 독립 검증 예정은 이 사용자 결정으로 변경됐습니다.
+
+`speaker.allow_development_profile`의 기본값은 false입니다. 별도
+`speaker_development.yaml`에서 enforce/allow_development_profile=true 및
+owner_development.json 경로를 명시하며 기본 YAML 뒤에 적용합니다.
+사용자가 선택한 이 모드에서도 유효한 개발 점수/분리된 해시 근거를 검사합니다.
+등록만 된 프로필이나 기준에 미달하는 개발 결과는 허용하지 않습니다.
+프로필의 calibrated=false 및 기준값/원본 파일은 변경하지 않습니다.
+
+실제 모델과 프로필로 노드의 인증 런타임 준비를 확인했습니다. 마이크·ROS를 시작하거나
+추가 음성 데이터를 평가하지 않았습니다. 코드 자동 검사에서 명시적 선택의 유무,
+개발 근거 없는 프로필 거부, 개발 기준 미달 거부, 검증 상태 보존을 확인합니다.
+기존 인증 거부/오류 시 fetch 차단과 화자 무관 stop 경로를 유지합니다.
+별도 녹음 시험과 Jetson 시험을 추가 요구하지 않습니다.
+
+변경 후 빌드 성공, 음성 패키지 348 passed/1 skipped, 화자 도구 단위 시험 8 passed.
+실제 준비 로그는 `[SPEAKER READY] mode=enforce calibrated=False development_override=True`였습니다.
+owner_development.json의 SHA256은 위 기록과 동일합니다. 실제 명령 발행은 하지 않았습니다.

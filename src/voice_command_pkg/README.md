@@ -675,6 +675,12 @@ dry-run은 별도 event이며 실제 명령 시각을 만들지 않습니다. �
 
 ## 화자 인증 — 등록·보정·검증 후 활성화 (2026-11-12)
 
+> **2026-11-16 운영 선택:** 사용자가 추가 독립 녹음 검증을 생략하고 개발 기준으로
+> 진행하도록 요청했습니다. 아래의 최초 절차는 일반 기본 절차이며, 이 노트북에서는
+> 문서 끝의 `speaker_development.yaml` 실행 설정을 사용합니다.
+> 독립 검증 완료로 표시하지 않습니다.
+
+
 등록된 사용자의 `fetch`만 허용하는 선택 기능입니다. 현재 기본값은
 `speaker.mode: "off"`입니다. 실제 본인/타인 데이터로 검증하기 전에는 켜지 않습니다.
 `stop`은 모든 모드에서 화자 결과를 기다리지 않고 기존 규칙으로 처리합니다.
@@ -782,3 +788,34 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/calibrate_spe
 YAML 불리언 변환을 피하려고 `-p "speaker.mode:='off'"`처럼 따옴표를 보존합니다.
 
 시험 근거와 남은 항목은 `tools/voice_eval/results/2026-11-12_speaker_auth.md`를 참고하세요.
+
+
+### 2026-11-16 사용자 선택: 개발 프로필로 실행
+
+본인 9/10 허용·타인 0/10 허용의 개발 결과와 기준값 0.7646047983524492를 그대로
+사용합니다. 사용자가 추가 녹음 검증 생략을 요청했습니다. 검증 상태 `calibrated: false`는
+유지하며, `speaker.allow_development_profile: true`를 명시한 별도 설정에서만 허용합니다.
+등록만 된 owner.json은 이 옵션을 켜도 사용할 수 없습니다. 유효한 개발 근거와 기존
+모델/등록/품질 검사를 통과한 owner_development.json이 필요합니다.
+
+노트북에서 기존 음성 노드를 종료한 뒤 실행합니다. Jetson은 기존 eated 실행과
+ROS_DOMAIN_ID=37을 유지하며 복사/재빌드할 항목이 없습니다.
+
+```bash
+cd ~/2026project
+source voice_env.sh
+export ROS_DOMAIN_ID=37
+export ROS_LOCALHOST_ONLY=0
+ros2 run voice_command_pkg voice_command_node --ros-args \
+  --params-file src/voice_command_pkg/config/voice_command.yaml \
+  --params-file src/voice_command_pkg/config/speaker_development.yaml \
+  -p publish_commands:=true
+```
+
+준비 로그는 `[SPEAKER READY] mode=enforce calibrated=False development_override=True`입니다.
+LLM READY/LISTENING 및 로봇 IDLE 상태가 함께 준비되면 가져오기 명령을 사용할 수 있습니다.
+인증이 거부되거나 모델/프로필/시간 초과 오류가 나면 가져오기는 발행하지 않고,
+stop은 누구의 목소리든 기존 경로로 처리합니다. 이 명령은 실제 Jetson 명령을 발행합니다.
+
+일반 기본 설정은 off/allow_development_profile=false를 유지합니다.
+위 두 번째 params 파일을 뒤에 적용하는 실행에서 사용자 선택을 반영합니다.

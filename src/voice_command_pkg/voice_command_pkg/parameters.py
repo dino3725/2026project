@@ -34,6 +34,7 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'speaker.profile_path': '~/2026project/speaker_profiles/owner.json',
     'speaker.wait_seconds': 1.0,
     'speaker.min_speech_seconds': 0.6,
+    'speaker.allow_development_profile': False,
     'messages.speaker_rejected': '등록된 사용자 목소리를 확인하지 못했어요. 다시 말씀해 주세요.',
     'messages.speaker_unavailable': '화자 인증을 준비하지 못했어요. 등록 상태를 확인해 주세요.',
     'whisper.model': 'small',

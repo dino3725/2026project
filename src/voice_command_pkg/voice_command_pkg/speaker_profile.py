@@ -16,10 +16,13 @@ class SpeakerConfig:
     profile_path: str = '~/2026project/speaker_profiles/owner.json'
     wait_seconds: float = 1.0
     min_speech_seconds: float = 0.6
+    allow_development_profile: bool = False
 
     def __post_init__(self):
         if self.mode not in ('off', 'shadow', 'enforce'):
             raise ValueError('speaker.mode must be off, shadow or enforce')
+        if type(self.allow_development_profile) is not bool:
+            raise ValueError('speaker.allow_development_profile must be a boolean')
         if not isinstance(self.profile_path, str) or not self.profile_path.strip():
             raise ValueError('speaker.profile_path must be nonempty')
         for name in ('wait_seconds', 'min_speech_seconds'):
@@ -53,7 +56,7 @@ def similarity(vector, reference):
     return float(np.clip(np.dot(unit_vector(vector), unit_vector(reference)), -1, 1))
 
 
-def load_profile(path, model_sha256):
+def load_profile(path, model_sha256, require_development=False):
     """Validate a JSON template; profiles are immutable for the life of a node."""
     data = json.loads(Path(path).expanduser().read_text())
     if (data.get('schema') != 1 or data.get('backend') != 'resemblyzer-0.1.4'
@@ -73,9 +76,10 @@ def load_profile(path, model_sha256):
             or any(not isinstance(h, str) or len(h) != 64 for h in hashes)
             or len(set(hashes)) != len(hashes)):
         raise ValueError('profile needs at least 20 distinct enrollment clips')
-    if data['calibrated']:
+    if data['calibrated'] or require_development:
         seen = set(hashes)
-        for name in ('development', 'validation'):
+        evidence_names = ('development', 'validation') if data['calibrated'] else ('development',)
+        for name in evidence_names:
             evidence = data.get(name, {})
             genuine = evidence.get('genuine_count', 0)
             other = evidence.get('other_count', 0)

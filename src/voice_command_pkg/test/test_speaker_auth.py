@@ -194,3 +194,70 @@ def test_busy_worker_is_bounded_and_close_does_not_wait(monkeypatch):
         release.set()
         runtime.worker.join(timeout=2)
     assert not runtime.worker.is_alive()
+
+
+def development_profile():
+    data = profile()
+    data['development'] = {
+        'genuine_count': 10, 'other_count': 10, 'threshold': .75,
+        'genuine_scores': [.9] * 10, 'other_scores': [.5] * 10,
+        'hashes': [f'{i:064x}' for i in range(20, 40)],
+    }
+    return data
+
+
+def test_development_override_needs_valid_evidence(tmp_path):
+    path = tmp_path / 'profile.json'
+    path.write_text(json.dumps(profile()))
+    with pytest.raises(ValueError, match='evidence'):
+        load_profile(path, MODEL_SHA256, require_development=True)
+    data = development_profile()
+    path.write_text(json.dumps(data))
+    assert not load_profile(path, MODEL_SHA256, True)['calibrated']
+    data['development']['other_scores'][0] = .8
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match='criteria'):
+        load_profile(path, MODEL_SHA256, True)
+
+
+@pytest.mark.parametrize('allow', [False, True])
+def test_explicit_development_override_preserves_calibration_status(monkeypatch, tmp_path, allow):
+    path = tmp_path / 'profile.json'
+    path.write_text(json.dumps(development_profile()))
+    monkeypatch.setattr(speaker_runtime, 'SpeakerEncoder', lambda *args: SimpleNamespace(
+        encode=lambda pcm: profile()['embedding']))
+    ready, logs = threading.Event(), []
+
+    def log(message):
+        logs.append(message)
+        ready.set()
+
+    config = SpeakerConfig(mode='enforce', profile_path=str(path), allow_development_profile=allow)
+    runtime = SpeakerRuntime(config, log, threading.Event())
+    try:
+        assert ready.wait(1)
+        assert runtime.ready == allow
+        if allow:
+            assert 'calibrated=False development_override=True' in logs[0]
+            assert runtime.submit(b'audio').result(timeout=1).allowed
+        else:
+            assert runtime.submit(b'audio').result().reason == 'speaker_unavailable'
+        assert not json.loads(path.read_text())['calibrated']
+    finally:
+        runtime.close()
+        runtime.worker.join(timeout=2)
+
+
+def test_development_option_requires_bool_and_overlay_enforces():
+    from pathlib import Path
+    import yaml
+
+    with pytest.raises(ValueError, match='boolean'):
+        SpeakerConfig(allow_development_profile='true')
+    path = Path(__file__).resolve().parents[1] / 'config' / 'speaker_development.yaml'
+    values = yaml.safe_load(path.read_text())['voice_command_node']['ros__parameters']['speaker']
+    config = build_pipeline_config({'speaker.' + key: value for key, value in values.items()})
+    assert config.speaker.mode == 'enforce'
+    assert config.speaker.allow_development_profile
+    assert config.speaker.profile_path.endswith('/owner_development.json')
+    assert not build_pipeline_config({}).speaker.allow_development_profile
