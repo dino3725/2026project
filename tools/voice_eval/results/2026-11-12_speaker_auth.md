@@ -125,3 +125,54 @@ PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speake
   이 실물 단계의 명령/순서는 검증 데이터와 인증 모드를 확정한 뒤 제공.
 
 과거 녹음의 자동 등록, 정지 약화, Jetson 수정, GitHub push는 이번 작업에 포함하지 않았습니다.
+
+
+## 2026-11-16 실제 등록 및 development 보정 결과
+
+사용자 등록 `speaker_enrollment_wmp_9_m4`의 20개 WAV는 각 6초/16 kHz/mono/PCM16이며,
+등록 해시와 품질 검사를 통과했습니다. 실제 모델로 재계산한 임베딩 평균도 저장된
+`owner.json`과 일치했습니다. 이는 등록 파일 일관성 확인이며 화자 구분 정확도 평가가 아닙니다.
+
+본인 `speaker_genuine-dev_22sezaa1` 10개와 타인 `speaker_other-dev_1yv_ksp0` 10개로
+기존 calibrate 도구를 실행했습니다. 타인 manifest의 consent=true 및 complete=true를 확인했고,
+등록/본인 개발/타인 개발 녹음 간 PCM 중복과 변경을 검사했습니다. 전부 통과했습니다.
+붙여넣은 터미널에는 동의 입력 앞에 글자가 보이지만 저장된 manifest의 동의 기록은 true입니다.
+
+| 항목 | 결과 |
+|---|---|
+| 본인 허용 | 9/10 |
+| 본인 거부율 FRR | 10% |
+| 타인 허용 | 0/10 |
+| 타인 수락률 FAR | 0% |
+| 기준값 | 0.7646047983524492 |
+| 본인 점수 범위 | 0.727413–0.892606 |
+| 타인 점수 범위 | 0.603593–0.764605 |
+| 독립 검증 완료 | 아니요 (`calibrated: false`) |
+
+본인의 `01.wav`, “콜라 가져다 줘” 점수 0.727413이 기준보다 낮았습니다.
+사용자가 이 문장을 한 번 재녹음했으며, 분석 대상은 최종 저장한 녹음입니다.
+거부된 데이터를 삭제하거나 통과한 재녹음으로 대체해 성적을 수정하지 않았습니다.
+
+기존 알고리즘은 관찰한 타인 최고 점수 바로 위의 표현 가능한 실수를 선택합니다.
+따라서 개발 데이터에서 FAR 0%가 나온 것은 독립 정확도 증거가 아니며,
+경계의 여유가 작고 본인 FRR도 허용 상한 10%입니다. 출력 반올림 값을 수동 입력하지 않습니다.
+기준과 모델을 유지한 별도의 본인/동의한 타인 test 녹음이 필요합니다.
+
+로컬 결과는 `speaker_profiles/owner_development.json`에 새로 저장했습니다.
+SHA256: `2be0e4690c049cc2f8391b4eb995900c7cb068c4c6850400aaff0cd22ee47439`.
+프로필과 원본 WAV는 Git에서 제외되는 것을 확인했습니다. 운영 설정은 off를 유지했고,
+마이크 시작/ROS 발행/Jetson 변경/운영 임계값 변경은 하지 않았습니다.
+
+다음 확인은 노트북에서 각각 새 10문장을 녹음하는 것입니다. 음성 노드가 실행 중이면
+먼저 Ctrl+C로 종료합니다. Jetson에는 실행할 명령이 없습니다.
+
+```bash
+cd ~/2026project
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speaker.py --purpose genuine-test
+PYTHONPATH=src/voice_command_pkg .venv/bin/python tools/voice_eval/record_speaker.py --purpose other-test
+```
+
+첫 명령은 본인, 두 번째는 이번 개발 녹음을 제공했던 동의한 타인이 읽습니다.
+화면 안내에 따라 각 10개를 저장하고 두 manifest 경로를 확보하면 녹음 단계 완료입니다.
+이후 고정된 `owner_development.json`으로 독립 검증하며, 본인 허용 9/10 이상·타인 허용
+0/10이 검증 기준입니다. 소수 표본 결과를 모든 사람·환경에서의 성능 보장으로 해석하지 않습니다.
