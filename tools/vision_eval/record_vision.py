@@ -179,7 +179,9 @@ def main():
             rclpy.spin_once(node, timeout_sec=0.1)
             if (node.is_ready() and 'rgb' in node.images
                     and 'depth' in node.images and node.camera_info
-                    and node.buffer.can_transform('base_link', 'link1', Time())):
+                    and node.buffer.can_transform('base_link', 'link1', Time())
+                    and node.buffer.can_transform(
+                        'base_link', node.camera_info['frame_id'], Time())):
                 break
         if not node.is_ready():
             raise RuntimeError('Recognition pose is not ready; no trial was sent')

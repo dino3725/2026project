@@ -63,6 +63,7 @@ def make_controller(fraction, error_code=MoveItErrorCodes.SUCCESS):
         cartesian_path_client=planner,
         execute_trajectory_client=SimpleNamespace(),
         _ensure_active=lambda operation_id: None,
+        _verify_trajectory_arrival=lambda *args: None,
         _wait_future=lambda *args: response,
         _wait_for_server=lambda *args: None,
         _send_goal=lambda *args: calls.append(args[1]) or object(),

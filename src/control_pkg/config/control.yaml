@@ -4,6 +4,7 @@ control_node:
 
     # Logitech F710 in XInput mode: A=0, X=2, Y=3. B is unused.
     recognition_button_index: 0
+    release_button_index: 1  # B: release at CARGO, then return HOME (same as open palm)
     home_button_index: 2
     emergency_button_index: 3
 
@@ -44,5 +45,12 @@ control_node:
     retreat_joint_jump_rad: 0.35    # reject abrupt joint changes
     action_server_timeout_sec: 10.0
     action_result_timeout_sec: 20.0
+    # Diagnostic references only: deviation does not stop or warn in control_node.
+    arrival_joint_tolerance_deg: 1.0
+    home_arrival_joint_tolerances_deg: [1.0, 1.0, 2.0, 1.0]
+    # Fresh, finite post-action feedback is still required continuously.
+    arrival_timeout_sec: 2.0
+    arrival_stable_sec: 0.3
+    arrival_max_state_age_sec: 0.5
     # Includes a possible first-use CUDA backend warm-up in VisionNode2.
     vision_result_timeout_sec: 60.0

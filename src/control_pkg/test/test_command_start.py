@@ -73,6 +73,7 @@ def test_a_button_repeats_last_target_when_idle():
     node = SimpleNamespace(
         _previous_buttons=[],
         recognition_button_index=0,
+        release_button_index=1,
         home_button_index=2,
         emergency_button_index=3,
         _lock=threading.RLock(),

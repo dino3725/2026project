@@ -35,11 +35,21 @@ class MeasurementControl(ControlNode):
         )
         self.get_logger().info(
             'MEASUREMENT MODE: no startup movement, no fetch, no gripper, '
-            'no base driving. Press and release Y before prepare service.'
+            'no base driving. Physical Y stop and input freshness guards '
+            'remain active; startup Y verification='
+            f'{self.require_stop_verification}.'
         )
+
+    def _declare_parameters(self):
+        super()._declare_parameters()
+        # User requested no repeated Y confirmation on 2026-11-12.
+        # This controls only the startup test, never the emergency-stop path.
+        self.declare_parameter('require_stop_verification', False)
 
     def _read_parameters(self):
         super()._read_parameters()
+        self.require_stop_verification = bool(
+            self.get_parameter('require_stop_verification').value)
         self.home_on_startup = False
         self.pick_enabled = False
         self.set_parameters([
@@ -107,7 +117,7 @@ class MeasurementControl(ControlNode):
 
     def blocked_reason(self):
         now = time.monotonic()
-        if not self._stop_seen:
+        if self.require_stop_verification and not self._stop_seen:
             return 'Press and release physical Y first'
         if self._y_down:
             return 'Release Y first'

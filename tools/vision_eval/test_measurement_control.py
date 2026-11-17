@@ -16,17 +16,20 @@ def harness():
     node = SimpleNamespace(
         _lock=threading.RLock(), _joy_at=now, _joint_at=now,
         _stop_seen=False, _y_down=False, _preparing=False,
+        require_stop_verification=True,
         _stop_event=threading.Event(), state=TaskState.IDLE,
         emergency_button_index=3, _handle_emergency_stop=Mock(),
         _publish_command_status=Mock(), _set_state=Mock(),
         _start_operation=Mock(), prepare_sequence=Mock(),
         ready_publisher=Mock(), get_logger=Mock(return_value=Mock()),
     )
-    node.blocked_reason = MethodType(MeasurementControl.blocked_reason, node)
+    node.blocked_reason = MethodType(
+        MeasurementControl.blocked_reason, node)
     return node
 
 
-@pytest.mark.parametrize('condition', ['no_y', 'held_y', 'old_joy', 'old_joint'])
+@pytest.mark.parametrize(
+    'condition', ['no_y', 'held_y', 'old_joy', 'old_joint'])
 def test_prepare_requires_verified_stop_and_fresh_inputs(condition):
     node = harness()
     node._stop_seen = condition != 'no_y'
@@ -47,6 +50,17 @@ def test_prepare_starts_only_an_explicit_recognition_request():
     assert result.success
     node._start_operation.assert_called_once_with(node.prepare_sequence)
     assert node._preparing
+
+
+def test_optional_verification_keeps_held_y_and_freshness_guards():
+    node = harness()
+    node.require_stop_verification = False
+    assert node.blocked_reason() == ''
+    node._y_down = True
+    assert node.blocked_reason() == 'Release Y first'
+    node._y_down = False
+    node._joy_at = 0
+    assert node.blocked_reason() == 'No fresh joystick heartbeat'
 
 
 def test_joystick_only_y_triggers_stop():

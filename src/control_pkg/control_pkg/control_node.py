@@ -33,6 +33,7 @@ from tf2_ros import Buffer, TransformException, TransformListener
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 from control_pkg.command_protocol import DEFAULT_SUPPORTED_TARGETS
+from control_pkg.arm_arrival import joint_feedback_error, trajectory_endpoint
 from control_pkg.command_protocol import STOP_ACTION
 from control_pkg.command_protocol import validate_voice_command
 from control_pkg.open_palm_gate import OpenPalmGate
@@ -45,6 +46,10 @@ class OperationCancelled(RuntimeError):
 
 class ActionOutcomeUnknown(RuntimeError):
     """An action may still be executing; automatic HOME must not follow."""
+
+
+class ArmArrivalUnverified(ActionOutcomeUnknown):
+    """Post-action feedback is invalid; do not descend or auto-HOME."""
 
 
 class ControlNode(Node):
@@ -63,6 +68,8 @@ class ControlNode(Node):
         self._worker: Optional[threading.Thread] = None
         self._previous_buttons = []
         self._current_joint_positions: Optional[list[float]] = None
+        self._joint_received_at = 0.0
+        self._joint_stamp_ns = 0
         self._emergency_active = False
 
         self._declare_parameters()
@@ -194,6 +201,7 @@ class ControlNode(Node):
             'Control state machine ready: '
             f'targets={list(self.supported_targets)}, '
             f'buttons=A{self.recognition_button_index}/'
+            f'B{self.release_button_index}/'
             f'X{self.home_button_index}/'
             f'Y{self.emergency_button_index}'
         )
@@ -215,6 +223,7 @@ class ControlNode(Node):
             list(DEFAULT_SUPPORTED_TARGETS),
         )
         self.declare_parameter('recognition_button_index', 0)
+        self.declare_parameter('release_button_index', 1)
         self.declare_parameter('home_button_index', 2)
         self.declare_parameter('emergency_button_index', 3)
         self.declare_parameter('home_on_startup', True)
@@ -258,6 +267,11 @@ class ControlNode(Node):
         self.declare_parameter('moveit_acceleration_scale', 0.10)
         self.declare_parameter('retreat_cartesian_step_m', 0.005)
         self.declare_parameter('retreat_joint_jump_rad', 0.35)
+        self.declare_parameter('arrival_joint_tolerance_deg', 1.0)
+        self.declare_parameter('home_arrival_joint_tolerances_deg', [1.0] * 4)
+        self.declare_parameter('arrival_timeout_sec', 2.0)
+        self.declare_parameter('arrival_stable_sec', 0.3)
+        self.declare_parameter('arrival_max_state_age_sec', 0.5)
 
     def _read_parameters(self) -> None:
         def value(name: str):
@@ -265,15 +279,17 @@ class ControlNode(Node):
 
         self.supported_targets = tuple(value('supported_targets'))
         self.recognition_button_index = int(value('recognition_button_index'))
+        self.release_button_index = int(value('release_button_index'))
         self.home_button_index = int(value('home_button_index'))
         self.emergency_button_index = int(value('emergency_button_index'))
         button_indices = {
             self.recognition_button_index,
+            self.release_button_index,
             self.home_button_index,
             self.emergency_button_index,
         }
-        if min(button_indices) < 0 or len(button_indices) != 3:
-            raise ValueError('A, X, and Y button indices must be unique')
+        if min(button_indices) < 0 or len(button_indices) != 4:
+            raise ValueError('A, B, X, and Y button indices must be unique')
         self.home_on_startup = bool(value('home_on_startup'))
         self.home_pose = self._pose_parameter(value('home_pose_deg'))
         self.recognition_pose = self._pose_parameter(
@@ -352,6 +368,23 @@ class ControlNode(Node):
         )
         self.retreat_cartesian_step = float(value('retreat_cartesian_step_m'))
         self.retreat_joint_jump = float(value('retreat_joint_jump_rad'))
+        self.arrival_joint_tolerance = math.radians(
+            float(value('arrival_joint_tolerance_deg')))
+        self.home_arrival_joint_tolerances = self._pose_parameter(
+            value('home_arrival_joint_tolerances_deg'))
+        if not all(math.isfinite(x) and x > 0
+                   for x in self.home_arrival_joint_tolerances):
+            raise ValueError('HOME arrival limits must be positive and finite')
+        self.arrival_timeout = float(value('arrival_timeout_sec'))
+        self.arrival_stable = float(value('arrival_stable_sec'))
+        self.arrival_max_age = float(value('arrival_max_state_age_sec'))
+        if not all(math.isfinite(x) and x > 0 for x in (
+                self.arrival_joint_tolerance, self.arrival_timeout,
+                self.arrival_stable, self.arrival_max_age,
+                self.position_tolerance)):
+            raise ValueError('Arm arrival checks require positive finite limits')
+        if self.arrival_stable >= self.arrival_timeout:
+            raise ValueError('Arrival stability interval must be below timeout')
         if self.retreat_cartesian_step <= 0 or self.retreat_joint_jump <= 0:
             raise ValueError(
                 'Cartesian retreat step and joint jump must be positive'
@@ -425,13 +458,14 @@ class ControlNode(Node):
             self.get_logger().warn(f'Voice command rejected: {message}')
 
     def joy_callback(self, msg: Joy) -> None:
-        """Dispatch rising edges for A/X/Y according to the task state."""
+        """Dispatch rising edges for A/B/X/Y according to the task state."""
         buttons = list(msg.buttons)
         if not self._previous_buttons:
             self._previous_buttons = [0] * len(buttons)
 
         emergency = self._rising_edge(buttons, self.emergency_button_index)
         home = self._rising_edge(buttons, self.home_button_index)
+        release = self._rising_edge(buttons, self.release_button_index)
         recognition = self._rising_edge(
             buttons,
             self.recognition_button_index,
@@ -444,8 +478,22 @@ class ControlNode(Node):
         if home:
             self._handle_home_recovery()
             return
+        if release:
+            self._handle_release_request()
+            return
         if recognition:
             self._handle_recognition_request()
+
+    def _handle_release_request(self) -> None:
+        """Release once at CARGO using the same sequence as an open palm."""
+        with self._lock:
+            if self.state != TaskState.DRIVE_TO_PLACE:
+                self._restore_state_authority()
+                return
+            self._set_manual_drive(False, force=True)
+            self._publish_zero_velocity()
+            self._set_state(TaskState.PLACING)
+            self._start_operation(self._release_sequence)
 
     def _rising_edge(self, buttons: Sequence[int], index: int) -> bool:
         current = 0 <= index < len(buttons) and buttons[index] == 1
@@ -543,10 +591,15 @@ class ControlNode(Node):
 
     def joint_state_callback(self, msg: JointState) -> None:
         positions = dict(zip(msg.name, msg.position))
-        if all(name in positions for name in self.JOINT_NAMES):
+        if all(name in positions and math.isfinite(positions[name])
+               for name in self.JOINT_NAMES):
             current = [float(positions[name]) for name in self.JOINT_NAMES]
             with self._lock:
                 self._current_joint_positions = current
+                self._joint_received_at = time.monotonic()
+                self._joint_stamp_ns = (
+                    msg.header.stamp.sec * 1_000_000_000
+                    + msg.header.stamp.nanosec)
 
     def _startup_home_sequence(self, operation_id: int) -> None:
         try:
@@ -743,7 +796,80 @@ class ControlNode(Node):
                 f'{label} trajectory failed: '
                 f'{response.result.error_string or response.result.error_code}'
             )
-        self.get_logger().info(f'Arm reached {label}')
+        home_limits = None
+        if label == 'HOME' and list(positions) == list(self.home_pose):
+            home_limits = self.home_arrival_joint_tolerances
+        self._verify_arm_arrival(
+            positions, operation_id, label, joint_tolerances=home_limits)
+        self.get_logger().info(
+            f'Arm {label} complete; post-action feedback checked')
+
+    def _verify_arm_arrival(
+        self, expected, operation_id: int, label: str, point=None,
+        joint_tolerances=None,
+    ) -> None:
+        """
+        Require valid feedback, without rejecting or warning on deviation.
+
+        Joint tolerances remain available to diagnostic subclasses only.
+        Action success and fresh finite feedback permit the next action.
+        """
+        started = time.monotonic()
+        stable_since = None
+        previous_stamp = None
+        reason = 'No post-action joint feedback'
+        while time.monotonic() - started < self.arrival_timeout:
+            self._ensure_active(operation_id)
+            now = time.monotonic()
+            clock_ns = self.get_clock().now().nanoseconds
+            with self._lock:
+                actual = self._current_joint_positions
+                received = self._joint_received_at
+                stamp = self._joint_stamp_ns
+            age = (clock_ns - stamp) / 1e9
+            if (received < started or now - received > self.arrival_max_age
+                    or stamp <= 0 or not 0 <= age <= self.arrival_max_age):
+                reason = 'Missing or stale post-action joint feedback'
+            else:
+                reason = joint_feedback_error(actual, expected)
+            if not reason and point is not None:
+                try:
+                    transform = self.tf_buffer.lookup_transform(
+                        self.base_frame, self.end_effector_link, Time())
+                    tf_stamp = (transform.header.stamp.sec * 1_000_000_000
+                                + transform.header.stamp.nanosec)
+                    tf_age = (clock_ns - tf_stamp) / 1e9
+                    xyz = transform.transform.translation
+                    error = math.dist((xyz.x, xyz.y, xyz.z), point)
+                    if not 0 <= tf_age <= self.arrival_max_age:
+                        reason = 'Stale tool transform'
+                    elif not math.isfinite(error):
+                        reason = 'Nonfinite tool transform or target'
+                except TransformException as exc:
+                    reason = f'Tool transform unavailable: {exc}'
+            if reason:
+                stable_since = None
+            elif stamp != previous_stamp:
+                if stable_since is None:
+                    stable_since = now
+                elif now - stable_since >= self.arrival_stable:
+                    self._ensure_active(operation_id)
+                    return
+            previous_stamp = stamp
+            self._sleep_cancelable(0.05, operation_id)
+        self._ensure_active(operation_id)
+        raise ArmArrivalUnverified(
+            f'{label} feedback not verified: {reason or "not sustained long enough"}')
+
+    def _verify_trajectory_arrival(
+        self, trajectory, operation_id: int, label: str, point=None,
+    ) -> None:
+        """Reject absent endpoints instead of accepting an empty success result."""
+        try:
+            expected = trajectory_endpoint(trajectory, self.JOINT_NAMES)
+        except ValueError as exc:
+            raise ArmArrivalUnverified(f'{label}: {exc}') from exc
+        self._verify_arm_arrival(expected, operation_id, label, point)
 
     def _send_gripper(
         self,
@@ -892,6 +1018,11 @@ class ControlNode(Node):
             or error_code != MoveItErrorCodes.SUCCESS
         ):
             raise RuntimeError(f'MoveIt {label} failed: error={error_code}')
+        self._verify_trajectory_arrival(
+            # executed_trajectory is optional measured execution history in
+            # MoveIt, not the commanded reference. Compare to the final plan.
+            response.result.planned_trajectory.joint_trajectory,
+            operation_id, label, point)
         self.get_logger().info(
             f'MoveIt {label} reached '
             f'({point[0]:.3f}, {point[1]:.3f}, {point[2]:.3f})'
@@ -1018,6 +1149,8 @@ class ControlNode(Node):
                 'MoveIt RETREAT execution failed: '
                 f'error={execution.result.error_code.val}'
             )
+        self._verify_trajectory_arrival(
+            response.solution.joint_trajectory, operation_id, 'RETREAT')
         self.get_logger().info(
             'RETREAT completed: executed '
             f'{response.fraction * 100.0:.1f}% of the requested '

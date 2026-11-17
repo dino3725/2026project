@@ -15,10 +15,14 @@ class TotalControl(Node):
         super().__init__('total_control_node')
 
         self.declare_parameter('recognition_button_index', 0)
+        self.declare_parameter('release_button_index', 1)
         self.declare_parameter('home_button_index', 2)
         self.declare_parameter('emergency_button_index', 3)
         self.recognition_button_index = int(
             self.get_parameter('recognition_button_index').value
+        )
+        self.release_button_index = int(
+            self.get_parameter('release_button_index').value
         )
         self.home_recovery_button_index = int(
             self.get_parameter('home_button_index').value
@@ -54,6 +58,7 @@ class TotalControl(Node):
         self.latest_axes: list[float] = []
         self.latest_buttons: list[int] = []
 
+        self.previous_release_pressed = False
         self.previous_recognition_pressed = False
         self.previous_home_recovery_pressed = False
         self.previous_emergency_stop_pressed = False
@@ -81,7 +86,7 @@ class TotalControl(Node):
         self.get_logger().info(
             'TurtleBot base joystick control ready: '
             f'A={self.recognition_button_index} repeats the last target; '
-            'B is unused'
+            f'B={self.release_button_index} releases at CARGO and returns HOME'
         )
         self.get_logger().info(
             'Safety buttons: '
@@ -95,14 +100,15 @@ class TotalControl(Node):
     def _validate_button_parameters(self) -> None:
         button_indices = {
             self.recognition_button_index,
+            self.release_button_index,
             self.home_recovery_button_index,
             self.emergency_stop_button_index,
         }
         if min(button_indices) < 0:
             raise ValueError('button indices must not be negative')
-        if len(button_indices) != 3:
+        if len(button_indices) != 4:
             raise ValueError(
-                'recognition, HOME recovery, and emergency-stop '
+                'recognition, release, HOME recovery, and emergency-stop '
                 'button indices must be different'
             )
 
@@ -134,10 +140,13 @@ class TotalControl(Node):
         emergency_stop_pressed = self.get_button(
             self.emergency_stop_button_index
         )
+        release_pressed = self.get_button(self.release_button_index)
         self._warn_if_button_indices_unavailable()
 
         startup_elapsed = (now - self.start_time).nanoseconds / 1e9
         if startup_elapsed >= 1.0:
+            if release_pressed and not self.previous_release_pressed:
+                self._gate_for_task_button('Release/B')
             if (
                 recognition_pressed
                 and not self.previous_recognition_pressed
@@ -183,6 +192,7 @@ class TotalControl(Node):
                 self.target_linear = 0.0
                 self.target_angular = 0.0
 
+        self.previous_release_pressed = release_pressed
         self.previous_recognition_pressed = recognition_pressed
         self.previous_home_recovery_pressed = home_recovery_pressed
         self.previous_emergency_stop_pressed = emergency_stop_pressed
@@ -232,6 +242,7 @@ class TotalControl(Node):
     def _warn_if_button_indices_unavailable(self) -> None:
         required_count = max(
             self.recognition_button_index,
+            self.release_button_index,
             self.home_recovery_button_index,
             self.emergency_stop_button_index,
         ) + 1
