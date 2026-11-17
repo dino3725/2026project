@@ -27,6 +27,7 @@ DEFAULT_PARAMETERS: dict[str, Any] = {
     'audio_stop.precision': 'fp32',
     'audio_stop.utterance_recheck': True,
     'audio_stop.recheck_phase_shifts': False,
+    'audio_stop.recheck_gain': 1.0,
     'audio_stop.threshold': 0.01,
     'audio_stop.score': 1.0,
     'audio_stop.queue_frames': 128,

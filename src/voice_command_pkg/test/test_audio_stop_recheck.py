@@ -92,6 +92,37 @@ def test_phase_retry_exhausts_bounded_offsets_without_rewriting_pcm():
     ]
 
 
+def test_gain_retry_keeps_original_first_and_its_coordinates():
+    from voice_command_pkg.audio_samples import amplify_pcm
+    pcm = b'\1\0' * 480
+    amplified = amplify_pcm(pcm, 2)
+    calls = []
+    backend = SimpleNamespace(reset=lambda: None, accept=lambda chunk: (
+        calls.append(chunk) or (['스톱'] if chunk == amplified else [])
+    ))
+    assert recheck_audio(backend, pcm, gain=2) == ('스톱', .03)
+    assert calls == [pcm, amplified]
+    assert pcm == b'\1\0' * 480
+
+
+def test_original_hit_never_uses_gain_retry():
+    calls = []
+    backend = SimpleNamespace(reset=lambda: None, accept=lambda pcm: (
+        calls.append(pcm) or ['정지']
+    ))
+    pcm = b'\1\0' * 480
+    assert recheck_audio(backend, pcm, phase_shifts=True, gain=2) == ('정지', .03)
+    assert calls == [pcm]
+
+
+def test_gain_retry_checks_shared_cancellation_before_dispatch():
+    calls = []
+    backend = SimpleNamespace(reset=lambda: None, accept=lambda pcm: (
+        calls.append(pcm) or (['정지'] if len(calls) == 2 else [])
+    ))
+    assert recheck_audio(backend, b'\1\0' * 480, lambda: len(calls) >= 2, gain=2) is None
+
+
 def test_recheck_worker_original_coordinates_and_expired_input():
     events, logs = [], []
     done = threading.Event()

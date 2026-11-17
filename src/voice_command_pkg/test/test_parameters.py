@@ -68,3 +68,8 @@ def test_phase_recheck_requires_explicit_selection():
     config = build_pipeline_config({'audio_stop.recheck_phase_shifts': True})
     assert config.audio_stop.recheck_phase_shifts
     assert config.audio_stop.mode == 'off'
+
+
+def test_recheck_gain_default_and_override():
+    assert build_pipeline_config({}).audio_stop.recheck_gain == 1.0
+    assert build_pipeline_config({'audio_stop.recheck_gain': 2.0}).audio_stop.recheck_gain == 2.0

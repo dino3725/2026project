@@ -13,12 +13,12 @@ from voice_command_pkg.audio_stop_model import AudioStopConfig, KoreanStopSpotte
 from voice_command_pkg.audio_stop_recheck import recheck_audio, RECHECK_PREFIXES_MS
 
 
-def trial(backend, pcm, phases, deadline_seconds=None):
+def trial(backend, pcm, phases, deadline_seconds=None, gain=1.0):
     """Distinguish absent detections from results discarded by the runtime deadline."""
     start = time.perf_counter()
     deadline = float('inf') if deadline_seconds is None else start + deadline_seconds
     hit = recheck_audio(backend, pcm, lambda: time.perf_counter() > deadline,
-                        phase_shifts=phases)
+                        phase_shifts=phases, gain=gain)
     elapsed = time.perf_counter() - start
     expired = elapsed > (deadline_seconds if deadline_seconds is not None else float('inf'))
     return {'hit': None if expired else hit, 'expired': expired, 'compute_seconds': elapsed}
@@ -51,11 +51,13 @@ def main():
     parser.add_argument('--prefix-ms', type=int, nargs='+', default=[0],
                         help='Input offsets for sensitivity testing, not new recordings.')
     parser.add_argument('--targets-only', action='store_true')
+    parser.add_argument('--recheck-gain', type=float, default=1.0)
     args = parser.parse_args()
     if (len(set(args.prefix_ms)) != len(args.prefix_ms)
             or any(p < 0 or p > 1000 for p in args.prefix_ms)):
         parser.error('prefix-ms must be distinct offsets between 0 and 1000')
-    backend = KoreanStopSpotter(AudioStopConfig())
+    config = AudioStopConfig(recheck_gain=args.recheck_gain)
+    backend = KoreanStopSpotter(config)
     rows, seen, skipped = [], set(), []
     for manifest in args.manifest:
         for sample in json.loads(manifest.read_text())['samples']:
@@ -79,7 +81,8 @@ def main():
                     ('original', False, None), ('phases', True, None),
                     ('bounded_phases', True, AudioStopConfig().max_lag_seconds),
                 ):
-                    result = trial(backend, bytes(prefix_ms * 32) + pcm, phases, deadline)
+                    result = trial(backend, bytes(prefix_ms * 32) + pcm, phases, deadline,
+                                   gain=args.recheck_gain if phases else 1.0)
                     hit = result['hit']
                     result['synthetic_prefix_hit'] = bool(hit and hit[1] <= prefix_ms / 1000)
                     if hit:
@@ -88,10 +91,11 @@ def main():
                     row[method] = result
                 rows.append(row)
     # Synthetic silence is not a household-noise recording or an accuracy sample.
-    silence = trial(backend, bytes(32000 * 10), True)
+    silence = trial(backend, bytes(32000 * 10), True, gain=args.recheck_gain)
     result = {
         'development_only': True, 'no_ros_no_microphone': True,
         'prefixes_ms': list(RECHECK_PREFIXES_MS), 'synthetic_tail_seconds': 0,
+        'recheck_gain': args.recheck_gain,
         'input_prefixes_ms': args.prefix_ms, 'targets_only': args.targets_only,
         'correlated_replays_not_independent_samples': True,
         'deadline_seconds': AudioStopConfig().max_lag_seconds,

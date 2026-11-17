@@ -36,6 +36,7 @@ class AudioStopConfig:
     precision: str = 'fp32'
     utterance_recheck: bool = True
     recheck_phase_shifts: bool = False
+    recheck_gain: float = 1.0
     threshold: float = 0.01
     score: float = 1.0
     queue_frames: int = 128
@@ -46,6 +47,9 @@ class AudioStopConfig:
             raise ValueError('audio_stop.utterance_recheck must be boolean')
         if type(self.recheck_phase_shifts) is not bool:
             raise ValueError('audio_stop.recheck_phase_shifts must be boolean')
+        if (type(self.recheck_gain) not in (int, float)
+                or not math.isfinite(self.recheck_gain) or not 1 <= self.recheck_gain <= 4):
+            raise ValueError('audio_stop.recheck_gain must be finite and between 1 and 4')
         if self.mode not in ('off', 'shadow', 'active'):
             raise ValueError('audio_stop.mode must be off, shadow or active')
         if self.precision not in ('int8', 'fp32'):

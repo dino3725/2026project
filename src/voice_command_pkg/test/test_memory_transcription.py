@@ -10,12 +10,38 @@ import pytest
 
 from voice_command_pkg import pipeline
 from voice_command_pkg.audio_capture import FRAME_BYTES, SAMPLE_RATE
-from voice_command_pkg.audio_samples import pcm_to_float32
+from voice_command_pkg.audio_samples import amplify_pcm, pcm_to_float32
 from voice_command_pkg.parameters import build_pipeline_config
 from voice_command_pkg.utterance_buffer import Utterance
 
 
 PCM = b'\x00\x40' * (FRAME_BYTES // 2)
+
+
+def test_kws_gain_preserves_original_samples_and_limits_clipping():
+    original = np.array([-20000, 0, 10000], dtype='<i2').tobytes()
+    amplified = amplify_pcm(original, 2.0)
+    np.testing.assert_array_equal(np.frombuffer(amplified, '<i2'), [-32767, 0, 16384])
+    np.testing.assert_array_equal(np.frombuffer(original, '<i2'), [-20000, 0, 10000])
+    assert amplify_pcm(original, 1.0) == original
+
+
+@pytest.mark.parametrize('samples', [[0, 0], [-32768, 20000], [32767, -1000]])
+def test_kws_gain_keeps_silence_and_full_scale_unchanged(samples):
+    pcm = np.array(samples, dtype='<i2').tobytes()
+    assert amplify_pcm(pcm, 4) == pcm
+
+
+@pytest.mark.parametrize('gain', [True, 0, 5, float('nan'), float('inf'), '2'])
+def test_kws_gain_rejects_invalid_values(gain):
+    with pytest.raises(ValueError):
+        amplify_pcm(PCM, gain)
+
+
+@pytest.mark.parametrize('pcm', [b'', b'\0'])
+def test_kws_gain_rejects_invalid_pcm(pcm):
+    with pytest.raises(ValueError):
+        amplify_pcm(pcm, 2)
 
 
 def test_pcm_conversion_preserves_sign_endianness_and_scale():

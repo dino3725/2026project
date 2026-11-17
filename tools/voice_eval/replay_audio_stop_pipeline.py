@@ -27,6 +27,7 @@ def main():
                         default=AudioStopConfig().precision)
     parser.add_argument('--no-utterance-recheck', action='store_true')
     parser.add_argument('--recheck-phase-shifts', action='store_true')
+    parser.add_argument('--recheck-gain', type=float, default=1.0)
     parser.add_argument('--speaker-profile', type=Path,
                         help='Enable real speaker inference alongside STT; still no ROS/LLM.')
     parser.add_argument('--allow-development-profile', action='store_true')
@@ -86,6 +87,7 @@ def main():
                 mode=args.mode, precision=args.precision,
                 utterance_recheck=not args.no_utterance_recheck,
                 recheck_phase_shifts=args.recheck_phase_shifts,
+                recheck_gain=args.recheck_gain,
             ), speaker=SpeakerConfig(
                 mode='enforce' if args.speaker_profile else 'off',
                 profile_path=str(args.speaker_profile) if args.speaker_profile else (
@@ -121,6 +123,7 @@ def main():
         'precision': args.precision,
         'utterance_recheck': not args.no_utterance_recheck,
         'recheck_phase_shifts': args.recheck_phase_shifts,
+        'recheck_gain': args.recheck_gain,
         'speaker_profile_sha256': hashlib.sha256(args.speaker_profile.read_bytes()).hexdigest()
         if args.speaker_profile else None,
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),

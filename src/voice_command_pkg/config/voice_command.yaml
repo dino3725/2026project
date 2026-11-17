@@ -20,6 +20,7 @@ voice_command_node:
       model_dir: "~/.cache/eated/ko-kws-zipformer-tiny/c2430dd975019802a68077e0fc4dd0521ae193e9"
       utterance_recheck: true     # fresh VAD segment check; mode off still disables both
       recheck_phase_shifts: false # optional bounded retries with 0..300ms leading silence
+      recheck_gain: 1.0           # optional KWS-only retry gain; original first pass retained
       threshold: 0.01
       score: 1.0
       queue_frames: 128           # absorb bounded PulseAudio delivery bursts

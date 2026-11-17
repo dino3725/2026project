@@ -17,7 +17,7 @@ from voice_command_pkg.speaker_profile import SpeakerConfig
 from voice_command_pkg.utterance_buffer import Utterance
 
 
-def run(samples, profile, phases):
+def run(samples, profile, phases, gain=1.0):
     """Exercise real worker deadlines and local callbacks; LLM/IDLE are simulated."""
     logs, commands, rows = [], [], []
     ready = threading.Event()
@@ -39,7 +39,9 @@ def run(samples, profile, phases):
         )
 
     config = pipeline.PipelineConfig(
-        audio_stop=AudioStopConfig(mode='active', recheck_phase_shifts=phases),
+        audio_stop=AudioStopConfig(
+            mode='active', recheck_phase_shifts=phases, recheck_gain=gain,
+        ),
         speaker=SpeakerConfig(mode='enforce', profile_path=str(profile),
                               allow_development_profile=True),
     )
@@ -87,7 +89,7 @@ def run(samples, profile, phases):
             print(f'phases={phases} {sample["id"]} callbacks={actions}', flush=True)
     finally:
         instance.request_stop()
-    return {'phases': phases, 'rows': rows, 'logs': logs}
+    return {'phases': phases, 'gain': gain, 'rows': rows, 'logs': logs}
 
 
 def main():
@@ -95,6 +97,9 @@ def main():
     parser.add_argument('--manifest', type=Path, required=True)
     parser.add_argument('--speaker-profile', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--recheck-gain', type=float, default=1.0)
+    parser.add_argument('--extra-manifest', type=Path,
+                        help='Additional target_stop clips; ambiguous inputs are excluded.')
     args = parser.parse_args()
     samples = json.loads(args.manifest.read_text())['samples']
     selected = []
@@ -111,13 +116,22 @@ def main():
                          'path': str((args.manifest.parent / row['file']).resolve())})
     if len(selected) != 13:
         raise ValueError('expected 9 stop + 2 owner fetch + 2 other fetch clips')
+    if args.extra_manifest:
+        for row in json.loads(args.extra_manifest.read_text())['samples']:
+            if row['category'] == 'target_stop':
+                selected.append({**row, 'role': 'target_stop', 'path': str((
+                    args.extra_manifest.parent / row['file']
+                ).resolve())})
     result = {
         'no_ros_no_microphone': True, 'development_only': True,
         'limitations': 'Completed WAV injection, fake IDLE/LLM, real KWS/STT/speaker. '
                        'No continuous stream input, live microphone or physical latency.',
         'profile_sha256': hashlib.sha256(args.speaker_profile.read_bytes()).hexdigest(),
         'manifest_sha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
-        'runs': [run(selected, args.speaker_profile, phases) for phases in (False, True)],
+        'extra_manifest_sha256': hashlib.sha256(args.extra_manifest.read_bytes()).hexdigest()
+        if args.extra_manifest else None,
+        'runs': [run(selected, args.speaker_profile, phases,
+                     args.recheck_gain if phases else 1.0) for phases in (False, True)],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')

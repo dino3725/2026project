@@ -4,6 +4,7 @@ import threading
 import time
 
 from voice_command_pkg.audio_capture import FRAME_BYTES
+from voice_command_pkg.audio_samples import amplify_pcm
 from voice_command_pkg.audio_stop import AudioStopEvent
 from voice_command_pkg.utterance_buffer import UtteranceBuffer
 
@@ -11,16 +12,23 @@ from voice_command_pkg.utterance_buffer import UtteranceBuffer
 RECHECK_PREFIXES_MS = (0, 120, 300, 240, 180, 60)
 
 
-def recheck_audio(backend, pcm, cancelled=lambda: False, *, phase_shifts=False):
-    """Try original PCM first, optionally retry with bounded leading silence."""
+def recheck_audio(backend, pcm, cancelled=lambda: False, *, phase_shifts=False, gain=1.0):
+    """Retain the original first pass, then optionally shift/amplify a KWS copy."""
     # Fixed development candidates, not a search or a change to the audio/STT.
     # All attempts share the caller's deadline. No synthetic tail is appended.
-    for prefix_ms in (RECHECK_PREFIXES_MS if phase_shifts else (0,)):
+    prefixes = RECHECK_PREFIXES_MS if phase_shifts else (0,)
+    attempts = [(False, 0)] + ([(True, p) for p in prefixes] if gain > 1 else [
+        (False, p) for p in prefixes[1:]
+    ])
+    amplified = None
+    for use_gain, prefix_ms in attempts:
         if cancelled():
             return None
+        if use_gain and amplified is None:
+            amplified = amplify_pcm(pcm, gain)
         backend.reset()
         prefix_bytes = prefix_ms * 32
-        candidate = bytes(prefix_bytes) + pcm
+        candidate = bytes(prefix_bytes) + (amplified if use_gain else pcm)
         for offset in range(0, len(candidate), FRAME_BYTES):
             if cancelled():
                 return None
@@ -75,6 +83,7 @@ class AudioStopRecheckWorker:
                 hit = recheck_audio(
                     self.backend, utterance.audio, cancelled,
                     phase_shifts=self.config.recheck_phase_shifts,
+                    gain=self.config.recheck_gain,
                 )
                 if cancelled():
                     if not self.closed.is_set():

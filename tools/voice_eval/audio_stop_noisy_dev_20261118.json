@@ -1,0 +1,96 @@
+{
+  "development_only": true,
+  "note": "User confirmed ordered 3 stops per keyword and bystander noise. After listening, user reported clip 2 too quiet or unclear to determine its content; its second-stop mapping is order-only and excluded from the target denominator. Clips 4,5,13 likewise unconfirmed. Separate from original 7/9 live-trial count.",
+  "samples": [
+    {
+      "id": "noisy_live_01",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225514_001.wav",
+      "sha256": "ef9a1a6f33e484b976cbcbabd0472dab73a71591c9efa58d2bc9d217f8dee4ce",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_02",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225525_002.wav",
+      "sha256": "0ba4f49346f724dad95e5f9d26e85c9f5d9d6ddf770411bf13550c0c96f3f3ed",
+      "category": "unconfirmed_input"
+    },
+    {
+      "id": "noisy_live_03",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225531_003.wav",
+      "sha256": "b20daaad2fc68053a7f59ed2901179e44d78ab7c4e4284cbbdeb9e0f45ac7521",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_04",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225542_004.wav",
+      "sha256": "75c3a74cd769a7d577edb6663f9753f5742401aa61a069017bc63b59ab0f8008",
+      "category": "unconfirmed_input"
+    },
+    {
+      "id": "noisy_live_05",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225545_005.wav",
+      "sha256": "708734d061c7844506104070f19a1f9487192d7578e3e49d1143805dec0e1bbd",
+      "category": "unconfirmed_input"
+    },
+    {
+      "id": "noisy_live_06",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225549_006.wav",
+      "sha256": "a8794b8fc68932f44cb979c9788560b48b9f49386613d3c599e50c7ef52ab1ad",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_07",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225556_007.wav",
+      "sha256": "be7d7c0efd8e00805092c39040918ca70e1859c8e882d18c64b36c4cecf38dc1",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_08",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225602_008.wav",
+      "sha256": "5d3280fd10fc4324bab88e7a7bf334830f3feb008cb3aba8669780d0104f81bb",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_09",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225609_009.wav",
+      "sha256": "f49158409362bd1daa762ac623230ec0a7ffc639e6536fd461357a9f3118d972",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_10",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225616_010.wav",
+      "sha256": "189a4c29134bfa997dfde08a9dac5fbc6618bbd1a5ae05e67ebf9d61d63560cf",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_11",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225622_011.wav",
+      "sha256": "bed0327e3be39984a1f3711564c2d3f6053ae1c0b7a7f7518c86d483476bd9ae",
+      "category": "target_stop"
+    },
+    {
+      "id": "noisy_live_12",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225629_012.wav",
+      "sha256": "85c46115dd00c953ad1b7a5c42aa10f70fa4f5b7ea74b9b7e4524393ceafa09d",
+      "category": "negative"
+    },
+    {
+      "id": "noisy_live_13",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225631_013.wav",
+      "sha256": "4c96cee83ee3311e8263da5ee1b21817b1d6d7c439946fe4a90a9037b53e4a96",
+      "category": "unconfirmed_input"
+    },
+    {
+      "id": "noisy_live_14",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225636_014.wav",
+      "sha256": "ad5296df7e800d627dbf617606e34c7a52f9e9f0ed1edc63bfa40ed0ec5116cd",
+      "category": "negative"
+    },
+    {
+      "id": "noisy_live_15",
+      "file": "../../recordings/audio_stop_phases.CUEVO5/vad_command_20261117_225643_015.wav",
+      "sha256": "4721ee4817cc5e90aca3edabf6738639bcd39cf26adcaa90fd440b14cb6fe3c1",
+      "category": "negative"
+    }
+  ]
+}
