@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>eated_navigation</name>
+  <version>0.1.0</version>
+  <description>Mapping and isolated Nav2 environment for the calibrated EATED robot.</description>
+  <maintainer email="imsunghy@gmail.com">fcsl</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>nav2_map_server</exec_depend>
+  <exec_depend>turtlebot3_manipulation_cartographer</exec_depend>
+  <exec_depend>turtlebot3_manipulation_navigation2</exec_depend>
+  <exec_depend>twist_mux</exec_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

@@ -1,0 +1,7 @@
+ros-humble-cartographer-ros 2.0.9002-1jammy.20261106.194934 install ok installed
+ros-humble-nav2-bringup 1.1.20-1jammy.20261107.060322 install ok installed
+ros-humble-navigation2 1.1.20-1jammy.20261107.060120 install ok installed
+ros-humble-slam-toolbox 2.6.10-1jammy.20261107.050750 install ok installed
+ros-humble-turtlebot3-manipulation-cartographer 2.2.1-1jammy.20261107.060951 install ok installed
+ros-humble-turtlebot3-manipulation-navigation2 2.2.1-1jammy.20261107.062251 install ok installed
+ros-humble-twist-mux 4.3.0-1jammy.20261106.190828 install ok installed

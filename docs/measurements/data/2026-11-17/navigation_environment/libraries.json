@@ -1,0 +1,47 @@
+{
+  "nav2_controller/controller_server": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "nav2_planner/planner_server": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "nav2_amcl/amcl": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "nav2_map_server/map_server": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "nav2_bt_navigator/bt_navigator": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "nav2_velocity_smoother/velocity_smoother": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "cartographer_ros/cartographer_node": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "cartographer_ros/cartographer_occupancy_grid_node": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  },
+  "twist_mux/twist_mux": {
+    "present": true,
+    "ldd_returncode": 0,
+    "missing_libraries": []
+  }
+}

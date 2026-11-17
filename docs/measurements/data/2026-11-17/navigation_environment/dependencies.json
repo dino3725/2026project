@@ -1,0 +1,72 @@
+{
+  "dependencies_installed": true,
+  "packages": {
+    "navigation2": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_bringup": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_controller": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_planner": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_bt_navigator": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_amcl": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_map_server": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_lifecycle_manager": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "nav2_velocity_smoother": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "1.1.20"
+    },
+    "cartographer_ros": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "2.0.9002"
+    },
+    "turtlebot3_manipulation_cartographer": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "2.2.1"
+    },
+    "turtlebot3_manipulation_navigation2": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "2.2.1"
+    },
+    "twist_mux": {
+      "installed": true,
+      "prefix": "/opt/ros/humble",
+      "version": "4.3.0"
+    }
+  },
+  "live_hardware_verified": false,
+  "wheel_routing_integrated": false
+}
