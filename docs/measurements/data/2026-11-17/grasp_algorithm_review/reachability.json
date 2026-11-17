@@ -1,0 +1,311 @@
+{
+  "executed": false,
+  "hardware_tcp_validated": false,
+  "axis_xy_m": [
+    0.2887249663105039,
+    0.06558876094618227
+  ],
+  "profile": {
+    "status": "experimental_not_adopted",
+    "target_class": "coke",
+    "support_z_base_m": 0.07,
+    "object_height_m": 0.134,
+    "object_radius_m": 0.0265,
+    "top_insets_m": [
+      0.025,
+      0.04,
+      0.055
+    ],
+    "pitch_candidates_deg": [
+      0.0,
+      10.0,
+      20.0
+    ],
+    "approach_height_m": 0.05,
+    "minimum_study_lift_m": 0.03,
+    "axis_residual_p90_limit_m": 0.005,
+    "orientation_error_limit_deg": 5.0,
+    "position_error_limit_m": 0.002,
+    "tcp_source": "nominal_gripper_reference.json",
+    "hardware_tcp_validated": false
+  },
+  "tcp_in_tool_m": [
+    0.0004000007629394453,
+    1.734723475976807e-18,
+    0.0
+  ],
+  "limitations": [
+    "Read-only IK/path services; no action goals or motion commands.",
+    "Installed IK is position-only; solved orientation is checked explicitly.",
+    "Current planning scene may omit the box, can and camera geometry.",
+    "Joint-space path feasibility does not certify a straight approach.",
+    "Saved object position and nominal TCP are hypotheses, not fresh execution goals."
+  ],
+  "input_sha256": {
+    "log/grasp_quality_gate_20261117/remeasured/geometry.json": "72b1879ae91012ec1c80659abc1e551393be4b97eae51ec30b5a88df8b460be9",
+    "docs/measurements/data/2026-11-17/grasp_algorithm_review/nominal_gripper_reference.json": "e83916971ceed1b00d340f28370f73ee7ceef4a15ca7bb1b6df7c33d60d17331",
+    "/home/fcsl/2026project/src/control_pkg/config/grasp_candidate_review.yaml": "384799fa90a92fde34e704c3a72e82cf9154e9cceab8558c9d6b01a320a19676",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/tools/vision_eval/review_grasp_reachability.py": "d1454bbfe7b0b13dbf2ff31bf40e99140398ff006252d92c8eeb5c878f40a288"
+  },
+  "candidates": [
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 0.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.17900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28833114748906585,
+          0.06551870849274016,
+          0.17900000000000002
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 10.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.17900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.2883371304818696,
+          0.06551977274691495,
+          0.17906945940354985
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 20.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.17900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28835489767007194,
+          0.06552293317261476,
+          0.17913680831827095
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 0.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.164
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28833114748906585,
+          0.06551870849274016,
+          0.164
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 10.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.164
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.2883371304818696,
+          0.06551977274691495,
+          0.16406945940354983
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 20.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.164
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28835489767007194,
+          0.06552293317261476,
+          0.16413680831827093
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 0.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.14900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28833114748906585,
+          0.06551870849274016,
+          0.14900000000000002
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 10.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.14900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.2883371304818696,
+          0.06551977274691495,
+          0.14906945940354985
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 20.0,
+      "contact_base_m": [
+        0.2887249663105039,
+        0.06558876094618227,
+        0.14900000000000002
+      ],
+      "pick": {
+        "success": false,
+        "tool_target_m": [
+          0.28835489767007194,
+          0.06552293317261476,
+          0.14913680831827095
+        ],
+        "attempts": [
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          },
+          {
+            "error_code": -31
+          }
+        ]
+      }
+    }
+  ],
+  "initial_joints_rad": [
+    0.0015339807878856412,
+    -1.7671458676442586,
+    0.9341942998223555,
+    1.23178657267217
+  ]
+}

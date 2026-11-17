@@ -1,0 +1,10 @@
+{
+  "plan_sha256": "60e40ca171e24c97f89e78b39edd4ae4e84b324b2447baca54ef452f49481736",
+  "gripper_joints_m": [
+    0.0,
+    0.0
+  ],
+  "valid": true,
+  "samples_checked": 554,
+  "executed": false
+}

@@ -1,0 +1,57 @@
+{
+  "executed": false,
+  "clearance_proof": false,
+  "assumptions": "Box region x[.10,.55], y[-.25,.25], top .09m; can inflated 10mm XY/20mm Z. Camera envelope 140x100x100mm. No complete environment/self-collision proof.",
+  "input_sha256": {
+    "log/grasp_segments_20261118/reachability_upper.json": "07ee12a4029d7264f331c5fa77850eaf746544b9c25f83402675103191b20d8b",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/tools/vision_eval/screen_grasp_path.py": "b9e9f6e76bfac636bda3e319955965d6530c6b6a7034ed1fceaed49123b824e7"
+  },
+  "candidates": [
+    {
+      "top_inset_m": 0.015,
+      "pitch_deg": 0.0,
+      "samples": 650,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.02990712612805102,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.009108018853482521,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.015,
+      "pitch_deg": 10.0,
+      "samples": 666,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.030730771783125693,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.00865057937143631,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.02,
+      "pitch_deg": 0.0,
+      "samples": 650,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.029265354514821484,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.009105513320905612,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.02,
+      "pitch_deg": 10.0,
+      "samples": 666,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.030518119589806297,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.008649490711294217,
+      "sampled_envelope_clear": true
+    }
+  ]
+}

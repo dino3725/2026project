@@ -1,0 +1,687 @@
+{
+  "summary": {
+    "frames": 52,
+    "legacy_valid": 52,
+    "candidate_valid": 52,
+    "max_surface_difference_mm": 0.41031506176304744
+  },
+  "rows": [
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627067098174.json",
+      "input_metadata_sha256": "0e7d816b88e2c19509798f6b2b60e95b2a2450a9157b49948c0e6bca410f74bd",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627215458807.json",
+      "input_metadata_sha256": "6b96f2261cf8f8c60ff89b92fdead9367f64c161f7d9c1d06c645854b943a0b8",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.38069338618122384,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627383067346.json",
+      "input_metadata_sha256": "020e62c5cbbac2a87b4c49fb14082b3720431c41fa7995fc873b89a09bc016fa",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627519199603.json",
+      "input_metadata_sha256": "11c9fc10af5965bbaa69d450fa649ff3e411fda02ff0e6fc50730613af501cf6",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627751861066.json",
+      "input_metadata_sha256": "4edfb20219ffaf214bd2aa14797d47c2d30bfa14279d626530c3f1bc5c0a9560",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922627938229111.json",
+      "input_metadata_sha256": "60569e4957b563205a2d31c4c15c87fa2e49b5cf60de77b750c0ff0df6afc418",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628133296551.json",
+      "input_metadata_sha256": "9cfa22d57d4e1d9a4e2d0bfbd4a781d1705df3993680161b3c183ebe54699f62",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628265838480.json",
+      "input_metadata_sha256": "ba9b909a09e15029a961fc749f18ae89c1368373e8ca145402de574691db29ac",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628384337476.json",
+      "input_metadata_sha256": "d3c8665d49c013c02d7c24c446e79f12f5e4e785c7235126da7fbcdbd7a6b8f9",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628551415213.json",
+      "input_metadata_sha256": "9523850752fa9580452a44d9ed7e74b0d4122f1f49de6853df5323fd533f5a89",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628738972227.json",
+      "input_metadata_sha256": "161c8de28e03cfb673bcc7ca07f8455b5a5a3361528d18a6fb84727fa8a51c38",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922628865177592.json",
+      "input_metadata_sha256": "aa1be6c6e187bce41e3ee584e321437a82362cfeefc3c587bc664e3393004a12",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922629034449995.json",
+      "input_metadata_sha256": "6de5d31b0a0e9dfda396a306b81d6315077ad96f0581627b97155eae7e12f5d1",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794922629224536245.json",
+      "input_metadata_sha256": "2ce03761da1c64cc5d3badb433aec26d3295c7cbc3ec3071189358185c1eb7b2",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923155142704091.json",
+      "input_metadata_sha256": "de8123febdf0f24e08598cf4e57db66a2097159d4905aefa8ead0b7c5bc4ec9f",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.41031506176304744,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923155374665788.json",
+      "input_metadata_sha256": "02c04e50f1935a049e64597b0c347c3c6290e3c294c30598d86e59bb58443acd",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923155511738581.json",
+      "input_metadata_sha256": "cae6663ea9d5e78ee05bca5c903af58cee3b1a0c873949596f0159eeba3ce3e2",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923155739338544.json",
+      "input_metadata_sha256": "7eae09a205fbb5417f8a146a2b306d51182173c17e2bd17aa2056e5ca43e9cbe",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923155884275612.json",
+      "input_metadata_sha256": "ac08b54b7d1471bddba0d6b11191cc30143b644d94a68204438586a47f26ed31",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156000902881.json",
+      "input_metadata_sha256": "800435582f5c0202e11a52fc03e1e983dd484d76a39e5d0d06f8592f9655fdcb",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156118570085.json",
+      "input_metadata_sha256": "d10719786050289b06b5e8e3e5e5407348bf549614374bd5ac7358826aba43d4",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156335106828.json",
+      "input_metadata_sha256": "904b95b8b57857313aaed2533a93d4e7f879e44caad16b297d7ace686459b052",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156481144857.json",
+      "input_metadata_sha256": "32674b5631710c05088f84f2896f65be56449a0030acfc83f9bd9d7279191f5d",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156658365190.json",
+      "input_metadata_sha256": "fdf3a952a0b51d9aaa5a701976e993a0cc3d8bdc510ce207e65bda0412527be3",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923156838985083.json",
+      "input_metadata_sha256": "709d6e88001d27553609987a05043d5ed01c934f659241de40cfdfe304c22cdf",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923157011143980.json",
+      "input_metadata_sha256": "40c5a33dd10db5662a25cab261c70e572d221585d126c1fd584e28eadf6a61e5",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923157282018043.json",
+      "input_metadata_sha256": "2b7aeef30bdab1e3755209a252e3f0f09bdad5ade42f5898918eaebe098952b9",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923550534642844.json",
+      "input_metadata_sha256": "1d7d0cfcf0f819b10de8987848072e336dc5d61b02fefc8914848ec05f322265",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923550682365234.json",
+      "input_metadata_sha256": "7ffaf5744c9d32e479c8c99b242cce4ae890f3d3e90d44b864e8c6af336b0d4c",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923550851549014.json",
+      "input_metadata_sha256": "21d2b9b3f571bf1b92c53a6d768dc915e64fb2d4d0aefdc7c5e31eabb474da9b",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        -0.3675281970337424,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551035977539.json",
+      "input_metadata_sha256": "4c178dc93bca551e85f96bd96398702f68a76e71ef27230068a1e541e56ac4fa",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551169979010.json",
+      "input_metadata_sha256": "47d725feec31489b9945f05b0e9bf5e4770ffa2637b4b07ea348aa4742e7075b",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551320292939.json",
+      "input_metadata_sha256": "d5dca76b497ee4352fa95b63045c1de41b5fc233e71ee1cb0545fbb24eea5a5f",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551447824827.json",
+      "input_metadata_sha256": "2fee4cc85a51b809aa8aac9d8687ee804aaef259e6fe444975b18b896c5cdfec",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551565380940.json",
+      "input_metadata_sha256": "a705d938c85b1279bf44ee51ae790d2fffd8a1acf8046616e1bb53f807df6ea2",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551731328617.json",
+      "input_metadata_sha256": "69ce2bd20af7ffe0fc46a04e7a0aa0402a15f2959565163e6672f81707875a5d",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923551894593840.json",
+      "input_metadata_sha256": "fb4c87be549afe71ead7657a7651f9a04d21a7bee4e1ba6d3ffb7e3c698467fb",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923552327319748.json",
+      "input_metadata_sha256": "f44840a3a598b966e880b76cb45936a816abd1ef46cfceb1e7ae2795e4c96b28",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        -0.3675281970337424,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794923552507931382.json",
+      "input_metadata_sha256": "fc30ddff353a1c60fa8371b0dc4dcfe877bd6dd46d06647376cbbdf439d2a99a",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924814212985638.json",
+      "input_metadata_sha256": "84968c427e3b11898a47657ea0646eca8787e630e9c2dc5f389271b39af72f3b",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924814482695233.json",
+      "input_metadata_sha256": "89fc2690bc75b4260cbd8ca8195f3e7aabb03eeca1a674e41aa557f263841622",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924814708214841.json",
+      "input_metadata_sha256": "44461a7d0d12178496be268bffaa5ff24994abe27dd2a6364df1f8aea3a2cb11",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924814890461488.json",
+      "input_metadata_sha256": "45a8cb974eec97a166a38959b4e4754d7bdfee00a508a01430cb522403071e0d",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815080717199.json",
+      "input_metadata_sha256": "7cd7a81753cbd357215f7e838369fa1a0dee43682c8548eba8ee01b921eb0b08",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815229666358.json",
+      "input_metadata_sha256": "00ccd79466afc80e542644d1c5d67d64888a17a12be81fd742b3a569b70530aa",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        -0.3543630078862697,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815433981501.json",
+      "input_metadata_sha256": "777372d34eb0f9bf0c81135d186849f987baee5afe21886e0089aff0babfe1dd",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815599346147.json",
+      "input_metadata_sha256": "69bc43d8b3af4382151c93bb83649131210eefc49147b5e46afb403961c5d2b9",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815715869371.json",
+      "input_metadata_sha256": "d5ce3eeb750e42a9e48297bed91593662f3b388819f520cf7455973373e524bc",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815852802053.json",
+      "input_metadata_sha256": "3d6bf2717a96e1f6573773c10f847495894792390a48bf8dbd389a4d11cf11d1",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924815976628170.json",
+      "input_metadata_sha256": "a8b8e6e84077658ffc890906796d117e511dc2cf8f123fc2f459ea90f85d3a37",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924816108592989.json",
+      "input_metadata_sha256": "5b119f7bf499a4ec30679465991fedd59df27c80219dbc19f0b8eac69479c072",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "input": "log/eateded_20261117_223450_253950/observations/1794924816418252798.json",
+      "input_metadata_sha256": "f154d0aab5b1534d1212dbd0aab55f67bcee36ca746b1f9e1316843e3f3494fe",
+      "legacy_valid": true,
+      "candidate_valid": true,
+      "candidate_reason": "",
+      "candidate_source": "center",
+      "surface_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "absolute_accuracy_validated": false
+}

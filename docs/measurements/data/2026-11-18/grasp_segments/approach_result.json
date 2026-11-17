@@ -1,0 +1,31 @@
+{
+  "samples": 10,
+  "planned_tool_m": [
+    0.25376639660292016,
+    0.06262432347691087,
+    0.28372719200703395
+  ],
+  "mean_sensor_fk_tool_m": [
+    0.2554471636136751,
+    0.06202953304618395,
+    0.2647833395019045
+  ],
+  "mean_joint_error_deg": [
+    -0.12854163447432512,
+    1.3940097173700905,
+    2.2320499240653984,
+    0.539778107412767
+  ],
+  "mean_sensor_fk_error_mm": [
+    1.6807670107549244,
+    -0.5947904307269172,
+    -18.94385250512942
+  ],
+  "nominal_finger_gap_above_can_top_mm": [
+    31.354661935017987,
+    31.99969499603342
+  ],
+  "physical_contact_confirmed": false,
+  "model_reference_only": true,
+  "physical_contact_evidence": "User visual check: 닿지 않고 떨어져 있음"
+}

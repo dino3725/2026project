@@ -1,0 +1,16 @@
+[INFO] [1794929050.189299578] [vision_candidate_audit]: Loading YOLO model: /home/fcsl/2026project/best.pt
+[INFO] [1794929050.371648132] [vision_candidate_audit]: Vision action server ready: model=/home/fcsl/2026project/best.pt, classes=['airpod', 'coke', 'tissue', 'vaseline'], localization_mode=candidate
+[INFO] [1794929050.373118773] [vision_candidate_audit]: RGB=/realsense/d435i/color/image_raw, depth=/realsense/d435i/aligned_depth_to_color/image_raw, CameraInfo=/realsense/d435i/color/camera_info
+[INFO] [1794929050.391661952] [vision_candidate_audit]: VisionNode2 live preview enabled: publish_rate=60.0 Hz, window=False. YOLO remains on-demand.
+[INFO] [1794929057.686768978] [vision_candidate_audit]: Target requested: coke
+[INFO] [1794929057.774512260] [vision_candidate_audit]: Preparing YOLO inference backend before starting the recognition timeout: device=Orin
+[INFO] [1794929063.094080007] [vision_candidate_audit]: YOLO inference backend ready in 5.30s; recognition timeout starts now
+[WARN] [1794929063.495498563] [vision_candidate_audit]: synchronized frame is stale: age=0.688s
+[INFO] [1794929064.517224969] [vision_candidate_audit]: Detection class=coke confidence=0.933; center=(558, 439); depth=0.314m; camera=(-0.026, 0.023, 0.314); base=(0.256, 0.067, 0.139); accumulated=0.83/2.00s; samples=6; error=none; mode=candidate; source=center; pixel=(558, 439); valid=1.000; support=1.000; depth_span=0.0010m; recent_r90=0.0000m; window=not enough recent samples
+[INFO] [1794929065.597572405] [vision_candidate_audit]: Detection class=coke confidence=0.933; center=(558, 439); depth=0.315m; camera=(-0.026, 0.023, 0.315); base=(0.257, 0.067, 0.139); accumulated=0.17/2.00s; samples=2; error=none; mode=candidate; source=center; pixel=(558, 439); valid=1.000; support=1.000; depth_span=0.0012m; recent_r90=0.0000m; window=not enough recent samples
+[INFO] [1794929066.734116949] [vision_candidate_audit]: Detection class=coke confidence=0.933; center=(558, 439); depth=0.315m; camera=(-0.026, 0.023, 0.315); base=(0.257, 0.067, 0.138); accumulated=1.30/2.00s; samples=9; error=none; mode=candidate; source=center; pixel=(558, 439); valid=1.000; support=1.000; depth_span=0.0010m; recent_r90=0.0000m; window=not enough recent samples
+[INFO] [1794929067.536458109] [vision_candidate_audit]: Final median base point: X=0.257, Y=0.067, Z=0.138, confidence=0.933, samples=14
+[INFO] [1794929067.546168641] [vision_candidate_audit]: Target requested: coke
+[WARN] [1794929068.102057540] [vision_candidate_audit]: synchronized frame is stale: age=0.785s
+[INFO] [1794929069.486283027] [vision_candidate_audit]: Detection class=coke confidence=0.933; center=(558, 439); depth=0.315m; camera=(-0.026, 0.023, 0.315); base=(0.257, 0.067, 0.139); accumulated=1.23/2.00s; samples=6; error=none; mode=candidate; source=center; pixel=(558, 439); valid=1.000; support=1.000; depth_span=0.0020m; recent_r90=0.0000m; window=not enough recent samples
+[INFO] [1794929070.414515815] [vision_candidate_audit]: Final median base point: X=0.257, Y=0.067, Z=0.139, confidence=0.933, samples=10

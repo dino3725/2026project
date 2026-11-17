@@ -1,0 +1,6 @@
+{
+  "pid": 22351,
+  "mode": "recognition-audit",
+  "reason": "Unexpected termination signal; user did not request shutdown",
+  "detached_assistant_run": true
+}

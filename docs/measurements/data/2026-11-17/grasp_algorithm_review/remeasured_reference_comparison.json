@@ -1,0 +1,30 @@
+{
+  "reference": {
+    "x_mm": 285,
+    "y_mm": 50,
+    "x_source": "user remeasured and repositioned can center relative to wheel axle",
+    "y_source": "user said approximately left 5cm retained; not newly measured",
+    "support_z_base_m": 0.07,
+    "uncertainty_mm": null
+  },
+  "frames": 12,
+  "legacy_surface_mean_mm": [
+    261.02813856832876,
+    65.57389389696138,
+    162.44619615034384
+  ],
+  "legacy_fixed_offset_tool_target_mean_mm": [
+    281.02813856832876,
+    65.57389389696138,
+    162.44619615034384
+  ],
+  "candidate_object_axis_mean_xy_mm": [
+    288.7324331111846,
+    65.55588461293402
+  ],
+  "axis_x_difference_to_user_reference_mm": 3.732433111184605,
+  "legacy_tool_x_difference_to_user_reference_mm": -3.9718614316712433,
+  "point_roles_differ": true,
+  "interpretation": "Neither field reports independently measured physical contact accuracy. Tool target and object axis are different references; TCP and tracking validation remain.",
+  "arm_state": "HOME / IDLE; pick_enabled=false"
+}

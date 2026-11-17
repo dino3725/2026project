@@ -1,0 +1,1279 @@
+{
+  "summary": {
+    "box_right": {
+      "median_z_base_mean_mm": 59.837984020900194,
+      "median_z_base_range_mm": [
+        59.34763111035704,
+        60.249451891319225
+      ],
+      "expected_z_base_mm": 70.0,
+      "mean_difference_mm": -10.162015979099806
+    },
+    "box_front": {
+      "median_z_base_mean_mm": 58.4558532398735,
+      "median_z_base_range_mm": [
+        57.96129589103599,
+        58.714864832161815
+      ],
+      "expected_z_base_mm": 70.0,
+      "mean_difference_mm": -11.544146760126502
+    },
+    "axis_accepted": 10,
+    "axis_mean_mm": [
+      283.70530144840086,
+      68.82735326218975
+    ],
+    "axis_peak_to_peak_mm": [
+      0.17148192367905102,
+      0.2637145142191377
+    ]
+  },
+  "rows": [
+    {
+      "index": 1,
+      "depth_stamp_ns": 1794928078054911865,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 1.0,
+          "median_z_base_m": 0.05963501198433148,
+          "plane": {
+            "normal": [
+              0.011266368069665538,
+              -0.005370891265025513,
+              -0.9999221082052032
+            ],
+            "offset_m": 0.05597179271800281,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.638424895745395,
+            "point_count": 1500
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9976452119309263,
+          "median_z_base_m": 0.05824767497107128,
+          "plane": {
+            "normal": [
+              -0.03463922788139011,
+              -0.023329441953964268,
+              -0.9991275499303867
+            ],
+            "offset_m": 0.06727418960268547,
+            "inlier_fraction": 0.995279307631786,
+            "inlier_rms_mm": 0.6480946612588446,
+            "point_count": 1271
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9334189295768738,
+          "x1": 480.9621887207031,
+          "y1": 246.45086669921875,
+          "x2": 634.3427734375,
+          "y2": 630.9563598632812
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021538646224755806,
+            0.038806616979876654,
+            0.2873753985834992
+          ],
+          "quaternion_xyzw": [
+            0.5990229423108258,
+            -0.5858441380049568,
+            0.3857916601282159,
+            -0.3861644151472599
+          ]
+        },
+        "rgb_stamp_ns": 1794928078054911865,
+        "depth_stamp_ns": 1794928078054911865
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0010000000000000009,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.28366848832848557,
+            0.06883254819467682
+          ],
+          "body_points": 6858,
+          "inlier_fraction": 0.9928550597841936,
+          "axis_hypothesis_xy_m": [
+            0.28366848832848557,
+            0.06883254819467682
+          ],
+          "residual_p90_m": 0.0019474719349087451,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.553136499893823,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.28366848832848557,
+          0.06883254819467682,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          317
+        ],
+        "candidate_surface_base_m": [
+          0.25695619402657777,
+          0.06744331518012756,
+          0.13897096873161388
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "depth_stamp_ns": 1794928078621997070,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 1.0,
+          "median_z_base_m": 0.0600852884325581,
+          "plane": {
+            "normal": [
+              0.012090380361585613,
+              -0.010885167644333223,
+              -0.9998676591569842
+            ],
+            "offset_m": 0.05600330699347354,
+            "inlier_fraction": 0.9966666666666667,
+            "inlier_rms_mm": 0.7150994765168668,
+            "point_count": 1500
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9984301412872841,
+          "median_z_base_m": 0.058598847652568745,
+          "plane": {
+            "normal": [
+              -0.0025306220682211836,
+              -0.023021004644369767,
+              -0.9997317786772169
+            ],
+            "offset_m": 0.05998873273309518,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.6243981667993701,
+            "point_count": 1272
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9337390661239624,
+          "x1": 480.87548828125,
+          "y1": 246.46356201171875,
+          "x2": 634.8232421875,
+          "y2": 630.5559692382812
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021661297308656,
+            0.03880642883532276,
+            0.28745094266185545
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976926,
+            0.38617804110889503,
+            -0.38654345529834516
+          ]
+        },
+        "rgb_stamp_ns": 1794928078621997070,
+        "depth_stamp_ns": 1794928078621997070
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.2836592490628135,
+            0.06886741704688082
+          ],
+          "body_points": 6865,
+          "inlier_fraction": 0.9928623452294246,
+          "axis_hypothesis_xy_m": [
+            0.2836592490628135,
+            0.06886741704688082
+          ],
+          "residual_p90_m": 0.001890750221717632,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.6033780031229417,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.2836592490628135,
+          0.06886741704688082,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.2570250852010352,
+          0.06744342085794854,
+          0.1394065769411384
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "depth_stamp_ns": 1794928078988935059,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9986666666666667,
+          "median_z_base_m": 0.059744631274012736,
+          "plane": {
+            "normal": [
+              0.015889328055219473,
+              0.009120192842109912,
+              -0.9998321615833711
+            ],
+            "offset_m": 0.05512009181258572,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.8041203493775938,
+            "point_count": 1498
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9952904238618524,
+          "median_z_base_m": 0.058578235342145527,
+          "plane": {
+            "normal": [
+              -0.007687038054471921,
+              -0.023947894276000817,
+              -0.9996836538654089
+            ],
+            "offset_m": 0.061206832397970576,
+            "inlier_fraction": 0.9936908517350158,
+            "inlier_rms_mm": 0.7079362539671257,
+            "point_count": 1268
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9333556890487671,
+          "x1": 480.77679443359375,
+          "y1": 246.48297119140625,
+          "x2": 634.7643432617188,
+          "y2": 630.6412353515625
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021661297308656,
+            0.03880642883532276,
+            0.28745094266185545
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976926,
+            0.38617804110889503,
+            -0.38654345529834516
+          ]
+        },
+        "rgb_stamp_ns": 1794928078988935059,
+        "depth_stamp_ns": 1794928078988935059
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.2837679046082676,
+            0.0687112032907851
+          ],
+          "body_points": 6911,
+          "inlier_fraction": 0.9897265229344523,
+          "axis_hypothesis_xy_m": [
+            0.2837679046082676,
+            0.0687112032907851
+          ],
+          "residual_p90_m": 0.0018707893711243824,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.544231832868377,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.2837679046082676,
+          0.0687112032907851,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.2570250852010352,
+          0.06744342085794854,
+          0.1394065769411384
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "depth_stamp_ns": 1794928079656101074,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9986666666666667,
+          "median_z_base_m": 0.0597654760332353,
+          "plane": {
+            "normal": [
+              0.009482448764100503,
+              -0.00018469229954568952,
+              -0.9999550235156532
+            ],
+            "offset_m": 0.05685204158017444,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.7353900751195622,
+            "point_count": 1498
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9984301412872841,
+          "median_z_base_m": 0.05841410092206675,
+          "plane": {
+            "normal": [
+              -0.0023880981187649284,
+              -0.02411690276511257,
+              -0.9997062928622552
+            ],
+            "offset_m": 0.05998734989715166,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.5574811900034551,
+            "point_count": 1272
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9332749843597412,
+          "x1": 480.6967468261719,
+          "y1": 246.596435546875,
+          "x2": 634.5703125,
+          "y2": 630.9320068359375
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021656239140391373,
+            0.038806436594461806,
+            0.28744783152148223
+          ],
+          "quaternion_xyzw": [
+            0.5987834677510001,
+            -0.58560516863235,
+            0.38616211589958244,
+            -0.386527832714698
+          ]
+        },
+        "rgb_stamp_ns": 1794928079656101074,
+        "depth_stamp_ns": 1794928079656101074
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.2837471062637952,
+            0.0687008758291041
+          ],
+          "body_points": 7034,
+          "inlier_fraction": 0.9918965027011658,
+          "axis_hypothesis_xy_m": [
+            0.2837471062637952,
+            0.0687008758291041
+          ],
+          "residual_p90_m": 0.0019085235740608523,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.4515154247126536,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.2837471062637952,
+          0.0687008758291041,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.25702225631612136,
+          0.06744341651849,
+          0.1393886174177444
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "depth_stamp_ns": 1794928080023041748,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9993333333333333,
+          "median_z_base_m": 0.05939817218213722,
+          "plane": {
+            "normal": [
+              0.01841031932651975,
+              -0.0010098603786987028,
+              -0.9998300057131267
+            ],
+            "offset_m": 0.05361796462332598,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.6067679719177146,
+            "point_count": 1499
+          }
+        },
+        "box_front": {
+          "valid_fraction": 1.0,
+          "median_z_base_m": 0.05796129589103599,
+          "plane": {
+            "normal": [
+              -0.014859801211027741,
+              -0.02220631571468197,
+              -0.9996429691896745
+            ],
+            "offset_m": 0.06230336587335332,
+            "inlier_fraction": 0.9968602825745683,
+            "inlier_rms_mm": 0.6964023202160388,
+            "point_count": 1274
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9332080483436584,
+          "x1": 480.6993103027344,
+          "y1": 246.4525146484375,
+          "x2": 634.4405517578125,
+          "y2": 630.9542236328125
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.02151571332348895,
+            0.03880665215853419,
+            0.28736124932353124
+          ],
+          "quaternion_xyzw": [
+            0.5990696390171966,
+            -0.5858907367346865,
+            0.38571936381904565,
+            -0.38609349203440707
+          ]
+        },
+        "rgb_stamp_ns": 1794928080023041748,
+        "depth_stamp_ns": 1794928080023041748
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.28378751341001385,
+            0.06885501973584338
+          ],
+          "body_points": 6980,
+          "inlier_fraction": 0.9896848137535816,
+          "axis_hypothesis_xy_m": [
+            0.28378751341001385,
+            0.06885501973584338
+          ],
+          "residual_p90_m": 0.001901975885253234,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.5321557497249962,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.28378751341001385,
+          0.06885501973584338,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          316
+        ],
+        "candidate_surface_base_m": [
+          0.25694324439078475,
+          0.06744329531561942,
+          0.13888949151260843
+        ]
+      }
+    },
+    {
+      "index": 6,
+      "depth_stamp_ns": 1794928080590122314,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9993333333333333,
+          "median_z_base_m": 0.06005593588928829,
+          "plane": {
+            "normal": [
+              0.017741853670081142,
+              -0.005605734568322717,
+              -0.9998268861999556
+            ],
+            "offset_m": 0.054325292723761076,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.7294293929769812,
+            "point_count": 1499
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9992150706436421,
+          "median_z_base_m": 0.05861604286854022,
+          "plane": {
+            "normal": [
+              -0.01489932929530728,
+              -0.019699940373990886,
+              -0.9996949146293639
+            ],
+            "offset_m": 0.06277489334807779,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.6680859610163996,
+            "point_count": 1273
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9333380460739136,
+          "x1": 480.864990234375,
+          "y1": 246.43975830078125,
+          "x2": 634.621826171875,
+          "y2": 630.517822265625
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021661297308656,
+            0.03880642883532276,
+            0.28745094266185545
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976926,
+            0.38617804110889503,
+            -0.38654345529834516
+          ]
+        },
+        "rgb_stamp_ns": 1794928080590122314,
+        "depth_stamp_ns": 1794928080590122314
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022469716609741484,
+            0.315
+          ],
+          "pixel": [
+            558,
+            438
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0010000000000000009,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.28372859111596876,
+            0.06888730821383394
+          ],
+          "body_points": 6908,
+          "inlier_fraction": 0.9926172553561089,
+          "axis_hypothesis_xy_m": [
+            0.28372859111596876,
+            0.06888730821383394
+          ],
+          "residual_p90_m": 0.0018797425248761159,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.5582537819572275,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.28372859111596876,
+          0.06888730821383394,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          558,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.25716426238476353,
+          0.06744871716272163,
+          0.1397228544976723
+        ]
+      }
+    },
+    {
+      "index": 7,
+      "depth_stamp_ns": 1794928081123847412,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.998,
+          "median_z_base_m": 0.060003374070951354,
+          "plane": {
+            "normal": [
+              0.018080092996276838,
+              -0.004882624397305521,
+              -0.9998246197290008
+            ],
+            "offset_m": 0.05416100142178209,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.7361183025780127,
+            "point_count": 1497
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9960753532182104,
+          "median_z_base_m": 0.058513931393689655,
+          "plane": {
+            "normal": [
+              -0.010860073779429148,
+              -0.027144890788070298,
+              -0.9995725154792967
+            ],
+            "offset_m": 0.06207479268629174,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.6592474619275558,
+            "point_count": 1269
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.933730959892273,
+          "x1": 480.7365417480469,
+          "y1": 246.55029296875,
+          "x2": 634.619873046875,
+          "y2": 630.590576171875
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021661297308656,
+            0.03880642883532276,
+            0.28745094266185545
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976926,
+            0.38617804110889503,
+            -0.38654345529834516
+          ]
+        },
+        "rgb_stamp_ns": 1794928081123847412,
+        "depth_stamp_ns": 1794928081123847412
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.28362197329631544,
+            0.06885457610187871
+          ],
+          "body_points": 6872,
+          "inlier_fraction": 0.9921420256111758,
+          "axis_hypothesis_xy_m": [
+            0.28362197329631544,
+            0.06885457610187871
+          ],
+          "residual_p90_m": 0.00189881792998123,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.5788303593637845,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.28362197329631544,
+          0.06885457610187871,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.2570250852010352,
+          0.06744342085794854,
+          0.1394065769411384
+        ]
+      }
+    },
+    {
+      "index": 8,
+      "depth_stamp_ns": 1794928081690935059,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 1.0,
+          "median_z_base_m": 0.06009486734081118,
+          "plane": {
+            "normal": [
+              0.017275934197026933,
+              0.001984977945676219,
+              -0.9998487895477872
+            ],
+            "offset_m": 0.05483654927644519,
+            "inlier_fraction": 0.998,
+            "inlier_rms_mm": 0.6428137985142691,
+            "point_count": 1500
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9960753532182104,
+          "median_z_base_m": 0.05871486483216182,
+          "plane": {
+            "normal": [
+              -0.0131311079155793,
+              -0.023374001605811226,
+              -0.9996405504249218
+            ],
+            "offset_m": 0.06263155040133545,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.594541913411931,
+            "point_count": 1269
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9332444667816162,
+          "x1": 480.7679443359375,
+          "y1": 246.69189453125,
+          "x2": 634.613525390625,
+          "y2": 631.341796875
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.02156149057155521,
+            0.038806581937060054,
+            0.28755800229673306
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976928,
+            0.38617804110889503,
+            -0.38654345529834494
+          ]
+        },
+        "rgb_stamp_ns": 1794928081690935059,
+        "depth_stamp_ns": 1794928081690935059
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02556567186441005,
+            0.022742873292085426,
+            0.314
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0010000000000000009,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.2837934552199945,
+            0.06896459034332324
+          ],
+          "body_points": 6853,
+          "inlier_fraction": 0.9924120822997228,
+          "axis_hypothesis_xy_m": [
+            0.2837934552199945,
+            0.06896459034332324
+          ],
+          "residual_p90_m": 0.0019450893205992664,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.5609660505611855,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.2837934552199945,
+          0.06896459034332324,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          558,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.25624017326350196,
+          0.06735266287389956,
+          0.1399836186894151
+        ]
+      }
+    },
+    {
+      "index": 9,
+      "depth_stamp_ns": 1794928082258019775,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9986666666666667,
+          "median_z_base_m": 0.05934763111035704,
+          "plane": {
+            "normal": [
+              0.01939771437099415,
+              -0.006997371487866187,
+              -0.9997873601268631
+            ],
+            "offset_m": 0.053212179336349745,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.7272757674353638,
+            "point_count": 1498
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9976452119309263,
+          "median_z_base_m": 0.058277809332367314,
+          "plane": {
+            "normal": [
+              -0.010799565070068873,
+              -0.023575527261624894,
+              -0.9996637254140184
+            ],
+            "offset_m": 0.06162674839213551,
+            "inlier_fraction": 0.998426435877262,
+            "inlier_rms_mm": 0.7001901381182172,
+            "point_count": 1271
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9339760541915894,
+          "x1": 480.7373352050781,
+          "y1": 246.5589599609375,
+          "x2": 634.6826171875,
+          "y2": 630.7066650390625
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.02152293863380511,
+            0.038806641075038305,
+            0.2873657080587205
+          ],
+          "quaternion_xyzw": [
+            0.5990549268022293,
+            -0.5858760553693434,
+            0.38574214348786334,
+            -0.38611583903826396
+          ]
+        },
+        "rgb_stamp_ns": 1794928082258019775,
+        "depth_stamp_ns": 1794928082258019775
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0020000000000000018,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.2836372452219984,
+            0.06879686096709188
+          ],
+          "body_points": 6875,
+          "inlier_fraction": 0.9978181818181818,
+          "axis_hypothesis_xy_m": [
+            0.2836372452219984,
+            0.06879686096709188
+          ],
+          "residual_p90_m": 0.0018711564134859238,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.5364821449608974,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.2836372452219984,
+          0.06879686096709188,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          317
+        ],
+        "candidate_surface_base_m": [
+          0.25694732667643705,
+          0.06744330157777205,
+          0.13891516294895745
+        ]
+      }
+    },
+    {
+      "index": 10,
+      "depth_stamp_ns": 1794928082758385254,
+      "regions": {
+        "box_right": {
+          "valid_fraction": 0.9993333333333333,
+          "median_z_base_m": 0.06024945189131922,
+          "plane": {
+            "normal": [
+              0.01683073599845934,
+              -0.003205930545493443,
+              -0.9998532133943899
+            ],
+            "offset_m": 0.054960101586341265,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.6598525727617348,
+            "point_count": 1499
+          }
+        },
+        "box_front": {
+          "valid_fraction": 0.9984301412872841,
+          "median_z_base_m": 0.058635729193087766,
+          "plane": {
+            "normal": [
+              0.005332033957172027,
+              -0.02478647601053261,
+              -0.9996785483448462
+            ],
+            "offset_m": 0.058304675386808176,
+            "inlier_fraction": 1.0,
+            "inlier_rms_mm": 0.5673700889193378,
+            "point_count": 1272
+          }
+        }
+      },
+      "inference_metadata": {
+        "detection": {
+          "class_name": "coke",
+          "confidence": 0.9329699277877808,
+          "x1": 480.63818359375,
+          "y1": 246.5673828125,
+          "x2": 634.711181640625,
+          "y2": 630.970947265625
+        },
+        "intrinsics_fx_fy_cx_cy": [
+          911.713134765625,
+          911.4946899414062,
+          632.2310791015625,
+          372.9808654785156
+        ],
+        "depth_encoding": "16UC1",
+        "depth_scale": 0.001,
+        "camera_to_base": {
+          "translation": [
+            -0.021661297308656,
+            0.03880642883532276,
+            0.28745094266185545
+          ],
+          "quaternion_xyzw": [
+            0.598773165881345,
+            -0.5855948885976926,
+            0.38617804110889503,
+            -0.38654345529834516
+          ]
+        },
+        "rgb_stamp_ns": 1794928082758385254,
+        "depth_stamp_ns": 1794928082758385254
+      },
+      "geometry": {
+        "surface": {
+          "point": [
+            -0.02564709120155785,
+            0.022815302824862767,
+            0.315
+          ],
+          "pixel": [
+            558,
+            439
+          ],
+          "source": "center",
+          "valid_fraction": 1.0,
+          "support_fraction": 1.0,
+          "depth_span_m": 0.0010000000000000009,
+          "count": 49,
+          "reason": ""
+        },
+        "axis": {
+          "accepted": true,
+          "axis_xy_m": [
+            0.28364148795635563,
+            0.06880313289847938
+          ],
+          "body_points": 6863,
+          "inlier_fraction": 0.9916945942007869,
+          "axis_hypothesis_xy_m": [
+            0.28364148795635563,
+            0.06880313289847938
+          ],
+          "residual_p90_m": 0.0019634019754150938,
+          "max_residual_p90_m": 0.005,
+          "fit_condition": 3.549123264038149,
+          "visible_fraction": 1.0,
+          "reason": ""
+        },
+        "contact_example_base_m": [
+          0.28364148795635563,
+          0.06880313289847938,
+          0.17400000000000002
+        ],
+        "contact_example_pixel": [
+          559,
+          318
+        ],
+        "candidate_surface_base_m": [
+          0.2570250852010352,
+          0.06744342085794854,
+          0.1394065769411384
+        ]
+      }
+    }
+  ],
+  "regions_xyxy": {
+    "box_right": [
+      700,
+      490,
+      900,
+      610
+    ],
+    "box_front": [
+      430,
+      640,
+      820,
+      690
+    ]
+  },
+  "input_sha256": {
+    "log/grasp_contact_audit_20261118/home_capture_v2/capture.json": "c1b2a8762d9429cf3e2f4c74490fb5c18acbfb189d3ae5b19728d7750b6164e5",
+    "best.pt": "d0892d275d9795595d0808136c692dbec5652b08e6e451589ebf01971b68ab08",
+    "/home/fcsl/2026project/log/grasp_contact_audit_20261118/analyze_home.py": "900bf1f7d8df9d4eeb84a464e4ba750f824a16ede8a9a27805d25dbe1efc6999",
+    "log/grasp_contact_audit_20261118/home_capture_v2/001_rgb.png": "1cccc98d267091c209fb7efc182a6542fa275d4b65b3517ec94d127ae79fda7b",
+    "log/grasp_contact_audit_20261118/home_capture_v2/001_depth.png": "d63b2e685e7bedfd4eb91bc85c3e54e5e34c25ea5fec25f2feeb206deece4c97",
+    "log/grasp_contact_audit_20261118/home_capture_v2/002_rgb.png": "91b1f112f3ea9b1e1bebc59a2735e56d2d628c4f20f5a6c9041b57cbd3d8a66a",
+    "log/grasp_contact_audit_20261118/home_capture_v2/002_depth.png": "087ef51b2026aaf26cce2d85e9fdc0b85075e99aefe2c982db1140eb531b43f5",
+    "log/grasp_contact_audit_20261118/home_capture_v2/003_rgb.png": "b063771ef32771a803afed3f95a8ba22a6eed72452b468a4eeca73e8bd0c4f41",
+    "log/grasp_contact_audit_20261118/home_capture_v2/003_depth.png": "63f5454e86ae5131d24c73d9a35747b88f6679fe45afa6bac8ebdd8bb0eb24cb",
+    "log/grasp_contact_audit_20261118/home_capture_v2/004_rgb.png": "fcfb1553a0904741db40604a5653d7e797237645d8ce76f443692c612aa113cb",
+    "log/grasp_contact_audit_20261118/home_capture_v2/004_depth.png": "db52b0b927e5175e7ce62931b39970bd76d02369955b457dcbc0cd88cb19c2a9",
+    "log/grasp_contact_audit_20261118/home_capture_v2/005_rgb.png": "3167f97628b2c4832730fab65700563005ead1929d2742af7ec506f1aa59c11f",
+    "log/grasp_contact_audit_20261118/home_capture_v2/005_depth.png": "f63a2ae40eda5b5b79973624149980c848c3bedc9e8eb0b5a98d83cc998dc35a",
+    "log/grasp_contact_audit_20261118/home_capture_v2/006_rgb.png": "d4b6166f1c9dd5d7a9c8d5b6639a8004114c4e2c9117ce1f381071ef71675001",
+    "log/grasp_contact_audit_20261118/home_capture_v2/006_depth.png": "20ba04ffd05ca20bcab555234d4a3122d7030ab555f1d0bfe40bf703212dc53f",
+    "log/grasp_contact_audit_20261118/home_capture_v2/007_rgb.png": "ad56654003f02b5704f888a11e7bcd222efdf2c16668923bb964a6787c0a6a1c",
+    "log/grasp_contact_audit_20261118/home_capture_v2/007_depth.png": "41742ced4625c71be67e5940525228869a8cbabb32642b18d36594f4cdb1e99b",
+    "log/grasp_contact_audit_20261118/home_capture_v2/008_rgb.png": "5c887055f0f6e076e2dcb1855b9040e9695f92ecaa41b5961d991d6302a6b250",
+    "log/grasp_contact_audit_20261118/home_capture_v2/008_depth.png": "92b985e1f75cf457b3392496122c45238ac810706886cd60e2eae3bd4614aab3",
+    "log/grasp_contact_audit_20261118/home_capture_v2/009_rgb.png": "7c08442e8cf1a9e88eb899172312a3e8378cbba9f6bf56dc0cdf3c564371b49c",
+    "log/grasp_contact_audit_20261118/home_capture_v2/009_depth.png": "a0a53581b85953c0528f79a6e3d2c7fd65d55dbac301dd2da6da94b27ab09d57",
+    "log/grasp_contact_audit_20261118/home_capture_v2/010_rgb.png": "87160edd7fd8ecd51ee7c2184f95bee5273930108c8b72483bc79bd97872182d",
+    "log/grasp_contact_audit_20261118/home_capture_v2/010_depth.png": "01f8ed8a7fb09653db9cc3901fce1042f9a6ffb995b4c5b90cfb810d91028de8"
+  },
+  "limitations": [
+    "Box ROIs visually reviewed at HOME only, not segmentation.",
+    "Ten unique stationary frames are not ten independent poses.",
+    "No independent object XY measurement in this HOME capture.",
+    "Earlier contact could have displaced the can; cross-pose differences cannot be assigned solely to calibration.",
+    "No runtime offsets fitted or applied."
+  ]
+}

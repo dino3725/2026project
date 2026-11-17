@@ -1,0 +1,29 @@
+{
+  "user_observation_after_approach": "Fingers touch can top; gripper displaced to robot left",
+  "user_observation_after_clearance": "Still touching",
+  "actual_minus_desired_deg": [
+    -0.08745624073985289,
+    4.330602225521383,
+    0.6147412130987221,
+    0.17552236018496353
+  ],
+  "actual_motion_from_measured_start_deg": [
+    -0.0878906249999997,
+    -1.6699218750000038,
+    0.6152343750000011,
+    0.1757812499999994
+  ],
+  "sensor_fk_tool_motion_mm": [
+    -1.7447951308503518,
+    -0.8728140583692118,
+    7.378296092047848
+  ],
+  "controller_actual_velocity": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance_physically_confirmed": false,
+  "approach_trial_passed": false
+}

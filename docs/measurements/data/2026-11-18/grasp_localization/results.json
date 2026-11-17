@@ -1,0 +1,178 @@
+[
+  {
+    "trial": 1,
+    "action_status": 4,
+    "success": true,
+    "point": [
+      0.256980371529264,
+      0.06692635170452715,
+      0.1384289754494836
+    ],
+    "confidence": 0.9326371550559998,
+    "frame": "base_link",
+    "message": "Target successfully localized.",
+    "elapsed_sec": 9.889960330998292,
+    "feedback": [
+      {
+        "stable_time": 0.0,
+        "detected": true
+      },
+      {
+        "stable_time": 0.06671404838562012,
+        "detected": true
+      },
+      {
+        "stable_time": 0.3669271469116211,
+        "detected": true
+      },
+      {
+        "stable_time": 0.4669981002807617,
+        "detected": true
+      },
+      {
+        "stable_time": 0.7004966735839844,
+        "detected": true
+      },
+      {
+        "stable_time": 0.8339240550994873,
+        "detected": true
+      },
+      {
+        "stable_time": 0.8339240550994873,
+        "detected": false
+      },
+      {
+        "stable_time": 1.2008516788482666,
+        "detected": true
+      },
+      {
+        "stable_time": 1.2008516788482666,
+        "detected": false
+      },
+      {
+        "stable_time": 0.0,
+        "detected": true
+      },
+      {
+        "stable_time": 0.16678667068481445,
+        "detected": true
+      },
+      {
+        "stable_time": 0.20014476776123047,
+        "detected": true
+      },
+      {
+        "stable_time": 0.36693406105041504,
+        "detected": true
+      },
+      {
+        "stable_time": 0.6337969303131104,
+        "detected": true
+      },
+      {
+        "stable_time": 0.800586462020874,
+        "detected": true
+      },
+      {
+        "stable_time": 0.867302417755127,
+        "detected": true
+      },
+      {
+        "stable_time": 1.1341657638549805,
+        "detected": true
+      },
+      {
+        "stable_time": 1.300955057144165,
+        "detected": true
+      },
+      {
+        "stable_time": 1.334312915802002,
+        "detected": true
+      },
+      {
+        "stable_time": 1.6345341205596924,
+        "detected": true
+      },
+      {
+        "stable_time": 1.7679662704467773,
+        "detected": true
+      },
+      {
+        "stable_time": 1.934755802154541,
+        "detected": true
+      },
+      {
+        "stable_time": 2.101546049118042,
+        "detected": true
+      }
+    ]
+  },
+  {
+    "trial": 2,
+    "action_status": 4,
+    "success": true,
+    "point": [
+      0.2570381877153258,
+      0.06692635170452714,
+      0.1385992365801351
+    ],
+    "confidence": 0.9327156245708466,
+    "frame": "base_link",
+    "message": "Target successfully localized.",
+    "elapsed_sec": 2.877920069000538,
+    "feedback": [
+      {
+        "stable_time": 0.0,
+        "detected": true
+      },
+      {
+        "stable_time": 0.13342928886413574,
+        "detected": true
+      },
+      {
+        "stable_time": 0.43364548683166504,
+        "detected": true
+      },
+      {
+        "stable_time": 0.5670745372772217,
+        "detected": true
+      },
+      {
+        "stable_time": 0.5670745372772217,
+        "detected": false
+      },
+      {
+        "stable_time": 0.8339328765869141,
+        "detected": true
+      },
+      {
+        "stable_time": 1.2342197895050049,
+        "detected": true
+      },
+      {
+        "stable_time": 1.2675771713256836,
+        "detected": true
+      },
+      {
+        "stable_time": 1.2675771713256836,
+        "detected": false
+      },
+      {
+        "stable_time": 1.7012267112731934,
+        "detected": true
+      },
+      {
+        "stable_time": 1.767942190170288,
+        "detected": true
+      },
+      {
+        "stable_time": 1.767942190170288,
+        "detected": false
+      },
+      {
+        "stable_time": 2.1682348251342773,
+        "detected": true
+      }
+    ]
+  }
+]

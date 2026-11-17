@@ -1,0 +1,6 @@
+{
+  "numpy": "1.21.5",
+  "scipy": "1.8.0",
+  "max_axis_recomputation_difference_m": 0.0,
+  "reused_saved_yolo_boxes": true
+}

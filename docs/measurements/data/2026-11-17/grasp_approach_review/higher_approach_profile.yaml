@@ -1,0 +1,18 @@
+approach_height_m: 0.05
+axis_residual_p90_limit_m: 0.005
+hardware_tcp_validated: false
+minimum_finger_clearance_m: 0.025
+minimum_study_lift_m: 0.03
+object_height_m: 0.134
+object_radius_m: 0.0265
+orientation_error_limit_deg: 5.0
+pitch_candidates_deg:
+- 0.0
+- 10.0
+position_error_limit_m: 0.002
+status: experimental_not_adopted
+support_z_base_m: 0.07
+target_class: coke
+tcp_source: nominal_gripper_reference.json
+top_insets_m:
+- 0.04

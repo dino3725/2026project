@@ -1,0 +1,16 @@
+{
+  "active_model_raw_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "active_model_canonical_equal": true,
+  "before_joints": {
+    "wheel_right_joint": 0.7900001057611052,
+    "joint2": -1.765611886856373,
+    "wheel_left_joint": 2.718213956133356,
+    "joint1": 0.0,
+    "joint4": 1.2241166687327416,
+    "gripper_left_joint": -0.0,
+    "gripper_right_joint": -0.0,
+    "joint3": 0.9372622613981267
+  },
+  "model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "sent_wall_time": 1794931187.865681
+}

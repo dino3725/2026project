@@ -1,0 +1,22 @@
+{
+  "executed": false,
+  "clearance_proof": false,
+  "assumptions": "Box region x[.10,.55], y[-.25,.25], top .09m; can inflated 10mm XY/20mm Z. Camera envelope 140x100x100mm. No complete environment/self-collision proof.",
+  "input_sha256": {
+    "log/grasp_approach_review_20261117/higher_reachability.json": "cdcf5b2ee76d16642626c538234da8b2a1729b88b089f64da14fcfa64de7bdc8",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/tools/vision_eval/screen_grasp_path.py": "d7e09b771086bfcb8b5144b0e93a320e8088904785333c92637d9fbb17edcad8"
+  },
+  "candidates": [
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 0.0,
+      "samples": 700,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.014261592043272597,
+      "first_overlaps": [],
+      "sampled_envelope_clear": true
+    }
+  ]
+}

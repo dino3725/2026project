@@ -1,0 +1,32 @@
+{
+  "active_model_raw_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "active_model_canonical_equal": true,
+  "before_joints": {
+    "wheel_right_joint": 0.7884661249732196,
+    "joint2": 0.8268156446703606,
+    "wheel_left_joint": 2.719747936921242,
+    "joint1": 0.17947575218262002,
+    "joint4": 0.20248546400090464,
+    "gripper_left_joint": -0.0,
+    "gripper_right_joint": -0.0,
+    "joint3": -0.8666991451553873
+  },
+  "model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "sent_wall_time": 1794926948.7616358,
+  "acceptance": {
+    "success": true,
+    "message": "One reviewed high approach requested; no gripper/descend"
+  },
+  "result": {
+    "attempted": true,
+    "completed": true,
+    "action_succeeded": true,
+    "arrival_verified": true,
+    "final_joints_rad": [
+      0.17947575218262002,
+      0.7976700097005334,
+      -0.8559612796401878,
+      0.2055534255766759
+    ]
+  }
+}

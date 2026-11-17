@@ -1,0 +1,8 @@
+{
+  "user_observation": "Gripper contacts can and is displaced to robot left",
+  "stop_published": true,
+  "state_after": "ERROR",
+  "automatic_home_requested": false,
+  "gripper_command_requested": false,
+  "time": 1794926595.463997
+}

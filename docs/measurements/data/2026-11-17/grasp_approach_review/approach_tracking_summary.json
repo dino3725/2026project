@@ -1,0 +1,45 @@
+{
+  "sample_count": 10,
+  "target_joints_deg": [
+    10.18950810579629,
+    45.41240878798306,
+    -51.87649343857684,
+    11.401933548759335
+  ],
+  "mean_joint_error_deg": [
+    -0.0029846682962898405,
+    1.1080990245169355,
+    1.875516876076837,
+    0.11173832624066696
+  ],
+  "mean_abs_joint_error_deg": [
+    0.01343257786296807,
+    1.1080990245169355,
+    1.875516876076837,
+    0.11173832624066696
+  ],
+  "joint_error_std_deg": [
+    0.02636718749999991,
+    0.04027654419394913,
+    0.026367187499998942,
+    0.0
+  ],
+  "target_tool_m": [
+    0.27112415647413296,
+    0.06311083084912196,
+    0.26837808317352946
+  ],
+  "mean_sensor_fk_tool_m": [
+    0.2722864734054083,
+    0.06330080495774515,
+    0.25308095092179494
+  ],
+  "mean_sensor_fk_delta_mm": [
+    1.1623169312753536,
+    0.1899741086231907,
+    -15.297132251734586
+  ],
+  "mean_sensor_fk_distance_mm": 15.343311042822657,
+  "physical_contact_error_measured": false,
+  "interpretation": "Joint sensors + URDF FK; not independently measured fingertips. No arrival-error abort or compensation introduced."
+}

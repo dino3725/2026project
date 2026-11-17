@@ -1,0 +1,9 @@
+[INFO] [1794931142.448376658] [model_approach_control]: Control state machine ready: targets=['airpod', 'coke', 'tissue', 'vaseline'], buttons=A0/B1/X2/Y3
+[WARN] [1794931142.449389684] [model_approach_control]: pick_enabled=false: Vision is active, but Cartesian pick motion is blocked until measured offsets are configured.
+[INFO] [1794931142.450176526] [model_approach_control]: STATE RETURN_HOME -> IDLE
+[INFO] [1794931142.458441859] [model_approach_control]: MEASUREMENT MODE: no startup movement, no fetch, no gripper, no base driving. Physical Y stop and input freshness guards remain active; startup Y verification=False.
+[INFO] [1794931142.478054677] [model_approach_control]: HIGH APPROACH: no startup motion; awaiting explicit service.
+[INFO] [1794931193.930321890] [model_approach_control]: STATE IDLE -> VISION_SEARCH
+[INFO] [1794931193.931455592] [model_approach_control]: HIGH APPROACH complete. Holding; no descent or grasp.
+[INFO] [1794931261.295788626] [model_approach_control]: STATE VISION_SEARCH -> ERROR
+[WARN] [1794931261.297806646] [model_approach_control]: Measurement stop (voice): cancellation requested; no automatic HOME and base remains disabled.

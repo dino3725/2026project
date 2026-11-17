@@ -1,0 +1,14 @@
+{
+  "reference": "HOME distal fingertip lower edge above wheel support plane",
+  "source": "nominal URDF and installed finger STL",
+  "user_instruction": "Use model values and continue without further user measurements",
+  "measured_mm": null,
+  "hardware_verified": false,
+  "model_distal_last_1mm_height_range_mm": [
+    227.93775661555128,
+    228.26693874448904
+  ],
+  "basis": "Same ten HOME joint samples in home_capture.json; distal mesh X within 1mm of maximum; base height 10mm",
+  "measurement_request_status": "withdrawn_by_user_preference",
+  "interpretation": "Nominal reference only. No fabricated user measurement or contact-error compensation."
+}

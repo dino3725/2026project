@@ -1,0 +1,752 @@
+{
+  "summary": {
+    "samples": 10,
+    "model_full_envelope_gap_range_mm": [
+      16.70503455856612,
+      17.685702973518875
+    ],
+    "model_contact_pad_gap_range_mm": [
+      38.384716986812926,
+      39.36615849683084
+    ],
+    "nominal_inner_width_range_mm": [
+      41.99999999999999,
+      41.99999999999999
+    ]
+  },
+  "rows": [
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1940489802501033,
+              0.05954339838305795,
+              0.22111139887696862
+            ],
+            [
+              0.2949611267857085,
+              0.11554882037329095,
+              0.29092676601106277
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25092429069312194,
+              0.08085163595162109,
+              0.24279149336042627
+            ],
+            [
+              0.28710573446472776,
+              0.08735864934004031,
+              0.26256540489101043
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017111398876968636,
+          "model_contact_pad_gap_above_top_m": 0.03879149336042628
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20421787284782478,
+              0.0030005278245361713,
+              0.22111139887696862
+            ],
+            [
+              0.30513001938343,
+              0.059005949814769164,
+              0.29092676601106277
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.2583584679504322,
+              0.03951481207137007,
+              0.24279149336042627
+            ],
+            [
+              0.294539911722038,
+              0.04602182545978929,
+              0.26256540489101043
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017111398876968636,
+          "model_contact_pad_gap_above_top_m": 0.03879149336042628
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 1,
+      "sensor_fk_tool_m": [
+        0.2723423303511162,
+        0.06336663277933621,
+        0.2527347125287652
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1940489802501033,
+              0.05954339838305795,
+              0.22111139887696862
+            ],
+            [
+              0.2949611267857085,
+              0.11554882037329095,
+              0.29092676601106277
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25092429069312194,
+              0.08085163595162109,
+              0.24279149336042627
+            ],
+            [
+              0.28710573446472776,
+              0.08735864934004031,
+              0.26256540489101043
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017111398876968636,
+          "model_contact_pad_gap_above_top_m": 0.03879149336042628
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20421787284782478,
+              0.0030005278245361713,
+              0.22111139887696862
+            ],
+            [
+              0.30513001938343,
+              0.059005949814769164,
+              0.29092676601106277
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.2583584679504322,
+              0.03951481207137007,
+              0.24279149336042627
+            ],
+            [
+              0.294539911722038,
+              0.04602182545978929,
+              0.26256540489101043
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017111398876968636,
+          "model_contact_pad_gap_above_top_m": 0.03879149336042628
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 2,
+      "sensor_fk_tool_m": [
+        0.2723423303511162,
+        0.06336663277933621,
+        0.2527347125287652
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 3,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.19400417565063108,
+              0.0595353405473765,
+              0.2207050345585661
+            ],
+            [
+              0.2949841982656242,
+              0.11555296963913145,
+              0.2906416051534772
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25090088032121255,
+              0.0808474257381093,
+              0.2423847169868129
+            ],
+            [
+              0.2870972701593322,
+              0.08735712708601195,
+              0.2622085242868759
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.016705034558566118,
+          "model_contact_pad_gap_above_top_m": 0.03838471698681292
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20417306824835252,
+              0.002992469988854725,
+              0.2207050345585661
+            ],
+            [
+              0.30515309086334563,
+              0.05901009908060966,
+              0.2906416051534772
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25833505757852276,
+              0.039510601857858284,
+              0.2423847169868129
+            ],
+            [
+              0.2945314474166424,
+              0.046020303205760935,
+              0.2622085242868759
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.016705034558566118,
+          "model_contact_pad_gap_above_top_m": 0.03838471698681292
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 4,
+      "sensor_fk_tool_m": [
+        0.27232647841521473,
+        0.06336378190473334,
+        0.2523534914667245
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.19413775424554985,
+              0.059101052060156326,
+              0.2216857029735188
+            ],
+            [
+              0.29494755175222365,
+              0.1149610544856483,
+              0.2913797023644932
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.2509641487990628,
+              0.08032897530439236,
+              0.24336615849683077
+            ],
+            [
+              0.28714049629703675,
+              0.08677779920877585,
+              0.2630901277280122
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.01768570297351882,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683078
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20421989923596556,
+              0.002542649147291319,
+              0.2216857029735188
+            ],
+            [
+              0.30502969674263936,
+              0.0584026515727833,
+              0.2913797023644932
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.2583349074409082,
+              0.038980796178297084,
+              0.24336615849683077
+            ],
+            [
+              0.29451125493888214,
+              0.045429620082680575,
+              0.2630901277280122
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.01768570297351882,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683078
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 5,
+      "sensor_fk_tool_m": [
+        0.272347739433472,
+        0.06280978268580917,
+        0.2532837989562419
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 6,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 7,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 8,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 9,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    },
+    {
+      "fingers": [
+        {
+          "side": "left",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.1939867424692772,
+              0.059532205295362024,
+              0.22168570297351886
+            ],
+            [
+              0.29483079202566,
+              0.11552538045657659,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25084053634725534,
+              0.08083657324010154,
+              0.24336615849683083
+            ],
+            [
+              0.28700694891391504,
+              0.0873408833574063,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        },
+        {
+          "side": "right",
+          "recorded_opening_m": -0.0,
+          "full_mesh_envelope_base_m": [
+            [
+              0.20415563506699863,
+              0.002989334736840245,
+              0.22168570297351886
+            ],
+            [
+              0.30499968462338145,
+              0.05898250989805481,
+              0.29137970236449323
+            ]
+          ],
+          "contact_pad_envelope_base_m": [
+            [
+              0.25827471360456555,
+              0.03949974935985053,
+              0.24336615849683083
+            ],
+            [
+              0.2944411261712253,
+              0.046004059477155274,
+              0.26309012772801227
+            ]
+          ],
+          "model_full_envelope_gap_above_top_m": 0.017685702973518874,
+          "model_contact_pad_gap_above_top_m": 0.03936615849683084
+        }
+      ],
+      "nominal_inner_width_m": 0.041999999999999996,
+      "independent_physical_measurement": false,
+      "index": 10,
+      "sensor_fk_tool_m": [
+        0.272250975917194,
+        0.06335020323803943,
+        0.253283798956242
+      ]
+    }
+  ],
+  "object_top_z_base_m": 0.204,
+  "limitations": [
+    "Recorded encoders plus URDF, not physical fingertip measurements.",
+    "Latest joint samples are not necessarily synchronized to image stamps.",
+    "Positive model gap contradicts reported contact only conditional on object height, model, joint references and mounting being correct.",
+    "A contradiction is not an estimated correction or evidence of a unique cause."
+  ],
+  "input_sha256": {
+    "log/grasp_approach_review_20261117/after_executed_approach/capture.json": "355fcc0820ad000b8473660e0300caa4d889916b0a9e9ce2886dedd37065ac67",
+    "log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "/home/fcsl/2026project/tools/vision_eval/audit_grasp_contact.py": "41ab132fe89507fbd1c64c6df34835bd151cb109710d5499647be2052d6cfe9d"
+  }
+}

@@ -1,0 +1,738 @@
+{
+  "assumptions": {
+    "support_z_base_m": 0.07,
+    "upright_coke_height_m": 0.134,
+    "radius_m": 0.0265
+  },
+  "limitations": [
+    "Axis hypotheses not independently measured.",
+    "Contact example is not an executable tool goal.",
+    "ROI is not a segmentation mask."
+  ],
+  "frames": [
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.018001849178471387,
+          0.335
+        ],
+        "pixel": [
+          568,
+          324
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.28884555419202285,
+          0.06550718091591604
+        ],
+        "body_points": 4008,
+        "inlier_fraction": 0.9805389221556886,
+        "residual_p90_m": 0.0025226581038411467,
+        "fit_condition": 3.6014395892146873,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.28884555419202285,
+        0.06550718091591604,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        251
+      ],
+      "candidate_surface_base_m": [
+        0.26058330183242634,
+        0.06566521538944958,
+        0.16281836993107757
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923550534642844.json",
+      "rgb_stamp_ns": 1794923550052676270,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923550534642844.json": "1d7d0cfcf0f819b10de8987848072e336dc5d61b02fefc8914848ec05f322265",
+        "log/eateded_20261117_223450_253950/observations/1794923550534642844_rgb.png": "0df6f36119c8c90bb82c9558b850f6fa52aae099fd5357b2ed6e7916d7c13147",
+        "log/eateded_20261117_223450_253950/observations/1794923550534642844_depth.npy": "ee2d67152a9de6ac4cebdb51f9a75050f0194131ef0cadf6013e0dcd06557269"
+      },
+      "legacy_surface_base_m": [
+        0.2605833018324263,
+        0.06566521538944958,
+        0.1628183699310777
+      ],
+      "overlay": "1794923550534642844_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.018369377375505137,
+          0.335
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.28903651338921194,
+          0.06528772105458258
+        ],
+        "body_points": 4016,
+        "inlier_fraction": 0.974601593625498,
+        "residual_p90_m": 0.0029631177363353533,
+        "fit_condition": 3.7282619843110765,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.28903651338921194,
+        0.06528772105458258,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.2609374564368323,
+        0.06567062091063168,
+        0.16276954981916783
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923550682365234.json",
+      "rgb_stamp_ns": 1794923550419604980,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923550682365234.json": "7ffaf5744c9d32e479c8c99b242cce4ae890f3d3e90d44b864e8c6af336b0d4c",
+        "log/eateded_20261117_223450_253950/observations/1794923550682365234_rgb.png": "1870ce90485e4aa5e4defab8521b683e7e4f4beff94462e21b63d0d9eaca2fda",
+        "log/eateded_20261117_223450_253950/observations/1794923550682365234_depth.npy": "6b6028511f3ecb0d5827ece487184134e31a7a47ea56630438b13f21af2231b0"
+      },
+      "legacy_surface_base_m": [
+        0.2609374564368323,
+        0.06567062091063168,
+        0.16276954981916783
+      ],
+      "overlay": "1794923550682365234_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.0232336364271738,
+          -0.01873690557253888,
+          0.335
+        ],
+        "pixel": [
+          569,
+          322
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2887724324727175,
+          0.06535005191680675
+        ],
+        "body_points": 4064,
+        "inlier_fraction": 0.9867125984251969,
+        "residual_p90_m": 0.002671474996200233,
+        "fit_condition": 3.650452813150461,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2887724324727175,
+        0.06535005191680675,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.26108552229177723,
+        0.06530864163089764,
+        0.16286197212632283
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923550851549014.json",
+      "rgb_stamp_ns": 1794923550586390625,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923550851549014.json": "21d2b9b3f571bf1b92c53a6d768dc915e64fb2d4d0aefdc7c5e31eabb474da9b",
+        "log/eateded_20261117_223450_253950/observations/1794923550851549014_rgb.png": "7ab76516f8d3557905ec1915b283cc14419c612170a05e277e39a5837eca164f",
+        "log/eateded_20261117_223450_253950/observations/1794923550851549014_depth.npy": "b585fa6e74857fb6855ec951f898e23c1aecbc5e673ff27b7a4ba92c64f9e5d9"
+      },
+      "legacy_surface_base_m": [
+        0.2608173353974731,
+        0.0653032361097156,
+        0.1626107281300183
+      ],
+      "overlay": "1794923550851549014_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.023302990565762377,
+          -0.018424211337820073,
+          0.336
+        ],
+        "pixel": [
+          569,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2885713183457823,
+          0.06565764428810622
+        ],
+        "body_points": 3980,
+        "inlier_fraction": 0.9738693467336683,
+        "residual_p90_m": 0.0024276460289153023,
+        "fit_condition": 3.716322929687348,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2885713183457823,
+        0.06565764428810622,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        571,
+        251
+      ],
+      "candidate_surface_base_m": [
+        0.26156582661515687,
+        0.06538259832865895,
+        0.16221113983272756
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551035977539.json",
+      "rgb_stamp_ns": 1794923550853248291,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551035977539.json": "4c178dc93bca551e85f96bd96398702f68a76e71ef27230068a1e541e56ac4fa",
+        "log/eateded_20261117_223450_253950/observations/1794923551035977539_rgb.png": "fc9a71c7a2cc3c68f87be5ffba0ad06b5ca3d4291185489140a7e2585b618550",
+        "log/eateded_20261117_223450_253950/observations/1794923551035977539_depth.npy": "71f5703eda64b38ab2ac70ba6487870a8c3b301c325529eb66528a91866d1e25"
+      },
+      "legacy_surface_base_m": [
+        0.2615658266151568,
+        0.06538259832865893,
+        0.16221113983272764
+      ],
+      "overlay": "1794923551035977539_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.023302990565762377,
+          -0.018055586041690705,
+          0.336
+        ],
+        "pixel": [
+          569,
+          324
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.288793102290429,
+          0.06559486653951814
+        ],
+        "body_points": 4012,
+        "inlier_fraction": 0.9730807577268196,
+        "residual_p90_m": 0.0025793472274554907,
+        "fit_condition": 3.5811995742743554,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.288793102290429,
+        0.06559486653951814,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.2612707300251852,
+        0.0653771766715929,
+        0.16166614298161305
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551169979010.json",
+      "rgb_stamp_ns": 1794923551020034668,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551169979010.json": "47d725feec31489b9945f05b0e9bf5e4770ffa2637b4b07ea348aa4742e7075b",
+        "log/eateded_20261117_223450_253950/observations/1794923551169979010_rgb.png": "cd5dfb38fef44d9e0e21d24fc4e896d8653342ca93eb94a30f529f4a637fb09c",
+        "log/eateded_20261117_223450_253950/observations/1794923551169979010_depth.npy": "d479e49656b113bbec4bce1860a42205e0446aa3b065249acbbd648fb0380cb5"
+      },
+      "legacy_surface_base_m": [
+        0.2612707300251852,
+        0.06537717667159289,
+        0.16166614298161322
+      ],
+      "overlay": "1794923551169979010_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.0232336364271738,
+          -0.018369377375505137,
+          0.335
+        ],
+        "pixel": [
+          569,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.28874297773167906,
+          0.06561858529277316
+        ],
+        "body_points": 4029,
+        "inlier_fraction": 0.9714569372052618,
+        "residual_p90_m": 0.0026383589850917156,
+        "fit_condition": 3.5952272307716937,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.28874297773167906,
+        0.06561858529277316,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        571,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.2608173353974731,
+        0.06530323610971561,
+        0.16261072813001817
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551320292939.json",
+      "rgb_stamp_ns": 1794923551120106689,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551320292939.json": "d5dca76b497ee4352fa95b63045c1de41b5fc233e71ee1cb0545fbb24eea5a5f",
+        "log/eateded_20261117_223450_253950/observations/1794923551320292939_rgb.png": "a24af11e49c74f2454d78e5603b9bef250ab45566c232c0f1c547812f298c54a",
+        "log/eateded_20261117_223450_253950/observations/1794923551320292939_depth.npy": "b370c22e37328d56242238fb792d320f94117043b4bd7f813de5aeac6ee4efea"
+      },
+      "legacy_surface_base_m": [
+        0.2608173353974731,
+        0.0653032361097156,
+        0.1626107281300183
+      ],
+      "overlay": "1794923551320292939_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.023671527539935046,
+          -0.018424211337820073,
+          0.336
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.28870695488932885,
+          0.0655826553528464
+        ],
+        "body_points": 4138,
+        "inlier_fraction": 0.9905751570807153,
+        "residual_p90_m": 0.0022414963803674697,
+        "fit_condition": 3.596995792220033,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.28870695488932885,
+        0.0655826553528464,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.2615334406345031,
+        0.06575107980062264,
+        0.16191690919969748
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551447824827.json",
+      "rgb_stamp_ns": 1794923551220178467,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551447824827.json": "2fee4cc85a51b809aa8aac9d8687ee804aaef259e6fe444975b18b896c5cdfec",
+        "log/eateded_20261117_223450_253950/observations/1794923551447824827_rgb.png": "52210f126ad169e67cd8d6cb4bf3e20c856102619e24b93b94e741a34eedf2f2",
+        "log/eateded_20261117_223450_253950/observations/1794923551447824827_depth.npy": "43caabbbbd326d6b72c8207ab97732f70421bb826e12db5e167597e626e0260b"
+      },
+      "legacy_surface_base_m": [
+        0.2615334406345031,
+        0.06575107980062264,
+        0.16191690919969762
+      ],
+      "overlay": "1794923551447824827_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.018369377375505137,
+          0.335
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2888660273422166,
+          0.06554786269311301
+        ],
+        "body_points": 4063,
+        "inlier_fraction": 0.9761260152596604,
+        "residual_p90_m": 0.0027813899711346688,
+        "fit_condition": 3.5786941700546753,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2888660273422166,
+        0.06554786269311301,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        251
+      ],
+      "candidate_surface_base_m": [
+        0.26084556413937204,
+        0.06567062091063165,
+        0.1630053645088033
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551565380940.json",
+      "rgb_stamp_ns": 1794923551420322510,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551565380940.json": "a705d938c85b1279bf44ee51ae790d2fffd8a1acf8046616e1bb53f807df6ea2",
+        "log/eateded_20261117_223450_253950/observations/1794923551565380940_rgb.png": "040cfd067a67902b742893822c875eb9861c2c4f56970a762771cf95eb0e35fa",
+        "log/eateded_20261117_223450_253950/observations/1794923551565380940_depth.npy": "2a8503ec36f7b76f9696cd8671a36e1bc7066c3e4fdfb135169963fb70fe4519"
+      },
+      "legacy_surface_base_m": [
+        0.260845564139372,
+        0.06567062091063164,
+        0.16300536450880335
+      ],
+      "overlay": "1794923551565380940_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.018369377375505137,
+          0.335
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.28854003979863435,
+          0.06541319566359656
+        ],
+        "body_points": 3937,
+        "inlier_fraction": 0.9667259334518669,
+        "residual_p90_m": 0.0029088330617669904,
+        "fit_condition": 3.6777297651881122,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.28854003979863435,
+        0.06541319566359656,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        572,
+        251
+      ],
+      "candidate_surface_base_m": [
+        0.26081107723567354,
+        0.0656706209106317,
+        0.1626095040237679
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551731328617.json",
+      "rgb_stamp_ns": 1794923551553751709,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551731328617.json": "69ce2bd20af7ffe0fc46a04e7a0aa0402a15f2959565163e6672f81707875a5d",
+        "log/eateded_20261117_223450_253950/observations/1794923551731328617_rgb.png": "5c548f778b1e0962aff627953d19904d133adbfdc04b21e7bfaf6c00fd10fcad",
+        "log/eateded_20261117_223450_253950/observations/1794923551731328617_depth.npy": "e773d9f58f87392427c7f33e8cffb4c0c8aa6340f465a6f161bdb350c80b8102"
+      },
+      "legacy_surface_base_m": [
+        0.2608110772356735,
+        0.06567062091063168,
+        0.16260950402376806
+      ],
+      "overlay": "1794923551731328617_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.018369377375505137,
+          0.335
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2886342839445385,
+          0.06574789272083797
+        ],
+        "body_points": 4009,
+        "inlier_fraction": 0.9840359191818409,
+        "residual_p90_m": 0.002419027426547859,
+        "fit_condition": 3.70943645534137,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2886342839445385,
+        0.06574789272083797,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        571,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.26081107723567354,
+        0.0656706209106317,
+        0.1626095040237679
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923551894593840.json",
+      "rgb_stamp_ns": 1794923551687180908,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923551894593840.json": "fb4c87be549afe71ead7657a7651f9a04d21a7bee4e1ba6d3ffb7e3c698467fb",
+        "log/eateded_20261117_223450_253950/observations/1794923551894593840_rgb.png": "b7e52845d558e0658fca5ecf1eab0f128a3fafe0a0008806b742a02066833ce0",
+        "log/eateded_20261117_223450_253950/observations/1794923551894593840_depth.npy": "23f9234a98510996e6d7a0500df0a7979a18b87c1bad4b58d2308a1bf7e25fb5"
+      },
+      "legacy_surface_base_m": [
+        0.2608110772356735,
+        0.06567062091063168,
+        0.16260950402376806
+      ],
+      "overlay": "1794923551894593840_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02360107656511381,
+          -0.01873690557253888,
+          0.335
+        ],
+        "pixel": [
+          568,
+          322
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.288598733616477,
+          0.0656550050170093
+        ],
+        "body_points": 4030,
+        "inlier_fraction": 0.9843672456575683,
+        "residual_p90_m": 0.002166795907917881,
+        "fit_condition": 3.5223370142915478,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.288598733616477,
+        0.0656550050170093,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        571,
+        251
+      ],
+      "candidate_surface_base_m": [
+        0.2610792641299776,
+        0.06567602643181372,
+        0.16286074802007258
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923552327319748.json",
+      "rgb_stamp_ns": 1794923552154188721,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923552327319748.json": "f44840a3a598b966e880b76cb45936a816abd1ef46cfceb1e7ae2795e4c96b28",
+        "log/eateded_20261117_223450_253950/observations/1794923552327319748_rgb.png": "e0adb3cfdbb725cba1582059ef37c4a5c1386e1ced078a4140d1b268d41bd1d3",
+        "log/eateded_20261117_223450_253950/observations/1794923552327319748_depth.npy": "479ec707c395c623de5078240b6825efa0f79c62e2794f997f6963c25ac419be"
+      },
+      "legacy_surface_base_m": [
+        0.2608110772356735,
+        0.06567062091063168,
+        0.16260950402376806
+      ],
+      "overlay": "1794923552327319748_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.023671527539935046,
+          -0.018424211337820073,
+          0.336
+        ],
+        "pixel": [
+          568,
+          323
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2886812593211772,
+          0.06570795390010206
+        ],
+        "body_points": 4080,
+        "inlier_fraction": 0.9838235294117647,
+        "residual_p90_m": 0.0025049191849428917,
+        "fit_condition": 3.603683386185867,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2886812593211772,
+        0.06570795390010206,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        571,
+        250
+      ],
+      "candidate_surface_base_m": [
+        0.2615334406345031,
+        0.06575107980062264,
+        0.16191690919969748
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794923552507931382.json",
+      "rgb_stamp_ns": 1794923552220904297,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794923552507931382.json": "fc30ddff353a1c60fa8371b0dc4dcfe877bd6dd46d06647376cbbdf439d2a99a",
+        "log/eateded_20261117_223450_253950/observations/1794923552507931382_rgb.png": "54425c70f897096ae7e0bfe5b7d3dc5b8995e5c644b611fe7cb97cdf96019ce2",
+        "log/eateded_20261117_223450_253950/observations/1794923552507931382_depth.npy": "fdcb09bcb0e7c75adf4fbbf482e31dd60cb3b738f8466e8db3844a560d3522b9"
+      },
+      "legacy_surface_base_m": [
+        0.2615334406345031,
+        0.06575107980062264,
+        0.16191690919969762
+      ],
+      "overlay": "1794923552507931382_geometry.png"
+    }
+  ],
+  "source_sha256": {
+    "tools/vision_eval/analyze_grasp_observations.py": "54f1937786e0abdf377f98a20c73906e655f143c449cb507c0d5ac5c41700ada",
+    "src/vision_pkg/vision_pkg/object_geometry.py": "fbcfd15b3c83b12c654a8b0383234b82ffd5f6961d9b5b6c44f3320043090667"
+  },
+  "summary": {
+    "frames": 12,
+    "axis_accepted": 12,
+    "axis_mean_m": [
+      0.2887324331111846,
+      0.06555588461293402
+    ],
+    "axis_peak_to_peak_mm": [
+      0.4964735905775841,
+      0.4601716662553934
+    ]
+  }
+}

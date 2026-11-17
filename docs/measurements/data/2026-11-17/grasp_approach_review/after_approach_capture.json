@@ -1,0 +1,956 @@
+{
+  "created": "2026-11-17T23:39:38.205868+09:00",
+  "frames": [
+    {
+      "index": 1,
+      "rgb_stamp_ns": 1794926379221616455,
+      "depth_stamp_ns": 1794926379221616455,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.069298503,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24174506219050176,
+            0.09720193626153215,
+            0.3014905083871128
+          ],
+          "quaternion": [
+            0.5903125263179768,
+            -0.4824248444034272,
+            0.41608811288178,
+            -0.49564914313745767
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03507039184744054,
+            0.3931376623993746,
+            0.08163958244750173,
+            0.9151763898815463
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7900001057611052,
+        "joint2": 0.8130098175793898,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 2,
+      "rgb_stamp_ns": 1794926379721973877,
+      "depth_stamp_ns": 1794926379721973877,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.076472688,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24190877440947936,
+            0.09723137891195426,
+            0.3009796399722495
+          ],
+          "quaternion": [
+            0.5906926904767988,
+            -0.48274149648332776,
+            0.4157089162274032,
+            -0.4952059066280973
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.035132826100897775,
+            0.39383754783449043,
+            0.08161273391266549,
+            0.9148754189009453
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7900001057611052,
+        "joint2": 0.8130098175793898,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 3,
+      "rgb_stamp_ns": 1794926380222326660,
+      "depth_stamp_ns": 1794926380222326660,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.077026038,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24174460951631746,
+            0.09720185485082349,
+            0.30149191729754027
+          ],
+          "quaternion": [
+            0.5903114771334808,
+            -0.48242397050830993,
+            0.4160891585830113,
+            -0.49565036543229457
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03507021959023243,
+            0.3931357314030965,
+            0.0816396564448206,
+            0.9151772193884729
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.7212819177091276,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 4,
+      "rgb_stamp_ns": 1794926380455826416,
+      "depth_stamp_ns": 1794926380455826416,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.343700837,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24174460951631746,
+            0.09720185485082349,
+            0.30149191729754027
+          ],
+          "quaternion": [
+            0.5903114771334808,
+            -0.48242397050830993,
+            0.4160891585830113,
+            -0.49565036543229457
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03507021959023243,
+            0.3931357314030965,
+            0.0816396564448206,
+            0.9151772193884729
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8130098175793898,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8713010875190442
+      }
+    },
+    {
+      "index": 5,
+      "rgb_stamp_ns": 1794926381089624268,
+      "depth_stamp_ns": 1794926381089624268,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.219373475,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.241789096463476,
+            0.09705447818863316,
+            0.30149191729754027
+          ],
+          "quaternion": [
+            0.5902009809872832,
+            -0.482559146010272,
+            0.4162026573355593,
+            -0.49555506320721276
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03498018604319211,
+            0.39314375257956014,
+            0.08143006814070497,
+            0.9151958918147772
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17640779060684875,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 6,
+      "rgb_stamp_ns": 1794926381623352539,
+      "depth_stamp_ns": 1794926381623352539,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.188208289,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24184260414533523,
+            0.09721947859096601,
+            0.30118644586558035
+          ],
+          "quaternion": [
+            0.5905388597178062,
+            -0.4826133647882433,
+            0.4158624263142113,
+            -0.4953853426081766
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03510755815754465,
+            0.3935542952199572,
+            0.08162360667570431,
+            0.914997302131207
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 7,
+      "rgb_stamp_ns": 1794926382223802490,
+      "depth_stamp_ns": 1794926382223802490,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.086776598,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.2419239239474583,
+            0.09704834520541468,
+            0.30103954944744693
+          ],
+          "quaternion": [
+            0.5905605499026052,
+            -0.48290314133210466,
+            0.4158444304156695,
+            -0.49509211535085623
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03500276903517491,
+            0.39359674107226195,
+            0.08137192715043715,
+            0.9150054759666681
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 8,
+      "rgb_stamp_ns": 1794926382757528320,
+      "depth_stamp_ns": 1794926382757528320,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.054978471,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24174460951631746,
+            0.09720185485082349,
+            0.30149191729754027
+          ],
+          "quaternion": [
+            0.5903114771334808,
+            -0.48242397050830993,
+            0.4160891585830113,
+            -0.49565036543229457
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03507021959023243,
+            0.3931357314030965,
+            0.0816396564448206,
+            0.9151772193884729
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7900001057611052,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 9,
+      "rgb_stamp_ns": 1794926382924316162,
+      "depth_stamp_ns": 1794926382924316162,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.391414441,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.2418006815911042,
+            0.09721193907365483,
+            0.30131724405847954
+          ],
+          "quaternion": [
+            0.5904415213961952,
+            -0.4825322883269745,
+            0.4159595119804897,
+            -0.49549882434394615
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03509157261594714,
+            0.39337509795055775,
+            0.0816304804461861,
+            0.9150743568179875
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7915340865489908,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    },
+    {
+      "index": 10,
+      "rgb_stamp_ns": 1794926383724899414,
+      "depth_stamp_ns": 1794926383724899414,
+      "pair_delta_ms": 0.0,
+      "depth_age_seconds_at_capture": 0.095288323,
+      "optical_frame": "d435i_color_optical_frame",
+      "intrinsics": {
+        "k": [
+          911.713134765625,
+          0.0,
+          632.2310791015625,
+          0.0,
+          911.4946899414062,
+          372.9808654785156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model": "plumb_bob",
+        "width": 1280,
+        "height": 720
+      },
+      "transforms_to_base_link_at_depth_stamp": {
+        "d435i_color_optical_frame": {
+          "translation": [
+            0.24174460951631746,
+            0.09720185485082349,
+            0.30149191729754027
+          ],
+          "quaternion": [
+            0.5903114771334808,
+            -0.48242397050830993,
+            0.4160891585830113,
+            -0.49565036543229457
+          ]
+        },
+        "link1": {
+          "translation": [
+            -0.092,
+            0.0,
+            0.116
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "link3": {
+          "translation": [
+            -0.08,
+            0.0,
+            0.1925
+          ],
+          "quaternion": [
+            -0.03507021959023243,
+            0.3931357314030965,
+            0.0816396564448206,
+            0.9151772193884729
+          ]
+        },
+        "base_footprint": {
+          "translation": [
+            0.0,
+            0.0,
+            -0.01
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "joints_latest_radians": {
+        "wheel_right_joint": 0.7900001057611052,
+        "joint2": 0.8114758367915041,
+        "wheel_left_joint": 2.719747936921242,
+        "joint1": 0.17794177139473438,
+        "joint4": 0.200951483213019,
+        "gripper_left_joint": -0.0,
+        "gripper_right_joint": -0.0,
+        "joint3": -0.8728350683069298
+      }
+    }
+  ],
+  "method": "RGB/depth paired within 20ms; TF queried at depth stamp; no actuator commands."
+}

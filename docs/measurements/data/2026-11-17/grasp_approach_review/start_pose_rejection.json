@@ -1,0 +1,21 @@
+{
+  "active_model_raw_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "active_model_canonical_equal": true,
+  "before_joints": {
+    "wheel_right_joint": 0.7853981633974483,
+    "joint2": -1.0446409165501216,
+    "wheel_left_joint": 2.715145994557585,
+    "joint1": 0.0,
+    "joint4": 0.009203884727313847,
+    "gripper_left_joint": -0.0,
+    "gripper_right_joint": -0.0,
+    "joint3": 1.0845244170351482
+  },
+  "model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "sent_wall_time": 1794926063.123394,
+  "acceptance": {
+    "success": false,
+    "message": "Robot has moved since planning"
+  },
+  "error": "Robot has moved since planning"
+}

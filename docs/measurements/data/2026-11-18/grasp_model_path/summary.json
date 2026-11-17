@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-18",
+  "physical_motion_executed": false,
+  "execution_authorized": false,
+  "runtime_grasp_integration": false,
+  "reference_policy": "nominal_model_user_requested_no_more_manual_measurements",
+  "observations": "33 saved HOME RGB-D frames from grasp_localization_20261118; not fresh execution targets",
+  "axis_xy_m": [
+    0.2836324839123595,
+    0.06831693429249493
+  ],
+  "accepted_model_chains": 3,
+  "selected_candidate_index": 0,
+  "selection_rule": "minimum sum of absolute joint waypoint travel among accepted chains; no empirical success ranking",
+  "selected_top_inset_m": 0.025,
+  "model_targets": {
+    "contact_base_m": [
+      0.2836324839123595,
+      0.06831693429249493,
+      0.17900000000000002
+    ],
+    "pick_tool_base_m": [
+      0.2832393609144486,
+      0.06824307686994513,
+      0.17900000000000002
+    ],
+    "approach_contact_base_m": [
+      0.2541483153056315,
+      0.06277763816662915,
+      0.283727192007034
+    ],
+    "approach_tool_base_m": [
+      0.2537551923077206,
+      0.06270378074407935,
+      0.283727192007034
+    ],
+    "lift_contact_base_m": [
+      0.2836324839123595,
+      0.06831693429249493,
+      0.20900000000000002
+    ],
+    "lift_tool_base_m": [
+      0.2832393609144486,
+      0.06824307686994513,
+      0.20900000000000002
+    ],
+    "object_top_z_base_m": 0.20400000000000001,
+    "approach_height_m": 0.10472719200703395,
+    "approach_backoff_m": 0.03,
+    "ik_clearance_buffer_m": 0.010727192007033953,
+    "nominal_approach_clearance_m": 0.05072719200703396,
+    "reference": "nominal_model_not_physical_measurement"
+  },
+  "selected_descent_review": {
+    "accepted": true,
+    "endpoint_error_m": 0.0002156985682192527,
+    "max_line_error_m": 0.00021569856821925266,
+    "max_orientation_error_rad": 0.0997284452963854,
+    "pitch_range_rad": [
+      -0.07304015730247768,
+      0.09972844377391298
+    ],
+    "max_yaw_roll_error_rad": 0.0006301422021351977,
+    "orientation_rule": "pitch_interval",
+    "max_backward_step_m": 6.938893903907228e-17,
+    "samples": 160,
+    "physical_path_verified": false
+  },
+  "selected_lift_review": {
+    "accepted": true,
+    "endpoint_error_m": 3.985647112075454e-05,
+    "max_line_error_m": 3.985647112075454e-05,
+    "max_orientation_error_rad": 0.0996169288952023,
+    "pitch_range_rad": [
+      0.00798017009307013,
+      0.099616928895202
+    ],
+    "max_yaw_roll_error_rad": 2.165007062515656e-11,
+    "orientation_rule": "pitch_interval",
+    "max_backward_step_m": 2.7755575615628914e-17,
+    "samples": 35,
+    "physical_path_verified": false
+  },
+  "selected_entry_envelope_review": {
+    "top_inset_m": 0.025,
+    "pitch_deg": 0.0,
+    "samples": 650,
+    "possible_overlap_count": 0,
+    "min_separating_axis_gap_m": 0.029661315391092513,
+    "first_overlaps": [],
+    "interpolation": "quintic_with_derivative_bound",
+    "max_between_sample_motion_bound_m": 0.009110068433751521,
+    "sampled_envelope_clear": true
+  },
+  "scope_limits": [
+    "Entry-only obstacle envelope screen; descent/lift collision geometry not certified.",
+    "Lift planning used open fingers and no attached can; held-object clearance not certified.",
+    "Previous physical finger/can contact contradicts nominal model; unresolved.",
+    "No controller defaults, interfaces, stop paths, speeds, or gripper values changed.",
+    "Live control still uses existing grasp target calculation; this is reusable geometry plus read-only planning tooling.",
+    "After these saved planning runs, tool added an entry joint-name order guard and configuration TCP source label was corrected. Replan from fresh data before any execution."
+  ],
+  "validation": {
+    "control_pkg": {
+      "passed": 81,
+      "skipped": 1,
+      "build": "passed",
+      "colcon_test": "passed"
+    },
+    "path_screen_and_high_approach_tests": {
+      "passed": 37
+    }
+  },
+  "artifact_sha256": {
+    "approach_screen.json": "d8d2e82bb100b111bbd4666e9b75dcbd758363968d0503dd0262018d34f8d2ba",
+    "profile.yaml": "596e686c1145539ae74f19c180d49c1e08fe52c16f59242d895df1fd9a18dedd",
+    "profile_backoff.yaml": "727c07a87195143b455dd98815cd4fc7f43065275676edaff342b5a403327431",
+    "profile_pitch_range.yaml": "04d86982e3608b25f43061bf38b1e3805f6b706f921c37c5439a9beab7ee22d3",
+    "reachability.json": "4c3e86fc70569c74c293d39d0b92c562d9bce0f57ae60953702a2f8bd690c071",
+    "reachability_backoff.json": "aa817c483d7ddb21e7345ca6528cfaf75b68f25962e239365ae60bf14d0736ee",
+    "reachability_pitch_range.json": "22f80b0f043d8d048a62aafbaaaf37f44e82e6d94f5e382b059b2390af3b1eb0"
+  }
+}

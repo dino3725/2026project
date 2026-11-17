@@ -1,0 +1,460 @@
+{
+  "executed": false,
+  "clearance_proof": false,
+  "assumptions": "Box region x[.10,.55], y[-.25,.25], top .09m; can inflated 10mm XY/20mm Z. Camera envelope 140x100x100mm. No complete environment/self-collision proof.",
+  "input_sha256": {
+    "log/grasp_quality_gate_20261117/reachability_closer_actual_clearance_v3.json": "d460a8e5db20390200b758e838320d985758893f246693ab592c69f6e1fdd8bb",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/tools/vision_eval/screen_grasp_path.py": "91b7a2f5d87bcce077b13bef1efad3401e65886868ee5d07ac0a905afae3f9ef"
+  },
+  "candidates": [
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 0.0,
+      "samples": 701,
+      "possible_overlap_count": 10,
+      "min_separating_axis_gap_m": -0.0010317419522727078,
+      "first_overlaps": [
+        {
+          "sample": 695,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00010193380724901613,
+          "joints_rad": [
+            0.17611992489998446,
+            0.7866785721724174,
+            -0.6496289781336385,
+            -0.18405807826388246
+          ]
+        },
+        {
+          "sample": 696,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00010193380724901613,
+          "joints_rad": [
+            0.17611992489998446,
+            0.7866785721724174,
+            -0.6496289781336385,
+            -0.18405807826388246
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00032119168419444954,
+          "joints_rad": [
+            0.17634063064637462,
+            0.789878912675965,
+            -0.6516137558293473,
+            -0.1858323525297545
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0005593621263336873,
+          "joints_rad": [
+            0.17634063064637462,
+            0.789878912675965,
+            -0.6516137558293473,
+            -0.1858323525297545
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0007757928863767194,
+          "joints_rad": [
+            0.17656133639276478,
+            0.7930792531795126,
+            -0.6535985335250561,
+            -0.18760662679562654
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0010176798302306833,
+          "joints_rad": [
+            0.17656133639276478,
+            0.7930792531795126,
+            -0.6535985335250561,
+            -0.18760662679562654
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0007757928863767194,
+          "joints_rad": [
+            0.17656133639276478,
+            0.7930792531795126,
+            -0.6535985335250561,
+            -0.18760662679562654
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0010176798302306833,
+          "joints_rad": [
+            0.17656133639276478,
+            0.7930792531795126,
+            -0.6535985335250561,
+            -0.18760662679562654
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0007897407232781151,
+          "joints_rad": [
+            0.17656810136372497,
+            0.7931773485436947,
+            -0.653659370017506,
+            -0.18766101103382768
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0010317419522727078,
+          "joints_rad": [
+            0.17656810136372497,
+            0.7931773485436947,
+            -0.653659370017506,
+            -0.18766101103382768
+          ]
+        }
+      ],
+      "sampled_envelope_clear": false
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 0.0,
+      "samples": 701,
+      "possible_overlap_count": 12,
+      "min_separating_axis_gap_m": -0.0011960247046978734,
+      "first_overlaps": [
+        {
+          "sample": 695,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -5.731001707619254e-05,
+          "joints_rad": [
+            0.17709028621916423,
+            0.7862439117050574,
+            -0.6486140087340071,
+            -0.1827129737511685
+          ]
+        },
+        {
+          "sample": 695,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.000285925162042025,
+          "joints_rad": [
+            0.17709028621916423,
+            0.7862439117050574,
+            -0.6486140087340071,
+            -0.1827129737511685
+          ]
+        },
+        {
+          "sample": 696,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -5.731001707619254e-05,
+          "joints_rad": [
+            0.17709028621916423,
+            0.7862439117050574,
+            -0.6486140087340071,
+            -0.1827129737511685
+          ]
+        },
+        {
+          "sample": 696,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.000285925162042025,
+          "joints_rad": [
+            0.17709028621916423,
+            0.7862439117050574,
+            -0.6486140087340071,
+            -0.1827129737511685
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0005024087575859065,
+          "joints_rad": [
+            0.17730813383542415,
+            0.7893849641517473,
+            -0.6505611003807431,
+            -0.18445302037353223
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0007346572123658607,
+          "joints_rad": [
+            0.17730813383542415,
+            0.7893849641517473,
+            -0.6505611003807431,
+            -0.18445302037353223
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0009483447618958973,
+          "joints_rad": [
+            0.1775259814516841,
+            0.7925260165984372,
+            -0.6525081920274791,
+            -0.186193066995896
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.001184249071905466,
+          "joints_rad": [
+            0.1775259814516841,
+            0.7925260165984372,
+            -0.6525081920274791,
+            -0.186193066995896
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0009483447618958973,
+          "joints_rad": [
+            0.1775259814516841,
+            0.7925260165984372,
+            -0.6525081920274791,
+            -0.186193066995896
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.001184249071905466,
+          "joints_rad": [
+            0.1775259814516841,
+            0.7925260165984372,
+            -0.6525081920274791,
+            -0.186193066995896
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0009600244312529121,
+          "joints_rad": [
+            0.17753168171271957,
+            0.7926082062463188,
+            -0.6525591401665358,
+            -0.1862385975375271
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0011960247046978734,
+          "joints_rad": [
+            0.17753168171271957,
+            0.7926082062463188,
+            -0.6525591401665358,
+            -0.1862385975375271
+          ]
+        }
+      ],
+      "sampled_envelope_clear": false
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 10.0,
+      "samples": 705,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.0006860599117164828,
+      "first_overlaps": [],
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 0.0,
+      "samples": 701,
+      "possible_overlap_count": 12,
+      "min_separating_axis_gap_m": -0.0013938507202184147,
+      "first_overlaps": [
+        {
+          "sample": 695,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00023632599327196024,
+          "joints_rad": [
+            0.17592448702820151,
+            0.7867963984986317,
+            -0.6484491749022631,
+            -0.18311920553866307
+          ]
+        },
+        {
+          "sample": 695,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00045892462948193824,
+          "joints_rad": [
+            0.17592448702820151,
+            0.7867963984986317,
+            -0.6484491749022631,
+            -0.18311920553866307
+          ]
+        },
+        {
+          "sample": 696,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00023632599327196024,
+          "joints_rad": [
+            0.17592448702820151,
+            0.7867963984986317,
+            -0.6484491749022631,
+            -0.18311920553866307
+          ]
+        },
+        {
+          "sample": 696,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.00045892462948193824,
+          "joints_rad": [
+            0.17592448702820151,
+            0.7867963984986317,
+            -0.6484491749022631,
+            -0.18311920553866307
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0006923386486004934,
+          "joints_rad": [
+            0.17614604703640202,
+            0.7900128436847957,
+            -0.6504423624747371,
+            -0.18490114357991527
+          ]
+        },
+        {
+          "sample": 697,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0009185803358720684,
+          "joints_rad": [
+            0.17614604703640202,
+            0.7900128436847957,
+            -0.6504423624747371,
+            -0.18490114357991527
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0011492284900213728,
+          "joints_rad": [
+            0.17636760704460253,
+            0.7932292888709598,
+            -0.652435550047211,
+            -0.1866830816211675
+          ]
+        },
+        {
+          "sample": 698,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0013791364727085836,
+          "joints_rad": [
+            0.17636760704460253,
+            0.7932292888709598,
+            -0.652435550047211,
+            -0.1866830816211675
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0011492284900213728,
+          "joints_rad": [
+            0.17636760704460253,
+            0.7932292888709598,
+            -0.652435550047211,
+            -0.1866830816211675
+          ]
+        },
+        {
+          "sample": 699,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0013791364727085836,
+          "joints_rad": [
+            0.17636760704460253,
+            0.7932292888709598,
+            -0.652435550047211,
+            -0.1866830816211675
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_left",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0011638253373909002,
+          "joints_rad": [
+            0.17637467853818364,
+            0.7933319476119154,
+            -0.6524991662802992,
+            -0.1867399554384372
+          ]
+        },
+        {
+          "sample": 700,
+          "body": "finger_right",
+          "obstacle": "can_envelope",
+          "separating_gap_m": -0.0013938507202184147,
+          "joints_rad": [
+            0.17637467853818364,
+            0.7933319476119154,
+            -0.6524991662802992,
+            -0.1867399554384372
+          ]
+        }
+      ],
+      "sampled_envelope_clear": false
+    }
+  ]
+}

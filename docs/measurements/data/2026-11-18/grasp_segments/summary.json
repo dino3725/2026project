@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-18",
+  "physical_approach_completed": true,
+  "physical_approach_contact": false,
+  "physical_contact_evidence": "User confirmed: 닿지 않고 떨어져 있음",
+  "physical_descent_executed": false,
+  "physical_grasp_executed": false,
+  "gripper_open_request_executed": false,
+  "gripper_open_block_reason": "Hardware/joy/camera supervisor had already shut down after an externally received termination signal; sender unknown.",
+  "user_requested_shutdown": false,
+  "hardware_restart_completed": true,
+  "current_mode": "Stopped; no robot execution processes at handoff",
+  "supervisor_pid": 22351,
+  "supervisor_log": "log/eateded_20261118_010533_850510",
+  "selected_nominal_top_inset_m": 0.015,
+  "nominal_min_gap_m": 0.013441804439664983,
+  "nominal_camera_gap_m": 0.017355844012830156,
+  "nominal_payload_final_bottom_gap_m": 0.02800008572099108,
+  "known_tracking": "Approach sensors+URDF tool Z about 18.94mm below planned; not a measured fingertip displacement.",
+  "remaining": [
+    "Fresh plan after restart; old execution artifact is spent.",
+    "Validate actual open jaws, alignment, descent and grip.",
+    "No normal-runtime grasp replacement yet; no physical success-rate claim."
+  ],
+  "tests": {
+    "geometry_opening_and_approach": 50,
+    "bringup": 12
+  },
+  "reference": "Nominal fingers/TCP by user request; no new manual measurements.",
+  "source_sha256": {
+    "reachability.json": "cb3a0b356d06481adb9eefeda664ce72d1e22e7fd8f3ce59238a938635ec34e6",
+    "approach_result.json": "90d087a625e9e2a92a312ba2fd8a40bfb0cb5871bd75cac6bc75acaccef82f5d",
+    "segment_review_upper.json": "6706d11c2d323d3a40640c957a8eb3a0dbc9cbe972a8be1b94331958917c9d44",
+    "reachability_upper.json": "07ee12a4029d7264f331c5fa77850eaf746544b9c25f83402675103191b20d8b",
+    "segment_review_v2.json": "08a71144430911a6ba4a130a42acd88dba6aaa595e449efbec87fac7a282d4c8",
+    "geometry.json": "d06caae9659658f1398ec46d35a37d3a9d03f01d4c1a3fa3d5e9b836d2211951",
+    "segment_review.json": "a4f01b8e117bd71485543e9810bd316b79e63baf91f706c96f3fd3ff998c6c3c",
+    "approach_screen_upper.json": "ced57500cf6e748fc270ec0f85da490d45e7eb8ce625fffc1f64fa2177fbf4f3",
+    "restart_process.json": "ccdbeafd97a5a7ed1929bfc8e04e8b7191dd17df4ed17093dd500efe8aae29db"
+  },
+  "mode_before_shutdown": "recognition-audit; HOME/IDLE, pick_enabled=false, vision legacy explicitly selected by audit launcher",
+  "final_shutdown": {
+    "signal": "SIGHUP",
+    "received_kst": "2026-11-18 01:34:27",
+    "completed_kst": "2026-11-18 01:34:29",
+    "sender_identified": false,
+    "processes_remaining_at_handoff": false
+  }
+}

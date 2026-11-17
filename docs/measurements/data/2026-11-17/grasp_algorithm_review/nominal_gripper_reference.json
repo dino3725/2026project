@@ -1,0 +1,64 @@
+{
+  "model_only": true,
+  "hardware_tcp_validated": false,
+  "assumptions": [
+    "Installed meshes match physical finger pads.",
+    "Desired contact is at the middle of the pad rectangle.",
+    "Pad compression and attachment differences are not measured."
+  ],
+  "input_sha256": {
+    "log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/opt/ros/humble/share/turtlebot3_manipulation_description/meshes/open_manipulator_x/gripper_left_palm.stl": "fb4dfabe68712bbba34deb9f8469f9187009c07579dccd5401b82d08de425267",
+    "/opt/ros/humble/share/turtlebot3_manipulation_description/meshes/open_manipulator_x/gripper_right_palm.stl": "a5bfc10a067c806a19062e2fcb58989623a09edc0e9bbc4fd735a56d83f99752"
+  },
+  "pads": [
+    {
+      "side": "left",
+      "center_at_zero_in_tool_m": [
+        0.0004000007629394453,
+        0.021,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "open_joint_m": 0.019,
+      "pad_size_m": [
+        0.035,
+        0.0,
+        0.015
+      ],
+      "tip_x_in_tool_m": 0.020699999999999996
+    },
+    {
+      "side": "right",
+      "center_at_zero_in_tool_m": [
+        0.0004000007629394453,
+        -0.020999999999999998,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "open_joint_m": 0.019,
+      "pad_size_m": [
+        0.035,
+        0.0,
+        0.015
+      ],
+      "tip_x_in_tool_m": 0.020699999999999996
+    }
+  ],
+  "tcp_in_tool_m": [
+    0.0004000007629394453,
+    1.734723475976807e-18,
+    0.0
+  ],
+  "nominal_open_inner_width_m": 0.07999999999999999,
+  "nominal_coke_width_m": 0.053,
+  "nominal_centered_side_clearance_m": 0.013499999999999995
+}

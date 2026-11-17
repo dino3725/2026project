@@ -1,0 +1,79 @@
+{
+  "executed": false,
+  "clearance_proof": false,
+  "assumptions": "Box region x[.10,.55], y[-.25,.25], top .09m; can inflated 10mm XY/20mm Z. Camera envelope 140x100x100mm. No complete environment/self-collision proof.",
+  "input_sha256": {
+    "log/grasp_model_path_20261118/reachability_pitch_range.json": "22f80b0f043d8d048a62aafbaaaf37f44e82e6d94f5e382b059b2390af3b1eb0",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/tools/vision_eval/screen_grasp_path.py": "b9e9f6e76bfac636bda3e319955965d6530c6b6a7034ed1fceaed49123b824e7"
+  },
+  "candidates": [
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 0.0,
+      "samples": 650,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.029661315391092513,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.009110068433751521,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.025,
+      "pitch_deg": 10.0,
+      "samples": 666,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.030523999052851886,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.00864855347623017,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 0.0,
+      "samples": 650,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.029744431443863822,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.00910813459168024,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.04,
+      "pitch_deg": 10.0,
+      "samples": 666,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.030487776950013146,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.00864860001174108,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 0.0,
+      "samples": 650,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.0297162780008058,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.009109870303968573,
+      "sampled_envelope_clear": true
+    },
+    {
+      "top_inset_m": 0.055,
+      "pitch_deg": 10.0,
+      "samples": 666,
+      "possible_overlap_count": 0,
+      "min_separating_axis_gap_m": 0.030599399108008185,
+      "first_overlaps": [],
+      "interpolation": "quintic_with_derivative_bound",
+      "max_between_sample_motion_bound_m": 0.008648478688509556,
+      "sampled_envelope_clear": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "summary": {
+    "frames": 13,
+    "axis_accepted": 13,
+    "axis_mean_m": [
+      0.271535689825264,
+      0.06290576488941475
+    ],
+    "axis_peak_to_peak_mm": [
+      0.24599568620570222,
+      0.5354775581944554
+    ]
+  },
+  "axis_delta_from_remeasured_mm": [
+    -17.196743285920636,
+    -2.6501197235192646
+  ],
+  "residual_p90_range_mm": [
+    2.327773985132878,
+    4.394407911839149
+  ],
+  "requested_shift_only_approximate_mm": [
+    -20,
+    0
+  ],
+  "absolute_accuracy_validated": false
+}

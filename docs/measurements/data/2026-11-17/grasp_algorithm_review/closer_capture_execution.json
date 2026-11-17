@@ -1,0 +1,28 @@
+{
+  "sent": true,
+  "capture_after_stamp_ns": 1794923552507931382,
+  "sent_wall_time": 1794924809.1363873,
+  "completed": true,
+  "transitions": [
+    {
+      "state": "IDLE",
+      "wall_time": 1794924806.9054582
+    },
+    {
+      "state": "MOVE_TO_RECOGNITION",
+      "wall_time": 1794924809.1405077
+    },
+    {
+      "state": "VISION_SEARCH",
+      "wall_time": 1794924814.12595
+    },
+    {
+      "state": "RETURN_HOME",
+      "wall_time": 1794924816.5324438
+    },
+    {
+      "state": "IDLE",
+      "wall_time": 1794924820.9974735
+    }
+  ]
+}

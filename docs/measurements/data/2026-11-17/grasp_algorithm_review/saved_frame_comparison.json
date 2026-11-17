@@ -1,0 +1,604 @@
+{
+  "model_sha256": "d0892d275d9795595d0808136c692dbec5652b08e6e451589ebf01971b68ab08",
+  "device": "cpu",
+  "imgsz": 640,
+  "scope": "re-inferred saved frames; surface-to-surface comparison only",
+  "limitations": [
+    "No ground truth object centers or grasp contacts.",
+    "Saved snapshots are not the original action inference frames.",
+    "Nonzero RGB-depth time offsets are reported, not silently paired.",
+    "Camera-frame comparisons avoid reusing latest TF as image-time TF.",
+    "Dominant depth does not guarantee foreground segmentation."
+  ],
+  "source_sha256": {
+    "tools/vision_eval/compare_surface_localization.py": "60da78234c401bf8356318a5c9c1230a020635bf795d87b9c2a40ccaaa18af7d",
+    "src/vision_pkg/vision_pkg/surface_localization.py": "7758a6b6c414eab53b7ccb1944c07eb701cd8978fb41a074cce9d14f111b6c59",
+    "src/vision_pkg/vision_pkg/vision_utils.py": "c3d8c6ba297de31df159d6b91552f2287b916c06d3a2abe4c9aa32f94fa7fa34"
+  },
+  "rows": [
+    {
+      "session": "log/accepted_calibration_test_20261112_01/coke_trials",
+      "trial": 1,
+      "input_sha256": {
+        "log/accepted_calibration_test_20261112_01/coke_trials/session.json": "4d2086623a4bc5d42cc529a4109b944991acdca748cad1cbc8c849da95da18c5",
+        "log/accepted_calibration_test_20261112_01/coke_trials/001_rgb.png": "1a569df5e853cb2373a740cc2893fa3aa85e1ac3a7b7b7507d76b8247d3ba092",
+        "log/accepted_calibration_test_20261112_01/coke_trials/001_depth.png": "3044e298b70e078ad77bb189831209fde63731123c696ade4c3224d98b468795"
+      },
+      "rgb_depth_offset_ms": 0.0,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9070910811424255,
+        "x1": 661.7958984375,
+        "y1": 184.026123046875,
+        "x2": 822.692138671875,
+        "y2": 506.7755126953125
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.038768326550854396,
+        -0.009884685872016668,
+        0.322
+      ],
+      "candidate": {
+        "point": [
+          0.038768326550854396,
+          -0.009884685872016668,
+          0.322
+        ],
+        "pixel": [
+          742,
+          345
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "000_comparison.png"
+    },
+    {
+      "session": "log/accepted_calibration_test_20261112_01/coke_trials",
+      "trial": 2,
+      "input_sha256": {
+        "log/accepted_calibration_test_20261112_01/coke_trials/session.json": "4d2086623a4bc5d42cc529a4109b944991acdca748cad1cbc8c849da95da18c5",
+        "log/accepted_calibration_test_20261112_01/coke_trials/002_rgb.png": "d8056a8763b22277feb731cbfe54005df37d544574304cab6cf909d2c743219f",
+        "log/accepted_calibration_test_20261112_01/coke_trials/002_depth.png": "6ba27ee82c5094d0a216fda90d2b83daf53a9278c5f9e83602bb86241288a245"
+      },
+      "rgb_depth_offset_ms": 0.0,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9068487882614136,
+        "x1": 661.9400024414062,
+        "y1": 183.7133331298828,
+        "x2": 822.5780639648438,
+        "y2": 507.33551025390625
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.038768326550854396,
+        -0.00953141996322602,
+        0.322
+      ],
+      "candidate": {
+        "point": [
+          0.038768326550854396,
+          -0.00953141996322602,
+          0.322
+        ],
+        "pixel": [
+          742,
+          346
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "001_comparison.png"
+    },
+    {
+      "session": "log/accepted_calibration_test_20261112_01/coke_trials",
+      "trial": 3,
+      "input_sha256": {
+        "log/accepted_calibration_test_20261112_01/coke_trials/session.json": "4d2086623a4bc5d42cc529a4109b944991acdca748cad1cbc8c849da95da18c5",
+        "log/accepted_calibration_test_20261112_01/coke_trials/003_rgb.png": "f3dff98cf08861942055b7c75eb67819eac16da5968e8263ec174118272a592f",
+        "log/accepted_calibration_test_20261112_01/coke_trials/003_depth.png": "e29d449ab23d92713ba3f1807f957164c6c4d12c689a5cb59891dfa1d11079e7"
+      },
+      "rgb_depth_offset_ms": -33.357178,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9071189761161804,
+        "x1": 661.84912109375,
+        "y1": 184.2161865234375,
+        "x2": 822.623779296875,
+        "y2": 507.11456298828125
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.038647928021193365,
+        -0.009501819280110412,
+        0.321
+      ],
+      "candidate": {
+        "point": [
+          0.038647928021193365,
+          -0.009501819280110412,
+          0.321
+        ],
+        "pixel": [
+          742,
+          346
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "002_comparison.png"
+    },
+    {
+      "session": "log/approach_test_20261112_01/coke_trials_02",
+      "trial": 1,
+      "input_sha256": {
+        "log/approach_test_20261112_01/coke_trials_02/session.json": "bf0336b282ff2abb197bc796df7ddc914991c98e5cc56e7b454cc28fd6a97e0e",
+        "log/approach_test_20261112_01/coke_trials_02/001_rgb.png": "365bc09417a40c906ad3a62308b571045f0e628adadaa813535fbe0cf8107778",
+        "log/approach_test_20261112_01/coke_trials_02/001_depth.png": "3f16881332e187f43032ae3b6d41dd17e0c0cebe3453e2aa02257cf6cdccfbd4"
+      },
+      "rgb_depth_offset_ms": -100.072754,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9096216559410095,
+        "x1": 619.7377319335938,
+        "y1": 182.88523864746094,
+        "x2": 772.3585815429688,
+        "y2": 503.299560546875
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.02308154077641331,
+        -0.010854353532817789,
+        0.33
+      ],
+      "candidate": {
+        "point": [
+          0.02308154077641331,
+          -0.010854353532817789,
+          0.33
+        ],
+        "pixel": [
+          696,
+          343
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0031999999999999806,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "003_comparison.png"
+    },
+    {
+      "session": "log/approach_test_20261112_01/coke_trials_02",
+      "trial": 2,
+      "input_sha256": {
+        "log/approach_test_20261112_01/coke_trials_02/session.json": "bf0336b282ff2abb197bc796df7ddc914991c98e5cc56e7b454cc28fd6a97e0e",
+        "log/approach_test_20261112_01/coke_trials_02/002_rgb.png": "323b0df36e8f2b41ce165ba21b002038abbb26ddda4d8b54bbcce5c317aa1889",
+        "log/approach_test_20261112_01/coke_trials_02/002_depth.png": "18f8017839fcd785fd85fc0c7270784c7291888fdf3e02bff2e9cb7c820151f1"
+      },
+      "rgb_depth_offset_ms": 0.0,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9079095125198364,
+        "x1": 620.0909423828125,
+        "y1": 182.94078063964844,
+        "x2": 771.9061279296875,
+        "y2": 502.516357421875
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.023011596713454482,
+        -0.01082146155241531,
+        0.329
+      ],
+      "candidate": {
+        "point": [
+          0.023011596713454482,
+          -0.01082146155241531,
+          0.329
+        ],
+        "pixel": [
+          696,
+          343
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "004_comparison.png"
+    },
+    {
+      "session": "log/approach_test_20261112_01/coke_trials_02",
+      "trial": 3,
+      "input_sha256": {
+        "log/approach_test_20261112_01/coke_trials_02/session.json": "bf0336b282ff2abb197bc796df7ddc914991c98e5cc56e7b454cc28fd6a97e0e",
+        "log/approach_test_20261112_01/coke_trials_02/003_rgb.png": "c50fd75bcd6ee44414bdf14779646fd43d156b4682575ac65ff908679ad4b092",
+        "log/approach_test_20261112_01/coke_trials_02/003_depth.png": "34fd61c4738cabed00e47a031db2d3a1f39d6430d829b1c9455aa57c66b0200f"
+      },
+      "rgb_depth_offset_ms": 0.0,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9092376828193665,
+        "x1": 619.8616943359375,
+        "y1": 183.021240234375,
+        "x2": 772.0792236328125,
+        "y2": 503.451171875
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.02308154077641331,
+        -0.010854353532817789,
+        0.33
+      ],
+      "candidate": {
+        "point": [
+          0.02308154077641331,
+          -0.010854353532817789,
+          0.33
+        ],
+        "pixel": [
+          696,
+          343
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "005_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_01",
+      "trial": 1,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_01/session.json": "70493b193f85f9413e2542c143d52e3786d2c9011cb0c91a837e4d858e06f355",
+        "log/vision_baseline_20261111/coke_285mm_01/001_rgb.png": "1025ffb71d282977950f1ddce0a28438a6a32539efc3f1707ff2515762081c95",
+        "log/vision_baseline_20261111/coke_285mm_01/001_depth.png": "7793e4de2442adfe1f5ae01ecdd0ebbd9c24b268a7ec9a72a187e5eff2b152c6"
+      },
+      "rgb_depth_offset_ms": -66.7146,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9061663746833801,
+        "x1": 637.6243896484375,
+        "y1": 173.43727111816406,
+        "x2": 792.273193359375,
+        "y2": 492.2664794921875
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.030231055809309026,
+        -0.014606369462450239,
+        0.333
+      ],
+      "candidate": {
+        "point": [
+          0.030231055809309026,
+          -0.014606369462450239,
+          0.333
+        ],
+        "pixel": [
+          715,
+          333
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "006_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_01",
+      "trial": 2,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_01/session.json": "70493b193f85f9413e2542c143d52e3786d2c9011cb0c91a837e4d858e06f355",
+        "log/vision_baseline_20261111/coke_285mm_01/002_rgb.png": "28a145b02c82ecc9fc2d7580f24d47ab0339d7ce6a55dcf0d5d18769aa9f0bf9",
+        "log/vision_baseline_20261111/coke_285mm_01/002_depth.png": "b87ccec2abdc4a82fd7a7caad3fce7ae5f85292786565e26efebdf6e98a0f7bb"
+      },
+      "rgb_depth_offset_ms": -33.355957,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9034777283668518,
+        "x1": 637.9310302734375,
+        "y1": 173.1519775390625,
+        "x2": 792.5308837890625,
+        "y2": 492.07232666015625
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.030140271857929717,
+        -0.01456250649109153,
+        0.332
+      ],
+      "candidate": {
+        "point": [
+          0.030140271857929717,
+          -0.014926743390838406,
+          0.332
+        ],
+        "pixel": [
+          715,
+          332
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        -0.3642368997468764,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.3642368997468764,
+      "overlay": "007_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_01",
+      "trial": 3,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_01/session.json": "70493b193f85f9413e2542c143d52e3786d2c9011cb0c91a837e4d858e06f355",
+        "log/vision_baseline_20261111/coke_285mm_01/003_rgb.png": "50a46824b0eadea46d3ed98666ee4a379d7b90a065200a2caa0404c06ba93d50",
+        "log/vision_baseline_20261111/coke_285mm_01/003_depth.png": "cdf84d234f3a5a19677b5a1c9a8b5f861cd3fd3113a052a2ea29f7110a6faa60"
+      },
+      "rgb_depth_offset_ms": 33.357666,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9054972529411316,
+        "x1": 637.967529296875,
+        "y1": 172.96533203125,
+        "x2": 792.2962646484375,
+        "y2": 492.42218017578125
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        0.030231055809309026,
+        -0.014606369462450239,
+        0.333
+      ],
+      "candidate": {
+        "point": [
+          0.030231055809309026,
+          -0.014606369462450239,
+          0.333
+        ],
+        "pixel": [
+          715,
+          333
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "008_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_left50_01",
+      "trial": 1,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_left50_01/session.json": "15199b7e40ca3faa73313af373f223addf53b878f645887b9aeb83d9361c8bd2",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/001_rgb.png": "b93747d112e25a0a4390c4c50743c81abe7c7f4b9d5cb6ebca7ec7f0f287bf34",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/001_depth.png": "e4fc5b9efe7fa7a38f465c934be8d61a899fa3a2ca29dff9d58c73b665cd20a5"
+      },
+      "rgb_depth_offset_ms": 0.0,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9053797721862793,
+        "x1": 507.2233581542969,
+        "y1": 170.90464782714844,
+        "x2": 657.3896484375,
+        "y2": 489.228271484375
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        -0.01851200990151771,
+        -0.01584383426491448,
+        0.336
+      ],
+      "candidate": {
+        "point": [
+          -0.01851200990151771,
+          -0.01584383426491448,
+          0.336
+        ],
+        "pixel": [
+          582,
+          330
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "009_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_left50_01",
+      "trial": 2,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_left50_01/session.json": "15199b7e40ca3faa73313af373f223addf53b878f645887b9aeb83d9361c8bd2",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/002_rgb.png": "b07a2d0dff5998a4583d026d63f6e95999a80671a12b14cf0ed0b5fbf61553c1",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/002_depth.png": "4104c7896c241607a2eeb00ca8c1c0f94d9929a345f802e1fc80ee2c9805aba7"
+      },
+      "rgb_depth_offset_ms": 33.356689,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9029947519302368,
+        "x1": 506.88818359375,
+        "y1": 170.5373992919922,
+        "x2": 657.3741455078125,
+        "y2": 489.03570556640625
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        -0.01851200990151771,
+        -0.01584383426491448,
+        0.336
+      ],
+      "candidate": {
+        "point": [
+          -0.01851200990151771,
+          -0.01584383426491448,
+          0.336
+        ],
+        "pixel": [
+          582,
+          330
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "010_comparison.png"
+    },
+    {
+      "session": "log/vision_baseline_20261111/coke_285mm_left50_01",
+      "trial": 3,
+      "input_sha256": {
+        "log/vision_baseline_20261111/coke_285mm_left50_01/session.json": "15199b7e40ca3faa73313af373f223addf53b878f645887b9aeb83d9361c8bd2",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/003_rgb.png": "f2b24cab3c11227e1c10268f0c4fc3abe3453cf6b4fc6a1e36b287b74689c9ff",
+        "log/vision_baseline_20261111/coke_285mm_left50_01/003_depth.png": "4c5ad50043d33ee403d2aa237ef16eb63ca10d5bf661818637907d00c71d8ec5"
+      },
+      "rgb_depth_offset_ms": -33.355957,
+      "detection": {
+        "class_name": "coke",
+        "confidence": 0.9055397510528564,
+        "x1": 506.9772644042969,
+        "y1": 171.17127990722656,
+        "x2": 657.66943359375,
+        "y2": 489.39501953125
+      },
+      "legacy_source": "center",
+      "legacy_point": [
+        -0.01851200990151771,
+        -0.01584383426491448,
+        0.336
+      ],
+      "candidate": {
+        "point": [
+          -0.01851200990151771,
+          -0.01584383426491448,
+          0.336
+        ],
+        "pixel": [
+          582,
+          330
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "camera_delta_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance_between_methods_mm": 0.0,
+      "overlay": "011_comparison.png"
+    }
+  ],
+  "summary": {
+    "frames": 12,
+    "detections": 12,
+    "legacy_valid": 12,
+    "candidate_valid": 12,
+    "legacy_fallbacks": 0,
+    "exact_timestamp_pairs": 5
+  }
+}

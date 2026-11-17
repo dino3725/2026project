@@ -1,0 +1,29 @@
+{
+  "measurement": "wrist_joint_rotation_axis_height_above_wheel_support",
+  "source": "user ruler measurement reported in conversation",
+  "user_verbatim": "29.3센치 정도돼",
+  "user_value_cm": 29.3,
+  "measured_mm": 293.0,
+  "measurement_quality": "approximate",
+  "measurement_uncertainty_mm": null,
+  "pose": "HOME unchanged by user report",
+  "model_reference_link": "link5",
+  "base_origin_above_support_mm": 10,
+  "model_prediction_mean_mm": 292.8445231286339,
+  "model_prediction_range_mm": [
+    292.81737734859314,
+    293.0171380507288
+  ],
+  "measured_minus_model_mean_mm": 0.15547687136609056,
+  "model_capture_simultaneous_with_ruler_measurement": false,
+  "interpretation": [
+    "Consistent at the precision of the approximate ruler measurement, not 0.16 mm certified accuracy.",
+    "Supports wrist center height at this HOME pose; does not validate finger tip height, wrist pitch, horizontal position or all joint zero references.",
+    "Does not justify uniform arm height adjustment or replacement of camera extrinsics."
+  ],
+  "runtime_parameters_changed": false,
+  "input_sha256": {
+    "docs/measurements/data/2026-11-18/grasp_contact_audit/home_capture.json": "c1b2a8762d9429cf3e2f4c74490fb5c18acbfb189d3ae5b19728d7750b6164e5",
+    "log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546"
+  }
+}

@@ -1,0 +1,723 @@
+{
+  "assumptions": {
+    "support_z_base_m": 0.07,
+    "upright_coke_height_m": 0.134,
+    "radius_m": 0.0265,
+    "max_residual_p90_m": 0.005
+  },
+  "limitations": [
+    "Axis hypotheses not independently measured.",
+    "Contact example is not an executable tool goal.",
+    "ROI is not a segmentation mask."
+  ],
+  "frames": [
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3548,
+        "inlier_fraction": 0.7669109357384442,
+        "axis_hypothesis_xy_m": [
+          0.30513149498353787,
+          0.011519191402982139
+        ],
+        "residual_p90_m": 0.00978690418176896,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2772531381116834,
+        0.01121095862453263,
+        0.16094050967355145
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627067098174.json",
+      "rgb_stamp_ns": 1794922626318854980,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627067098174.json": "0e7d816b88e2c19509798f6b2b60e95b2a2450a9157b49948c0e6bca410f74bd",
+        "log/eateded_20261117_223450_253950/observations/1794922627067098174_rgb.png": "0453bad0b9ac1cc70ddc40cf996963f3b4c64c996d305a5649371050a1a8a8df",
+        "log/eateded_20261117_223450_253950/observations/1794922627067098174_depth.npy": "f1f48772e520dd3fba717e8688a6fe7d637ebc8a9b5fbcea2cddb5fc3b6a75aa"
+      },
+      "legacy_surface_base_m": [
+        0.2772531381116834,
+        0.01121095862453263,
+        0.16094050967355145
+      ],
+      "overlay": "1794922627067098174_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3623,
+        "inlier_fraction": 0.7742202594534916,
+        "axis_hypothesis_xy_m": [
+          0.30531570403598496,
+          0.011570676900428473
+        ],
+        "residual_p90_m": 0.009333710597555334,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2771355945017913,
+        0.011210958624532665,
+        0.16121286350069536
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627215458807.json",
+      "rgb_stamp_ns": 1794922627052715576,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627215458807.json": "6b96f2261cf8f8c60ff89b92fdead9367f64c161f7d9c1d06c645854b943a0b8",
+        "log/eateded_20261117_223450_253950/observations/1794922627215458807_rgb.png": "d99f5b0a5ad4533e51dc8874295556cc5fbd931db2d0ead12a53aa914b9fa3ac",
+        "log/eateded_20261117_223450_253950/observations/1794922627215458807_depth.npy": "16db76f36fb646d2277d9b089adbf13f124c418ff98e1ca592d3887ef8efb2eb"
+      },
+      "legacy_surface_base_m": [
+        0.2774130354717185,
+        0.011216557776324198,
+        0.1614734831699208
+      ],
+      "overlay": "1794922627215458807_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.030740826783155532,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          713,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3649,
+        "inlier_fraction": 0.7826801863524253,
+        "axis_hypothesis_xy_m": [
+          0.30501191328130084,
+          0.011749430016625777
+        ],
+        "residual_p90_m": 0.009333583183427004,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.27708642269837974,
+        0.011591503478018936,
+        0.1607280703355431
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627383067346.json",
+      "rgb_stamp_ns": 1794922627252861084,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627383067346.json": "020e62c5cbbac2a87b4c49fb14082b3720431c41fa7995fc873b89a09bc016fa",
+        "log/eateded_20261117_223450_253950/observations/1794922627383067346_rgb.png": "9e5a7d504fdf40345c6b33deaff0da169fa2843f55e4d6b25760dcffca754f95",
+        "log/eateded_20261117_223450_253950/observations/1794922627383067346_depth.npy": "8370b82dc3404353f29a2b486f01a510a61604ff1aaa41b37f74c2193278d9b7"
+      },
+      "legacy_surface_base_m": [
+        0.2770864226983797,
+        0.011591503478018936,
+        0.16072807033554323
+      ],
+      "overlay": "1794922627383067346_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.030740826783155532,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          713,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3591,
+        "inlier_fraction": 0.773322194374826,
+        "axis_hypothesis_xy_m": [
+          0.30501855174333997,
+          0.011578783224472108
+        ],
+        "residual_p90_m": 0.00972394213818258,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.27708642269837974,
+        0.011591503478018936,
+        0.1607280703355431
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627519199603.json",
+      "rgb_stamp_ns": 1794922627352933838,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627519199603.json": "11c9fc10af5965bbaa69d450fa649ff3e411fda02ff0e6fc50730613af501cf6",
+        "log/eateded_20261117_223450_253950/observations/1794922627519199603_rgb.png": "410a2062dd20a61f307c8540ad4bf2580570902c2150e3008eaf180bc5ed69ed",
+        "log/eateded_20261117_223450_253950/observations/1794922627519199603_depth.npy": "224bde936d4007516fd55b1095039699efea0ee1e27cbfde43c05df5ae240443"
+      },
+      "legacy_surface_base_m": [
+        0.2770864226983797,
+        0.011591503478018936,
+        0.16072807033554323
+      ],
+      "overlay": "1794922627519199603_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.030740826783155532,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          713,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3483,
+        "inlier_fraction": 0.7671547516508757,
+        "axis_hypothesis_xy_m": [
+          0.3046724103631689,
+          0.011660084835881407
+        ],
+        "residual_p90_m": 0.00966235231698836,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.27710433647325683,
+        0.01159150347801895,
+        0.16093005128094062
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627751861066.json",
+      "rgb_stamp_ns": 1794922627586437256,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627751861066.json": "4edfb20219ffaf214bd2aa14797d47c2d30bfa14279d626530c3f1bc5c0a9560",
+        "log/eateded_20261117_223450_253950/observations/1794922627751861066_rgb.png": "b6f9c06e01da71b019215859a06d18293ce97df15cd4a923f18cacf30aa8fb47",
+        "log/eateded_20261117_223450_253950/observations/1794922627751861066_depth.npy": "475030315d3b3f5e47347f696c17e61a4a9528844ad53bbffceadff0a8d406e6"
+      },
+      "legacy_surface_base_m": [
+        0.27710433647325683,
+        0.01159150347801895,
+        0.16093005128094062
+      ],
+      "overlay": "1794922627751861066_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3588,
+        "inlier_fraction": 0.7778706800445931,
+        "axis_hypothesis_xy_m": [
+          0.3049198017030205,
+          0.011439286591807391
+        ],
+        "residual_p90_m": 0.009209316226322083,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2770929050331393,
+        0.01121095862453272,
+        0.16072933829037545
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922627938229111.json",
+      "rgb_stamp_ns": 1794922627753225342,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922627938229111.json": "60569e4957b563205a2d31c4c15c87fa2e49b5cf60de77b750c0ff0df6afc418",
+        "log/eateded_20261117_223450_253950/observations/1794922627938229111_rgb.png": "cfa0419a543df0813cc4fcbd1cc0eb80eb9e5cd16c47925c5b51e9905a4716c0",
+        "log/eateded_20261117_223450_253950/observations/1794922627938229111_depth.npy": "4fa9bb22a8fc323720697a8b50f95a41b9b84c0adf7d580f8d365a45f78e11a0"
+      },
+      "legacy_surface_base_m": [
+        0.27709290503313927,
+        0.01121095862453272,
+        0.1607293382903756
+      ],
+      "overlay": "1794922627938229111_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3576,
+        "inlier_fraction": 0.7748881431767338,
+        "axis_hypothesis_xy_m": [
+          0.30474161306248615,
+          0.011981829722646973
+        ],
+        "residual_p90_m": 0.009532246263150435,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2770929050331393,
+        0.01121095862453272,
+        0.16072933829037545
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628133296551.json",
+      "rgb_stamp_ns": 1794922627953375977,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628133296551.json": "9cfa22d57d4e1d9a4e2d0bfbd4a781d1705df3993680161b3c183ebe54699f62",
+        "log/eateded_20261117_223450_253950/observations/1794922628133296551_rgb.png": "4388af42360e1f9c39bddb05a96321eaa1c07e613eb3357eb56ce7185a3a6749",
+        "log/eateded_20261117_223450_253950/observations/1794922628133296551_depth.npy": "8f8f0c0468d5f3cb02c73564ae1f8c3281ac6dbaaa28bd17cc24de5e6ba1e1e4"
+      },
+      "legacy_surface_base_m": [
+        0.27709290503313927,
+        0.01121095862453272,
+        0.1607293382903756
+      ],
+      "overlay": "1794922628133296551_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3592,
+        "inlier_fraction": 0.7761692650334076,
+        "axis_hypothesis_xy_m": [
+          0.3046590176923177,
+          0.012130114234474833
+        ],
+        "residual_p90_m": 0.009852428778577341,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.27708080223658926,
+        0.011590042811026144,
+        0.16072933829037553
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628265838480.json",
+      "rgb_stamp_ns": 1794922628053451660,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628265838480.json": "ba9b909a09e15029a961fc749f18ae89c1368373e8ca145402de574691db29ac",
+        "log/eateded_20261117_223450_253950/observations/1794922628265838480_rgb.png": "0cb0687747eff41c384ef8eaebce4726c2d4e1e5c273ec44941776b20f76cd14",
+        "log/eateded_20261117_223450_253950/observations/1794922628265838480_depth.npy": "f854871b149fd31d5a400c49f2733dc64ec0b0716fb3db812a9672ef6c3f5bb7"
+      },
+      "legacy_surface_base_m": [
+        0.2770808022365892,
+        0.011590042811026168,
+        0.1607293382903756
+      ],
+      "overlay": "1794922628265838480_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.03065223650424154,
+          -0.028462458138109537,
+          0.34600000000000003
+        ],
+        "pixel": [
+          713,
+          298
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3589,
+        "inlier_fraction": 0.7787684591808303,
+        "axis_hypothesis_xy_m": [
+          0.30502761132659617,
+          0.01134783375709294
+        ],
+        "residual_p90_m": 0.009626532203177867,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2766191301846396,
+        0.011675257644605436,
+        0.1616616295518637
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628384337476.json",
+      "rgb_stamp_ns": 1794922628220244385,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628384337476.json": "d3c8665d49c013c02d7c24c446e79f12f5e4e785c7235126da7fbcdbd7a6b8f9",
+        "log/eateded_20261117_223450_253950/observations/1794922628384337476_rgb.png": "80b296c7a97a1e11cf1535c5b824fcdb4ca4cff3cd65028b026c3bfdcfee5b11",
+        "log/eateded_20261117_223450_253950/observations/1794922628384337476_depth.npy": "a045051692d4acd75d6efb32e3a150908ae726aa63dfd0b732ed32cb2c83c6fb"
+      },
+      "legacy_surface_base_m": [
+        0.2766191301846396,
+        0.011675257644605436,
+        0.16166162955186386
+      ],
+      "overlay": "1794922628384337476_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3563,
+        "inlier_fraction": 0.7751894470951446,
+        "axis_hypothesis_xy_m": [
+          0.30488863599955707,
+          0.011718006245515002
+        ],
+        "residual_p90_m": 0.009775038271030566,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2770929050331393,
+        0.01121095862453272,
+        0.16072933829037545
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628551415213.json",
+      "rgb_stamp_ns": 1794922628387037354,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628551415213.json": "9523850752fa9580452a44d9ed7e74b0d4122f1f49de6853df5323fd533f5a89",
+        "log/eateded_20261117_223450_253950/observations/1794922628551415213_rgb.png": "e2e4cd3045d10cfb4c00db513fddb4fba0940195db7fda70bea0a1eed9d93181",
+        "log/eateded_20261117_223450_253950/observations/1794922628551415213_depth.npy": "a93b89741883fe2d62bc1deb98d7889ef3f8f2e434565ff5292d5e5cd8c68d3c"
+      },
+      "legacy_surface_base_m": [
+        0.27709290503313927,
+        0.01121095862453272,
+        0.1607293382903756
+      ],
+      "overlay": "1794922628551415213_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031031741840740774,
+          -0.028462458138109537,
+          0.34600000000000003
+        ],
+        "pixel": [
+          714,
+          298
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3556,
+        "inlier_fraction": 0.7702474690663667,
+        "axis_hypothesis_xy_m": [
+          0.3047036072638586,
+          0.011881369451181439
+        ],
+        "residual_p90_m": 0.009758015948510461,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2766255938383192,
+        0.011295809462166732,
+        0.16166289385264757
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628738972227.json",
+      "rgb_stamp_ns": 1794922628453754639,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628738972227.json": "161c8de28e03cfb673bcc7ca07f8455b5a5a3361528d18a6fb84727fa8a51c38",
+        "log/eateded_20261117_223450_253950/observations/1794922628738972227_rgb.png": "98eab4cba277035d452d37877cc01dd030d5463d5ae80db40b3a5eacf9dd7d35",
+        "log/eateded_20261117_223450_253950/observations/1794922628738972227_depth.npy": "61b4d05fe490d5ba62d7d114d2f75bdd2dc94d5fb573568dda34016d8387189a"
+      },
+      "legacy_surface_base_m": [
+        0.27662559383831914,
+        0.011295809462166732,
+        0.16166289385264773
+      ],
+      "overlay": "1794922628738972227_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031121428955887424,
+          -0.028164026191633832,
+          0.34700000000000003
+        ],
+        "pixel": [
+          714,
+          299
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3620,
+        "inlier_fraction": 0.7798342541436464,
+        "axis_hypothesis_xy_m": [
+          0.3048806706138592,
+          0.011468640172147734
+        ],
+        "residual_p90_m": 0.00967251713091794,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2770929050331393,
+        0.01121095862453272,
+        0.16072933829037545
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922628865177592.json",
+      "rgb_stamp_ns": 1794922628687265381,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922628865177592.json": "aa1be6c6e187bce41e3ee584e321437a82362cfeefc3c587bc664e3393004a12",
+        "log/eateded_20261117_223450_253950/observations/1794922628865177592_rgb.png": "d23c706b8a5cdac62ca796782957e5090628970c413f2dc127dc7fc6b0485eb5",
+        "log/eateded_20261117_223450_253950/observations/1794922628865177592_depth.npy": "72ae47326974ecec7cc906015b688177c97b99f3b01c03e86c1d81b294eadf7a"
+      },
+      "legacy_surface_base_m": [
+        0.27709290503313927,
+        0.01121095862453272,
+        0.1607293382903756
+      ],
+      "overlay": "1794922628865177592_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.031031741840740774,
+          -0.028462458138109537,
+          0.34600000000000003
+        ],
+        "pixel": [
+          714,
+          298
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3494,
+        "inlier_fraction": 0.7704636519748139,
+        "axis_hypothesis_xy_m": [
+          0.30479186390605945,
+          0.011678602765893404
+        ],
+        "residual_p90_m": 0.009434472118814879,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2766255938383192,
+        0.011295809462166732,
+        0.16166289385264757
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922629034449995.json",
+      "rgb_stamp_ns": 1794922628854054688,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922629034449995.json": "6de5d31b0a0e9dfda396a306b81d6315077ad96f0581627b97155eae7e12f5d1",
+        "log/eateded_20261117_223450_253950/observations/1794922629034449995_rgb.png": "fda76b3b459bdea570efb7159bfbd9d3b662cbd354ee941e49c13ae7dc23bf30",
+        "log/eateded_20261117_223450_253950/observations/1794922629034449995_depth.npy": "c349576e6c7fec3714d28edf1ecc66fda9c923a104ec8e8b366f6b79a1716fef"
+      },
+      "legacy_surface_base_m": [
+        0.27662559383831914,
+        0.011295809462166732,
+        0.16166289385264773
+      ],
+      "overlay": "1794922629034449995_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          0.03065223650424154,
+          -0.028462458138109537,
+          0.34600000000000003
+        ],
+        "pixel": [
+          713,
+          298
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": false,
+        "axis_xy_m": null,
+        "body_points": 3566,
+        "inlier_fraction": 0.7807066741447,
+        "axis_hypothesis_xy_m": [
+          0.30510723617103847,
+          0.011672446984600198
+        ],
+        "residual_p90_m": 0.009385338737492312,
+        "max_residual_p90_m": 0.005,
+        "reason": "body residual exceeds quality limit"
+      },
+      "candidate_surface_base_m": [
+        0.2766191301846396,
+        0.011675257644605436,
+        0.1616616295518637
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794922629224536245.json",
+      "rgb_stamp_ns": 1794922628920769531,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794922629224536245.json": "2ce03761da1c64cc5d3badb433aec26d3295c7cbc3ec3071189358185c1eb7b2",
+        "log/eateded_20261117_223450_253950/observations/1794922629224536245_rgb.png": "d549883f0fd1b76e03a9e004c29cdab6177e51782401085d22596890f2585f9b",
+        "log/eateded_20261117_223450_253950/observations/1794922629224536245_depth.npy": "9cdcc7094b93a95a602251d6d7590ca3ed897c096e374860d8296d46c7f02d90"
+      },
+      "legacy_surface_base_m": [
+        0.2766191301846396,
+        0.011675257644605436,
+        0.16166162955186386
+      ],
+      "overlay": "1794922629224536245_geometry.png"
+    }
+  ],
+  "source_sha256": {
+    "tools/vision_eval/analyze_grasp_observations.py": "ea5ed481548bce4c70dc05428f6465cdf9c9f13f4fbc43952f0c083a118048dd",
+    "src/vision_pkg/vision_pkg/object_geometry.py": "ceee63a1a2dd624e17a43c247e7f77823fc433b8eb289e31d30a3ffe1fcda2bd"
+  },
+  "summary": {
+    "frames": 14,
+    "axis_accepted": 0
+  }
+}

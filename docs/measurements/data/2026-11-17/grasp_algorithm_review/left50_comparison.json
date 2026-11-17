@@ -1,0 +1,64 @@
+{
+  "requested_displacement_mm": [
+    0,
+    50,
+    0
+  ],
+  "reference_quality": "user placement; object/support configuration changed in images; pure lateral displacement not verified",
+  "center": {
+    "frames": 14,
+    "axis_accepted": 14,
+    "axis_mean_m": [
+      0.30491929515329474,
+      0.011671164021839275
+    ],
+    "axis_peak_to_peak_mm": [
+      0.6566863436672787,
+      0.7822804773818924
+    ]
+  },
+  "left": {
+    "frames": 13,
+    "axis_accepted": 13,
+    "axis_mean_m": [
+      0.33601430943150973,
+      0.06453210103317022
+    ],
+    "axis_peak_to_peak_mm": [
+      0.2864688739916965,
+      0.7111546544227021
+    ]
+  },
+  "legacy_surface_mean_before_mm": [
+    276.99180184774866,
+    11.398431311258218,
+    161.07828021831435
+  ],
+  "legacy_surface_mean_after_mm": [
+    309.3711923473098,
+    64.47710717855989,
+    157.27328004366234
+  ],
+  "legacy_surface_delta_mm": [
+    32.37939049956107,
+    53.07867586730168,
+    -3.805000174652018
+  ],
+  "axis_delta_xy_mm": [
+    31.095014278214983,
+    52.86093701133095
+  ],
+  "mean_camera_translation_delta_mm": [
+    0.029098101795344694,
+    -0.007491784284108238,
+    -0.017700341827464605
+  ],
+  "first_frame_camera_rotation_delta_deg": 0.033897745580051236,
+  "scene_observations": [
+    "Printed board present in first capture, absent in second.",
+    "Support box image position changed.",
+    "Planar matching not used: only four ambiguous feature matches."
+  ],
+  "arm_status": "HOME / IDLE after recognition; Pick disabled",
+  "interpretation": "Neither absolute accuracy nor superiority over legacy established by this pair."
+}

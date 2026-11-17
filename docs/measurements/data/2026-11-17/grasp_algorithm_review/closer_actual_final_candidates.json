@@ -1,0 +1,31 @@
+{
+  "executed": false,
+  "actual_capture": true,
+  "hardware_tcp_validated": false,
+  "candidates": [
+    {
+      "top_inset_mm": 25.0,
+      "pitch_deg": 0.0,
+      "approach_height_mm": 74.72719200703395,
+      "nominal_finger_clearance_mm": 17.609008365948643
+    },
+    {
+      "top_inset_mm": 40.0,
+      "pitch_deg": 0.0,
+      "approach_height_mm": 89.72719200703395,
+      "nominal_finger_clearance_mm": 17.609008365948643
+    },
+    {
+      "top_inset_mm": 40.0,
+      "pitch_deg": 10.0,
+      "approach_height_mm": 92.81167471854364,
+      "nominal_finger_clearance_mm": 20.750608334872663
+    },
+    {
+      "top_inset_mm": 55.0,
+      "pitch_deg": 0.0,
+      "approach_height_mm": 104.72719200703395,
+      "nominal_finger_clearance_mm": 17.609008365948643
+    }
+  ]
+}

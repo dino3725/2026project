@@ -1,0 +1,715 @@
+{
+  "executed": false,
+  "execution_authorized": false,
+  "current_nominal_inner_width_m": 0.041999999999999996,
+  "planned_open_inner_width_m": 0.07999999999999999,
+  "opening_required_before_descent": true,
+  "nominal_camera_source": "https://raw.githubusercontent.com/realsenseai/realsense-ros/ros2-master/realsense2_description/urdf/_d435.urdf.xacro",
+  "nominal_camera_size_xyz_m": [
+    0.02505,
+    0.09,
+    0.025
+  ],
+  "nominal_camera_center_in_camera_link_m": [
+    0.0,
+    -0.0175,
+    0.0
+  ],
+  "assumptions": [
+    "Nominal meshes, camera-link mounting and upright rigid can; not measured clearance.",
+    "Finger mesh slices enclose the mesh solid; positive separating gap proves only those bounds are separated.",
+    "Nonpositive separating gap is possible overlap, not proof of physical collision.",
+    "Camera body source excludes custom mount/cables; original broad envelope is reported separately.",
+    "Descent uses fully open fingers, not current feedback opening.",
+    "Lift attaches the can rigidly at the first lift pose, with no slip.",
+    "Finger/can contact is intentional after grasp; fingers/table remain checked.",
+    "Sampled model review is not full environment, self-collision or physical safety certification."
+  ],
+  "input_sha256": {
+    "log/grasp_segments_20261118/reachability.json": "cb3a0b356d06481adb9eefeda664ce72d1e22e7fd8f3ce59238a938635ec34e6",
+    "log/grasp_quality_gate_20261117/nominal_gripper_reference_v2.json": "5755cd7dfa03df2368701942d4d191f4c05d921fdbe0277e0e0d950b8acbc931",
+    "log/grasp_segments_20261118/capture/capture.json": "a0f4c1a328765fce1227ce25f09bf77cb28e9d644aa483095e5974e49025677c",
+    "/home/fcsl/2026project/log/measured_model_20261111/measured.urdf": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+    "/home/fcsl/2026project/src/vision_pkg/config/camera_mount.yaml": "a83de472ffd9b32492b9bf05eb18cbbbb544bb8d005457bf07acb43cfd82cf02",
+    "/home/fcsl/2026project/tools/vision_eval/review_grasp_segments.py": "a27c9768ed279632881fedc1a2f08e82faee6cf18dcc17f00169e3a247886ebe",
+    "/home/fcsl/2026project/tools/vision_eval/grasp_collision_geometry.py": "d8bd3d9ec4cfc0eaa3906e7bf9038c9fa58df363487a9ea92f18c21b5ac849c1"
+  },
+  "finger_mesh_sha256": {
+    "/opt/ros/humble/share/turtlebot3_manipulation_description/meshes/open_manipulator_x/gripper_left_palm.stl": "fb4dfabe68712bbba34deb9f8469f9187009c07579dccd5401b82d08de425267",
+    "/opt/ros/humble/share/turtlebot3_manipulation_description/meshes/open_manipulator_x/gripper_right_palm.stl": "a5bfc10a067c806a19062e2fcb58989623a09edc0e9bbc4fd735a56d83f99752"
+  },
+  "candidates": [
+    {
+      "index": 0,
+      "top_inset_m": 0.025,
+      "stages": [
+        {
+          "leg": "descent",
+          "samples": 160,
+          "min_gaps_m": {
+            "link2/table": 0.15340041237050672,
+            "link2/can": 0.3199918576068165,
+            "link3/table": 0.14066491431253775,
+            "link3/can": 0.18662233303054748,
+            "link4/table": 0.09235307299253502,
+            "link4/can": 0.07015799896029834,
+            "link5/table": 0.09186573798478848,
+            "link5/can": 0.02913456824092519,
+            "finger/table": 0.08433309727165739,
+            "finger/can": 0.013491743489019891,
+            "camera_body_nominal/table": 0.14175459513001495,
+            "camera_body_nominal/can": 0.007754595130014946,
+            "camera_envelope/table": 0.09682691199689468,
+            "camera_envelope/can": -0.034178104568415496
+          },
+          "possible_overlap_counts": {
+            "camera_envelope/can": 72
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 88,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0002777490572701824
+            },
+            {
+              "sample": 89,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0009890767417553709
+            },
+            {
+              "sample": 90,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0016959665989306136
+            },
+            {
+              "sample": 91,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.002398739556648044
+            },
+            {
+              "sample": 92,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.003097080037001196
+            },
+            {
+              "sample": 93,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.003097080037001196
+            },
+            {
+              "sample": 94,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0037901940828929254
+            },
+            {
+              "sample": 95,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.004478093856575577
+            },
+            {
+              "sample": 96,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.005161003601477504
+            },
+            {
+              "sample": 97,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.005839075962890593
+            },
+            {
+              "sample": 98,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.006512403530609466
+            },
+            {
+              "sample": 99,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.007181030311373612
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 0.0,
+            "final": 0.0
+          },
+          "max_between_sample_motion_bound_m": 0.007680337505219523,
+          "grasp_closure_certified": false
+        },
+        {
+          "leg": "lift",
+          "samples": 35,
+          "min_gaps_m": {
+            "link2/table": 0.15340041237048324,
+            "link2/can": 0.31791661328003346,
+            "link3/table": 0.14066491431253775,
+            "link3/can": 0.18621616770136717,
+            "link4/table": 0.09235307299253502,
+            "link4/can": 0.06991252851804164,
+            "link5/table": 0.09186573798478848,
+            "link5/can": 0.02913456824092512,
+            "finger/table": 0.08433309727165739,
+            "camera_body_nominal/table": 0.14175459513001495,
+            "camera_body_nominal/can": 0.007754594247034733,
+            "camera_envelope/table": 0.09682691199689467,
+            "camera_envelope/can": -0.03417810456841559
+          },
+          "possible_overlap_counts": {
+            "camera_envelope/can": 35
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 0,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841554
+            },
+            {
+              "sample": 1,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841548
+            },
+            {
+              "sample": 2,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841551
+            },
+            {
+              "sample": 3,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0341781045684155
+            },
+            {
+              "sample": 4,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841548
+            },
+            {
+              "sample": 5,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.034178104568415545
+            },
+            {
+              "sample": 6,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.034178104568415545
+            },
+            {
+              "sample": 7,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.034178104568415524
+            },
+            {
+              "sample": 8,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.034178104568415524
+            },
+            {
+              "sample": 9,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841557
+            },
+            {
+              "sample": 10,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.03417810456841544
+            },
+            {
+              "sample": 11,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0341781045684155
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 2.7755575615628914e-17,
+            "final": 0.02806961437994257
+          },
+          "max_between_sample_motion_bound_m": 0.005118220438011178,
+          "grasp_closure_certified": false
+        }
+      ],
+      "geometry_review": {
+        "nominal_geometry_accepted": true,
+        "reasons": [],
+        "min_nominal_separating_gap_m": 0.007754594247034733,
+        "minimum_gap_m": 0.005,
+        "mounting_and_cables_verified": false,
+        "execution_authorized": false
+      },
+      "total_joint_travel_rad": 6.350708318287465
+    },
+    {
+      "index": 3,
+      "top_inset_m": 0.04,
+      "stages": [
+        {
+          "leg": "descent",
+          "samples": 177,
+          "min_gaps_m": {
+            "link2/table": 0.15340041237052565,
+            "link2/can": 0.31999185607117303,
+            "link3/table": 0.1346811269473132,
+            "link3/can": 0.18553005254491417,
+            "link4/table": 0.08108297186317298,
+            "link4/can": 0.06916465038172799,
+            "link5/table": 0.07888568074739626,
+            "link5/can": 0.02639973132914672,
+            "finger/table": 0.07085235793105292,
+            "finger/can": 0.013479593464000312,
+            "camera_body_nominal/table": 0.12724548413645942,
+            "camera_body_nominal/can": -0.006754515863540591,
+            "camera_envelope/table": 0.08058975461208308,
+            "camera_envelope/can": -0.04974846855434842
+          },
+          "possible_overlap_counts": {
+            "camera_envelope/can": 99,
+            "camera_body_nominal/can": 26
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 78,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0002521508887577059
+            },
+            {
+              "sample": 79,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0010667798622265717
+            },
+            {
+              "sample": 80,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0010667798622265717
+            },
+            {
+              "sample": 81,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0018750193898122228
+            },
+            {
+              "sample": 82,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0026768403685097156
+            },
+            {
+              "sample": 83,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0034722440256929263
+            },
+            {
+              "sample": 84,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.004261274030061227
+            },
+            {
+              "sample": 85,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.005044007821925552
+            },
+            {
+              "sample": 86,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.005820547984918198
+            },
+            {
+              "sample": 87,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.006591013659564306
+            },
+            {
+              "sample": 88,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.007355531999041841
+            },
+            {
+              "sample": 89,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.008114229667357115
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 0.0,
+            "final": 0.0
+          },
+          "max_between_sample_motion_bound_m": 0.00809401681037026,
+          "grasp_closure_certified": false
+        },
+        {
+          "leg": "lift",
+          "samples": 43,
+          "min_gaps_m": {
+            "link2/table": 0.15340041237048324,
+            "link2/can": 0.3171301246852351,
+            "link3/table": 0.1346811269473132,
+            "link3/can": 0.1847402038032872,
+            "link4/table": 0.08108297186317298,
+            "link4/can": 0.06895129395955174,
+            "link5/table": 0.07888568074739624,
+            "link5/can": 0.02639973132914667,
+            "finger/table": 0.07085235793105289,
+            "camera_body_nominal/table": 0.1272454841364594,
+            "camera_body_nominal/can": -0.006754516830797015,
+            "camera_envelope/table": 0.08058975461208305,
+            "camera_envelope/can": -0.04974846855434855
+          },
+          "possible_overlap_counts": {
+            "camera_body_nominal/can": 43,
+            "camera_envelope/can": 43
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 0,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.006754516653302138
+            },
+            {
+              "sample": 0,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0497484685543485
+            },
+            {
+              "sample": 1,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.006754515863540611
+            },
+            {
+              "sample": 1,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.049748468554348474
+            },
+            {
+              "sample": 2,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.006754516547494139
+            },
+            {
+              "sample": 2,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.04974846855434848
+            },
+            {
+              "sample": 3,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.006754516421986342
+            },
+            {
+              "sample": 3,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.04974846855434849
+            },
+            {
+              "sample": 4,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.006754515863540573
+            },
+            {
+              "sample": 4,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.04974846855434846
+            },
+            {
+              "sample": 5,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.0067545165474941545
+            },
+            {
+              "sample": 5,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0497484685543485
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 2.7755575615628914e-17,
+            "final": 0.028210899743304235
+          },
+          "max_between_sample_motion_bound_m": 0.006017350816435233,
+          "grasp_closure_certified": false
+        }
+      ],
+      "geometry_review": {
+        "nominal_geometry_accepted": false,
+        "reasons": [
+          "descent: camera_body_nominal/can below nominal clearance threshold",
+          "lift: camera_body_nominal/can below nominal clearance threshold"
+        ],
+        "min_nominal_separating_gap_m": -0.006754516830797015,
+        "minimum_gap_m": 0.005,
+        "mounting_and_cables_verified": false,
+        "execution_authorized": false
+      },
+      "total_joint_travel_rad": 6.468919546625669
+    },
+    {
+      "index": 6,
+      "top_inset_m": 0.055,
+      "stages": [
+        {
+          "leg": "descent",
+          "samples": 192,
+          "min_gaps_m": {
+            "link2/table": 0.1533954594658012,
+            "link2/can": 0.319991835943084,
+            "link3/table": 0.12665144661045008,
+            "link3/can": 0.1848430669048565,
+            "link4/table": 0.0691427690141664,
+            "link4/can": 0.06828093871981497,
+            "link5/table": 0.06554602542542817,
+            "link5/can": 0.02437130672183803,
+            "finger/table": 0.057111078069532084,
+            "finger/can": 0.013425186264404091,
+            "camera_body_nominal/table": 0.11261789077751602,
+            "camera_body_nominal/can": -0.01721954744012833,
+            "camera_envelope/table": 0.06459194565504876,
+            "camera_envelope/can": -0.053213821615792606
+          },
+          "possible_overlap_counts": {
+            "camera_envelope/can": 120,
+            "camera_body_nominal/can": 52
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 72,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0005347687798571837
+            },
+            {
+              "sample": 73,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0014330855804840087
+            },
+            {
+              "sample": 74,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.002323945142542
+            },
+            {
+              "sample": 75,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.003207323749587522
+            },
+            {
+              "sample": 76,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.004083205068106256
+            },
+            {
+              "sample": 77,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.004951614074570898
+            },
+            {
+              "sample": 78,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.00581265072782311
+            },
+            {
+              "sample": 79,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.006666523384711576
+            },
+            {
+              "sample": 80,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.006666523384711576
+            },
+            {
+              "sample": 81,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.00751349079881336
+            },
+            {
+              "sample": 82,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.008353576212404068
+            },
+            {
+              "sample": 83,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.00918677553701746
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 0.0,
+            "final": 0.0
+          },
+          "max_between_sample_motion_bound_m": 0.007899139390223589,
+          "grasp_closure_certified": false
+        },
+        {
+          "leg": "lift",
+          "samples": 48,
+          "min_gaps_m": {
+            "link2/table": 0.15340041237035057,
+            "link2/can": 0.3166495865603797,
+            "link3/table": 0.12665144661045008,
+            "link3/can": 0.18349816979822015,
+            "link4/table": 0.0691427690141664,
+            "link4/can": 0.06807049974510726,
+            "link5/table": 0.06554602542542817,
+            "link5/can": 0.024371306721837967,
+            "finger/table": 0.057111078069532084,
+            "camera_body_nominal/table": 0.11261789077751602,
+            "camera_body_nominal/can": -0.017219547440128383,
+            "camera_envelope/table": 0.06459194565504876,
+            "camera_envelope/can": -0.053213821615792606
+          },
+          "possible_overlap_counts": {
+            "camera_body_nominal/can": 48,
+            "camera_envelope/can": 48
+          },
+          "first_possible_overlaps": [
+            {
+              "sample": 0,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.01721954744012834
+            },
+            {
+              "sample": 0,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.053213821615792606
+            },
+            {
+              "sample": 1,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.017219547440128352
+            },
+            {
+              "sample": 1,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.053213821615792606
+            },
+            {
+              "sample": 2,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.01721954744012833
+            },
+            {
+              "sample": 2,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.053213821615792606
+            },
+            {
+              "sample": 3,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.017219547440128366
+            },
+            {
+              "sample": 3,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.05321382161579259
+            },
+            {
+              "sample": 4,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.017219547440128352
+            },
+            {
+              "sample": 4,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.0532138216157926
+            },
+            {
+              "sample": 5,
+              "body": "camera_body_nominal",
+              "obstacle": "can",
+              "separating_gap_m": -0.017219547440128366
+            },
+            {
+              "sample": 5,
+              "body": "camera_envelope",
+              "obstacle": "can",
+              "separating_gap_m": -0.053213821615792606
+            }
+          ],
+          "payload_bottom_above_table_m": {
+            "min": 0.0,
+            "final": 0.028395351561659343
+          },
+          "max_between_sample_motion_bound_m": 0.006904100943398277,
+          "grasp_closure_certified": false
+        }
+      ],
+      "geometry_review": {
+        "nominal_geometry_accepted": false,
+        "reasons": [
+          "descent: camera_body_nominal/can below nominal clearance threshold",
+          "lift: camera_body_nominal/can below nominal clearance threshold"
+        ],
+        "min_nominal_separating_gap_m": -0.017219547440128383,
+        "minimum_gap_m": 0.005,
+        "mounting_and_cables_verified": false,
+        "execution_authorized": false
+      },
+      "total_joint_travel_rad": 6.645602905555085
+    }
+  ],
+  "selected_nominal_candidate_index": 0,
+  "selection_scope": "Nominal modeled bodies only, larger separation before shorter joint travel; mount/cables/real tracking/closure remain unverified."
+}

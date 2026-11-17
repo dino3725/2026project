@@ -1,0 +1,21 @@
+{
+  "live_successes": 2,
+  "live_trials": 2,
+  "between_trial_surface_difference_mm": 0.17980979945892933,
+  "between_trial_xyz_difference_mm": [
+    0.05781618606182093,
+    -1.3877787807814457e-14,
+    0.1702611306514945
+  ],
+  "motion_commands_sent": false,
+  "physical_grasp_test_performed": false,
+  "default_localization_mode": "candidate",
+  "running_original_node_restarted": false,
+  "runtime_applies_on_next_launch": true,
+  "model_fingertip_policy": "nominal model; independent physical verification not claimed",
+  "source_sha256": {
+    "src/vision_pkg/vision_pkg/vision_node.py": "bcaab1f4eb7720190cf7996887a333023bf88d00645234e85fb8fe46b4c83201",
+    "src/vision_pkg/vision_pkg/surface_localization.py": "4e5d11119d97fb11b432f70c83dadc3b98e11e7a5360bed71a5c4b286dd92d23",
+    "src/vision_pkg/config/vision2.yaml": "2dca35ba5d24906eb6654ae0ab64fb2533752b8107bd32141c07893a847d40c6"
+  }
+}

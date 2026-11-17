@@ -1,0 +1,23 @@
+[
+  {
+    "scenario": "reachability",
+    "hypothetical_shift_x_m": 0.0,
+    "candidate_count": 9,
+    "pick_pass": 0,
+    "complete_chain_count": 0,
+    "complete_chain_insets_mm": [],
+    "executed": false
+  },
+  {
+    "scenario": "reachability_closer20",
+    "hypothetical_shift_x_m": -0.02,
+    "candidate_count": 9,
+    "pick_pass": 6,
+    "complete_chain_count": 2,
+    "complete_chain_insets_mm": [
+      40.0,
+      55.0
+    ],
+    "executed": false
+  }
+]

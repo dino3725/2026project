@@ -1,0 +1,863 @@
+{
+  "assumptions": {
+    "support_z_base_m": 0.07,
+    "upright_coke_height_m": 0.134,
+    "radius_m": 0.0265,
+    "max_residual_p90_m": 0.005
+  },
+  "limitations": [
+    "Axis hypotheses not independently measured.",
+    "Contact example is not an executable tool goal.",
+    "ROI is not a segmentation mask."
+  ],
+  "frames": [
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.006726116583251468,
+          0.323
+        ],
+        "pixel": [
+          574,
+          354
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.27144768083883314,
+          0.06299695520777897
+        ],
+        "body_points": 4160,
+        "inlier_fraction": 0.9314903846153846,
+        "axis_hypothesis_xy_m": [
+          0.27144768083883314,
+          0.06299695520777897
+        ],
+        "residual_p90_m": 0.003501824725751921,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.5322631638859914,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.27144768083883314,
+        0.06299695520777897,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        281
+      ],
+      "candidate_surface_base_m": [
+        0.24416293419568966,
+        0.062418197132916325,
+        0.16341815290638723
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924814212985638.json",
+      "rgb_stamp_ns": 1794924813969699463,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924814212985638.json": "84968c427e3b11898a47657ea0646eca8787e630e9c2dc5f389271b39af72f3b",
+        "log/eateded_20261117_223450_253950/observations/1794924814212985638_rgb.png": "d3df35ed44aca345d85aaa9a0606f42c97fd5b44167c6af401b9d3bc21ea2705",
+        "log/eateded_20261117_223450_253950/observations/1794924814212985638_depth.npy": "17f8574f3e65c703d8fafa92432d6017c420e0b6d7d10e0c357ae62b501e2685"
+      },
+      "legacy_surface_base_m": [
+        0.2441629341956896,
+        0.06241819713291631,
+        0.16341815290638737
+      ],
+      "overlay": "1794924814212985638_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02104924114517629,
+          -0.0067469404736020915,
+          0.324
+        ],
+        "pixel": [
+          573,
+          354
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2714822085390784,
+          0.06310463854535671
+        ],
+        "body_points": 4110,
+        "inlier_fraction": 0.9221411192214112,
+        "axis_hypothesis_xy_m": [
+          0.2714822085390784,
+          0.06310463854535671
+        ],
+        "residual_p90_m": 0.003653601818282366,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.6331167676682443,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2714822085390784,
+        0.06310463854535671,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        575,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24485453971638288,
+        0.06284689720360778,
+        0.16270114665045698
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924814482695233.json",
+      "rgb_stamp_ns": 1794924814303281250,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924814482695233.json": "89fc2690bc75b4260cbd8ca8195f3e7aabb03eeca1a674e41aa557f263841622",
+        "log/eateded_20261117_223450_253950/observations/1794924814482695233_rgb.png": "dec2c9d016ee52ed3c5bdd7343b2898f95e7a011bf9c985c48064cc67c046bfc",
+        "log/eateded_20261117_223450_253950/observations/1794924814482695233_depth.npy": "bccc5c173118ea4968d5a08d27f0b28bfbfd86ceeddcaf9943b7080d679d8e3b"
+      },
+      "legacy_surface_base_m": [
+        0.24485453971638282,
+        0.06284689720360778,
+        0.16270114665045712
+      ],
+      "overlay": "1794924814482695233_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.020566126290944918,
+          -0.006705292692900844,
+          0.322
+        ],
+        "pixel": [
+          574,
+          354
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.27154595573048335,
+          0.0631769705890394
+        ],
+        "body_points": 4186,
+        "inlier_fraction": 0.9151935021500239,
+        "axis_hypothesis_xy_m": [
+          0.27154595573048335,
+          0.0631769705890394
+        ],
+        "residual_p90_m": 0.004394407911839149,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.455838109905079,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.27154595573048335,
+        0.0631769705890394,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        575,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24346527600507684,
+        0.062344818481618325,
+        0.16413397525060075
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924814708214841.json",
+      "rgb_stamp_ns": 1794924814436713867,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924814708214841.json": "44461a7d0d12178496be268bffaa5ff24994abe27dd2a6364df1f8aea3a2cb11",
+        "log/eateded_20261117_223450_253950/observations/1794924814708214841_rgb.png": "93311f72c115e1a140439dc4edfa7b508812602e288aab8bd0a55037a179855b",
+        "log/eateded_20261117_223450_253950/observations/1794924814708214841_depth.npy": "308427397d7cd47639ddc05b3e93b184036adddbfcae4145cc493ad5d82a6c01"
+      },
+      "legacy_surface_base_m": [
+        0.24346527600507678,
+        0.062344818481618325,
+        0.1641339752506009
+      ],
+      "overlay": "1794924814708214841_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.271538359329307,
+          0.06282970882240592
+        ],
+        "body_points": 4030,
+        "inlier_fraction": 0.941439205955335,
+        "axis_hypothesis_xy_m": [
+          0.271538359329307,
+          0.06282970882240592
+        ],
+        "residual_p90_m": 0.0030701965776147636,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.6410783388922727,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.271538359329307,
+        0.06282970882240592,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924814890461488.json",
+      "rgb_stamp_ns": 1794924814670222168,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924814890461488.json": "45a8cb974eec97a166a38959b4e4754d7bdfee00a508a01430cb522403071e0d",
+        "log/eateded_20261117_223450_253950/observations/1794924814890461488_rgb.png": "6f11820336ed4aad1d6b36099279491b8fe1e639023cf18aa5aeeb9a32ad8e45",
+        "log/eateded_20261117_223450_253950/observations/1794924814890461488_depth.npy": "08618d918b113e7f555b22aed7e352681363a2ea35ed17fd6f240fb6e0eaf214"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924814890461488_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.020693866205795507,
+          -0.007102400580583985,
+          0.324
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0010000000000000009,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.271682760437181,
+          0.06288185815953273
+        ],
+        "body_points": 4069,
+        "inlier_fraction": 0.945195379700172,
+        "axis_hypothesis_xy_m": [
+          0.271682760437181,
+          0.06288185815953273
+        ],
+        "residual_p90_m": 0.0029876612305272873,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.7504672603484894,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.271682760437181,
+        0.06288185815953273,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.2451199731437787,
+        0.062496803810670964,
+        0.1629453247556146
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815080717199.json",
+      "rgb_stamp_ns": 1794924814870373047,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815080717199.json": "7cd7a81753cbd357215f7e838369fa1a0dee43682c8548eba8ee01b921eb0b08",
+        "log/eateded_20261117_223450_253950/observations/1794924815080717199_rgb.png": "5ff9deb4bb7283608acb1c8a1436d60ad308215d17f9da1f31b1dfe9e027dfd2",
+        "log/eateded_20261117_223450_253950/observations/1794924815080717199_depth.npy": "c2988bb1666aaab67daf6a2cbae6891ff7cdd0d05c1f33e46d6d20689942a1c2"
+      },
+      "legacy_surface_base_m": [
+        0.24511997314377865,
+        0.062496803810670964,
+        0.16294532475561474
+      ],
+      "overlay": "1794924815080717199_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007434842599024008,
+          0.323
+        ],
+        "pixel": [
+          574,
+          352
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.27157864386134567,
+          0.06268910742934829
+        ],
+        "body_points": 4113,
+        "inlier_fraction": 0.9564794553853635,
+        "axis_hypothesis_xy_m": [
+          0.27157864386134567,
+          0.06268910742934829
+        ],
+        "residual_p90_m": 0.002497601500647529,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.5457373698034114,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.27157864386134567,
+        0.06268910742934829,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        577,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.2446800945948552,
+        0.06242862091406137,
+        0.16390264132911203
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815229666358.json",
+      "rgb_stamp_ns": 1794924815037165527,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815229666358.json": "00ccd79466afc80e542644d1c5d67d64888a17a12be81fd742b3a569b70530aa",
+        "log/eateded_20261117_223450_253950/observations/1794924815229666358_rgb.png": "27a8a709131ee322395775581fead43f33b18fd85438c7806824224f91713bba",
+        "log/eateded_20261117_223450_253950/observations/1794924815229666358_depth.npy": "f848c69be32b2cfef9b5df3bc999b0459cb4a8a842ab7fdd1bf1d3a96a21b6d4"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924815229666358_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.27158023293789896,
+          0.06285166232997534
+        ],
+        "body_points": 4001,
+        "inlier_fraction": 0.9385153711572107,
+        "axis_hypothesis_xy_m": [
+          0.27158023293789896,
+          0.06285166232997534
+        ],
+        "residual_p90_m": 0.002989566003351086,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.733981338230429,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.27158023293789896,
+        0.06285166232997534,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815433981501.json",
+      "rgb_stamp_ns": 1794924815270675293,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815433981501.json": "777372d34eb0f9bf0c81135d186849f987baee5afe21886e0089aff0babfe1dd",
+        "log/eateded_20261117_223450_253950/observations/1794924815433981501_rgb.png": "7f9ad452dcfbe1e9cbc57438d31225c52b2abac1ce92ac6de7c9a963564502c5",
+        "log/eateded_20261117_223450_253950/observations/1794924815433981501_depth.npy": "7bc9aa19e55158ecea1ccaf7641506b9f3f799e27e05aad47a1ae6abdd0edb36"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924815433981501_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.006726116583251468,
+          0.323
+        ],
+        "pixel": [
+          574,
+          354
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0030000000000000027,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2714367647509753,
+          0.0627811449512479
+        ],
+        "body_points": 4040,
+        "inlier_fraction": 0.9433168316831683,
+        "axis_hypothesis_xy_m": [
+          0.2714367647509753,
+          0.0627811449512479
+        ],
+        "residual_p90_m": 0.0030017313226223478,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.6289756324120503,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2714367647509753,
+        0.0627811449512479,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        281
+      ],
+      "candidate_surface_base_m": [
+        0.24416293419568966,
+        0.062418197132916325,
+        0.16341815290638723
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815599346147.json",
+      "rgb_stamp_ns": 1794924815437468018,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815599346147.json": "69bc43d8b3af4382151c93bb83649131210eefc49147b5e46afb403961c5d2b9",
+        "log/eateded_20261117_223450_253950/observations/1794924815599346147_rgb.png": "209b7302bc9e4513915394b2e4c747686adb8b04b3e8f9351d584171abf63928",
+        "log/eateded_20261117_223450_253950/observations/1794924815599346147_depth.npy": "be1ade259aef04965cf90c1136f2e6ce1767f9bf09d0a8e69438d57419ee7326"
+      },
+      "legacy_surface_base_m": [
+        0.2441629341956896,
+        0.06241819713291631,
+        0.16341815290638737
+      ],
+      "overlay": "1794924815599346147_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.27150945738591414,
+          0.06298017353865427
+        ],
+        "body_points": 4040,
+        "inlier_fraction": 0.9603960396039604,
+        "axis_hypothesis_xy_m": [
+          0.27150945738591414,
+          0.06298017353865427
+        ],
+        "residual_p90_m": 0.002327773985132878,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.7227583508870405,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.27150945738591414,
+        0.06298017353865427,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815715869371.json",
+      "rgb_stamp_ns": 1794924815470826660,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815715869371.json": "d5ce3eeb750e42a9e48297bed91593662f3b388819f520cf7455973373e524bc",
+        "log/eateded_20261117_223450_253950/observations/1794924815715869371_rgb.png": "5bc7a5ce290676c38196d5d3455ea3db3d3bbbcd168e82957732560c4e8961fd",
+        "log/eateded_20261117_223450_253950/observations/1794924815715869371_depth.npy": "a5ef21db5ce78d25c74fe196e97ba99aa53f13c48711b8b68ccdc6976c019121"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924815715869371_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2715498150191724,
+          0.06292058333331556
+        ],
+        "body_points": 4088,
+        "inlier_fraction": 0.9297945205479452,
+        "axis_hypothesis_xy_m": [
+          0.2715498150191724,
+          0.06292058333331556
+        ],
+        "residual_p90_m": 0.0035679646080332044,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.644731103025505,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2715498150191724,
+        0.06292058333331556,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815852802053.json",
+      "rgb_stamp_ns": 1794924815704334473,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815852802053.json": "3d6bf2717a96e1f6573773c10f847495894792390a48bf8dbd389a4d11cf11d1",
+        "log/eateded_20261117_223450_253950/observations/1794924815852802053_rgb.png": "e9bb2f808e7934ce195b63868bd540cfc7d5dc98ad8e32c15ccc820ee0b1dde0",
+        "log/eateded_20261117_223450_253950/observations/1794924815852802053_depth.npy": "a04ec5060630b5e98e678d05a859fa20b7e88dcdd83823c83582232cde1cc95e"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924815852802053_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2715130591857733,
+          0.06264149303084494
+        ],
+        "body_points": 4057,
+        "inlier_fraction": 0.9524279023909292,
+        "axis_hypothesis_xy_m": [
+          0.2715130591857733,
+          0.06264149303084494
+        ],
+        "residual_p90_m": 0.002430474466943916,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.7179733673186464,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2715130591857733,
+        0.06264149303084494,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        577,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924815976628170.json",
+      "rgb_stamp_ns": 1794924815771050781,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924815976628170.json": "a8b8e6e84077658ffc890906796d117e511dc2cf8f123fc2f459ea90f85d3a37",
+        "log/eateded_20261117_223450_253950/observations/1794924815976628170_rgb.png": "719ae7bb41f1ff9f8dad40a31481ce74f3263228d9f0858b368f6a47ea24e7d2",
+        "log/eateded_20261117_223450_253950/observations/1794924815976628170_depth.npy": "be1b4757db0bbff9bba89a9ab8c8038a48e56a9b61d61b0b1f416171a1f72625"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924815976628170_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.02062999624837021,
+          -0.007080479591137738,
+          0.323
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0020000000000000018,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2715704673679141,
+          0.06300277348448564
+        ],
+        "body_points": 4068,
+        "inlier_fraction": 0.9491150442477876,
+        "axis_hypothesis_xy_m": [
+          0.2715704673679141,
+          0.06300277348448564
+        ],
+        "residual_p90_m": 0.0027024341334391834,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.7139435780029992,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2715704673679141,
+        0.06300277348448564,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.24442151439527243,
+        0.06242340902348885,
+        0.16366039711774963
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924816108592989.json",
+      "rgb_stamp_ns": 1794924815971199707,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924816108592989.json": "5b119f7bf499a4ec30679465991fedd59df27c80219dbc19f0b8eac69479c072",
+        "log/eateded_20261117_223450_253950/observations/1794924816108592989_rgb.png": "02ecdd4d28556d7f43e2e855cd4d4925622dec2ac0d5c3d1e15518e43018dc5c",
+        "log/eateded_20261117_223450_253950/observations/1794924816108592989_depth.npy": "2520f23ff38aabf376eea2fca1b3d7a1603b0a8210dd069948a087277f1bd2b6"
+      },
+      "legacy_surface_base_m": [
+        0.24442151439527238,
+        0.062423409023488835,
+        0.16366039711774977
+      ],
+      "overlay": "1794924816108592989_geometry.png"
+    },
+    {
+      "surface": {
+        "point": [
+          -0.020693866205795507,
+          -0.007102400580583985,
+          0.324
+        ],
+        "pixel": [
+          574,
+          353
+        ],
+        "source": "center",
+        "valid_fraction": 1.0,
+        "support_fraction": 1.0,
+        "depth_span_m": 0.0010000000000000009,
+        "count": 49,
+        "reason": ""
+      },
+      "axis": {
+        "accepted": true,
+        "axis_xy_m": [
+          0.2715285623445549,
+          0.06291787414040603
+        ],
+        "body_points": 4013,
+        "inlier_fraction": 0.9434338400199352,
+        "axis_hypothesis_xy_m": [
+          0.2715285623445549,
+          0.06291787414040603
+        ],
+        "residual_p90_m": 0.002966758881822138,
+        "max_residual_p90_m": 0.005,
+        "fit_condition": 3.66946679588856,
+        "visible_fraction": 1.0,
+        "reason": ""
+      },
+      "contact_example_base_m": [
+        0.2715285623445549,
+        0.06291787414040603,
+        0.17400000000000002
+      ],
+      "contact_example_pixel": [
+        576,
+        280
+      ],
+      "candidate_surface_base_m": [
+        0.2451199731437787,
+        0.062496803810670964,
+        0.1629453247556146
+      ],
+      "capture": "log/eateded_20261117_223450_253950/observations/1794924816418252798.json",
+      "rgb_stamp_ns": 1794924816204707031,
+      "input_sha256": {
+        "log/eateded_20261117_223450_253950/observations/1794924816418252798.json": "f154d0aab5b1534d1212dbd0aab55f67bcee36ca746b1f9e1316843e3f3494fe",
+        "log/eateded_20261117_223450_253950/observations/1794924816418252798_rgb.png": "076c56bb3bafdf410c6c5498754cb58f400ae0a87e5738adec0a2e9dacc0a91e",
+        "log/eateded_20261117_223450_253950/observations/1794924816418252798_depth.npy": "63ca5d840153375ba6aafbb2cd080a329b0acbdadc28fd4bcc5e2dcb4ca7ea38"
+      },
+      "legacy_surface_base_m": [
+        0.24511997314377865,
+        0.062496803810670964,
+        0.16294532475561474
+      ],
+      "overlay": "1794924816418252798_geometry.png"
+    }
+  ],
+  "source_sha256": {
+    "tools/vision_eval/analyze_grasp_observations.py": "ea5ed481548bce4c70dc05428f6465cdf9c9f13f4fbc43952f0c083a118048dd",
+    "src/vision_pkg/vision_pkg/object_geometry.py": "ceee63a1a2dd624e17a43c247e7f77823fc433b8eb289e31d30a3ffe1fcda2bd"
+  },
+  "summary": {
+    "frames": 13,
+    "axis_accepted": 13,
+    "axis_mean_m": [
+      0.271535689825264,
+      0.06290576488941475
+    ],
+    "axis_peak_to_peak_mm": [
+      0.24599568620570222,
+      0.5354775581944554
+    ]
+  }
+}

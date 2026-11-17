@@ -1,0 +1,12 @@
+{
+  "attempted": true,
+  "completed": true,
+  "action_succeeded": true,
+  "arrival_verified": true,
+  "final_joints_rad": [
+    0.1825437137583913,
+    0.6059224112148283,
+    -0.45099035163837853,
+    -0.15493205957644976
+  ]
+}
