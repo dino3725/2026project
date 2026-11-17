@@ -17,6 +17,21 @@ from voice_command_pkg.audio_stop_model import AudioStopConfig
 from voice_command_pkg.speaker_profile import SpeakerConfig
 
 
+def join_replay_workers(instance, producers, timeout=10.0):
+    """Wait after offline shutdown so native model cleanup cannot race Python exit."""
+    workers = list(producers)
+    if instance is not None:
+        workers.append(instance.capture_worker)
+        for name in ('speaker', 'audio_stop_worker', 'audio_stop_recheck', 'continuous_recording'):
+            component = getattr(instance, name, None)
+            workers.append(getattr(component, 'worker', None))
+    workers = list(dict.fromkeys(worker for worker in workers if worker is not None))
+    deadline = time.monotonic() + timeout
+    for worker in workers:
+        worker.join(timeout=max(0.0, deadline - time.monotonic()))
+    return [worker.name for worker in workers if worker.is_alive()]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--wav', type=Path, required=True,
@@ -82,7 +97,7 @@ def main():
         ),
     }
     originals = {key: getattr(pipeline, key) for key in replacements}
-    instance, end_error = None, ''
+    instance, end_error, pending_workers = None, '', []
     try:
         for key, value in replacements.items():
             setattr(pipeline, key, value)
@@ -123,8 +138,7 @@ def main():
     finally:
         if instance is not None:
             instance.request_stop()
-        for producer in producers:
-            producer.join(timeout=1)
+        pending_workers = join_replay_workers(instance, producers)
         for key, value in originals.items():
             setattr(pipeline, key, value)
     result = {
@@ -141,6 +155,7 @@ def main():
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),
         'callback_commands': commands, 'logs': logs, 'expected_eof_error': end_error,
         'producer_errors': producer_errors,
+        'shutdown_workers_alive': pending_workers,
         'dropped_frames': instance.audio_stop_worker.dropped_frames
         if instance.audio_stop_worker else None,
     }
@@ -148,6 +163,8 @@ def main():
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n',
                            encoding='utf-8')
     print(f'local callbacks={len(commands)}; no ROS publications; results={args.output}')
+    if pending_workers:
+        raise SystemExit('Replay shutdown incomplete: ' + ', '.join(pending_workers))
 
 
 if __name__ == '__main__':
