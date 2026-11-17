@@ -1,15 +1,146 @@
-# EATED Terminator launcher
+# EATED 실행 방법
 
-Run the following command from a graphical terminal:
+## SSH 자동 실행: `eateded`
+
+Jetson에 SSH로 접속한 터미널에서 다음 명령 하나를 실행한다.
+
+```bash
+eateded
+```
+
+추가 Enter 입력이나 모니터 연결은 필요 없다. 현재 터미널에 단계별 준비 상태,
+음성 명령의 action/target, 로봇 상태를 표시한다. 9개 창의 역할 중 실행 역할 7개는
+별도 프로세스로 관리하고, 명령·상태를 보던 2개 창은 현재 터미널로 통합했다.
+음성 인식은 기존처럼 노트북에서 별도로 실행한다.
+
+**일반 로봇 실행용이다. control 단계에서 기존 설정대로 팔이 HOME으로 움직인다.**
+실행 전에 주변을 비우고 F710을 연결한 뒤 스틱과 버튼을 놓는다.
+좌표 측정 전용 실행기나 자동 파지 시험 명령이 아니다.
+노트북에서 fetch 명령이 들어오면 기존 제어기가 작업을 수행한다.
+
+자동 실행 순서:
+
+1. 기존 실행 충돌 및 채택한 보정 모델 검사.
+2. F710 드라이버: 실제 `/joy` 수신, 스틱 중립·버튼 해제 확인.
+3. 하드웨어: arm/gripper/diff_drive/joint_state 제어기 active,
+   팔 관절 상태 수신 및 액션 서버 확인.
+4. MoveIt: 계획·실행 액션과 Cartesian 서비스 확인.
+5. RealSense: RGB, aligned depth, CameraInfo의 실제 수신 확인.
+6. 비전: FindObject 서버와 손바닥·장착 TF 노드 확인.
+7. 조이스틱 중립을 다시 확인하고 제어기 시작 → HOME → IDLE 확인.
+8. 조이스틱 수동 주행 노드 시작.
+
+기존 `eated_hardware.sh`, `eated_moveit.sh`와 보정 모델을 그대로 사용한다.
+팔 속도·가속 배율, HOME 등 관절 자세, 그리퍼 설정은 변경하지 않는다.
+수동 주행 노드는 HOME 완료 후 시작하여, 제어기 실행 전에 주행 입력이 활성화되는
+구간을 만들지 않는다. 기존 Y/음성 stop 및 스틱 중립 복귀 처리는 유지한다.
+별도의 Y 버튼 시험을 자동으로 수행하거나 확인한 것으로 간주하지 않는다.
+
+각 단계의 준비 제한 시간은 기본 90초다. 준비 실패나 관리 프로세스 종료가 발생하면
+다음 단계로 진행하지 않고 자신이 시작한 프로세스를 정리한다. 조이스틱 입력이
+1초 이상 끊겨도 종료한다. 준비 확인이 하드웨어 기능 전체의 검증을 의미하지는 않는다.
+기존 `eated`나 측정 도구가 실행 중이면 먼저 종료해야 한다. 두 실행기를 함께 켜지 않는다.
+
+### 종료와 SSH 연결
+
+실행 터미널에서 **Ctrl+C**를 누른다. 수동 주행 노드 종료 신호 → 기존 제어기에 stop 요청 →
+제어·비전·카메라·MoveIt 종료 → 하드웨어 종료 → joy 종료 순서로 정리한다.
+상위 제어기는 HOME 복귀나 집게 열기를 새로 요청하지 않는다. **그러나 현재 설치된
+ROBOTIS 하드웨어 드라이버는 종료 시 자체 복귀·집게 초기화 후 토크 해제를 수행한다.**
+따라서 Ctrl+C를 '현재 자세 그대로 전원 종료'로 간주하면 안 된다. 팔의 복귀 공간이
+비워진 상태에서 종료하고, 종료 완료 문구가 나올 때까지 기다린다.
+이 동작은 2026-11-12 후속 조사에서 설치 바이너리와 공식 2.2.1 소스로 확인했다.
+조사 전 '종료 시 새 동작 없음'이라는 안내는 이 설명으로 정정한다.
+
+이 명령은 현재 SSH 세션의 포그라운드에서 실행한다. HUP/TERM을 받으면 같은 종료
+절차를 실행한다. 네트워크 단절이 즉시 감지된다는 보장은 없으므로 SSH 연결 종료를
+비상정지로 사용하지 않는다. 로봇 옆 F710의 Y가 기존 정지 수단이다.
+SSH 재접속 후에도 실행을 유지할 목적이면 사용자가 `tmux` 세션 안에서 실행할 수 있지만,
+그 경우 detach/SSH 종료 후에도 로봇 실행은 계속된다.
+
+### 로그와 미리보기
+
+로그는 실행마다 `log/eateded_날짜_시간/`에 저장한다.
+
+- `monitor.log`: 실행 단계, 명령 action/target, 상태 변화, 오류.
+- `hardware.log`, `moveit.log`, `camera.log`, `vision.log`, `joy.log`,
+  `control.log`, `joystick.log`: 각 실행기의 상세 출력.
+
+오류가 나면 화면에 표시된 로그 폴더에서 해당 단계의 파일을 확인한다.
+`telemetry.jsonl`에는 관절별 목표·실제 각도·속도와 로봇이 보고한 배터리 전압을
+기록한다. 어댑터를 사용할 때도 토픽의 필드 이름은 battery이다. 전원 공급 장치의
+출력 전류나 각 모터 단자 전압을 직접 측정한 값은 아니다.
+OpenCV/RViz 창은 열지 않는다. `/vision/debug_image` 토픽은 유지되어
+같은 ROS 네트워크의 노트북에서 별도 영상 뷰어로 볼 수 있다.
+
+### 조이스틱으로 물체 놓기 (2026-11-17)
+
+운반 자세에서 전달을 기다리는 `DRIVE_TO_PLACE` 상태일 때 **B 버튼을 한 번 누르면**
+손바닥 2초 유지와 동일하게 집게를 열고 0.5초 기다린 뒤 HOME으로 복귀한다.
+손바닥 방식도 계속 사용할 수 있다. B는 누르는 순간 한 번만 처리하며,
+인식·파지·복귀·ERROR·IDLE에서는 놓기를 시작하지 않는다. Y 비상정지가 우선한다.
+놓기 중에는 수동 주행을 차단하고 HOME 복귀 후 스틱 중립 확인을 거쳐 주행을 재개한다.
+설정은 두 노드의 `release_button_index`이며 기본값은 F710 B의 인덱스 1이다.
+`eated`/`eateded`를 다시 실행하면 적용된다. 변경 후 실물 버튼 시험은 아직 하지 않았다.
+
+### 이동 완료 후 처리 (2026-11-17 후속 변경)
+
+사용자 요청으로 일반 `control_node`의 관절각·손끝 계산 위치 오차 초과에 따른
+중단과 경고를 제거했다. HOME, 인식, 접근, 파지, 상승, 운반에 공통 적용하며,
+`eated`와 `eateded` 모두 다음 실행부터 같은 코드를 사용한다.
+이동 액션이 성공하고 최신의 유효한 센서 정보가 연속 0.3초 확인되면 진행한다.
+검사 제한 시간은 2초, 관절/TF 정보 최대 나이는 0.5초다.
+센서 유실·비정상 값·잘못된 궤적·이동 액션 실패·파지 실패·Y/음성 stop 처리는 유지한다.
+
+`arrival_joint_tolerance_deg`와 `home_arrival_joint_tolerances_deg`는 별도 진단 도구의
+참고 기준으로 남기며 일반 실행을 차단하지 않는다. `position_tolerance_m`는 MoveIt
+목표 영역 설정에도 사용하므로 그대로 유지한다. 관절 목표, 이동 시간, 속도·가속,
+그리퍼 설정은 바꾸지 않았다. 오차가 보정되거나 하드웨어 한계로 확정된 것은 아니다.
+별도 `object_pose_trials.py`는 원래 측정 경고·기록을 남기는 진단 도구이며 자동 실행되지 않는다.
+
+이전 HOME 허용치 조정과 반복 측정 당시 결과는
+[HOME 진단](docs/measurements/eateded_home_fix_2026-11-17.md) 및
+[콜라 5회 시험](docs/measurements/coke_pose_trials_2026-11-17.md)에 보존한다.
+
+종료 시 stop은 한 번 발행하고 전달/취소 처리를 기다린다. 이전 버전은 2초 동안
+반복 발행하여 정지 로그와 현재 관절 기준 hold 요청이 과도하게 발생했다.
+
+로봇을 시작하지 않고 명령 구성을 확인할 수 있다.
+
+```bash
+eateded --dry-run
+eateded --help
+```
+
+필요하면 단계별 대기 시간을 변경한다: `eateded --timeout 120`.
+장치가 없거나 실패한 단계를 건너뛰는 옵션은 없다.
+
+현재 Jetson에는 `~/.local/bin/eateded` 링크를 설치했다. 다른 Jetson 작업 환경에
+이 브랜치를 가져올 경우 저장소 루트에서 다음과 같이 설치한다.
+
+```bash
+mkdir -p ~/.local/bin
+ln -s "$PWD/eateded" ~/.local/bin/eateded
+```
+
+`~/.local/bin`이 PATH에 있어야 한다. 저장소 루트에서는 `./eateded`로도 실행할 수 있다.
+
+## 기존 그래픽 수동 실행: `eated`
 
 ```bash
 eated
 ```
 
-It opens an independent Terminator window with nine panes. Each pane sources
-ROS 2 Humble and `/home/fcsl/2026project/install/setup.bash`, then waits with its
-command prefilled. Commands are not started until Enter is pressed.
+기존 방식은 그대로 유지한다. Terminator 창 9개 각각에 명령이 미리 입력되어 있고,
+Enter를 눌렀을 때 실행된다. ROS 2 Humble과 워크스페이스 환경도 자동으로 불러온다.
 
-Start panes in numerical order. In particular, wait for hardware controllers
-before pane 2, wait for camera topics before pane 4, and clear the robot's
-workspace before starting pane 7 because the arm moves HOME on startup.
+기존 안내대로 번호순으로 실행하되 1번 하드웨어 제어기 활성화를 확인한 뒤 2번,
+3번 영상 수신을 확인한 뒤 4번을 실행한다. 7번은 HOME 이동이 있으므로 주변을 비운다.
+SSH에서 새 창과 Enter 입력 없이 사용하려면 위의 `eateded`를 사용한다.
+
+## 검증
+
+`python3 -m pytest tools/bringup -q`는 로봇을 실행하지 않고 준비 실패, 입력 유실,
+시간 초과, 프로세스 그룹 종료·다른 프로세스 보존 등을 검사한다.
+2026-11-17 어댑터 조건에서 HOME 기준 분리 후 실제 전체 기동과 IDLE 도달을
+두 번 확인했다. 측정값과 범위는 위 HOME 진단 기록을 따른다.

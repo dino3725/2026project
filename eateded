@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Run the SSH-friendly supervisor without opening desktop terminals.
+set -eo pipefail
+EATED_WORKSPACE="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+source /opt/ros/humble/setup.bash
+source "$EATED_WORKSPACE/install/setup.bash"
+export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-37}"
+export PYTHONUNBUFFERED=1
+unset DISPLAY WAYLAND_DISPLAY
+exec /usr/bin/python3 "$EATED_WORKSPACE/tools/bringup/eated_auto.py" "$@"
