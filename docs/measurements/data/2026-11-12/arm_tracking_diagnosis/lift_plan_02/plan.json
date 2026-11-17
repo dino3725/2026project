@@ -1,0 +1,692 @@
+{
+  "target_m": [
+    0.2619036965991476,
+    0.02279338424948993,
+    0.32823421579865136
+  ],
+  "executed": false,
+  "approved": true,
+  "model_sha256": "d7f6fa78a5391d07edbb66dd1c35d8bf3ab2eda7585a08614c634271b05e6546",
+  "velocity_scale": 0.1,
+  "acceleration_scale": 0.1,
+  "keepout": {
+    "x_min": 0.18,
+    "z_top": 0.24
+  },
+  "note": "Keepout top is 36mm over nominal coke top; conservative scene, not measured ground truth",
+  "kind": "diagnostic_lift",
+  "previous_reference_rad": [
+    0.06656759443818165,
+    0.7671322483994001,
+    -0.8751343948172364,
+    0.026033779898898053
+  ],
+  "diagnostic_target_rad": [
+    0.06656759443818165,
+    0.6624124932797403,
+    -0.8751343948172364,
+    0.026033779898898053
+  ],
+  "reference_sha256": "b7855e4369af91ffe88df070c82d54a91047ef4f78702ee0ddb3172eb02b4d98",
+  "scene": {
+    "name": "",
+    "robot_state": {
+      "joint_state": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": ""
+        },
+        "name": [],
+        "position": [],
+        "velocity": [],
+        "effort": []
+      },
+      "multi_dof_joint_state": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": ""
+        },
+        "joint_names": [],
+        "transforms": [],
+        "twist": [],
+        "wrench": []
+      },
+      "attached_collision_objects": [
+        {
+          "link_name": "end_effector_link",
+          "object": {
+            "header": {
+              "stamp": {
+                "sec": 0,
+                "nanosec": 0
+              },
+              "frame_id": "end_effector_link"
+            },
+            "pose": {
+              "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "id": "approach_camera_envelope",
+            "type": {
+              "key": "",
+              "db": ""
+            },
+            "primitives": [
+              {
+                "type": 1,
+                "dimensions": [
+                  0.14,
+                  0.1,
+                  0.1
+                ],
+                "polygon": {
+                  "points": []
+                }
+              }
+            ],
+            "primitive_poses": [
+              {
+                "position": {
+                  "x": -0.03024395088466985,
+                  "y": 0.024003263976252315,
+                  "z": 0.044460232726937776
+                },
+                "orientation": {
+                  "x": -0.009836379316377309,
+                  "y": 0.01382028134154291,
+                  "z": 0.004134483002382872,
+                  "w": 0.9998475641395982
+                }
+              }
+            ],
+            "meshes": [],
+            "mesh_poses": [],
+            "planes": [],
+            "plane_poses": [],
+            "subframe_names": [],
+            "subframe_poses": [],
+            "operation": "\u0000"
+          },
+          "touch_links": [
+            "end_effector_link",
+            "link5",
+            "gripper_left_link",
+            "gripper_right_link"
+          ],
+          "detach_posture": {
+            "header": {
+              "stamp": {
+                "sec": 0,
+                "nanosec": 0
+              },
+              "frame_id": ""
+            },
+            "joint_names": [],
+            "points": []
+          },
+          "weight": 0.0
+        }
+      ],
+      "is_diff": true
+    },
+    "robot_model_name": "",
+    "fixed_frame_transforms": [],
+    "allowed_collision_matrix": {
+      "entry_names": [],
+      "entry_values": [],
+      "default_entry_names": [],
+      "default_entry_values": []
+    },
+    "link_padding": [],
+    "link_scale": [],
+    "object_colors": [],
+    "world": {
+      "collision_objects": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 0
+            },
+            "frame_id": "base_link"
+          },
+          "pose": {
+            "position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "orientation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          },
+          "id": "approach_forward_keepout",
+          "type": {
+            "key": "",
+            "db": ""
+          },
+          "primitives": [
+            {
+              "type": 1,
+              "dimensions": [
+                0.7,
+                1.2,
+                0.74
+              ],
+              "polygon": {
+                "points": []
+              }
+            }
+          ],
+          "primitive_poses": [
+            {
+              "position": {
+                "x": 0.53,
+                "y": 0.0,
+                "z": -0.13
+              },
+              "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            }
+          ],
+          "meshes": [],
+          "mesh_poses": [],
+          "planes": [],
+          "plane_poses": [],
+          "subframe_names": [],
+          "subframe_poses": [],
+          "operation": "\u0000"
+        }
+      ],
+      "octomap": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": ""
+        },
+        "origin": {
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          }
+        },
+        "octomap": {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 0
+            },
+            "frame_id": ""
+          },
+          "binary": false,
+          "id": "",
+          "resolution": 0.0,
+          "data": []
+        }
+      }
+    },
+    "is_diff": true
+  },
+  "initial_validity": {
+    "valid": true,
+    "contacts": [],
+    "cost_sources": [],
+    "constraint_result": []
+  },
+  "elbow_allowed_deg": [
+    -53.0,
+    78.0
+  ],
+  "response": {
+    "trajectory_start": {
+      "joint_state": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": "base_footprint"
+        },
+        "name": [
+          "joint1",
+          "joint2",
+          "joint3",
+          "joint4",
+          "gripper_left_joint",
+          "gripper_right_joint",
+          "wheel_left_joint",
+          "wheel_right_joint"
+        ],
+        "position": [
+          0.06442719309119693,
+          0.7946020481247621,
+          -0.8329515678219032,
+          0.032213596545598466,
+          6.902913545485386e-05,
+          6.902913545485386e-05,
+          4.238388916928026,
+          0.4663301595172349
+        ],
+        "velocity": [
+          0.0,
+          -0.0,
+          -0.0,
+          -0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "effort": []
+      },
+      "multi_dof_joint_state": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": "base_footprint"
+        },
+        "joint_names": [],
+        "transforms": [],
+        "twist": [],
+        "wrench": []
+      },
+      "attached_collision_objects": [
+        {
+          "link_name": "end_effector_link",
+          "object": {
+            "header": {
+              "stamp": {
+                "sec": 0,
+                "nanosec": 0
+              },
+              "frame_id": "end_effector_link"
+            },
+            "pose": {
+              "position": {
+                "x": -0.03024395088466984,
+                "y": 0.024003263976252315,
+                "z": 0.04446023272693777
+              },
+              "orientation": {
+                "x": -0.009836379316377307,
+                "y": 0.013820281341542905,
+                "z": 0.004134483002382871,
+                "w": 0.9998475641395982
+              }
+            },
+            "id": "approach_camera_envelope",
+            "type": {
+              "key": "",
+              "db": ""
+            },
+            "primitives": [
+              {
+                "type": 1,
+                "dimensions": [
+                  0.14,
+                  0.1,
+                  0.1
+                ],
+                "polygon": {
+                  "points": []
+                }
+              }
+            ],
+            "primitive_poses": [
+              {
+                "position": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "orientation": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                }
+              }
+            ],
+            "meshes": [],
+            "mesh_poses": [],
+            "planes": [],
+            "plane_poses": [],
+            "subframe_names": [],
+            "subframe_poses": [],
+            "operation": "\u0000"
+          },
+          "touch_links": [
+            "end_effector_link",
+            "gripper_left_link",
+            "gripper_right_link",
+            "link5"
+          ],
+          "detach_posture": {
+            "header": {
+              "stamp": {
+                "sec": 0,
+                "nanosec": 0
+              },
+              "frame_id": ""
+            },
+            "joint_names": [],
+            "points": []
+          },
+          "weight": 0.0
+        }
+      ],
+      "is_diff": false
+    },
+    "group_name": "arm",
+    "trajectory": {
+      "joint_trajectory": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": "base_footprint"
+        },
+        "joint_names": [
+          "joint1",
+          "joint2",
+          "joint3",
+          "joint4"
+        ],
+        "points": [
+          {
+            "positions": [
+              0.06442719309119693,
+              0.7946020481247621,
+              -0.8329515678219032,
+              0.032213596545598466
+            ],
+            "velocities": [
+              0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "accelerations": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 0,
+              "nanosec": 0
+            }
+          },
+          {
+            "positions": [
+              0.06451157480967121,
+              0.7896020481247621,
+              -0.8345454330039115,
+              0.031977023434693004
+            ],
+            "velocities": [
+              0.00030688591848228324,
+              -0.01818438424999983,
+              -0.005796691382466948,
+              -0.0008603872703845469
+            ],
+            "accelerations": [
+              0.0005580531462591673,
+              -0.03306718305513871,
+              -0.010540926347735954,
+              -0.0015645612728469025
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 0,
+              "nanosec": 549922387
+            }
+          },
+          {
+            "positions": [
+              0.064764719965094,
+              0.7746020481247621,
+              -0.8393270285499363,
+              0.031267304101976624
+            ],
+            "velocities": [
+              0.0006137718369645761,
+              -0.03636876850000023,
+              -0.011593382764934082,
+              -0.0017207745407691209
+            ],
+            "accelerations": [
+              0.000558053146259896,
+              -0.03306718305518189,
+              -0.010540926347750055,
+              -0.0015645612728489699
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 1,
+              "nanosec": 99844775
+            }
+          },
+          {
+            "positions": [
+              0.06518662855746536,
+              0.749602048124762,
+              -0.8472963544599779,
+              0.03008443854744931
+            ],
+            "velocities": [
+              0.000920657755446838,
+              -0.05455315274999879,
+              -0.017390074147400625,
+              -0.0025811618111536076
+            ],
+            "accelerations": [
+              0.0005580531462557033,
+              -0.033067183054933676,
+              -0.010540926347670907,
+              -0.001564561272837211
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 1,
+              "nanosec": 649767162
+            }
+          },
+          {
+            "positions": [
+              0.06575504770306634,
+              0.7159206325362469,
+              -0.858033081577435,
+              0.028490815094354364
+            ],
+            "velocities": [
+              0.0010046689121679124,
+              -0.05953119528338784,
+              -0.018976939881105562,
+              -0.002816696012822321
+            ],
+            "accelerations": [
+              -0.0005580531462648496,
+              0.03306718305547662,
+              0.010540926347843876,
+              0.001564561272862914
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 2,
+              "nanosec": 199689550
+            }
+          },
+          {
+            "positions": [
+              0.06622315591130924,
+              0.6881830955017504,
+              -0.8668750604802249,
+              0.027178424009333107
+            ],
+            "velocities": [
+              0.0006977829936856897,
+              -0.041346811033391606,
+              -0.013180248498639786,
+              -0.001956308742437943
+            ],
+            "accelerations": [
+              -0.0005580531462474937,
+              0.03306718305444785,
+              0.010540926347515894,
+              0.0015645612728142132
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 2,
+              "nanosec": 749611937
+            }
+          },
+          {
+            "positions": [
+              0.0665225006826036,
+              0.6704455584672538,
+              -0.8725293090189982,
+              0.02633917914612277
+            ],
+            "velocities": [
+              0.000390897075203376,
+              -0.02316242678338997,
+              -0.007383557116172293,
+              -0.00109592147205331
+            ],
+            "accelerations": [
+              -0.0005580531462545568,
+              0.03306718305486551,
+              0.010540926347648966,
+              0.0015645612728340164
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 3,
+              "nanosec": 299534324
+            }
+          },
+          {
+            "positions": [
+              0.06665308201694943,
+              0.6627080214327573,
+              -0.8749958271937549,
+              0.02597308050472336
+            ],
+            "velocities": [
+              8.401115672106532e-05,
+              -0.004978042533388518,
+              -0.0015868657337048562,
+              -0.00023553420166868538
+            ],
+            "accelerations": [
+              -0.0005580531462609438,
+              0.03306718305524394,
+              0.010540926347769567,
+              0.0015645612728518896
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 3,
+              "nanosec": 849456712
+            }
+          },
+          {
+            "positions": [
+              0.06665940567492082,
+              0.6623333159819954,
+              -0.8751152731880505,
+              0.025955351457891362
+            ],
+            "velocities": [
+              -1.6436139661170837e-19,
+              9.73915912022034e-18,
+              3.104581324751531e-18,
+              4.608046341347648e-19
+            ],
+            "accelerations": [
+              -0.0005580531462701689,
+              0.03306718305579066,
+              0.01054092634794382,
+              0.001564561272877753
+            ],
+            "effort": [],
+            "time_from_start": {
+              "sec": 4,
+              "nanosec": 0
+            }
+          }
+        ]
+      },
+      "multi_dof_joint_trajectory": {
+        "header": {
+          "stamp": {
+            "sec": 0,
+            "nanosec": 0
+          },
+          "frame_id": ""
+        },
+        "joint_names": [],
+        "points": []
+      }
+    },
+    "planning_time": 0.012572185999999999,
+    "error_code": {
+      "val": 1
+    }
+  },
+  "original_duration_sec": 0.7273753700000001,
+  "duration_factor": 5.499223873912585,
+  "sample_count": 40,
+  "sample_ee_min_m": [
+    0.26188999314842143,
+    0.022823999735910892,
+    0.2705740651661107
+  ],
+  "sample_ee_max_m": [
+    0.27731610111885874,
+    0.02306276973419901,
+    0.3282663715361482
+  ],
+  "endpoint_m": [
+    0.26188999314842143,
+    0.022823999735910892,
+    0.3282663715361482
+  ]
+}

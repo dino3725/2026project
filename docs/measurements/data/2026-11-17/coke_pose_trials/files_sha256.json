@@ -1,0 +1,10 @@
+{
+  "control_tests.log": "9f1b7e17f3e7896eafc810bd5929eb7da51f0814d586afce3a10677408707314",
+  "events.jsonl": "c3b0f3752e67326d38094084024c8eefeebac50ddd39ec5f248a99fa95a3547c",
+  "operator_confirmations.jsonl": "0ec56e1b1190517bb39bd3f3db5b57c9da574501587e7f12df09db98da237f24",
+  "pose_means.csv": "5289ddc1edb52c519f58c66259a260764398643351a99fa03b18b920958c71dc",
+  "run_metadata.json": "d676fab1136e5ae564128f01451723672377e4ff821e86a4c1d5319708e7ad1c",
+  "shutdown.json": "01e4984d6a823e38f17c971ecceb3d21eeaee3bc13889a16f54defa1e924ea5f",
+  "summary.json": "f86faa56b9bc890fe88d7ecac61f0f2c2c1bedd5442d4c58d352d8ee754c90f1",
+  "tool_tests.log": "5f3da6672107839fa424e7dcefe8f3951353a847706d1ef18157c752227802b4"
+}

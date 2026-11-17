@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "message": "One reviewed high approach requested; no gripper/descend",
+  "execution": {
+    "attempted": true,
+    "completed": false,
+    "action_succeeded": true,
+    "error": "HIGH APPROACH arrival not verified: Joint arrival error 5.030 deg"
+  }
+}

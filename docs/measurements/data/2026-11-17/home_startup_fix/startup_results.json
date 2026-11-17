@@ -1,0 +1,48 @@
+[
+  {
+    "run": "eateded_20261117_001737_777605",
+    "full_startup_completed": true,
+    "startup_failed": false,
+    "shutdown_completed": true,
+    "idle_observed_sec": 48.47034797499998,
+    "idle_samples": 892,
+    "joint_error_deg_median": [
+      0.0,
+      -0.24999999999999717,
+      1.6679687500000004,
+      0.13671875000000025
+    ],
+    "voltage_range_v": [
+      12.06,
+      12.13
+    ],
+    "voice_stop_count": 1,
+    "arrival_log": [
+      "[control_node-1] [INFO] [1794842288.465778083] [control_node]: Arm reached HOME; joint arrival verified; error_deg=[0.0, -0.25, 1.756, 0.137]"
+    ],
+    "telemetry_sha256": "44d25ce070dc805d0a8efd34f0f889225500ca7ca8a1b0a91d000e05e2921991"
+  },
+  {
+    "run": "eateded_20261117_001914_481510",
+    "full_startup_completed": true,
+    "startup_failed": false,
+    "shutdown_completed": true,
+    "idle_observed_sec": 81.26941467899996,
+    "idle_samples": 1506,
+    "joint_error_deg_median": [
+      0.0,
+      -0.24999999999999717,
+      1.6679687500000004,
+      0.13671875000000025
+    ],
+    "voltage_range_v": [
+      12.06,
+      12.11
+    ],
+    "voice_stop_count": 1,
+    "arrival_log": [
+      "[control_node-1] [INFO] [1794842386.907426329] [control_node]: Arm reached HOME; joint arrival verified; error_deg=[0.088, -0.25, 1.668, 0.049]"
+    ],
+    "telemetry_sha256": "f9a60f5d2b09154c7d6868a7667df2780cc622a2d572140d14f3091ae6521e70"
+  }
+]

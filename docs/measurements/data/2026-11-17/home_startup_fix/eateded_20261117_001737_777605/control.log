@@ -1,0 +1,27 @@
+[INFO] [launch]: All log files can be found below /home/fcsl/.ros/log/2026-11-17-00-18-01-276660-fcsl-5984
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [control_node-1]: process started with pid [5993]
+[control_node-1] [INFO] [1794842282.686723552] [control_node]: Control state machine ready: targets=['airpod', 'coke', 'tissue', 'vaseline'], buttons=A0/X2/Y3
+[control_node-1] [INFO] [1794842282.693738118] [control_node]: Startup: moving manipulator to HOME
+[control_node-1] [INFO] [1794842288.465778083] [control_node]: Arm reached HOME; joint arrival verified; error_deg=[0.0, -0.25, 1.756, 0.137]
+[control_node-1] [INFO] [1794842288.466765701] [control_node]: STATE RETURN_HOME -> IDLE
+[control_node-1] [INFO] [1794842288.467434524] [control_node]: Startup complete: joystick drive enabled
+[control_node-1] [INFO] [1794842336.976753889] [control_node]: STATE IDLE -> ERROR
+[control_node-1] [ERROR] [1794842336.988016069] [control_node]: EMERGENCY STOP (voice): actions cancelled and joystick base control restored. Press X to return the arm HOME.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [control_node-1]: sending signal 'SIGINT' to process[control_node-1]
+[control_node-1] Traceback (most recent call last):
+[control_node-1]   File "/home/fcsl/2026project/install/control_pkg/lib/control_pkg/control_node", line 33, in <module>
+[control_node-1]     sys.exit(load_entry_point('control-pkg', 'console_scripts', 'control_node')())
+[control_node-1]   File "/home/fcsl/2026project/build/control_pkg/control_pkg/control_node.py", line 1445, in main
+[control_node-1]     node.destroy_node()
+[control_node-1]   File "/home/fcsl/2026project/build/control_pkg/control_pkg/control_node.py", line 1430, in destroy_node
+[control_node-1]     super().destroy_node()
+[control_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[control_node-1]     self.destroy_publisher(self._publishers[0])
+[control_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[control_node-1]     publisher.destroy()
+[control_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[control_node-1]     self.__publisher.destroy_when_not_in_use()
+[control_node-1] KeyboardInterrupt
+[ERROR] [control_node-1]: process has died [pid 5993, exit code -2, cmd '/home/fcsl/2026project/install/control_pkg/lib/control_pkg/control_node --ros-args -r __node:=control_node --params-file /home/fcsl/2026project/install/control_pkg/share/control_pkg/config/control.yaml'].

@@ -1,0 +1,51 @@
+{
+  "closed_at": "2026-11-12T20:16:42.096503+09:00",
+  "stop_confirmed_in_log": true,
+  "processes": [
+    {
+      "name": "measurement",
+      "pid": 8832,
+      "signal": "SIGTERM",
+      "still_running": false
+    },
+    {
+      "name": "vision",
+      "pid": 6826,
+      "signal": "SIGINT",
+      "still_running": false
+    },
+    {
+      "name": "camera",
+      "pid": 6354,
+      "signal": "SIGINT",
+      "still_running": false
+    },
+    {
+      "name": "moveit",
+      "pid": 6842,
+      "signal": "SIGINT",
+      "still_running": false
+    },
+    {
+      "name": "hardware",
+      "pid": 6558,
+      "signal": "SIGINT",
+      "still_running": false
+    },
+    {
+      "name": "joystick",
+      "pid": 6322,
+      "signal": "SIGINT",
+      "still_running": true
+    }
+  ],
+  "verified_at": "2026-11-12T20:17:13.697036+09:00",
+  "remaining_pids": [],
+  "joystick_child_sigint": true,
+  "hardware_controller_clean_exit": true,
+  "lidar_exit": {
+    "code": -6,
+    "message": "buffer overflow detected during shutdown"
+  },
+  "all_experiment_processes_exited": true
+}

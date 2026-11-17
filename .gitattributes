@@ -1,3 +1,5 @@
 # Preserve measurement CSV bytes so recorded SHA256 hashes remain meaningful.
 # Python's csv writer uses CRLF; recognize it as a line ending during whitespace checks.
 docs/measurements/data/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Keep captured diagnostic logs byte-identical to their SHA256 manifests.
+docs/measurements/data/**/*.log -text whitespace=-blank-at-eol

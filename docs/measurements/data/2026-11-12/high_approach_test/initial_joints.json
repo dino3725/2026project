@@ -1,0 +1,19 @@
+{
+  "joints": {
+    "wheel_right_joint": 0.4678641403051206,
+    "joint2": -1.043106935762236,
+    "wheel_left_joint": 4.238388916928026,
+    "joint1": 0.0015339807878856412,
+    "joint4": 0.009203884727313847,
+    "gripper_left_joint": 0.0001380582709097077,
+    "gripper_right_joint": 0.0001380582709097077,
+    "joint3": 1.086058397823034
+  },
+  "controllers": {
+    "joint_state_broadcaster": "active",
+    "arm_controller": "active",
+    "diff_drive_controller": "active",
+    "gripper_controller": "active",
+    "imu_broadcaster": "active"
+  }
+}

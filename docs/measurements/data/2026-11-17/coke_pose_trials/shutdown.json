@@ -1,0 +1,26 @@
+{
+  "time": 1794845413.5450923,
+  "owned_pids": {
+    "joy": 11173,
+    "hardware": 11186,
+    "moveit": 11350,
+    "camera": 11389,
+    "vision": 11421,
+    "control": 11528
+  },
+  "owned_pids_present": {
+    "joy": false,
+    "hardware": false,
+    "moveit": false,
+    "camera": false,
+    "vision": false,
+    "control": false
+  },
+  "remaining_robot_processes": [],
+  "runner_tail": [
+    "STATE: IDLE",
+    "COMMAND: stop ",
+    "STATE: ERROR",
+    "Cleanup: []"
+  ]
+}

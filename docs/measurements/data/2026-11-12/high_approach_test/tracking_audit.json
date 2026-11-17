@@ -1,0 +1,372 @@
+{
+  "joints": {
+    "wheel_right_joint": 0.4663301595172349,
+    "joint2": 0.7946020481247621,
+    "wheel_left_joint": 4.236854936140141,
+    "joint1": 0.06442719309119693,
+    "joint4": 0.032213596545598466,
+    "gripper_left_joint": 6.902913545485386e-05,
+    "gripper_right_joint": 6.902913545485386e-05,
+    "joint3": -0.8329515678219032
+  },
+  "/arm_controller/controller_state": {
+    "header": {
+      "stamp": {
+        "sec": 1794478767,
+        "nanosec": 418071014
+      },
+      "frame_id": ""
+    },
+    "joint_names": [
+      "joint1",
+      "joint2",
+      "joint3",
+      "joint4"
+    ],
+    "reference": {
+      "positions": [
+        0.06656759443818165,
+        0.7671322483994001,
+        -0.8751343948172364,
+        0.026033779898898053
+      ],
+      "velocities": [
+        -1.1906195475901555e-18,
+        -2.3049269204532704e-17,
+        3.223769406961849e-18,
+        3.5476290423178043e-17
+      ],
+      "accelerations": [
+        -0.03356099335964087,
+        -0.6497091134473602,
+        0.09087109637922981,
+        0.9999999997705517
+      ],
+      "effort": [],
+      "time_from_start": {
+        "sec": 402,
+        "nanosec": 181030009
+      }
+    },
+    "feedback": {
+      "positions": [
+        0.06442719309119693,
+        0.7946020481247621,
+        -0.8329515678219032,
+        0.032213596545598466
+      ],
+      "velocities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 402,
+        "nanosec": 181030009
+      }
+    },
+    "error": {
+      "positions": [
+        0.002140401346984719,
+        -0.02746979972536201,
+        -0.04218282699533327,
+        -0.006179816646700413
+      ],
+      "velocities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "output": {
+      "positions": [
+        0.06656759443818165,
+        0.7671322483994001,
+        -0.8751343948172364,
+        0.026033779898898053
+      ],
+      "velocities": [],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "desired": {
+      "positions": [
+        0.06656759443818165,
+        0.7671322483994001,
+        -0.8751343948172364,
+        0.026033779898898053
+      ],
+      "velocities": [
+        -1.1906195475901555e-18,
+        -2.3049269204532704e-17,
+        3.223769406961849e-18,
+        3.5476290423178043e-17
+      ],
+      "accelerations": [
+        -0.03356099335964087,
+        -0.6497091134473602,
+        0.09087109637922981,
+        0.9999999997705517
+      ],
+      "effort": [],
+      "time_from_start": {
+        "sec": 402,
+        "nanosec": 181030009
+      }
+    },
+    "actual": {
+      "positions": [
+        0.06442719309119693,
+        0.7946020481247621,
+        -0.8329515678219032,
+        0.032213596545598466
+      ],
+      "velocities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 402,
+        "nanosec": 181030009
+      }
+    },
+    "multi_dof_joint_names": [],
+    "multi_dof_reference": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_feedback": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_error": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_output": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_desired": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_actual": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    }
+  },
+  "/arm_controller/state": {
+    "header": {
+      "stamp": {
+        "sec": 1794478767,
+        "nanosec": 418057382
+      },
+      "frame_id": ""
+    },
+    "joint_names": [
+      "joint1",
+      "joint2",
+      "joint3",
+      "joint4"
+    ],
+    "reference": {
+      "positions": [],
+      "velocities": [],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "feedback": {
+      "positions": [],
+      "velocities": [],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "error": {
+      "positions": [
+        0.002140401346984719,
+        -0.02746979972536201,
+        -0.04218282699533327,
+        -0.006179816646700413
+      ],
+      "velocities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "output": {
+      "positions": [],
+      "velocities": [],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "desired": {
+      "positions": [
+        0.06656759443818165,
+        0.7671322483994001,
+        -0.8751343948172364,
+        0.026033779898898053
+      ],
+      "velocities": [
+        -1.1906195475901555e-18,
+        -2.3049269204532704e-17,
+        3.223769406961849e-18,
+        3.5476290423178043e-17
+      ],
+      "accelerations": [
+        -0.03356099335964087,
+        -0.6497091134473602,
+        0.09087109637922981,
+        0.9999999997705517
+      ],
+      "effort": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "actual": {
+      "positions": [
+        0.06442719309119693,
+        0.7946020481247621,
+        -0.8329515678219032,
+        0.032213596545598466
+      ],
+      "velocities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "accelerations": [],
+      "effort": [],
+      "time_from_start": {
+        "sec": 402,
+        "nanosec": 181030009
+      }
+    },
+    "multi_dof_joint_names": [],
+    "multi_dof_reference": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_feedback": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_error": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_output": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_desired": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    },
+    "multi_dof_actual": {
+      "transforms": [],
+      "velocities": [],
+      "accelerations": [],
+      "time_from_start": {
+        "sec": 0,
+        "nanosec": 0
+      }
+    }
+  }
+}

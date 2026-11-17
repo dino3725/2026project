@@ -1,0 +1,106 @@
+
+/opt/ros/humble/lib/libturtlebot3_manipulation_hardware.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000000a944 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base>:
+    a944:	d10143ff 	sub	sp, sp, #0x50
+    a948:	f00000c1 	adrp	x1, 25000 <typeinfo name for class_loader::impl::MetaObject<robotis::turtlebot3_manipulation_hardware::TurtleBot3ManipulationSystemHardware, hardware_interface::SystemInterface>@@Base+0x12700>
+    a94c:	f00000c2 	adrp	x2, 25000 <typeinfo name for class_loader::impl::MetaObject<robotis::turtlebot3_manipulation_hardware::TurtleBot3ManipulationSystemHardware, hardware_interface::SystemInterface>@@Base+0x12700>
+    a950:	a9027bfd 	stp	x29, x30, [sp, #32]
+    a954:	910083fd 	add	x29, sp, #0x20
+    a958:	f947bc21 	ldr	x1, [x1, #3960]
+    a95c:	a90353f3 	stp	x19, x20, [sp, #48]
+    a960:	91001bf4 	add	x20, sp, #0x6
+    a964:	f947c042 	ldr	x2, [x2, #3968]
+    a968:	f90023f5 	str	x21, [sp, #64]
+    a96c:	aa0003f3 	mov	x19, x0
+    a970:	52800035 	mov	w21, #0x1                   	// #1
+    a974:	f9400023 	ldr	x3, [x1]
+    a978:	f9000fe3 	str	x3, [sp, #24]
+    a97c:	d2800003 	mov	x3, #0x0                   	// #0
+    a980:	91004042 	add	x2, x2, #0x10
+    a984:	f9000002 	str	x2, [x0]
+    a988:	aa1403e1 	mov	x1, x20
+    a98c:	39001bf5 	strb	w21, [sp, #6]
+    a990:	97ffed88 	bl	5fb0 <robotis::turtlebot3_manipulation_hardware::OpenCR::send_heartbeat(unsigned char const&)@plt>
+    a994:	d2810004 	mov	x4, #0x800                 	// #2048
+    a998:	d2817c03 	mov	x3, #0xbe0                 	// #3040
+    a99c:	f2c05dc4 	movk	x4, #0x2ee, lsl #32
+    a9a0:	52801905 	mov	w5, #0xc8                  	// #200
+    a9a4:	f2c13883 	movk	x3, #0x9c4, lsl #32
+    a9a8:	aa1303e0 	mov	x0, x19
+    a9ac:	aa1403e1 	mov	x1, x20
+    a9b0:	910023e2 	add	x2, sp, #0x8
+    a9b4:	79000fe5 	strh	w5, [sp, #6]
+    a9b8:	a9008fe4 	stp	x4, x3, [sp, #8]
+    a9bc:	97ffed79 	bl	5fa0 <robotis::turtlebot3_manipulation_hardware::OpenCR::set_joints_variables(unsigned short const&, std::array<int, 4ul> const&)@plt>
+    a9c0:	52801b83 	mov	w3, #0xdc                  	// #220
+    a9c4:	f9400660 	ldr	x0, [x19, #8]
+    a9c8:	2a1503e2 	mov	w2, w21
+    a9cc:	aa1403e1 	mov	x1, x20
+    a9d0:	79000fe3 	strh	w3, [sp, #6]
+    a9d4:	97ffec43 	bl	5ae0 <robotis::turtlebot3_manipulation_hardware::DynamixelSDKWrapper::write_byte(unsigned short const&, unsigned char)@plt>
+    a9d8:	aa1303e0 	mov	x0, x19
+    a9dc:	97ffed05 	bl	5df0 <robotis::turtlebot3_manipulation_hardware::OpenCR::init_gripper()@plt>
+    a9e0:	52800060 	mov	w0, #0x3                   	// #3
+    a9e4:	97ffec47 	bl	5b00 <sleep@plt>
+    a9e8:	aa1303e0 	mov	x0, x19
+    a9ec:	52800001 	mov	w1, #0x0                   	// #0
+    a9f0:	97ffecb4 	bl	5cc0 <robotis::turtlebot3_manipulation_hardware::OpenCR::joints_torque(unsigned char) const@plt>
+    a9f4:	aa1303e0 	mov	x0, x19
+    a9f8:	52800001 	mov	w1, #0x0                   	// #0
+    a9fc:	97ffebed 	bl	59b0 <robotis::turtlebot3_manipulation_hardware::OpenCR::wheels_torque(unsigned char) const@plt>
+    aa00:	f9400673 	ldr	x19, [x19, #8]
+    aa04:	b40002f3 	cbz	x19, aa60 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base+0x11c>
+    aa08:	f9400261 	ldr	x1, [x19]
+    aa0c:	90ffffe0 	adrp	x0, 6000 <robotis::turtlebot3_manipulation_hardware::DynamixelSDKWrapper::read_byte(unsigned short const&)@plt>
+    aa10:	913b9000 	add	x0, x0, #0xee4
+    aa14:	f9400421 	ldr	x1, [x1, #8]
+    aa18:	eb00003f 	cmp	x1, x0
+    aa1c:	540003a1 	b.ne	aa90 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base+0x14c>  // b.any
+    aa20:	aa1303e0 	mov	x0, x19
+    aa24:	97ffebc7 	bl	5940 <robotis::turtlebot3_manipulation_hardware::DynamixelSDKWrapper::~DynamixelSDKWrapper()@plt>
+    aa28:	f00000c0 	adrp	x0, 25000 <typeinfo name for class_loader::impl::MetaObject<robotis::turtlebot3_manipulation_hardware::TurtleBot3ManipulationSystemHardware, hardware_interface::SystemInterface>@@Base+0x12700>
+    aa2c:	f947bc00 	ldr	x0, [x0, #3960]
+    aa30:	f9400fe2 	ldr	x2, [sp, #24]
+    aa34:	f9400001 	ldr	x1, [x0]
+    aa38:	eb010042 	subs	x2, x2, x1
+    aa3c:	d2800001 	mov	x1, #0x0                   	// #0
+    aa40:	54000441 	b.ne	aac8 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base+0x184>  // b.any
+    aa44:	aa1303e0 	mov	x0, x19
+    aa48:	d2800a01 	mov	x1, #0x50                  	// #80
+    aa4c:	a9427bfd 	ldp	x29, x30, [sp, #32]
+    aa50:	a94353f3 	ldp	x19, x20, [sp, #48]
+    aa54:	f94023f5 	ldr	x21, [sp, #64]
+    aa58:	910143ff 	add	sp, sp, #0x50
+    aa5c:	17ffecbd 	b	5d50 <operator delete(void*, unsigned long)@plt>
+    aa60:	f00000c0 	adrp	x0, 25000 <typeinfo name for class_loader::impl::MetaObject<robotis::turtlebot3_manipulation_hardware::TurtleBot3ManipulationSystemHardware, hardware_interface::SystemInterface>@@Base+0x12700>
+    aa64:	f947bc00 	ldr	x0, [x0, #3960]
+    aa68:	f9400fe2 	ldr	x2, [sp, #24]
+    aa6c:	f9400001 	ldr	x1, [x0]
+    aa70:	eb010042 	subs	x2, x2, x1
+    aa74:	d2800001 	mov	x1, #0x0                   	// #0
+    aa78:	54000281 	b.ne	aac8 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base+0x184>  // b.any
+    aa7c:	a9427bfd 	ldp	x29, x30, [sp, #32]
+    aa80:	a94353f3 	ldp	x19, x20, [sp, #48]
+    aa84:	f94023f5 	ldr	x21, [sp, #64]
+    aa88:	910143ff 	add	sp, sp, #0x50
+    aa8c:	d65f03c0 	ret
+    aa90:	f00000c0 	adrp	x0, 25000 <typeinfo name for class_loader::impl::MetaObject<robotis::turtlebot3_manipulation_hardware::TurtleBot3ManipulationSystemHardware, hardware_interface::SystemInterface>@@Base+0x12700>
+    aa94:	f947bc00 	ldr	x0, [x0, #3960]
+    aa98:	f9400fe3 	ldr	x3, [sp, #24]
+    aa9c:	f9400002 	ldr	x2, [x0]
+    aaa0:	eb020063 	subs	x3, x3, x2
+    aaa4:	d2800002 	mov	x2, #0x0                   	// #0
+    aaa8:	54000101 	b.ne	aac8 <robotis::turtlebot3_manipulation_hardware::OpenCR::~OpenCR()@@Base+0x184>  // b.any
+    aaac:	aa1303e0 	mov	x0, x19
+    aab0:	aa0103f0 	mov	x16, x1
+    aab4:	a9427bfd 	ldp	x29, x30, [sp, #32]
+    aab8:	a94353f3 	ldp	x19, x20, [sp, #48]
+    aabc:	f94023f5 	ldr	x21, [sp, #64]
+    aac0:	910143ff 	add	sp, sp, #0x50
+    aac4:	d61f0200 	br	x16
+    aac8:	97ffebde 	bl	5a40 <__stack_chk_fail@plt>
+    aacc:	d503201f 	nop

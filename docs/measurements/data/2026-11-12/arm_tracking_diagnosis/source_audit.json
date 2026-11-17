@@ -1,0 +1,14 @@
+{
+  "opencr.cpp": {
+    "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3_manipulation/2.2.1/turtlebot3_manipulation_hardware/src/opencr.cpp",
+    "sha256": "98dd2f22567cbf6911860afcd20ca25695b33a4249d377e2425a3df2082787e6"
+  },
+  "turtlebot3_manipulation_system.cpp": {
+    "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3_manipulation/2.2.1/turtlebot3_manipulation_hardware/src/turtlebot3_manipulation_system.cpp",
+    "sha256": "68ec73f0a5a5cf35d1e9232204ad474d2038663e8c0b2a6f4d19c2981732ab10"
+  },
+  "installed_library": {
+    "path": "/opt/ros/humble/lib/libturtlebot3_manipulation_hardware.so",
+    "sha256": "4109e54d6284dde61198d768e30b4074b7c10b22a4fa17c71e008138dd99a587"
+  }
+}

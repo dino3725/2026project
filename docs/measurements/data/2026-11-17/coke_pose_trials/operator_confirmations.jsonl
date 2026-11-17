@@ -1,0 +1,5 @@
+{"trial": 1, "time": 1794844634.4214566, "physical_grasp_confirmed": true, "release_ready_confirmed": true, "source": "user"}
+{"trial": 2, "time": 1794844780.1915383, "physical_grasp_confirmed": false, "recovery_clear_confirmed": true, "source": "user"}
+{"trial": 3, "time": 1794844894.6557372, "physical_grasp_confirmed": true, "release_ready_confirmed": true, "source": "user"}
+{"trial": 4, "time": 1794845035.5695353, "physical_grasp_confirmed": true, "release_ready_confirmed": true, "source": "user"}
+{"trial": 5, "time": 1794845336.1155405, "physical_grasp_confirmed": true, "release_ready_confirmed": true, "source": "user"}

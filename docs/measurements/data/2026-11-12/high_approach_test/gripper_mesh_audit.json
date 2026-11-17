@@ -1,0 +1,50 @@
+{
+  "gripper_left_palm.stl": {
+    "base_link_min_m": [
+      0.20668881650149562,
+      0.029087783781460833,
+      0.2415697065879813
+    ],
+    "base_link_max_m": [
+      0.2963499786821171,
+      0.06902671140322851,
+      0.2996683747672054
+    ],
+    "bottom_clearance_over_nominal_coke_mm": 37.56970658798128,
+    "tip_local_min_m": [
+      0.05010870471596718,
+      0.0,
+      -0.01246904581785202
+    ],
+    "tip_base_min_m": [
+      0.28129711970843196,
+      0.045219908280629065,
+      0.25856289351506095
+    ]
+  },
+  "gripper_right_palm.stl": {
+    "base_link_min_m": [
+      0.21166804427162478,
+      -0.029869743330392017,
+      0.2415697065879813
+    ],
+    "base_link_max_m": [
+      0.2996901873273945,
+      0.011388103149937856,
+      0.2996683747672054
+    ],
+    "bottom_clearance_over_nominal_coke_mm": 37.56970658798128,
+    "tip_local_min_m": [
+      0.05010870471596718,
+      -0.009600000455975533,
+      -0.01246904581785202
+    ],
+    "tip_base_min_m": [
+      0.28466678162136927,
+      -0.007167546600874689,
+      0.25856289351506095
+    ]
+  },
+  "user_bottom_clearance_mm": 13,
+  "note": "Uses installed official mesh, actual encoder joints, nominal 80+134mm object top and 10mm base offset; not a physical measurement"
+}

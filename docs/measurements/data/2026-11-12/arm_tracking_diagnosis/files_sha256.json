@@ -1,0 +1,14 @@
+{
+  "passive_summary.json": "1b2eccbe9882970dea869045d191220b0c5ce38eaddea4065b56220a695d685e",
+  "passive_samples.json": "fc5a621940ca3a2fa8e1454ec70081b66f70e7e7fbc822993fc4f82028989d20",
+  "historical_summary.json": "8fc8730b2effe74da4cb83d79067f663701699fc0fa699063d9705ae2f8ad958",
+  "historical_tracking.json": "f242ec1aad7a19a1a791395246d9c35ae8dea5bc381c927ddb47ab09c6cc12d9",
+  "source_audit.json": "c7a9a229885ac79d97b57e84fafbb9b26347113a91d11d40dbcde3ecd262e44f",
+  "opencr_destructor_disassembly.txt": "d2ff73dfacb28e3d9fe0822b1f75882e658c614e5da03d24601c7f69b55bedb6",
+  "dynamic_joint_state.json": "bf22b0d4c94754e7160458199b7ba7eeb0e1cd16199351cbcb990c0faf3b602c",
+  "lift_request.json": "9f2599220815d8603fb7c65d09a00c84fc4d5054117dac74e25e3bbb87bbe7c5",
+  "lift_settled.json": "23579871f6ecace5c3680fc8eb0c1c0f8f2294757376367c6e4111a94f0bd536",
+  "lift_plan_02/plan.json": "384020ab1b49ea10adfa2da7a7bc6d7547486ce745ba6ae0a05affcc08ce9ace",
+  "lift_plan_02/execution.json": "f9b2e3e4ec36ba344384e6ad552a5126c1134b4ad5f587c53cb156f0f4267a8c",
+  "shutdown.json": "6239d6d36e8330946e986ce6b4949f4aa3c73479a26b7128b728a2084578c474"
+}

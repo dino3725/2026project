@@ -1,0 +1,16 @@
+{
+  "pose_count": 30,
+  "median_error_deg": [
+    -0.03808593749999982,
+    0.43945312500000167,
+    0.47167968750000144,
+    0.17578124999999303
+  ],
+  "max_absolute_error_deg": [
+    0.1582031250000001,
+    1.6875,
+    1.3613281250000049,
+    0.3535156249999959
+  ],
+  "note": "Recorded latest joints vs requested calibration pose; not independent physical position measurement"
+}

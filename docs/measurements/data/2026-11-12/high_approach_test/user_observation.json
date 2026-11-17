@@ -1,0 +1,10 @@
+{
+  "gripper_center_left_of_coke_mm": [
+    15,
+    20
+  ],
+  "fingertip_fore_aft": "aligned with far rim of coke, away from robot",
+  "lowest_finger_to_coke_top_gap_mm": 13,
+  "method": "user observation, approximate; no new ruler request",
+  "decision": "no descent or grasp; investigate tracking and physical reference"
+}

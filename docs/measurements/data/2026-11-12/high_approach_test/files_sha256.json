@@ -1,0 +1,17 @@
+{
+  "session.json": "66b68ead955e145cefbd272fc1174d03bbef26e76e2197237891e054cf96a6e1",
+  "startup_check.json": "b39169cf34c2b900595a749419c53013218a1d933fd64e3160f5a359ca6bb8b9",
+  "initial_joints.json": "24810a9a66f024f4940c7f22ab0613f17262bec81db5372bf218ae73ae4482d9",
+  "recognition_path_screen.json": "322252b577cd0d22e043b6967aad00e1a4c85d8a39275dbfe63a8e6318278563",
+  "recognition_result.json": "744ff5de50e3993ac12f19a211f9ca5e464009117e03e99f4c5cd7a54d390105",
+  "approach_request.json": "c6882d89fe9f3e74a9deb5d3e236b304719662161aa3ee7177c02c3743fa9f83",
+  "settled_check.json": "50a89db87dc218b7cfd1f1693cb479a50f0ba26c9b3e938de31dfebdfee494a8",
+  "gripper_mesh_audit.json": "baf1052136122f14161f10e8effa6a1d6ea1ea8b8ca74ed84de23581c9d23812",
+  "controller_parameters.json": "fd6637454d44ae300a7fe40f3a49ee79886326bf45d57debe445bce8bcdfdc9b",
+  "user_observation.json": "c32e827e73739bc68cdfbf79a86f49c8a599593873a00e4d62ebc7f47b5ef020",
+  "plan_02/plan.json": "b7855e4369af91ffe88df070c82d54a91047ef4f78702ee0ddb3172eb02b4d98",
+  "plan_02/execution.json": "d03b5d2a8cddace1596dfa6e162eca9eba023a3ccef0ed5106a2eb9343c96fb6",
+  "coke_trials_02/session.json": "bf0336b282ff2abb197bc796df7ddc914991c98e5cc56e7b454cc28fd6a97e0e",
+  "coke_trials_02/trials.csv": "5e53af798a978f0614a5850b13c1efc098380f6735263038d2b5123f2bd820f5",
+  "tracking_audit.json": "1000a776462ee93a7b362ce774fef0db435c92b6e0e8a47da2cd5db0c31a5245"
+}

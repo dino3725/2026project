@@ -1,0 +1,35 @@
+{
+  "open_loop_control": {
+    "bool": true
+  },
+  "constraints.goal_time": {
+    "double": 0.0
+  },
+  "constraints.stopped_velocity_tolerance": {
+    "double": 0.01
+  },
+  "constraints.joint1.goal": {
+    "double": 0.0
+  },
+  "constraints.joint1.trajectory": {
+    "double": 0.0
+  },
+  "constraints.joint2.goal": {
+    "double": 0.0
+  },
+  "constraints.joint2.trajectory": {
+    "double": 0.0
+  },
+  "constraints.joint3.goal": {
+    "double": 0.0
+  },
+  "constraints.joint3.trajectory": {
+    "double": 0.0
+  },
+  "constraints.joint4.goal": {
+    "double": 0.0
+  },
+  "constraints.joint4.trajectory": {
+    "double": 0.0
+  }
+}
