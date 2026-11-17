@@ -10,6 +10,13 @@ vision_node2:
     recognition_timeout: 10.0
     depth_window_size: 7
     depth_scale: 0.001
+    # Candidate changes surface selection, not object-center estimation.
+    # Surface sampling verified by saved replay and live recognition; full grasp
+    # accuracy remains separate. Select legacy explicitly for baseline comparison.
+    observation_output_directory: ''  # opt-in paired diagnostic capture
+    localization_mode: candidate  # legacy | candidate
+    localization_max_gap_sec: 0.5
+    localization_max_spread_m: 0.01  # experimental 90th-percentile radius
     max_frame_age: 0.5
     tf_timeout: 0.2
     min_valid_samples: 10

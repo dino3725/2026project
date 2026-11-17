@@ -6,6 +6,9 @@ from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
+
+import yaml
 
 from vision_pkg.camera_mount_config import load_camera_mount
 
@@ -19,10 +22,18 @@ def generate_launch_description():
         get_package_share_directory('vision_pkg') + '/config/camera_mount.yaml'
     )
 
+    with open(config_path) as stream:
+        defaults = yaml.safe_load(stream)['vision_node']['ros__parameters']
+
     model_path = LaunchConfiguration('model_path')
     publish_mount_tf = LaunchConfiguration('publish_camera_mount_tf')
 
     declared_arguments = [
+        DeclareLaunchArgument(
+            'observation_output_directory',
+            default_value=defaults.get('observation_output_directory', '')),
+        DeclareLaunchArgument(
+            'localization_mode', default_value=defaults.get('localization_mode', 'candidate')),
         DeclareLaunchArgument(
             'model_path',
             default_value='',
@@ -54,7 +65,13 @@ def generate_launch_description():
         executable='vision_node',
         name='vision_node',
         output='screen',
-        parameters=[config_path, {'model_path': model_path}],
+        parameters=[config_path, {
+            'model_path': model_path,
+            'observation_output_directory': ParameterValue(
+                LaunchConfiguration('observation_output_directory'), value_type=str),
+            'localization_mode': ParameterValue(
+                LaunchConfiguration('localization_mode'), value_type=str),
+        }],
     )
 
     camera_mount_tf = Node(

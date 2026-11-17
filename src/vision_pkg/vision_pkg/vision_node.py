@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import threading
 import time
 from dataclasses import dataclass
@@ -27,6 +28,8 @@ from tf2_geometry_msgs import do_transform_point
 from tf2_ros import Buffer, TransformException, TransformListener
 from ultralytics import YOLO
 
+from vision_pkg.surface_localization import estimate_surface
+from vision_pkg.surface_localization import LocalizationWindow
 from vision_pkg.vision_utils import Detection
 from vision_pkg.vision_utils import deproject_pixel
 from vision_pkg.vision_utils import get_detection_depth
@@ -55,6 +58,7 @@ class FrameObservation:
     camera_point: Optional[tuple[float, float, float]] = None
     base_point: Optional[tuple[float, float, float]] = None
     error: str = ''
+    surface_quality: str = ''
 
 
 class VisionNode(Node):
@@ -143,7 +147,8 @@ class VisionNode(Node):
         self.get_logger().info(
             'Vision action server ready: '
             f'model={self.model_path}, '
-            f'classes={sorted(self.available_classes)}'
+            f'classes={sorted(self.available_classes)}, '
+            f'localization_mode={self.localization_mode}'
         )
         self.get_logger().info(
             f'RGB={self.rgb_topic}, depth={self.depth_topic}, '
@@ -174,6 +179,10 @@ class VisionNode(Node):
         self.declare_parameter('recognition_timeout', 10.0)
         self.declare_parameter('depth_window_size', 7)
         self.declare_parameter('depth_scale', 0.001)
+        self.declare_parameter('localization_mode', 'candidate')
+        self.declare_parameter('observation_output_directory', '')
+        self.declare_parameter('localization_max_gap_sec', 0.5)
+        self.declare_parameter('localization_max_spread_m', 0.01)
         self.declare_parameter('max_frame_age', 0.5)
         self.declare_parameter('tf_timeout', 0.2)
         self.declare_parameter('min_valid_samples', 10)
@@ -203,6 +212,14 @@ class VisionNode(Node):
             self.get_parameter('depth_window_size').value
         )
         self.depth_scale = float(self.get_parameter('depth_scale').value)
+        self.observation_output_directory = str(
+            self.get_parameter('observation_output_directory').value)
+        self.localization_mode = str(
+            self.get_parameter('localization_mode').value)
+        self.localization_max_gap_sec = float(
+            self.get_parameter('localization_max_gap_sec').value)
+        self.localization_max_spread_m = float(
+            self.get_parameter('localization_max_spread_m').value)
         self.max_frame_age = float(
             self.get_parameter('max_frame_age').value
         )
@@ -219,6 +236,14 @@ class VisionNode(Node):
         self.sync_slop = float(self.get_parameter('sync_slop').value)
 
     def _validate_parameters(self) -> None:
+        if self.localization_mode not in ('legacy', 'candidate'):
+            raise ValueError('localization_mode must be legacy or candidate')
+        LocalizationWindow(
+            duration=self.stable_detection_duration,
+            horizon=self.stable_detection_duration + 1.0,
+            max_gap=self.localization_max_gap_sec,
+            min_samples=max(2, self.min_valid_samples),
+            max_spread_m=self.localization_max_spread_m)
         if not self.model_path.strip():
             raise ValueError('model_path parameter must not be empty')
         if not 0.0 <= self.confidence_threshold <= 1.0:
@@ -361,15 +386,26 @@ class VisionNode(Node):
         started_at = time.monotonic()
         detected_at: Optional[float] = None
         detected_time = 0.0
+        window = LocalizationWindow(
+            duration=self.stable_detection_duration,
+            horizon=self.stable_detection_duration + 1.0,
+            max_gap=self.localization_max_gap_sec,
+            min_samples=max(2, self.min_valid_samples),
+            max_spread_m=self.localization_max_spread_m)
         last_observation_error = 'target not detected'
         samples: list[tuple[float, float, float, float]] = []
         last_processed_sequence = -1
+        last_pair_stamps = (0, 0)
         next_inference_at = started_at
         last_feedback_at = 0.0
         inference_interval = 1.0 / self.max_inference_rate_hz
 
         while rclpy.ok():
             now = time.monotonic()
+            if self.localization_mode == 'candidate':
+                window.expire(self.get_clock().now().nanoseconds / 1e9)
+                samples = [s for _, s in window.samples]
+                detected_time = window.coverage
             if goal_handle.is_cancel_requested:
                 goal_handle.canceled()
                 return self._failure_result('Goal canceled.')
@@ -411,9 +447,19 @@ class VisionNode(Node):
             last_processed_sequence = sequence
             next_inference_at = time.monotonic() + inference_interval
 
-            frame_error = self._validate_frame_age(rgb_msg)
+            pair_stamps = (Time.from_msg(rgb_msg.header.stamp).nanoseconds,
+                           Time.from_msg(depth_msg.header.stamp).nanoseconds)
+            frame_error = (self._validate_frame_age(rgb_msg)
+                           or self._validate_frame_age(depth_msg))
+            if not frame_error and any(a <= b for a, b in zip(pair_stamps, last_pair_stamps)):
+                frame_error = 'duplicate or out-of-order RGB/depth pair'
+            if not frame_error:
+                last_pair_stamps = pair_stamps
             if frame_error:
                 detected_at = None
+                if self.localization_mode == 'candidate':
+                    window.invalidate(frame_error)
+                    samples, detected_time = [], 0.
                 last_observation_error = frame_error
                 self._publish_feedback(goal_handle, False, detected_time, 0.0)
                 self._log_frame_error(frame_error)
@@ -424,10 +470,24 @@ class VisionNode(Node):
                 depth_msg,
                 target_class,
             )
+            self._record_observation(observation, depth_msg)
             observation_time = time.monotonic()
+            if self.localization_mode == 'candidate':
+                # Inference/recording can take long enough to invalidate a frame.
+                frame_error = (self._validate_frame_age(rgb_msg)
+                               or self._validate_frame_age(depth_msg))
+                if frame_error:
+                    window.invalidate(frame_error)
+                    samples, detected_time, detected_at = [], 0., None
+                    last_observation_error = frame_error
+                    self._log_frame_error(frame_error)
+                    continue
 
             if observation.detection is None:
                 detected_at = None
+                if self.localization_mode == 'candidate':
+                    window.invalidate(observation.error)
+                    samples, detected_time = [], 0.
                 last_observation_error = observation.error
                 self._publish_feedback(goal_handle, False, detected_time, 0.0)
                 self.publish_debug_image(observation, detected_time)
@@ -450,6 +510,17 @@ class VisionNode(Node):
                         observation.detection.confidence,
                     )
                 )
+            candidate_values = None
+            if self.localization_mode == 'candidate':
+                sample = samples[-1] if observation.base_point is not None else None
+                candidate_values = window.update(pair_stamps[1] / 1e9, sample)
+                samples = [s for _, s in window.samples]
+                detected_time = window.coverage
+                if candidate_values is None and observation.base_point is not None:
+                    last_observation_error = window.reason
+                observation.surface_quality += (
+                    f'; recent_r90={window.spread_m:.4f}m; '
+                    f'window={window.reason or "ready"}')
             stable_time = detected_time
 
             self._publish_feedback(
@@ -464,8 +535,11 @@ class VisionNode(Node):
             if (
                 stable_time >= self.stable_detection_duration
                 and len(samples) >= self.min_valid_samples
+                and (self.localization_mode == 'legacy'
+                     or candidate_values is not None)
             ):
-                final_values = median_localization(samples)
+                final_values = (candidate_values if self.localization_mode == 'candidate'
+                                else median_localization(samples))
                 self.publish_debug_image(
                     observation,
                     stable_time,
@@ -502,8 +576,10 @@ class VisionNode(Node):
     def _validate_frame_age(self, rgb_msg: Image) -> str:
         frame_time = Time.from_msg(rgb_msg.header.stamp)
         if frame_time.nanoseconds == 0:
-            return 'RGB frame has no timestamp'
+            return 'image frame has no timestamp'
         age = (self.get_clock().now() - frame_time).nanoseconds / 1e9
+        if age < 0:
+            return 'image frame timestamp is in the future'
         if age > self.max_frame_age:
             return f'synchronized frame is stale: age={age:.3f}s'
         return ''
@@ -549,7 +625,7 @@ class VisionNode(Node):
             observation.error = f'invalid depth: {exc}'
             return observation
 
-        if observation.depth_m is None:
+        if observation.depth_m is None and self.localization_mode == 'legacy':
             observation.error = 'invalid depth: no valid value in window'
             return observation
 
@@ -559,15 +635,31 @@ class VisionNode(Node):
             observation.error = 'CameraInfo unavailable'
             return observation
 
-        observation.camera_point = deproject_pixel(
-            u,
-            v,
-            observation.depth_m,
-            intrinsics.fx,
-            intrinsics.fy,
-            intrinsics.cx,
-            intrinsics.cy,
-        )
+        if self.localization_mode == 'candidate':
+            try:
+                surface = estimate_surface(
+                    np.asarray(depth_image), detection, depth_msg.encoding,
+                    self.depth_scale,
+                    (intrinsics.fx, intrinsics.fy, intrinsics.cx, intrinsics.cy),
+                    self.depth_window_size)
+            except ValueError as exc:
+                observation.error = f'invalid surface: {exc}'
+                return observation
+            observation.surface_quality = (
+                f'source={surface.source}; pixel={surface.pixel}; '
+                f'valid={surface.valid_fraction:.3f}; '
+                f'support={surface.support_fraction:.3f}; '
+                f'depth_span={surface.depth_span_m:.4f}m')
+            if surface.point is None:
+                observation.error = surface.reason
+                observation.depth_m = None
+                return observation
+            observation.camera_point = surface.point
+            observation.depth_m = surface.point[2]
+        else:
+            observation.camera_point = deproject_pixel(
+                u, v, observation.depth_m,
+                intrinsics.fx, intrinsics.fy, intrinsics.cx, intrinsics.cy)
 
         actual_frame = rgb_msg.header.frame_id
         if actual_frame and actual_frame != self.camera_frame:
@@ -581,11 +673,67 @@ class VisionNode(Node):
         try:
             observation.base_point = self.transform_point_to_base(
                 observation.camera_point,
-                rgb_msg,
+                depth_msg if self.localization_mode == 'candidate' else rgb_msg,
             )
         except TransformException as exc:
             observation.error = f'TF unavailable: {exc}'
         return observation
+
+    def _record_observation(self, observation, depth_msg):
+        """
+        Save the actual inference pair and image-time TF when opted in.
+
+        Disk IO adds latency; use this for diagnostic sessions, not benchmarks.
+        Recording errors must not change motion or action cancellation handling.
+        """
+        if not self.observation_output_directory:
+            return
+        try:
+            directory = Path(self.observation_output_directory).expanduser()
+            directory.mkdir(parents=True, exist_ok=True)
+            stem = str(time.time_ns())
+            rgb_path = directory / f'{stem}_rgb.png'
+            depth_path = directory / f'{stem}_depth.npy'
+            if not cv2.imwrite(str(rgb_path), observation.rgb_image):
+                raise OSError('Cannot write diagnostic RGB')
+            depth = self.bridge.imgmsg_to_cv2(depth_msg, desired_encoding='passthrough')
+            np.save(depth_path, depth, allow_pickle=False)
+            with self._intrinsics_lock:
+                k = self._camera_intrinsics
+            rgb = observation.rgb_message
+            data = {
+                'mode': self.localization_mode,
+                'rgb_file': rgb_path.name, 'depth_file': depth_path.name,
+                'rgb_stamp_ns': Time.from_msg(rgb.header.stamp).nanoseconds,
+                'depth_stamp_ns': Time.from_msg(depth_msg.header.stamp).nanoseconds,
+                'rgb_frame': rgb.header.frame_id,
+                'depth_frame': depth_msg.header.frame_id,
+                'depth_encoding': depth_msg.encoding, 'depth_scale': self.depth_scale,
+                'intrinsics_fx_fy_cx_cy': [k.fx, k.fy, k.cx, k.cy] if k else None,
+                'detection': vars(observation.detection) if observation.detection else None,
+                'camera_surface': observation.camera_point,
+                'base_surface': observation.base_point,
+                'quality': observation.surface_quality, 'error': observation.error,
+                'camera_to_base': None,
+            }
+            try:
+                tf_image = depth_msg if self.localization_mode == 'candidate' else rgb
+                tf = self.tf_buffer.lookup_transform(
+                    self.target_frame, self.camera_frame,
+                    Time.from_msg(tf_image.header.stamp), timeout=Duration(seconds=0.))
+                t, q = tf.transform.translation, tf.transform.rotation
+                data['camera_to_base'] = {
+                    'parent': self.target_frame, 'child': self.camera_frame,
+                    'query_stamp_ns': Time.from_msg(tf_image.header.stamp).nanoseconds,
+                    'translation': [t.x, t.y, t.z],
+                    'quaternion_xyzw': [q.x, q.y, q.z, q.w],
+                }
+            except TransformException as exc:
+                data['tf_error'] = str(exc)
+            (directory / f'{stem}.json').write_text(
+                json.dumps(data, indent=2, allow_nan=False) + '\n')
+        except (OSError, ValueError, CvBridgeError) as exc:
+            self.get_logger().error(f'Observation recording failed: {exc}')
 
     def find_target_detection(
         self,
@@ -800,7 +948,8 @@ class VisionNode(Node):
                 f'base={self._format_point(observation.base_point)}; '
                 f'accumulated={stable_time:.2f}/'
                 f'{self.stable_detection_duration:.2f}s; '
-                f'samples={sample_count}; error={observation.error or "none"}'
+                f'samples={sample_count}; error={observation.error or "none"}; '
+                f'mode={self.localization_mode}; {observation.surface_quality}'
             )
         self._last_detail_log_time = now
 
