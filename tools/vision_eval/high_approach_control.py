@@ -3,14 +3,17 @@
 import hashlib
 import json
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 import numpy as np
 import rclpy
 from action_msgs.msg import GoalStatus
 from moveit_msgs.action import ExecuteTrajectory
 from rclpy.executors import MultiThreadedExecutor
+from rclpy.qos import DurabilityPolicy, QoSProfile
 from rosidl_runtime_py.set_message import set_message_fields
 from std_srvs.srv import Trigger
+from std_msgs.msg import String
 
 from control_pkg.control_node import OperationCancelled
 from control_pkg.task_state import TaskState
@@ -26,7 +29,11 @@ def validate_trajectory(plan, current, model_sha):
         raise ValueError('Unapproved plan/model/scaling')
     target = plan['target_m']
     diagnostic = plan.get('kind') == 'diagnostic_lift'
-    height_ok = 0.30 <= target[2] <= 0.36 if diagnostic else target[2] == 0.290
+    geometry_review = plan.get('kind') == 'screened_grasp_approach'
+    contact_lift = plan.get('kind') == 'contact_clearance_lift'
+    height_ok = (0.27 <= target[2] <= 0.34 if contact_lift else
+                 0.26 <= target[2] <= 0.30 if geometry_review else
+                 0.30 <= target[2] <= 0.36 if diagnostic else target[2] == 0.290)
     if not (0.20 <= target[0] <= 0.31
             and abs(target[1]) <= 0.08 and height_ok):
         raise ValueError('Not a reviewed high approach target')
@@ -46,6 +53,20 @@ def validate_trajectory(plan, current, model_sha):
     if (q.shape != (len(points), 4) or v.shape != q.shape or a.shape != q.shape
             or not all(np.isfinite(x).all() for x in (q, v, a, t))):
         raise ValueError('Malformed/nonfinite trajectory')
+    if geometry_review:
+        screen = plan['path_screen']
+        digest = hashlib.sha256(json.dumps(q.tolist(), separators=(',', ':')).encode()).hexdigest()
+        full_digest = hashlib.sha256(json.dumps(trajectory, sort_keys=True,
+                                               separators=(',', ':')).encode()).hexdigest()
+        if (screen['trajectory_positions_sha256'] != digest
+                or screen['trajectory_sha256'] != full_digest
+                or screen.get('interpolation') != 'quintic_with_derivative_bound'
+                or not screen['sampled_envelope_clear']
+                or screen['possible_overlap_count'] != 0
+                or not math_is_finite_screen(screen)
+                or screen['min_separating_axis_gap_m'] < .010
+                or screen['max_between_sample_motion_bound_m'] >= screen['min_separating_axis_gap_m']):
+            raise ValueError('Approach trajectory does not match clearance review')
     if diagnostic:
         prior = np.array(plan['previous_reference_rad'], dtype=float)
         goal = np.array(plan['diagnostic_target_rad'], dtype=float)
@@ -55,7 +76,18 @@ def validate_trajectory(plan, current, model_sha):
                                    atol=1e-8, rtol=0)
                 or np.max(np.abs(q[-1] - goal)) > 0.00011):
             raise ValueError('Not the reviewed shoulder-only diagnostic lift')
-    minimum_duration = 4 if diagnostic else 1
+    if contact_lift:
+        reference = np.asarray(plan['measured_start_rad'], dtype=float)
+        expected = reference + [0, -np.deg2rad(6), 0, 0]
+        if (reference.shape != (4,) or not np.isfinite(reference).all()
+                or np.max(abs(q[0]-reference)) > .00011
+                or np.max(abs(q[-1]-expected)) > .00011
+                or np.max(abs(q[:, [0,2,3]]-reference[[0,2,3]])) > .00011
+                or np.any(np.diff(q[:,1]) > .00001)
+                or not plan.get('relative_finger_motion_upward')
+                or not .025 <= plan['predicted_finger_lift_m'] <= .055):
+            raise ValueError('Not a measured-start shoulder-only clearance lift')
+    minimum_duration = 4 if diagnostic or contact_lift else 1
     if (abs(t[0]) > 1e-9 or np.any(np.diff(t) <= 0)
             or not minimum_duration <= t[-1] <= 20):
         raise ValueError('Invalid trajectory timing')
@@ -74,11 +106,19 @@ def validate_trajectory(plan, current, model_sha):
     return trajectory, float(t[-1])
 
 
+def math_is_finite_screen(screen):
+    """Do not accept NaN clearance or a negative interpolation bound."""
+    values = [screen['min_separating_axis_gap_m'], screen['max_between_sample_motion_bound_m']]
+    return bool(np.isfinite(values).all() and min(values) >= 0)
+
+
 class HighApproachControl(MeasurementControl):
     """Hold after one approach; never descend, grasp or return HOME."""
 
     def __init__(self):
         self.used = False
+        self._model_matches = False
+        self._model_conflict = False
         super().__init__()
         self.declare_parameter('reviewed_plan_path', '')
         self.declare_parameter('reviewed_plan_sha256', '')
@@ -91,6 +131,10 @@ class HighApproachControl(MeasurementControl):
         model = (Path(__file__).resolve().parents[2]
                  / 'log/measured_model_20261111/measured.urdf')
         self.model_sha = hashlib.sha256(model.read_bytes()).hexdigest()
+        self.model_canonical = ET.canonicalize(model.read_text(), strip_text=True)
+        self.create_subscription(
+            String, '/robot_description', self.on_active_model,
+            QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
         self.result_path = self.path.parent / 'execution.json'
         if self.result_path.exists():
             raise ValueError('Execution already attempted; do not replay')
@@ -99,6 +143,21 @@ class HighApproachControl(MeasurementControl):
             callback_group=self.callback_group)
         self.get_logger().info(
             'HIGH APPROACH: no startup motion; awaiting explicit service.')
+
+    def on_active_model(self, message):
+        """Compare model content despite formatting differences between publishers."""
+        try:
+            matches = ET.canonicalize(message.data, strip_text=True) == self.model_canonical
+        except ET.ParseError:
+            matches = False
+        with self._lock:
+            self._model_conflict = getattr(self, '_model_conflict', False) or not matches
+            self._model_matches = matches and not self._model_conflict
+
+    def blocked_reason(self):
+        """Retain heartbeat/stop gates and require the live reviewed model."""
+        reason = super().blocked_reason()
+        return reason or ('' if self._model_matches else 'Active robot model not confirmed')
 
     def prepare(self, request, response):
         response.success = False

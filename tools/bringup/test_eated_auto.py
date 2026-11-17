@@ -12,6 +12,22 @@ import pytest
 import eated_auto as auto
 
 
+def test_audit_is_opt_in_and_does_not_change_poses(tmp_path):
+    """Audit mode records legacy inference and disables only Pick."""
+    import yaml
+    normal = dict(auto.stages())
+    audit = dict(auto.stages(tmp_path))
+    assert 'localization_mode:=legacy' in audit['vision']
+    assert not any('observation_output' in arg for arg in normal['vision'])
+    assert audit['hardware'] == normal['hardware']
+    auto.write_audit_config(tmp_path)
+    expected = yaml.safe_load(
+        (auto.WORKSPACE / 'src/control_pkg/config/control.yaml').read_text())
+    actual = yaml.safe_load((tmp_path / 'control_audit.yaml').read_text())
+    expected['control_node']['ros__parameters']['pick_enabled'] = False
+    assert actual == expected
+
+
 def test_shutdown_publishes_one_stop_even_with_busy_callbacks(monkeypatch):
     clock = [0.0]
     monkeypatch.setattr(auto.time, 'monotonic', lambda: clock[0])
@@ -162,3 +178,17 @@ def test_shutdown_signals_descendants_and_keeps_other_groups(tmp_path):
         processes.close()
         os.killpg(unrelated.pid, signal.SIGTERM)
         unrelated.wait(timeout=3)
+
+
+def test_reviewed_approach_uses_one_guarded_controller_and_no_start_trigger(tmp_path):
+    import hashlib
+    plan = tmp_path / 'plan.json'
+    plan.write_text('{}')
+    commands = dict(auto.stages(reviewed_approach_plan=plan))
+    control = commands['control']
+    assert any(x.endswith('high_approach_control.py') for x in control)
+    assert f'reviewed_plan_path:={plan}' in control
+    assert f'reviewed_plan_sha256:={hashlib.sha256(b"{}").hexdigest()}' in control
+    assert not any('Trigger' in ' '.join(command) or 'service call' in ' '.join(command)
+                   for command in commands.values())
+    assert list(commands).count('control') == 1

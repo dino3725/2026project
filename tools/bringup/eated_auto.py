@@ -22,9 +22,9 @@ MANAGED_NODES = {
 }
 
 
-def stages():
+def stages(audit_directory=None, reviewed_approach_plan=None):
     """Keep manual-drive startup after control has finished HOME."""
-    return [
+    commands = [
         ('joy', ['ros2', 'run', 'joy', 'joy_node', '--ros-args',
                  '-p', 'device_id:=0', '-p', 'deadzone:=0.05',
                  '-p', 'autorepeat_rate:=20.0']),
@@ -40,6 +40,36 @@ def stages():
         ('control', ['ros2', 'launch', 'control_pkg', 'control.launch.py']),
         ('joystick', ['ros2', 'run', 'joystick_pkg', 'total_control']),
     ]
+
+    if audit_directory is not None:
+        for name, command in commands:
+            if name == 'vision':
+                command.extend([
+                    f'observation_output_directory:={audit_directory / "observations"}',
+                    'localization_mode:=legacy'])
+            if name == 'control':
+                command.append(f'config_file:={audit_directory / "control_audit.yaml"}')
+    if reviewed_approach_plan is not None:
+        import hashlib
+        path = Path(reviewed_approach_plan).resolve()
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        commands = [(name, [sys.executable,
+                     str(WORKSPACE / 'tools/vision_eval/high_approach_control.py'),
+                     '--ros-args', '--params-file',
+                     str(WORKSPACE / 'src/control_pkg/config/control.yaml'),
+                     '-p', f'reviewed_plan_path:={path}',
+                     '-p', f'reviewed_plan_sha256:={digest}'] if name == 'control' else command)
+                    for name, command in commands]
+    return commands
+
+
+def write_audit_config(directory):
+    """Disable Pick for operator-triggered recognition and leave all poses intact."""
+    import yaml
+    source = WORKSPACE / 'src/control_pkg/config/control.yaml'
+    config = yaml.safe_load(source.read_text())
+    config['control_node']['ros__parameters']['pick_enabled'] = False
+    (directory / 'control_audit.yaml').write_text(yaml.safe_dump(config))
 
 
 def child_environment(name):
@@ -335,15 +365,22 @@ def main():
                         help='실행 순서만 출력; ROS/하드웨어를 시작하지 않음')
     parser.add_argument('--timeout', type=float, default=90,
                         help='단계별 준비 제한 시간(초, 기본 90)')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--recognition-audit', action='store_true',
+                        help='인식 기록만 수행: Pick 비활성, HOME/인식 자세 이동은 있음')
+    mode.add_argument('--reviewed-approach-plan', type=Path,
+                      help='검토한 접근 전용 계획: 시작 시 대기, 명시적 서비스로 1회 실행')
     args = parser.parse_args()
     if not 0 < args.timeout <= 600:
         parser.error('--timeout must be between 0 and 600 seconds')
     if args.dry_run:
         import shlex
-        for name, command in stages():
+        audit = WORKSPACE / 'log/AUDIT_RUN' if args.recognition_audit else None
+        for name, command in stages(audit, args.reviewed_approach_plan):
             print(f'{name}: {shlex.join(command)}')
         print('command/state: 위 터미널과 monitor.log에 통합 표시')
-        print('주의: 실제 실행 시 control 단계에서 기존 HOME 동작 실행')
+        print('control: 접근 서비스 대기' if args.reviewed_approach_plan else
+              '주의: 실제 실행 시 control 단계에서 기존 HOME 동작 실행')
         print('주의: 공급 하드웨어 드라이버는 종료 시에도 자체 복귀/집게 초기화 수행')
         return 0
 
@@ -357,14 +394,18 @@ def main():
     directory = (WORKSPACE / 'log'
                  / datetime.now().strftime('eateded_%Y%m%d_%H%M%S_%f'))
     directory.mkdir()
+    if args.recognition_audit:
+        write_audit_config(directory)
     processes = Processes(directory)
     observer = None
     result = 0
     interrupted = False
+    received_signal = None
 
     def interrupt(signum, frame):
-        nonlocal interrupted
+        nonlocal interrupted, received_signal
         if not interrupted:
+            received_signal = signal.Signals(signum).name
             interrupted = True
             raise KeyboardInterrupt
 
@@ -392,11 +433,18 @@ def main():
                     elapsed=time.monotonic() - started, **data)) + '\n')
 
             observer = Readiness(report, record)
+            report(f'감독 프로세스 pid={os.getpid()}, ppid={os.getppid()}, '
+                   f'sid={os.getsid(0)}')
             report(f'로그: {directory}')
-            report('자동 실행: 팔이 HOME으로 움직입니다. 주변을 비우고 F710을 준비하세요.')
+            report('접근 전용 실행: 제어기는 이동 없이 서비스 요청을 기다립니다.'
+                   if args.reviewed_approach_plan else
+                   '자동 실행: 팔이 HOME으로 움직입니다. 주변을 비우고 F710을 준비하세요.')
             report('공급 드라이버는 종료 시에도 자체 복귀/집게 초기화를 수행합니다.')
             preflight(observer)
-            for name, command in stages():
+            if args.recognition_audit:
+                report('인식 기록 모드: 물체 인식 후 집지 않고 HOME으로 복귀합니다.')
+            for name, command in stages(directory if args.recognition_audit else None,
+                                        args.reviewed_approach_plan):
                 # Do not start HOME with stale or pressed joystick inputs.
                 if name == 'control':
                     wait_ready('joy', observer, processes, args.timeout)
@@ -415,7 +463,7 @@ def main():
                 if not observer.fresh('joy'):
                     raise RuntimeError('조이스틱 입력이 끊겼습니다.')
         except KeyboardInterrupt:
-            report('종료 요청을 받았습니다.')
+            report(f'종료 요청을 받았습니다. 신호={received_signal or "KeyboardInterrupt"}')
         except Exception as exc:
             result = 1
             report(f'실행 실패: {exc}')

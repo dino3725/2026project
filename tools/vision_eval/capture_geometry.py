@@ -1,6 +1,7 @@
 """Capture synchronized RGB/depth and depth-time TF, without motion commands."""
 
 import argparse
+from collections import deque
 from datetime import datetime
 import json
 from pathlib import Path
@@ -16,6 +17,8 @@ from rclpy.time import Time
 from sensor_msgs.msg import CameraInfo, Image, JointState
 from std_msgs.msg import Bool
 from tf2_ros import Buffer, TransformListener
+
+from capture_stationarity import stationary
 
 
 def stamp_ns(msg):
@@ -35,6 +38,8 @@ class Capture(Node):
         self.info = None
         self.joints = None
         self.joint_at = 0
+        self.joint_stamp = 0
+        self.joint_history = deque(maxlen=100)
         self.ready = False
         self.ready_at = 0
         self.buffer = Buffer()
@@ -64,6 +69,10 @@ class Capture(Node):
     def on_joints(self, msg):
         self.joints = dict(zip(msg.name, msg.position))
         self.joint_at = time.monotonic()
+        self.joint_stamp = stamp_ns(msg)
+        names = ('joint1', 'joint2', 'joint3', 'joint4')
+        if all(name in self.joints for name in names):
+            self.joint_history.append((self.joint_at, [self.joints[n] for n in names]))
 
     def on_ready(self, msg):
         self.ready, self.ready_at = msg.data, time.monotonic()
@@ -72,6 +81,9 @@ class Capture(Node):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--stationary-only', action='store_true',
+                        help='Read-only capture using fresh stationary joint feedback, '
+                             'independent of the measurement controller ready flag')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
     rclpy.init(args=[])
@@ -79,19 +91,28 @@ def main():
     records = []
     started = time.monotonic()
     last_saved = 0
+    last_depth_stamp = -1
     metadata = {'created': datetime.now().astimezone().isoformat(), 'frames': records,
+                'stationary_only': args.stationary_only,
                 'method': 'RGB/depth paired within 20ms; TF queried at depth stamp; no actuator commands.'}
     try:
         while len(records) < 10 and time.monotonic() - started < 40:
             rclpy.spin_once(node, timeout_sec=0.05)
             now = time.monotonic()
-            if (not node.ready or now - node.ready_at > 1 or now - node.joint_at > 1
+            if args.stationary_only:
+                ready = stationary(node.joint_history, now)
+            else:
+                ready = node.ready and now - node.ready_at <= 1
+            joint_age = (node.get_clock().now().nanoseconds - node.joint_stamp) / 1e9
+            if (not ready or now - node.joint_at > 1 or not 0 <= joint_age <= .5
                     or node.pair is None or node.info is None or now - last_saved < 0.5):
                 continue
             rgb, depth = node.pair
             stamp = Time.from_msg(depth.header.stamp)
+            if stamp.nanoseconds <= last_depth_stamp:
+                continue
             age = (node.get_clock().now().nanoseconds - stamp.nanoseconds) / 1e9
-            if not 0 <= age <= 1:
+            if not 0 <= age <= .25:
                 continue
             frame = depth.header.frame_id
             if node.info.header.frame_id != frame:
@@ -119,8 +140,11 @@ def main():
                                'width': node.info.width, 'height': node.info.height},
                 'transforms_to_base_link_at_depth_stamp': transforms,
                 'joints_latest_radians': node.joints,
+                'joint_stamp_ns': node.joint_stamp,
+                'joint_to_depth_delta_ms': (node.joint_stamp - stamp.nanoseconds) / 1e6,
             })
             last_saved = now
+            last_depth_stamp = stamp.nanoseconds
             print(f'Captured {i}/10; pair delta {records[-1]["pair_delta_ms"]:.3f}ms', flush=True)
         if len(records) != 10:
             raise RuntimeError(f'Captured {len(records)}/10; check fresh readiness, images and TF')

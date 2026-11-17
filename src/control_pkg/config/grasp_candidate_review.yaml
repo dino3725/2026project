@@ -1,0 +1,19 @@
+# Offline/plan-only study. Not loaded by control.launch.py or sent to actuators.
+status: experimental_not_adopted
+target_class: coke
+support_z_base_m: 0.070  # same support plane: box 80mm minus base origin 10mm
+object_height_m: 0.134
+object_radius_m: 0.0265
+top_insets_m: [0.015, 0.020, 0.025, 0.040, 0.055]
+pitch_candidates_deg: [0.0, 10.0, 20.0]
+approach_height_m: 0.050
+approach_backoff_m: 0.030  # toward arm yaw origin; diagonal straight contact path
+minimum_finger_clearance_m: 0.040  # nominal geometry screening, not collision proof
+cartesian_pitch_range_deg: [-5.0, 20.0]  # study range, not measured wrist calibration
+minimum_study_lift_m: 0.030  # diagnostic endpoint only, not a runtime retreat rule
+axis_residual_p90_limit_m: 0.005
+orientation_error_limit_deg: 5.0
+position_error_limit_m: 0.002
+tcp_source: nominal_gripper_reference_v2.json
+hardware_tcp_validated: false
+reference_policy: model_assumed_user_requested_no_further_measurements
