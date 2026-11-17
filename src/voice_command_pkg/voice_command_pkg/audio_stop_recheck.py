@@ -8,19 +8,29 @@ from voice_command_pkg.audio_stop import AudioStopEvent
 from voice_command_pkg.utterance_buffer import UtteranceBuffer
 
 
-def recheck_audio(backend, pcm, cancelled=lambda: False):
-    """Decode a fresh stream, without synthetic silence or transcription hints."""
-    if cancelled():
-        return None
-    backend.reset()
-    for offset in range(0, len(pcm), FRAME_BYTES):
+RECHECK_PREFIXES_MS = (0, 120, 300, 240, 180, 60)
+
+
+def recheck_audio(backend, pcm, cancelled=lambda: False, *, phase_shifts=False):
+    """Try original PCM first, optionally retry with bounded leading silence."""
+    # Fixed development candidates, not a search or a change to the audio/STT.
+    # All attempts share the caller's deadline. No synthetic tail is appended.
+    for prefix_ms in (RECHECK_PREFIXES_MS if phase_shifts else (0,)):
         if cancelled():
             return None
-        words = backend.accept(pcm[offset:offset + FRAME_BYTES])
-        if cancelled():
-            return None
-        if words:
-            return words[0], min(offset + FRAME_BYTES, len(pcm)) / 32000
+        backend.reset()
+        prefix_bytes = prefix_ms * 32
+        candidate = bytes(prefix_bytes) + pcm
+        for offset in range(0, len(candidate), FRAME_BYTES):
+            if cancelled():
+                return None
+            words = backend.accept(candidate[offset:offset + FRAME_BYTES])
+            if cancelled():
+                return None
+            original_end = min(offset + FRAME_BYTES, len(candidate)) - prefix_bytes
+            # Never assign a synthetic-prefix hit to the real utterance.
+            if words and original_end > 0:
+                return words[0], original_end / 32000
     return None
 
 
@@ -62,7 +72,10 @@ class AudioStopRecheckWorker:
                     return self.closed.is_set() or time.perf_counter() > deadline
 
                 started = time.perf_counter()
-                hit = recheck_audio(self.backend, utterance.audio, cancelled)
+                hit = recheck_audio(
+                    self.backend, utterance.audio, cancelled,
+                    phase_shifts=self.config.recheck_phase_shifts,
+                )
                 if cancelled():
                     if not self.closed.is_set():
                         self.log(f'[AUDIO STOP RECHECK DROP] sequence={utterance.sequence} '

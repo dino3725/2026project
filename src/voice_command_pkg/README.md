@@ -906,3 +906,19 @@ ros2 run voice_command_pkg voice_command_node --ros-args \
 배치합니다. 현재 노트북에는 준비돼 있습니다. 런타임은 다운로드하지 않으며
 SHA256 `0575cb64845e6b9a10db9bcb74d5ac32b326b8dc90352671d345e2ee3d0126a2`를 검사합니다.
 재생성 명령과 전체 근거는 `tools/voice_eval/results/2026-11-17_speaker_adaptation.md`에 있습니다.
+
+## 2026-11-17 정지 재검사 입력 위치 보완 (실험 옵션)
+
+`audio_stop.recheck_phase_shifts=true`는 원본 발화 재검사가 실패했을 때 앞 무음
+120/300/240/180/60ms를 차례로 붙여 추가 검사합니다. 모든 검사는 같은 VAD 종료 후 0.5초 제한을
+공유하고 원래 오디오 좌표로 중복 처리합니다. STT 입력은 바꾸지 않습니다.
+기본 `audio_stop.mode=off`, `audio_stop.recheck_phase_shifts=false`를 유지합니다.
+새 옵션은 shadow 시험 전용으로 먼저 확인하며 active 운영 채택은 아직 보류합니다.
+
+개발 정지 녹음 49개에서 재검사 감지 46→49개, 일반 음성 75개에서 무제한 완주
+비교 오탐 0개였습니다. 일반 음성 75개 중 60개는 추가 검사가 0.5초 제한으로 만료됐으며
+이 경우 연속 감지/전사문 경로를 유지합니다. VAD 종료 대기 900ms 자체를 줄이는 기능은
+아닙니다. 실시간 마이크·생활 소음 안정화가 완료됐다는 의미도 아닙니다.
+
+재현 명령과 노트북 shadow 확인 절차:
+`tools/voice_eval/results/2026-11-17_audio_stop_phases.md`.

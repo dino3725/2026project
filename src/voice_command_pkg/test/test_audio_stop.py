@@ -24,6 +24,7 @@ PCM = bytes(FRAME_BYTES)
     {'threshold': float('nan')}, {'score': float('inf')}, {'queue_frames': 0},
     {'queue_frames': True}, {'queue_frames': 1.5}, {'max_lag_seconds': -1},
     {'precision': 'fp16'}, {'precision': ''}, {'utterance_recheck': 'true'},
+    {'recheck_phase_shifts': 'true'}, {'recheck_phase_shifts': 1},
 ])
 def test_invalid_config(values):
     with pytest.raises(ValueError):

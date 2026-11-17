@@ -29,6 +29,69 @@ def test_recheck_fresh_stream_no_synthetic_audio_and_early_exit():
     assert calls == ['reset', pcm]
 
 
+def test_phase_retry_preserves_original_audio_coordinates():
+    calls, attempts = [], []
+
+    def reset():
+        attempts.append([])
+
+    def accept(pcm):
+        attempts[-1].append(pcm)
+        calls.append(pcm)
+        return ['스톱'] if len(attempts) == 3 and pcm == b'\1' * 960 else []
+
+    pcm = b'\1' * 960
+    hit = recheck_audio(SimpleNamespace(reset=reset, accept=accept), pcm, phase_shifts=True)
+    assert hit == ('스톱', 0.03)
+    assert [b''.join(a) for a in attempts] == [pcm, bytes(3840) + pcm, bytes(9600) + pcm]
+
+
+def test_phase_retry_ignores_prefix_hits_and_keeps_partial_frame_end():
+    attempt = [0]
+
+    def reset():
+        attempt[0] += 1
+
+    backend = SimpleNamespace(reset=reset, accept=lambda pcm: (
+        ['정지'] if attempt[0] > 1 else []
+    ))
+    assert recheck_audio(backend, b'\1' * 100, phase_shifts=True) == ('정지', 100 / 32000)
+
+
+def test_phase_retry_cancellation_does_not_reset_deadline():
+    attempts = []
+    cancelled = [False]
+
+    def accept(pcm):
+        if len(attempts) == 2:
+            cancelled[0] = True
+        return ['정지'] if cancelled[0] else []
+
+    backend = SimpleNamespace(reset=lambda: attempts.append(True), accept=accept)
+    assert recheck_audio(backend, b'\1' * 960, lambda: cancelled[0],
+                         phase_shifts=True) is None
+    assert len(attempts) == 2
+
+
+def test_phase_retry_does_not_delay_original_hit():
+    calls = []
+    backend = SimpleNamespace(reset=lambda: calls.append('reset'), accept=lambda pcm: ['정지'])
+    assert recheck_audio(backend, b'\1' * 960, phase_shifts=True) == ('정지', 0.03)
+    assert calls == ['reset']
+
+
+def test_phase_retry_exhausts_bounded_offsets_without_rewriting_pcm():
+    attempts = []
+    backend = SimpleNamespace(
+        reset=lambda: attempts.append([]), accept=lambda pcm: attempts[-1].append(pcm) or [],
+    )
+    pcm = b'\1' * 100
+    assert recheck_audio(backend, pcm, phase_shifts=True) is None
+    assert [b''.join(a) for a in attempts] == [
+        bytes(ms * 32) + pcm for ms in (0, 120, 300, 240, 180, 60)
+    ]
+
+
 def test_recheck_worker_original_coordinates_and_expired_input():
     events, logs = [], []
     done = threading.Event()
@@ -51,6 +114,27 @@ def test_recheck_worker_original_coordinates_and_expired_input():
         assert events[0].audio_end == pytest.approx(1.0)
         assert events[0].window == pytest.approx((0.97, 1.0))
         assert events[0].source == 'utterance_recheck'
+    finally:
+        worker.close()
+
+
+def test_phase_worker_uses_shifted_retry_but_original_window():
+    events, attempts = [], []
+    done = threading.Event()
+    backend = SimpleNamespace(
+        reset=lambda: attempts.append(True),
+        accept=lambda pcm: ['정지'] if len(attempts) == 2 and any(pcm) else [],
+    )
+    worker = AudioStopRecheckWorker(
+        AudioStopConfig(recheck_phase_shifts=True), backend, events.append,
+        lambda line: done.set(),
+    )
+    try:
+        worker.submit(replace(utterance(), audio=b'\1' * 960))
+        assert done.wait(1)
+        assert len(events) == 1
+        assert events[0].audio_end == pytest.approx(1.0)
+        assert events[0].window == pytest.approx((.97, 1.0))
     finally:
         worker.close()
 

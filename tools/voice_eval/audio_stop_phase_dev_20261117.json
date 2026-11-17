@@ -1,0 +1,370 @@
+{
+  "development_only": true,
+  "note": "Recheck live labels from user-confirmed ordered trial; speaker negatives from completed recording manifests, other-dev consent=true. No held-out data.",
+  "samples": [
+    {
+      "id": "recheck_live_01",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141847_001.wav",
+      "sha256": "d4d9ac2223db7d9e3785602a2a14434b94b1bc9036c5b544a75aebcde0b8ffe6",
+      "category": "target_stop",
+      "reference": "스톱"
+    },
+    {
+      "id": "recheck_live_02",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141856_002.wav",
+      "sha256": "f0804e7d4526aba1b17e34b8401e77cd7afe9a04c70fe35eabd45fe031575313",
+      "category": "target_stop",
+      "reference": "스톱"
+    },
+    {
+      "id": "recheck_live_03",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141903_003.wav",
+      "sha256": "65be4364342d942222f4f856a25ec4a0f6957eb429e95a62d8dbcca6b4970d75",
+      "category": "target_stop",
+      "reference": "스톱"
+    },
+    {
+      "id": "recheck_live_04",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141913_004.wav",
+      "sha256": "dc4f034d91223fc398d1b978a057f62924855c41845dad69df678549a58afc27",
+      "category": "target_stop",
+      "reference": "멈춰"
+    },
+    {
+      "id": "recheck_live_05",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141918_005.wav",
+      "sha256": "52ac68193f4e60b5ebabd8f13451c7bfc986a1306fc6189a1943b0a82af4e242",
+      "category": "target_stop",
+      "reference": "멈춰"
+    },
+    {
+      "id": "recheck_live_06",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141927_006.wav",
+      "sha256": "9e497a9149808b0ef3329f2d5abbda80b0dd8bf8c17b0431e582531c0c5ce7f0",
+      "category": "target_stop",
+      "reference": "멈춰"
+    },
+    {
+      "id": "recheck_live_07",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141934_007.wav",
+      "sha256": "4a71f36b78acdf2e1a332ecfb0c679e2e5d9ee7aa3695d8ba12c78a26b657e7c",
+      "category": "target_stop",
+      "reference": "정지"
+    },
+    {
+      "id": "recheck_live_08",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141942_008.wav",
+      "sha256": "3b6c981034c4657374b1bc732c6e80b9846e3036316ab110804b675443b0b5f3",
+      "category": "target_stop",
+      "reference": "정지"
+    },
+    {
+      "id": "recheck_live_09",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141949_009.wav",
+      "sha256": "7ac728085da9b28ea48ac1e916f7aaf8f50f0d786bebc2f4de6f659495e57896",
+      "category": "target_stop",
+      "reference": "정지"
+    },
+    {
+      "id": "recheck_live_10",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_141958_010.wav",
+      "sha256": "a47039bb31826df75e2960156852ff41cd01a27eaeea2a4a210f9902640b2daf",
+      "category": "negative",
+      "reference": "콜라 가져다 줘"
+    },
+    {
+      "id": "recheck_live_11",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_142007_011.wav",
+      "sha256": "87e081c6bc5d19f9d231a3299077f63d3f07824461b463713ea0a63ff2c619f0",
+      "category": "negative",
+      "reference": "휴지 가져다 줘"
+    },
+    {
+      "id": "recheck_live_12",
+      "file": "../../recordings/audio_stop_recheck.lGeDuN/vad_command_20261112_142016_012.wav",
+      "sha256": "893bda46062a0926473dccac6b0269ff88b970b2ed51f5b4c20b86f5e60b0483",
+      "category": "negative",
+      "reference": "안녕하세요"
+    },
+    {
+      "id": "enrollment_01",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/01.wav",
+      "sha256": "ecbcce39208b151e44fd02ee604bd64374d152f4dfa40273f595d1de12ef0aa4",
+      "category": "negative",
+      "reference": "콜라 가져다 줘"
+    },
+    {
+      "id": "enrollment_02",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/02.wav",
+      "sha256": "84d966e2b20cd65f1cce740ce032c11a38615ab384130c2b848b0c187e376c08",
+      "category": "negative",
+      "reference": "휴지 가져다 줘"
+    },
+    {
+      "id": "enrollment_03",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/03.wav",
+      "sha256": "ad803fc4a3c93d4eb5c20bc85b30b582859e41dec43325dec7c2e2baa3084c01",
+      "category": "negative",
+      "reference": "바세린 가져다 줘"
+    },
+    {
+      "id": "enrollment_04",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/04.wav",
+      "sha256": "61512f8b6323ac8f5120e49610bfb36ca81483b03047cc80e1f080b070a9d41e",
+      "category": "negative",
+      "reference": "에어팟 가져다 줘"
+    },
+    {
+      "id": "enrollment_05",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/05.wav",
+      "sha256": "17aea729434c680bf3342fc05dff3c0f009a4ce9594f6a1591a4bb836ada1687",
+      "category": "negative",
+      "reference": "목마른데 마실 거 가져다 줘"
+    },
+    {
+      "id": "enrollment_06",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/06.wav",
+      "sha256": "bc56d45b5f8e08c63b977893df0066d924759ef68959914add4afb27f491c799",
+      "category": "negative",
+      "reference": "입술이 건조한데 바세린 가져다 줘"
+    },
+    {
+      "id": "enrollment_07",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/07.wav",
+      "sha256": "9257695f0107d906f402ab207c1d2438b76eebb8b7c47a13441a24aaa586c468",
+      "category": "negative",
+      "reference": "코를 닦게 휴지 좀 가져다 줘"
+    },
+    {
+      "id": "enrollment_08",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/08.wav",
+      "sha256": "913954d3740575d5a4735919f9f106a579983f2f110e2f1febae68ce41bcc131",
+      "category": "negative",
+      "reference": "음악 듣게 에어팟 좀 가져다 줘"
+    },
+    {
+      "id": "enrollment_09",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/09.wav",
+      "sha256": "f89558e2008e983d6e9dbdf60bee47fd4bd1618f1f8f44195918a0721c9ba3b2",
+      "category": "negative",
+      "reference": "나에게 콜라 좀 가져다 줄래"
+    },
+    {
+      "id": "enrollment_10",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/10.wav",
+      "sha256": "fc69d50f9652c3c7f9d7f43e4189694c94b11eb5182fad96ec7c46cccaaa9090",
+      "category": "negative",
+      "reference": "내 앞으로 휴지를 가져다 줘"
+    },
+    {
+      "id": "enrollment_11",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/11.wav",
+      "sha256": "22ee728463dca44f7c32023c0e71e3108b8c3b9212eacee58b0d2471b2fdabdf",
+      "category": "negative",
+      "reference": "바세린이 필요해 가져다 줘"
+    },
+    {
+      "id": "enrollment_12",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/12.wav",
+      "sha256": "6671a354dab87709823b8ee9d176c284f1a388a0ef67e2bd3c0a30a363476e4e",
+      "category": "negative",
+      "reference": "에어팟이 필요해 가져다 줘"
+    },
+    {
+      "id": "enrollment_13",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/13.wav",
+      "sha256": "8015333dc7f453c76f89a4f238a7bc4d79da11709f97561db5eda7976216f38e",
+      "category": "negative",
+      "reference": "마실 콜라 하나 가져다 줘"
+    },
+    {
+      "id": "enrollment_14",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/14.wav",
+      "sha256": "2e9271d11a6c78de07b3509d56ad347eb9791c49f6d2be85b53e3e104b6fc28e",
+      "category": "negative",
+      "reference": "휴지 좀 부탁해"
+    },
+    {
+      "id": "enrollment_15",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/15.wav",
+      "sha256": "249d52c99e276296e6dad9c298991591fa1b95f286bbf9e77cd9913b7e8447df",
+      "category": "negative",
+      "reference": "입술에 바를 바세린 부탁해"
+    },
+    {
+      "id": "enrollment_16",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/16.wav",
+      "sha256": "0e698f8e42cf7626cd0ef3abb44c47f10cb21c59d4dccd014bb310174a41f31b",
+      "category": "negative",
+      "reference": "에어팟 좀 부탁해"
+    },
+    {
+      "id": "enrollment_17",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/17.wav",
+      "sha256": "76542a06509c9a28fe06584472efb5dd9cb29a3518b4c88291496ec9b983ec8f",
+      "category": "negative",
+      "reference": "콜라를 나한테 가져와 줘"
+    },
+    {
+      "id": "enrollment_18",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/18.wav",
+      "sha256": "143575cfbf664a4e0628ec411c6c3744c0e55138a42726d7052ebd46bd72efe1",
+      "category": "negative",
+      "reference": "휴지를 나한테 가져와 줘"
+    },
+    {
+      "id": "enrollment_19",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/19.wav",
+      "sha256": "56aae171639c2a9ba06a6b767eb637394d583ad94995c916d986317c7900c896",
+      "category": "negative",
+      "reference": "바세린을 나한테 가져와 줘"
+    },
+    {
+      "id": "enrollment_20",
+      "file": "../../recordings/speaker_enrollment_wmp_9_m4/20.wav",
+      "sha256": "2507bd8e51131f5542c3333c574db089ac3faf273d4e3b60a27b5093b898baab",
+      "category": "negative",
+      "reference": "에어팟을 나한테 가져와 줘"
+    },
+    {
+      "id": "genuine-dev_01",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/01.wav",
+      "sha256": "7dc4b7cd69fb76b54c2384c5ee2601a3ea892814a9ec1fb137dd2ec9e58d7323",
+      "category": "negative",
+      "reference": "콜라 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_02",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/02.wav",
+      "sha256": "4053e1f65462154bbc85d737e2da26fdc419a2548ed0c542d9837616a5ede4c9",
+      "category": "negative",
+      "reference": "휴지 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_03",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/03.wav",
+      "sha256": "f4d60474d9239a8d7079d3ecef7331a1ba49339cbf51776b39f0be4ef4c0ec5f",
+      "category": "negative",
+      "reference": "바세린 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_04",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/04.wav",
+      "sha256": "ea13a3decd755d8ea8fb9d48ec51a78294b41e52678f5caacf0a48ec2e1bebed",
+      "category": "negative",
+      "reference": "에어팟 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_05",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/05.wav",
+      "sha256": "dc5603156a0d125d76e46d81fe05631dec7a9732681f9293cb6809a57c1a10b2",
+      "category": "negative",
+      "reference": "목마른데 마실 거 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_06",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/06.wav",
+      "sha256": "a7f27ab824cc2b0228e5b207105ca3cc75ab7af393bb10f018c384b89c739283",
+      "category": "negative",
+      "reference": "입술이 건조한데 바세린 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_07",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/07.wav",
+      "sha256": "9bebe9ba40c8d9a2aac117d955198d2a008579518b5e7a52115de3fe6aa8ed67",
+      "category": "negative",
+      "reference": "코를 닦게 휴지 좀 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_08",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/08.wav",
+      "sha256": "e77b5ae49cdb0c3a03afa7931bcd0adfee3cbcd20bbf31d9dce1241ea34db2be",
+      "category": "negative",
+      "reference": "음악 듣게 에어팟 좀 가져다 줘"
+    },
+    {
+      "id": "genuine-dev_09",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/09.wav",
+      "sha256": "4179e91b094f6e3f02770abd71abaf1fe509f85197d68c2e55ce64746e4a7268",
+      "category": "negative",
+      "reference": "나에게 콜라 좀 가져다 줄래"
+    },
+    {
+      "id": "genuine-dev_10",
+      "file": "../../recordings/speaker_genuine-dev_22sezaa1/10.wav",
+      "sha256": "09dcae397069d2d8e21c96125470103831887e28002cd93f0c2f4392e0243844",
+      "category": "negative",
+      "reference": "내 앞으로 휴지를 가져다 줘"
+    },
+    {
+      "id": "other-dev_01",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/01.wav",
+      "sha256": "ccd41e7d74f7503c7809f4ea2271b5405699df0aa0924c0c6165e9824f187ef6",
+      "category": "negative",
+      "reference": "콜라 가져다 줘"
+    },
+    {
+      "id": "other-dev_02",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/02.wav",
+      "sha256": "63d00b140c4765e8bd1f178e425d81b4d2de4a192e3cdef2d8c88ce31d8411e6",
+      "category": "negative",
+      "reference": "휴지 가져다 줘"
+    },
+    {
+      "id": "other-dev_03",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/03.wav",
+      "sha256": "43c90d7d1990be8b45a943289f9a90f4c0990f5867066c0de21a8851298c301d",
+      "category": "negative",
+      "reference": "바세린 가져다 줘"
+    },
+    {
+      "id": "other-dev_04",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/04.wav",
+      "sha256": "da53f87c7d5affe9b538cd908e501831ebbd048f2c6cf04365521934d8080b9d",
+      "category": "negative",
+      "reference": "에어팟 가져다 줘"
+    },
+    {
+      "id": "other-dev_05",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/05.wav",
+      "sha256": "8be6230060d85482bd8a5ab5d52031f16d903350ed81868391ff9bc2b1cafbb9",
+      "category": "negative",
+      "reference": "목마른데 마실 거 가져다 줘"
+    },
+    {
+      "id": "other-dev_06",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/06.wav",
+      "sha256": "8bbbeceac80221001aa2cc6df866b9985ab2ad929ddb6c7473721dc2b8674346",
+      "category": "negative",
+      "reference": "입술이 건조한데 바세린 가져다 줘"
+    },
+    {
+      "id": "other-dev_07",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/07.wav",
+      "sha256": "162ce0caac2e915c4043e053b4221825a49ec3c69f80ee96473568743232b3b2",
+      "category": "negative",
+      "reference": "코를 닦게 휴지 좀 가져다 줘"
+    },
+    {
+      "id": "other-dev_08",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/08.wav",
+      "sha256": "504623173267f3819e8e876065fd76569e902c7a18fe2d9c6409cb0629070d17",
+      "category": "negative",
+      "reference": "음악 듣게 에어팟 좀 가져다 줘"
+    },
+    {
+      "id": "other-dev_09",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/09.wav",
+      "sha256": "a2476fe0ea2006b420ac96dde713407f2b87cb89f436a91690007162b3dee76e",
+      "category": "negative",
+      "reference": "나에게 콜라 좀 가져다 줄래"
+    },
+    {
+      "id": "other-dev_10",
+      "file": "../../recordings/speaker_other-dev_1yv_ksp0/10.wav",
+      "sha256": "4df8f906b2256fe590b10a7a4d919d7ce26849df3f74338ea11aec46fc376108",
+      "category": "negative",
+      "reference": "내 앞으로 휴지를 가져다 줘"
+    }
+  ]
+}

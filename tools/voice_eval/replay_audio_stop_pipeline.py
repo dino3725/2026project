@@ -14,6 +14,7 @@ from evaluate_audio_stop import read_pcm
 from voice_command_pkg import pipeline
 from voice_command_pkg.audio_capture import FRAME_BYTES, SAMPLE_RATE
 from voice_command_pkg.audio_stop_model import AudioStopConfig
+from voice_command_pkg.speaker_profile import SpeakerConfig
 
 
 def main():
@@ -25,6 +26,10 @@ def main():
     parser.add_argument('--precision', choices=['int8', 'fp32'],
                         default=AudioStopConfig().precision)
     parser.add_argument('--no-utterance-recheck', action='store_true')
+    parser.add_argument('--recheck-phase-shifts', action='store_true')
+    parser.add_argument('--speaker-profile', type=Path,
+                        help='Enable real speaker inference alongside STT; still no ROS/LLM.')
+    parser.add_argument('--allow-development-profile', action='store_true')
     args = parser.parse_args()
     pcm = read_pcm(args.wav)
     logs, commands, producers, producer_errors = [], [], [], []
@@ -79,9 +84,24 @@ def main():
         instance = pipeline.VoiceCommandPipeline(
             pipeline.PipelineConfig(audio_stop=AudioStopConfig(
                 mode=args.mode, precision=args.precision,
-                utterance_recheck=not args.no_utterance_recheck
+                utterance_recheck=not args.no_utterance_recheck,
+                recheck_phase_shifts=args.recheck_phase_shifts,
+            ), speaker=SpeakerConfig(
+                mode='enforce' if args.speaker_profile else 'off',
+                profile_path=str(args.speaker_profile) if args.speaker_profile else (
+                    SpeakerConfig().profile_path
+                ),
+                allow_development_profile=args.allow_development_profile,
             )), record_command, log
         )
+        if args.speaker_profile:
+            deadline = time.perf_counter() + 60
+            while not instance.speaker.ready and time.perf_counter() < deadline:
+                if not instance.speaker.worker.is_alive():
+                    raise RuntimeError(f'speaker initialization failed: {instance.speaker.error}')
+                time.sleep(0.05)
+            if not instance.speaker.ready:
+                raise RuntimeError('speaker initialization timed out')
         try:
             instance.run_forever()
         except pipeline.PipelineError as exc:
@@ -100,6 +120,9 @@ def main():
         'no_ros_no_microphone': True, 'llm_disabled': True, 'mode': args.mode,
         'precision': args.precision,
         'utterance_recheck': not args.no_utterance_recheck,
+        'recheck_phase_shifts': args.recheck_phase_shifts,
+        'speaker_profile_sha256': hashlib.sha256(args.speaker_profile.read_bytes()).hexdigest()
+        if args.speaker_profile else None,
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),
         'callback_commands': commands, 'logs': logs, 'expected_eof_error': end_error,
         'producer_errors': producer_errors,

@@ -505,7 +505,8 @@ class VoiceCommandPipeline:
                 self.audio_stop_recheck = AudioStopRecheckWorker(
                     self.config.audio_stop, backend, self._on_audio_stop, self.log
                 )
-                self.log('[AUDIO STOP RECHECK READY] enabled=true')
+                self.log('[AUDIO STOP RECHECK READY] enabled=true '
+                         f'phase_shifts={self.config.audio_stop.recheck_phase_shifts}')
             except PipelineStopped:
                 raise
             except Exception as exc:
