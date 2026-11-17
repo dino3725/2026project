@@ -171,6 +171,50 @@ def test_eof_closes_stream_and_reports_failure(monkeypatch):
     assert len(closes) == 1
 
 
+def test_diagnostic_records_vad_rejected_input_after_warmup(monkeypatch, tmp_path):
+    import json
+    import wave
+
+    startup = b'\1\0' * (FRAME_BYTES // 2)
+    silence = bytes(FRAME_BYTES)
+    opens, closes = install_capture_pipe(monkeypatch, [startup, silence, silence])
+    instance, published, logs = make_pipeline(
+        monkeypatch, tmp_path, continuous_recording_seconds=1.0,
+        vad=VadConfig(stream_warmup_ms=30),
+    )
+    with pytest.raises(pipeline.PipelineError, match='종료'):
+        instance.run_forever()
+    recorder = instance.continuous_recording
+    metadata = json.loads(recorder.result_path.read_text())
+    with wave.open(str(recorder.result_path.parent / 'continuous.wav'), 'rb') as handle:
+        assert handle.readframes(handle.getnframes()) == silence * 2
+    assert metadata['frames'] == 2
+    assert metadata['audio_end'] == .06
+    assert metadata['end_reason'] == 'input_error'
+    assert not published
+    assert not any('[VOICE START]' in line for line in logs)
+    assert len(opens) == len(closes) == 1
+
+
+def test_diagnostic_limit_keeps_sending_original_frames_to_kws(monkeypatch, tmp_path):
+    from voice_command_pkg.continuous_recording import ContinuousRecording
+
+    instance, _, _ = make_pipeline(monkeypatch, tmp_path)
+    received = []
+    instance.audio_stop_worker = SimpleNamespace(
+        submit=lambda *args: received.append(args), close=lambda: None,
+    )
+    recorder = ContinuousRecording(tmp_path, .03, {}, lambda line: None)
+    instance.continuous_recording = recorder
+    frames = [bytes([value, 0]) * (FRAME_BYTES // 2) for value in (1, 2, 3)]
+    for index, frame in enumerate(frames, 1):
+        instance._on_capture_frame(frame, index * .03, 10 + index * .03)
+    instance.request_stop()
+    recorder.worker.join(timeout=2)
+    assert [row[0] for row in received] == frames
+    assert recorder.reason == 'duration_limit'
+
+
 def test_single_trial_helper_still_closes_stream(monkeypatch):
     audio = b'\x01\x00' * (FRAME_BYTES // 2)
     _, closes = install_capture_pipe(monkeypatch, [audio, bytes(FRAME_BYTES)])

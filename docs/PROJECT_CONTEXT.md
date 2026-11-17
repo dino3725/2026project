@@ -217,6 +217,18 @@ STT 중앙값은 준비 전 3.260초/후 2.0305초입니다. 다만 2·3번은 �
 음성 383 passed/1 skipped, 도구 60 passed. 새 녹음/Jetson 실행/ROS 발행 없음.
 상세 근거와 파일 재현 명령은 tools/voice_eval/results/2026-11-18_audio_stop_gain.md.
 
+2026-11-18 연속 입력 진단: VAD가 버린 짧은 정지와 생활 소음을 추적하기 위해
+continuous_recording_seconds(기본 0, 최대 300초)를 추가했습니다. 초기 안정화 이후
+실제 입력을 한도 내 메모리에 보관하고 별도 스레드로 저장하며, 기본 음성 처리와 발행은
+유지합니다. 진단 overlay는 publish_commands=false/KWS shadow를 명시합니다.
+기존 50초 파일의 실제 STT/ECAPA/KWS 재생에서 로컬 stop 9회, 프레임 누락 0,
+저장 PCM과 처리 입력의 바이트 일치를 확인했습니다. 불명확한 두 번째 스톱의 원인과
+실시간 후보 안정화는 아직 미해결입니다. 다음 마이크 시험에서 연속 원음을 함께 확보할 수
+있으며 새 녹음을 이번 완료 조건으로 요구하지 않습니다. 상세 절차는
+tools/voice_eval/results/2026-11-18_continuous_diagnostic.md.
+저장 파일 재생에서도 VAD 이벤트 18개 동일·정지 콜백 9회·프레임 누락 0을 확인했고,
+빌드 및 음성 399 passed/1 skipped, 평가 도구 60 passed입니다.
+
 ## 1. 과제 요구사항과 일정
 
 - 실제 하드웨어 기반 프로젝트. 발표는 개인별로, 본인이 맡은 역할을 중심으로 합니다.

@@ -12,7 +12,7 @@ from types import SimpleNamespace
 
 from evaluate_audio_stop import read_pcm
 from voice_command_pkg import pipeline
-from voice_command_pkg.audio_capture import FRAME_BYTES, SAMPLE_RATE
+from voice_command_pkg.audio_capture import FRAME_BYTES, SAMPLE_RATE, VadConfig
 from voice_command_pkg.audio_stop_model import AudioStopConfig
 from voice_command_pkg.speaker_profile import SpeakerConfig
 
@@ -28,6 +28,10 @@ def main():
     parser.add_argument('--no-utterance-recheck', action='store_true')
     parser.add_argument('--recheck-phase-shifts', action='store_true')
     parser.add_argument('--recheck-gain', type=float, default=1.0)
+    parser.add_argument('--post-warmup', action='store_true',
+                        help='Input is diagnostic continuous.wav; do not discard startup again.')
+    parser.add_argument('--continuous-recording-seconds', type=float, default=0.0,
+                        help='Exercise optional diagnostic storage during offline replay.')
     parser.add_argument('--speaker-profile', type=Path,
                         help='Enable real speaker inference alongside STT; still no ROS/LLM.')
     parser.add_argument('--allow-development-profile', action='store_true')
@@ -83,18 +87,23 @@ def main():
         for key, value in replacements.items():
             setattr(pipeline, key, value)
         instance = pipeline.VoiceCommandPipeline(
-            pipeline.PipelineConfig(audio_stop=AudioStopConfig(
-                mode=args.mode, precision=args.precision,
-                utterance_recheck=not args.no_utterance_recheck,
-                recheck_phase_shifts=args.recheck_phase_shifts,
-                recheck_gain=args.recheck_gain,
-            ), speaker=SpeakerConfig(
-                mode='enforce' if args.speaker_profile else 'off',
-                profile_path=str(args.speaker_profile) if args.speaker_profile else (
-                    SpeakerConfig().profile_path
+            pipeline.PipelineConfig(
+                continuous_recording_seconds=args.continuous_recording_seconds,
+                recordings_dir=args.output.parent / 'capture',
+                vad=VadConfig(stream_warmup_ms=0 if args.post_warmup else 1200),
+                audio_stop=AudioStopConfig(
+                    mode=args.mode, precision=args.precision,
+                    utterance_recheck=not args.no_utterance_recheck,
+                    recheck_phase_shifts=args.recheck_phase_shifts,
+                    recheck_gain=args.recheck_gain,
+                ), speaker=SpeakerConfig(
+                    mode='enforce' if args.speaker_profile else 'off',
+                    profile_path=str(args.speaker_profile) if args.speaker_profile else (
+                        SpeakerConfig().profile_path
+                    ),
+                    allow_development_profile=args.allow_development_profile,
                 ),
-                allow_development_profile=args.allow_development_profile,
-            )), record_command, log
+            ), record_command, log
         )
         if args.speaker_profile:
             deadline = time.perf_counter() + 60
@@ -124,6 +133,9 @@ def main():
         'utterance_recheck': not args.no_utterance_recheck,
         'recheck_phase_shifts': args.recheck_phase_shifts,
         'recheck_gain': args.recheck_gain,
+        'post_warmup_input': args.post_warmup,
+        'continuous_recording_metadata': str(instance.continuous_recording.result_path)
+        if instance.continuous_recording else None,
         'speaker_profile_sha256': hashlib.sha256(args.speaker_profile.read_bytes()).hexdigest()
         if args.speaker_profile else None,
         'wav_sha256': hashlib.sha256(args.wav.read_bytes()).hexdigest(),

@@ -1,0 +1,10 @@
+# Laptop-only observation overlay. Load AFTER normal/speaker parameters.
+voice_command_node:
+  ros__parameters:
+    publish_commands: false
+    save_recordings: true
+    continuous_recording_seconds: 300.0
+    audio_stop:
+      mode: "shadow"
+      recheck_phase_shifts: true
+      recheck_gain: 2.0

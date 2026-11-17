@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import audioop
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 import json
 import math
 from pathlib import Path
@@ -35,6 +35,7 @@ from voice_command_pkg.audio_stop import AudioStopEvent, AudioStopWorker
 from voice_command_pkg.audio_stop_model import AudioStopConfig, KoreanStopSpotter, STOP_WORDS
 from voice_command_pkg.audio_stop_recheck import AudioStopRecheckWorker
 from voice_command_pkg.command_classifier import classify_command, ClassifierConfig
+from voice_command_pkg.continuous_recording import ContinuousRecording, validate_recording_seconds
 from voice_command_pkg.llm_runtime import LlmRuntime, LlmStopped, LlmUnavailable
 from voice_command_pkg.speaker_profile import SpeakerConfig
 from voice_command_pkg.speaker_runtime import SpeakerDecision, SpeakerRuntime
@@ -62,6 +63,7 @@ class PipelineConfig:
     stt: SttConfig = DEFAULT_RUNTIME_STT
     recordings_dir: Path = Path('recordings')
     save_recordings: bool = False
+    continuous_recording_seconds: float = 0.0
     vad: VadConfig = field(default_factory=VadConfig)
     audio_stop: AudioStopConfig = field(default_factory=AudioStopConfig)
     classifier: ClassifierConfig = field(default_factory=ClassifierConfig)
@@ -77,6 +79,7 @@ class PipelineConfig:
     llm_failure_message: str = '명령을 처리하지 못했어요. 준비 완료 후 다시 말씀해 주세요.'
 
     def __post_init__(self) -> None:
+        validate_recording_seconds(self.continuous_recording_seconds)
         if not isinstance(self.save_recordings, bool):
             raise ValueError('save_recordings must be a boolean')
         if self.queue_capacity < 1:
@@ -443,6 +446,7 @@ class VoiceCommandPipeline:
         self._capture_error: Exception | None = None
         self.buffer = UtteranceBuffer(config.queue_capacity)
         self.capture_worker: threading.Thread | None = None
+        self.continuous_recording: ContinuousRecording | None = None
         self._ensure_running()
         # Saving is optional: do not touch the filesystem during initialization.
         self.recordings_dir = Path(config.recordings_dir).expanduser()
@@ -459,6 +463,8 @@ class VoiceCommandPipeline:
         self.speaker = SpeakerRuntime(config.speaker, log, self.stop_event)
 
     def run_once(self, command_index: int) -> dict[str, Any]:
+        if self.config.continuous_recording_seconds:
+            raise ValueError('continuous recording requires run_forever')
         if self.config.audio_stop.mode != 'off':
             raise ValueError('audio stop requires run_forever (one continuous microphone stream)')
         audio_data, capture = capture_utterance(self.config.vad, self.log, self.stop_event)
@@ -479,6 +485,8 @@ class VoiceCommandPipeline:
             self.audio_stop_worker.close()
         if self.audio_stop_recheck is not None:
             self.audio_stop_recheck.close()
+        if self.continuous_recording is not None:
+            self.continuous_recording.close('input_error' if self._capture_error else 'shutdown')
 
     def _start_audio_stop(self) -> None:
         if self.config.audio_stop.mode == 'off':
@@ -745,12 +753,19 @@ class VoiceCommandPipeline:
             'voice_end_to_command_seconds': voice_end_to_command,
         }
 
+    def _on_capture_frame(self, frame, audio_end, received_at):
+        if self.audio_stop_worker is not None:
+            self.audio_stop_worker.submit(frame, audio_end, received_at)
+        if self.continuous_recording is not None:
+            self.continuous_recording.submit(frame, audio_end, received_at)
+
     def _capture_loop(self) -> None:
         try:
             arguments = (self.config.vad, self.log, self.stop_event)
             stream = (
-                capture_utterances(*arguments, frame_sink=self.audio_stop_worker.submit)
-                if self.audio_stop_worker is not None else capture_utterances(*arguments)
+                capture_utterances(*arguments, frame_sink=self._on_capture_frame)
+                if self.audio_stop_worker is not None or self.continuous_recording is not None
+                else capture_utterances(*arguments)
             )
             for sequence, (audio, capture) in enumerate(
                 stream, start=1
@@ -775,6 +790,12 @@ class VoiceCommandPipeline:
         """Run the capture producer and sequential consumer until shutdown."""
         self._ensure_running()
         self._start_audio_stop()
+        if self.config.continuous_recording_seconds:
+            self.continuous_recording = ContinuousRecording(
+                self.recordings_dir, self.config.continuous_recording_seconds,
+                {'vad': asdict(self.config.vad), 'audio_stop': asdict(self.config.audio_stop)},
+                self.log,
+            )
         self.capture_worker = threading.Thread(
             target=self._capture_loop, name='voice_capture', daemon=True
         )
@@ -795,5 +816,9 @@ class VoiceCommandPipeline:
         finally:
             self.request_stop()
             self.capture_worker.join()
+            if self.continuous_recording is not None:
+                self.continuous_recording.worker.join(timeout=2)
+                if self.continuous_recording.worker.is_alive():
+                    self.log('[CONTINUOUS AUDIO ERROR] save still pending; file may be incomplete')
         if self._capture_error is not None:
             raise self._capture_error

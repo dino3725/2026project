@@ -933,3 +933,16 @@ SHA256 `0575cb64845e6b9a10db9bcb74d5ac32b326b8dc90352671d345e2ee3d0126a2`를 검
 분리했으며, 원래 9회 실시간 시험의 누락을 모두 해결한 것은 아닙니다. CPU 부하 중
 새 복구의 약 475ms 처리는 여유가 작으므로 기본 off를 유지합니다. 추가 마이크 시험을
 반복 요청하지 않으며 재현 명령은 `tools/voice_eval/results/2026-11-18_audio_stop_gain.md`입니다.
+
+### 2026-11-18 연속 입력 진단 저장
+
+`continuous_recording_seconds`를 0이 아닌 값(최대 300초)으로 지정하면 초기 안정화 이후
+마이크 입력을 VAD 판정 전부터 보관합니다. 기본값은 0이며 `save_recordings`의 발화 저장과
+별개입니다. 메모리에 최대 약 9.6MB의 PCM을 담고 한도/종료 때 별도 스레드로 저장합니다.
+저장 한도 도달 후에도 음성 처리는 계속됩니다. 강제 종료 전에는 저장되지 않을 수 있습니다.
+
+`continuous_*/continuous.wav`와 metadata.json이 생성되며 WAV 시간은 VAD/KWS 로그의
+audio 시간과 같습니다. 저장 파일의 파이프라인 재생에는 `--post-warmup`을 지정해야 합니다.
+`audio_stop_diagnostic.yaml`을 마지막 파라미터 파일로 지정하면 ROS 발행 없이 후보 감지와
+연속 저장을 시험합니다. 실행 순서와 판정 기준은
+`tools/voice_eval/results/2026-11-18_continuous_diagnostic.md`에 있습니다.

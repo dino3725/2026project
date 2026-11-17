@@ -73,3 +73,13 @@ def test_phase_recheck_requires_explicit_selection():
 def test_recheck_gain_default_and_override():
     assert build_pipeline_config({}).audio_stop.recheck_gain == 1.0
     assert build_pipeline_config({'audio_stop.recheck_gain': 2.0}).audio_stop.recheck_gain == 2.0
+
+
+def test_diagnostic_overlay_is_nonpublishing_and_bounded():
+    path = CONFIG_PATH.with_name('audio_stop_diagnostic.yaml')
+    values = flatten(yaml.safe_load(path.read_text())['voice_command_node']['ros__parameters'])
+    assert values['publish_commands'] is False
+    config = build_pipeline_config(values)
+    assert config.continuous_recording_seconds == 300.0
+    assert config.audio_stop.mode == 'shadow'
+    assert config.audio_stop.recheck_gain == 2.0

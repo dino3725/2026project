@@ -8,6 +8,7 @@ voice_command_node:
     publish_commands: true
     # Save processed utterances only when collecting evaluation/debug data.
     save_recordings: false
+    continuous_recording_seconds: 0.0 # optional post-warmup raw input; 0=off, max 300s
     recordings_dir: "~/2026project/recordings"
 
     capture:
