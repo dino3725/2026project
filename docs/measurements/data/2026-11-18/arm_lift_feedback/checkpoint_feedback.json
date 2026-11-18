@@ -1,0 +1,42 @@
+{
+  "measured_joint_fk_shift_mm": [
+    3.4754278962710883,
+    0.34905073936975123,
+    -26.17728564094504
+  ],
+  "tcp_before_m": [
+    0.22324325365932463,
+    -0.01070461083953543,
+    0.262175771122713
+  ],
+  "tcp_after_m": [
+    0.2267186815555957,
+    -0.01035556010016568,
+    0.23599848548176797
+  ],
+  "gripper_joint_m": 0.019006021961903093,
+  "joint_names": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4"
+  ],
+  "final_joint_feedback_minus_command_deg": [
+    0.058475961222944794,
+    1.0908651474424969,
+    1.6691634331732461,
+    0.4258856937372761
+  ],
+  "planned_displacement_mm": [
+    4.498587294705897,
+    -0.0005997373424219271,
+    -12.068147880422709
+  ],
+  "feedback_minus_planned_displacement_mm": [
+    -1.0231593984348084,
+    0.34965047671217314,
+    -14.109137760522332
+  ],
+  "visual_confirmation_before_step": "open gripper clear and laterally aligned",
+  "physical_gap_after_step": "unverified"
+}

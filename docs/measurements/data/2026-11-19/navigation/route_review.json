@@ -1,0 +1,14 @@
+{
+  "delivery_to_pickup": {
+    "status": 4,
+    "accepted": true,
+    "points": 179,
+    "length_m": 4.983692267783625
+  },
+  "pickup_to_delivery": {
+    "status": 4,
+    "accepted": true,
+    "points": 186,
+    "length_m": 4.9041428090129
+  }
+}

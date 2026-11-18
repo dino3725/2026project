@@ -1,0 +1,25 @@
+{
+  "observed_plan_start_minus_previous_feedback_deg": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "observed_early_controller_reference_minus_plan_start_deg": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "observed_early_reference_time_s": 0.06386137008666992,
+  "alternative_scope": "Offline geometry only: prior commanded pose to a target 30 mm above it; actuator response unverified",
+  "alternative_initial_reference_discontinuity_mm": 0.0,
+  "alternative_reference_displacement_mm": [
+    -5.343503417520878e-10,
+    1.9236348625106814e-11,
+    29.999999999759773
+  ],
+  "alternative_min_reference_z_change_mm": 0.0,
+  "alternative_max_xy_deviation_mm": 0.7836536575084989,
+  "executed": false
+}

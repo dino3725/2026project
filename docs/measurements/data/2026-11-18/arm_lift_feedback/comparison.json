@@ -1,0 +1,65 @@
+{
+  "operator_removed_box_and_can": true,
+  "planned_mm": 30.0,
+  "empty_tcp_change_mm": [
+    0.9768586157895554,
+    -0.032979132597718216,
+    -4.697713816226773
+  ],
+  "empty_final_joint_error_deg": [
+    -0.0026598113874288587,
+    4.479836942047363,
+    2.388812683114588,
+    0.16446145341151433
+  ],
+  "empty_actual_joint_change_deg": [
+    0.0,
+    1.0546874999999996,
+    -6.591796875,
+    12.568359375
+  ],
+  "old_reference_to_planned_start_mm": [
+    1.7805169277733124,
+    0.2681643037056886,
+    -22.339161847623025
+  ],
+  "old_reference_to_new_reference_mm": [
+    1.7796400641015286,
+    0.28257898333666764,
+    7.669621587529873
+  ],
+  "lowest_reference_sample": {
+    "t": 0.064,
+    "rel_ref_z_mm": -22.34,
+    "rel_feedback_z_mm": 0.0
+  },
+  "lowest_feedback_sample": {
+    "t": 1.462,
+    "rel_ref_z_mm": -15.11,
+    "rel_feedback_z_mm": -15.57
+  },
+  "reference_feedback_trace_samples": 106,
+  "start_difference_vs_can_deg": [
+    0.0878906250000001,
+    2.3730468750000013,
+    -1.0546875,
+    0.1757812499999994
+  ],
+  "can_test_tcp_change_mm": [
+    1.8161996152222248,
+    0.4096499406850921,
+    1.877708860493349
+  ],
+  "can_test_final_joint_error_deg": [
+    -0.0025393203805583707,
+    3.517892504258251,
+    2.0829017161387995,
+    0.11387237775998885
+  ],
+  "closed_trial_actual_start_minus_empty_start_mm": [
+    -2.86559031330777,
+    -0.3742220963485754,
+    8.73588799918476
+  ],
+  "open_gripper_final_m": 0.019006021961903093
+}

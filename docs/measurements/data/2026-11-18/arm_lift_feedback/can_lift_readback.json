@@ -1,0 +1,37 @@
+{
+  "operator_observation_before_close": "Fingertips straddled can near mid-height; mount and cable clear",
+  "gripper_before_lift_m": 0.005269224006387177,
+  "gripper_after_lift_m": 0.005269224006387177,
+  "model_tcp_delta_mm": [
+    1.8161996152222248,
+    0.4096499406850921,
+    1.877708860493349
+  ],
+  "physical_can_lift": "failed: bottom remained on box",
+  "joints": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4"
+  ],
+  "goal_change_deg": [
+    0.0025393203805583707,
+    -3.0784393792582496,
+    -9.5536048411388,
+    12.63026824724001
+  ],
+  "feedback_change_deg": [
+    0.0878906250000001,
+    0.5273437500000014,
+    -7.55859375,
+    12.744140625
+  ],
+  "final_errors_deg": [
+    -0.0025393203805583707,
+    3.517892504258251,
+    2.0829017161387995,
+    0.11387237775998885
+  ],
+  "operator_observation_after_lift": "Can remained between fingers with bottom in contact with support",
+  "transport_started": false
+}

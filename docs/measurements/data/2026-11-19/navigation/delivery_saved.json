@@ -1,0 +1,11 @@
+{
+  "goal": {
+    "x": 0.608839,
+    "y": 0.190239,
+    "yaw": 2.40808
+  },
+  "scan_delta_m": 0.026241414428031483,
+  "scan_yaw_delta_deg": 2.6677924196950893,
+  "assigned_as": "delivery",
+  "operator_corrected_label": true
+}

@@ -1,0 +1,29 @@
+{
+  "joints": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4"
+  ],
+  "attribution_method": "Mean incremental FK Z discrepancy over all joint replacement orders",
+  "model_z_difference_mm": -28.02915710729942,
+  "modeled_joint_contributions_mm": [
+    0.0,
+    -18.915229827654198,
+    -8.871960610989376,
+    -0.2419666686558444
+  ],
+  "unload_setpoint_change_deg": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "unload_joint_median_change_deg": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "scope": "Stationary support contact before release; not a loaded versus empty motion comparison"
+}

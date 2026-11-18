@@ -1,0 +1,82 @@
+Panels: []
+Visualization Manager:
+  Class: ''
+  Global Options:
+    Fixed Frame: map
+    Background Color: 44; 48; 52
+  Displays:
+  - Class: rviz_default_plugins/Map
+    Name: Physical map
+    Enabled: true
+    Topic:
+      Value: /map
+      Durability Policy: Transient Local
+    Alpha: 1
+  - Class: rviz_default_plugins/Map
+    Name: Global costmap
+    Enabled: true
+    Topic:
+      Value: /global_costmap/costmap
+      Durability Policy: Transient Local
+    Color Scheme: costmap
+    Alpha: 0.65
+    Draw Behind: false
+  - Class: rviz_default_plugins/Path
+    Name: Planned path
+    Enabled: true
+    Topic:
+      Value: /plan
+      Durability Policy: Volatile
+    Line Style: Billboards
+    Line Width: 0.045
+    Color: 0; 255; 80
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0.08
+  - Class: rviz_default_plugins/LaserScan
+    Name: Lidar
+    Enabled: true
+    Topic:
+      Value: /scan
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+    Style: Flat Squares
+    Size (m): 0.024
+    Color Transformer: FlatColor
+    Color: 255; 155; 40
+  - Class: rviz_default_plugins/Polygon
+    Name: Robot footprint
+    Enabled: true
+    Topic:
+      Value: /local_costmap/published_footprint
+    Color: 25; 199; 255
+    Alpha: 1
+  - Class: rviz_default_plugins/PoseWithCovariance
+    Name: AMCL pose
+    Enabled: true
+    Topic:
+      Value: /amcl_pose
+      Durability Policy: Transient Local
+    Shape: Arrow
+    Color: 25; 199; 255
+    Covariance:
+      Value: false
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Pickup and delivery
+    Enabled: true
+    Topic:
+      Value: /roundtrip/waypoints
+      Durability Policy: Transient Local
+  Tools:
+  - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Top Down
+      X: 2.95
+      Y: 1.175
+      Scale: 86
+Window Geometry:
+  Width: 1080
+  Height: 720
