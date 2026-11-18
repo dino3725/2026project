@@ -43,7 +43,7 @@ docs/PROJECT_CONTEXT.md  배경, 분석, 계획
 
 이 코드는 실제 로봇 팔과 바퀴를 움직입니다.
 
-1. **실제 로봇을 움직이는 명령은 실행하지 않습니다.** `ros2 launch`, `ros2 topic pub /voice/robot_command`, `/cmd_vel` 발행 등이 해당됩니다. 실물 시험은 사람이 합니다. 시험 절차를 제안하는 것은 괜찮습니다.
+1. **사용자가 요청한 실물 시험은 에이전트가 직접 실행할 수 있습니다.** 팔·바퀴 드라이버 시작, 물체 명령, Nav2 목표 전송과 결과 확인을 포함합니다. 확인된 배치와 시험 범위 안에서는 실행 권한을 매번 다시 묻지 않습니다. 물체 배치나 카메라 사각지대 확인처럼 현장에서만 가능한 일은 사용자에게 요청합니다. 주행은 아래의 정지·취소·속도 명령 경로를 따릅니다.
 2. **비상정지 경로를 약화하지 않습니다.** Y 버튼과 음성 `stop`은 모든 액션 목표를 취소해야 합니다(`ControlNode._handle_emergency_stop`, `_cancel_active_goals`). 새 액션 목표(예: Nav2 `NavigateToPose`)는 반드시 `_send_goal`을 거쳐 `_active_goals`에 등록되게 하세요.
 3. **stop 처리는 결정적이어야 합니다.** 정지 키워드는 LLM보다 먼저 규칙으로 판정합니다. LLM 결과에만 의존하는 stop 경로를 만들지 마세요.
 4. **작업 취소 구조를 유지합니다.** `control_node`의 작업 스레드는 `operation_id`로 무효화됩니다. 긴 대기나 루프에는 `_ensure_active` / `_sleep_cancelable` / `_wait_future`를 사용하세요.

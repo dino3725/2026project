@@ -1,0 +1,12 @@
+# Nav2 target poses in metres and radians.
+map: lab_20261118_145438.yaml
+frame_id: map
+waypoints:
+  delivery:
+    x: 0.608839
+    y: 0.190239
+    yaw: 2.40808
+  pickup:
+    x: 3.314998
+    y: 2.188383
+    yaw: 1.664659

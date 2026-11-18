@@ -1,0 +1,16 @@
+twist_mux:
+  ros__parameters:
+    topics:
+      stop:
+        topic: /navigation/trial_stop
+        timeout: 0.20
+        priority: 255
+      navigation:
+        topic: /navigation/cmd_vel
+        timeout: 0.20
+        priority: 10
+    locks:
+      permission:
+        topic: /navigation/locked
+        timeout: 0.30
+        priority: 200

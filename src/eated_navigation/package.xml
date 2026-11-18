@@ -6,10 +6,22 @@
   <maintainer email="imsunghy@gmail.com">fcsl</maintainer>
   <license>Apache-2.0</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>control_pkg</exec_depend>
+  <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>action_msgs</exec_depend>
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>nav2_bringup</exec_depend>
   <exec_depend>nav2_map_server</exec_depend>
+  <exec_depend>nav2_lifecycle_manager</exec_depend>
+  <exec_depend>nav2_costmap_2d</exec_depend>
+  <exec_depend>python3-pil</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
   <exec_depend>turtlebot3_manipulation_cartographer</exec_depend>
   <exec_depend>turtlebot3_manipulation_navigation2</exec_depend>
   <exec_depend>twist_mux</exec_depend>
